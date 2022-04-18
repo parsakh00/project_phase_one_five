@@ -1,0 +1,14 @@
+.titleBar{
+    -fx-background-color : #839192 ;
+}
+
+.timeDateBox{
+    -fx-background-color : #3381FF;
+}
+
+.ribbon{
+    -fx-background-color : #2E86C1;
+}
+.loginBox{
+    -fx-background-color : #89ADC4;
+}

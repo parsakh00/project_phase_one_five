@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.Login">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="339.0" layoutY="14.0" prefHeight="31.0" prefWidth="118.0" text="In The Name Of God" textAlignment="CENTER">
+         <font>
+            <Font name="Segoe UI Symbol" size="12.0" />
+         </font></Label>
+      <Pane fx:id="LoginBox" layoutX="230.0" layoutY="96.0" onKeyPressed="#logInEntered" prefHeight="303.0" prefWidth="336.0" styleClass="loginBox" stylesheets="@../styles.css">
+         <children>
+            <Label fx:id="Username" layoutX="39.0" layoutY="41.0" text="username :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label fx:id="Password" layoutX="41.0" layoutY="106.0" text="password :">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="UserNameTextField" layoutX="121.0" layoutY="37.0" />
+            <CheckBox fx:id="ShowPassWord" layoutX="286.0" layoutY="106.0" mnemonicParsing="false" onAction="#onCheckBoxPassWordLogInClicked" />
+            <Pane fx:id="Captcha" layoutX="124.0" layoutY="151.0" prefHeight="31.0" prefWidth="90.0" />
+            <TextField fx:id="CaptchaInput" layoutX="124.0" layoutY="196.0" prefHeight="31.0" prefWidth="90.0" />
+            <TextField fx:id="passwordVisibleTextField" layoutX="120.0" layoutY="100.0" />
+            <PasswordField fx:id="PasswordField" layoutX="120.0" layoutY="100.0" />
+            <Button fx:id="captchaRepeat" layoutX="234.0" layoutY="154.0" mnemonicParsing="false" onMouseClicked="#repeatCaptchaIconClicked" prefHeight="25.0" prefWidth="25.0" textAlignment="CENTER" />
+            <Button fx:id="login" layoutX="142.0" layoutY="248.0" mnemonicParsing="false" onAction="#LoginClicked" text="Log in" />
+            <Label fx:id="wrongCaptcha" alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="199.0" prefHeight="25.0" prefWidth="107.0" textAlignment="CENTER" textFill="RED">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="wrongUserPass" alignment="CENTER" contentDisplay="CENTER" layoutX="83.0" layoutY="14.0" prefHeight="17.0" prefWidth="167.0" textAlignment="CENTER" />
+         </children></Pane>
+      <Label fx:id="Time" layoutX="43.0" layoutY="36.0" prefHeight="17.0" prefWidth="142.0" />
+   </children>
+</Pane>
