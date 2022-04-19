@@ -16,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -54,7 +55,7 @@ public class Login {
     protected Button captchaRepeat;
 
     public void initialize (){
-        ImageView imageRepeat = new ImageView(String.valueOf(HelloApplication.class.getResource("repeat_icon.png")));
+        ImageView imageRepeat = new ImageView(String.valueOf(HelloApplication.class.getResource("images/repeat_icon.png")));
         ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("images/captcha_1.png")));
         imageRepeat.setFitHeight(18);
         imageRepeat.setFitWidth(18);
@@ -92,7 +93,7 @@ public class Login {
     protected void randomCaptchaIcon(){
         i += 1;
         if (i%6 == 1){
-            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("captcha_2.png")));
+            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("images/captcha_2.png")));
             captcha_image.setFitWidth(90);
             captcha_image.setFitHeight(31);
             Captcha.getChildren().remove(0,1);
@@ -101,7 +102,7 @@ public class Login {
             CaptchaInput.setText(null);
         }
         else if (i%6 == 2){
-            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("captcha_3.png")));
+            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("images/captcha_3.png")));
             captcha_image.setFitWidth(90);
             captcha_image.setFitHeight(31);
             Captcha.getChildren().remove(0,1);
@@ -110,7 +111,7 @@ public class Login {
             CaptchaInput.setText(null);
         }
         else if (i%6 == 3){
-            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("captcha_4.png")));
+            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("images/captcha_4.png")));
             captcha_image.setFitWidth(90);
             captcha_image.setFitHeight(31);
             captcha_image.setId("6626512");
@@ -120,7 +121,7 @@ public class Login {
             CaptchaInput.setText(null);
         }
         else if (i%6 == 4){
-            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("captcha_5.png")));
+            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("images/captcha_5.png")));
             captcha_image.setFitWidth(90);
             captcha_image.setFitHeight(31);
             captcha_image.setId("571196");
@@ -130,7 +131,7 @@ public class Login {
             CaptchaInput.setText(null);
         }
         else if (i%6 == 5){
-            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("captcha_6.png")));
+            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("images/captcha_6.png")));
             captcha_image.setFitWidth(90);
             captcha_image.setFitHeight(31);
             captcha_image.setId("6360424");
@@ -140,7 +141,7 @@ public class Login {
             CaptchaInput.setText(null);
         }
         else if (i%6 == 0){
-            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("captcha_1.png")));
+            ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("images/captcha_1.png")));
             captcha_image.setFitWidth(90);
             captcha_image.setFitHeight(31);
             captcha_image.setId("625708");
@@ -160,12 +161,24 @@ public class Login {
     protected void LoginClicked(ActionEvent actionEvent) throws IOException {
         try {
             if (MainLogIn()) {
+                edu.system.logic.Login logType = new edu.system.logic.Login();
+                if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "student")){
+                    stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+                    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentDesk-view.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    stage.setScene(scene);
+                    stage.show();
+                }
+                else if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "teacher")){
+                    stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+                    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    stage.setScene(scene);
+                    stage.show();
+                }
                 //ToDo
-                stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-                FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("studentdesk-view.fxml"));
-                Scene scene = new Scene(loader.load());
-                stage.setScene(scene);
-                stage.show();
+
+
             }
             else{
                 wrongCaptcha.setText("Enter numbers correctly");
@@ -182,19 +195,23 @@ public class Login {
     protected void logInEntered(KeyEvent keyEvent) throws IOException{
         if (keyEvent.getCode() == KeyCode.ENTER) {
             //ToDo
-            if (MainLogIn()) {
-                //ToDo
-                stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
-                FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("studentdesk-view.fxml"));
-                Scene scene = new Scene(loader.load());
-                stage.setScene(scene);
-                stage.show();
-            }
-            else{
-                wrongCaptcha.setText("Enter numbers correctly");
-                i += 1;
-                randomCaptchaIcon();
-                CaptchaInput.setText(null);
+            try {
+                if (MainLogIn()) {
+                    //ToDo
+                    stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
+                    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("studentdesk-view.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    stage.setScene(scene);
+                    stage.show();
+                }
+                else{
+                    wrongCaptcha.setText("Enter numbers correctly");
+                    i += 1;
+                    randomCaptchaIcon();
+                    CaptchaInput.setText(null);
+                }
+            }catch (IOException ex){
+                ex.printStackTrace();
             }
 
         }
@@ -204,19 +221,22 @@ public class Login {
         if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
             wrongCaptcha.setText(null);
             //ToDo
-            String namefield = UserNameTextField.getText();
-            String passfield = passwordVisibleTextField.getText();
-            Massage massage = new Massage(namefield, passfield);
+            Massage massage = new Massage(UserNameTextField.getText(), passwordVisibleTextField.getText());
             if (Controller.getInstance().login(massage)){
-                String namefield_2 = UserNameTextField.getText();
-                String passfield_2 = passwordVisibleTextField.getText();
-                edu.system.logic.Login logType = new edu.system.logic.Login();
-                logType.checkName(namefield_2);
-                logType.checkPass(passfield_2,namefield_2);
-                String log_Type = logType.userType();
+                wrongUserPass.setText(null);
+                return true;
+//                edu.system.logic.Login logType = new edu.system.logic.Login();
+//                if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "student")){
+//
+//                }
+//                else if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "teacher")){
+//
+//                }
                 //ToDo
             }
-            return true;
+            else{
+                wrongUserPass.setText("wrong username or password");
+            }
         }
         return false;
 
