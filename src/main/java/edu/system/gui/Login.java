@@ -166,6 +166,9 @@ public class Login {
                     stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
                     FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentDesk-view.fxml"));
                     Scene scene = new Scene(loader.load());
+                    stage.setHeight(650);
+                    stage.setWidth(800);
+                    stage.setResizable(false);
                     stage.setScene(scene);
                     stage.setTitle("educational system");
                     stage.show();
@@ -213,6 +216,9 @@ public class Login {
                         stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
                         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentDesk-view.fxml"));
                         Scene scene = new Scene(loader.load());
+                        stage.setHeight(650);
+                        stage.setWidth(800);
+                        stage.setResizable(false);
                         stage.setScene(scene);
                         stage.setTitle("educational system");
                         stage.show();
