@@ -6,21 +6,17 @@ import org.json.simple.parser.JSONParser;
 import java.io.File;
 import java.io.FileReader;
 
-//check json datas
 public class Login {
     boolean isNameValid;
     boolean isPassValid;
     String name;
-    String userEmail;
-    String userType;
-    String userDegree;
     public boolean checkName(String name){
         File file =  new File(System.getProperty("user.dir"),"/" + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json");
         isNameValid = file.exists();
         return isNameValid;
     }
     public boolean checkPass(String pass,String name){
-        if (checkName(name)){
+        if (isNameValid){
             JSONParser parser = new JSONParser();
             try {
                 Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
@@ -48,49 +44,6 @@ public class Login {
         return res;
     }
 
-    //must complete***
-    public String getUserType(String nameForType){
-        if (isNameValid && isPassValid){
-            JSONParser parser = new JSONParser();
-            try {
-                Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + nameForType + ".json"));
-                JSONObject jsonObject = (JSONObject)obj;
-                userType = (String) jsonObject.get("type");
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        return userType;
-    }
-    public String getUserEmail(String nameForEmail){
-        if (isNameValid && isPassValid){
-            JSONParser parser = new JSONParser();
-            try {
-                Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + nameForEmail + ".json"));
-                JSONObject jsonObject = (JSONObject)obj;
-                userEmail = (String) jsonObject.get("email");
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        return userEmail;
-    }
-    public String getUserDegree(String nameForDegree){
-        if (isNameValid && isPassValid){
-            JSONParser parser = new JSONParser();
-            try {
-                Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + nameForDegree + ".json"));
-                JSONObject jsonObject = (JSONObject)obj;
-                userDegree = (String) jsonObject.get("degree");
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-
-        }
-        return userDegree;
-    }
 //    public void deserializeUser(){
 //        JSONParser parser = new JSONParser();
 //        try {
@@ -107,6 +60,4 @@ public class Login {
 //        }
 //
 //    }
-
-
 }

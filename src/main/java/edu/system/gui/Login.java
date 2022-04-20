@@ -1,8 +1,7 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
-import edu.system.logic.Controller;
-import edu.system.logic.Massage;
+import edu.system.logic.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,8 +14,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -161,48 +160,71 @@ public class Login {
     protected void LoginClicked(ActionEvent actionEvent) throws IOException {
         try {
             if (MainLogIn()) {
-                edu.system.logic.Login logType = new edu.system.logic.Login();
-                if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "student")){
+                LoginForJson loginForJson = new LoginForJson(UserNameTextField.getText(), PasswordField.getText());
+                if (Objects.equals(loginForJson.getUserType(), "student")){
+                    CurrentUser.getInstance().setUser(loginForJson.getUserName());
                     stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
                     FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentDesk-view.fxml"));
                     Scene scene = new Scene(loader.load());
                     stage.setScene(scene);
+                    stage.setTitle("educational system");
                     stage.show();
                 }
-                else if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "teacher")){
+                else if (Objects.equals(loginForJson.getUserType(), "teacher")){
                     stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
                     FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
                     Scene scene = new Scene(loader.load());
                     stage.setScene(scene);
+                    stage.setTitle("educational system/student/" + loginForJson.getUserName());
                     stage.show();
                 }
-                //ToDo
 
 
             }
             else{
-                wrongCaptcha.setText("Enter numbers correctly");
-                i += 1;
-                randomCaptchaIcon();
-                CaptchaInput.setText(null);
+                if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
+                    wrongCaptcha.setText(null);
+
+                }
+                else {
+                    wrongCaptcha.setText("Enter numbers correctly");
+                    i += 1;
+                    randomCaptchaIcon();
+                    CaptchaInput.setText(null);
+                }
+
             }
         }catch (IOException ex){
             ex.printStackTrace();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @FXML
     protected void logInEntered(KeyEvent keyEvent) throws IOException{
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            //ToDo
             try {
                 if (MainLogIn()) {
                     //ToDo
-                    stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
-                    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("studentdesk-view.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    stage.setScene(scene);
-                    stage.show();
+                    LoginForJson loginForJson = new LoginForJson(UserNameTextField.getText(), PasswordField.getText());
+                    if (Objects.equals(loginForJson.getUserType(), "student")){
+                        CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                        stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
+                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentDesk-view.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        stage.setScene(scene);
+                        stage.setTitle("educational system");
+                        stage.show();
+                    }
+                    else if (Objects.equals(loginForJson.getUserType(), "teacher")){
+                        stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
+                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        stage.setScene(scene);
+                        stage.setTitle("educational system/student/" + loginForJson.getUserName());
+                        stage.show();
+                    }
                 }
                 else{
                     wrongCaptcha.setText("Enter numbers correctly");
@@ -212,6 +234,8 @@ public class Login {
                 }
             }catch (IOException ex){
                 ex.printStackTrace();
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
             }
 
         }
@@ -221,9 +245,8 @@ public class Login {
         if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
             wrongCaptcha.setText(null);
             //ToDo
-            Massage massage = new Massage(UserNameTextField.getText(), passwordVisibleTextField.getText());
+            MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText());
             if (Controller.getInstance().login(massage)){
-                wrongUserPass.setText(null);
                 return true;
 //                edu.system.logic.Login logType = new edu.system.logic.Login();
 //                if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "student")){
@@ -232,18 +255,13 @@ public class Login {
 //                else if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "teacher")){
 //
 //                }
-                //ToDo
             }
             else{
                 wrongUserPass.setText("wrong username or password");
             }
+
         }
         return false;
 
     }
-
-    protected void makeScene(String type){
-        //ToDo
-    }
-
 }

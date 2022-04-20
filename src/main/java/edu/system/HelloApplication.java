@@ -47,6 +47,7 @@ public class HelloApplication extends Application {
         //deserializeUser();
         //serializeUser();
         //currentDirectory();
+        //System.out.println(passHash("98114022"));
         launch();
 
     }

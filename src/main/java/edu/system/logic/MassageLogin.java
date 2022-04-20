@@ -1,6 +1,6 @@
 package edu.system.logic;
 
-public class Massage {
+public class MassageLogin {
     String name;
     String pass;
 
@@ -9,7 +9,7 @@ public class Massage {
         LOGIN
     }
 
-    public Massage(String name,String pass){
+    public MassageLogin(String name, String pass){
         this.name = name;
         this.pass = pass;
     }
