@@ -1,9 +1,9 @@
 package edu.system.logic;
 
-public class MassageStudentDesk {
+public class MassageUserDesk {
     String name;
 
-    public MassageStudentDesk(String name) {
+    public MassageUserDesk(String name) {
         this.name = name;
     }
 

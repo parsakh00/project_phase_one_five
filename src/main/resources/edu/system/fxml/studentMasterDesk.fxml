@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.TeacherDesk">
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.StudentMasterDesk">
     <children>
         <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
             <children>
@@ -17,17 +17,30 @@
                         <Menu mnemonicParsing="false" text="Record affairs">
                             <items>
                                 <MenuItem mnemonicParsing="false" text="Temporary scores" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Student's educational status" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Educational services">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Action 1" />
+                                <MenuItem mnemonicParsing="false" text="Weekly Schedule" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem mnemonicParsing="false" text="student exams" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
+                                <Menu mnemonicParsing="false" text="Requests">
+                                    <items>
+                                        <MenuItem mnemonicParsing="false" text="Recommendation" />
+                                        <MenuItem mnemonicParsing="false" text="Apply for a certificate of employment" />
+                                        <MenuItem mnemonicParsing="false" text="Request accommodation" />
+                                        <MenuItem mnemonicParsing="false" text="Withdrawal from education" />
+                                    </items>
+                                </Menu>
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Registration matters">
                             <items>
-                        <MenuItem mnemonicParsing="false" text="Lessons list" />
-                        <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem mnemonicParsing="false" text="Lessons list" />
+                                <SeparatorMenuItem mnemonicParsing="false" />
                                 <MenuItem mnemonicParsing="false" text="Teachers list" />
                             </items>
                         </Menu>

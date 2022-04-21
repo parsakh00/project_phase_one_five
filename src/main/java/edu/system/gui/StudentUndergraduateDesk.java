@@ -3,7 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageStudentDesk;
+import edu.system.logic.MassageUserDesk;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +16,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.apache.log4j.LogManager;
 import org.json.simple.parser.ParseException;
 
@@ -26,15 +25,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
-public class StudentDesk {
+public class StudentUndergraduateDesk {
 
-    static Logger log = LogManager.getLogger(StudentDesk.class);
+    static Logger log = LogManager.getLogger(StudentUndergraduateDesk.class);
 
     String lastLogIn;
     Stage stage;
@@ -84,8 +82,7 @@ public class StudentDesk {
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
             String strLine;
             while ((strLine = br.readLine()) != null){
-                if (strLine.contains("StudentDesk")){
-                    System.out.println(strLine);
+                if (strLine.contains("StudentUndergraduateDesk")){
                     Pattern pattern = Pattern.compile("\\d{2}:\\d{2}:\\d{2}");
                     Matcher matcher = pattern.matcher(strLine);
                     if(matcher.find()){
@@ -102,19 +99,19 @@ public class StudentDesk {
     }
 
     protected String getEmail() throws IOException, ParseException {
-        MassageStudentDesk massageStudentDesk = new MassageStudentDesk(CurrentUser.getInstance().getUser());
-        return Controller.getInstance().studentDeskEmail(massageStudentDesk);
+        MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
 
     }
 
     protected String getUsername() throws IOException, ParseException {
-        MassageStudentDesk massageStudentDesk = new MassageStudentDesk(CurrentUser.getInstance().getUser());
-        return Controller.getInstance().studentDeskUserName(massageStudentDesk);
+        MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
 
     protected String getUserType() throws IOException, ParseException {
-        MassageStudentDesk massageStudentDesk = new MassageStudentDesk(CurrentUser.getInstance().getUser());
-        return Controller.getInstance().studentDeskType(massageStudentDesk);
+        MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().userDeskType(massageStudentUndergraduateDesk);
     }
 
     public void logoutClicked(ActionEvent actionEvent) throws IOException {

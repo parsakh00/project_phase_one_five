@@ -29,9 +29,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TeacherDesk {
+public class EducationalAssistantDesk {
 
-    static Logger log = LogManager.getLogger(TeacherDesk.class);
+    static Logger log = LogManager.getLogger(EducationalAssistantDesk.class);
 
     String lastLogIn;
     Stage stage;
@@ -77,7 +77,7 @@ public class TeacherDesk {
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
             String strLine;
             while ((strLine = br.readLine()) != null){
-                if (strLine.contains("TeacherDesk")){
+                if (strLine.contains("EducationalAssistantDesk")){
                     Pattern pattern = Pattern.compile("\\d{2}:\\d{2}:\\d{2}");
                     Matcher matcher = pattern.matcher(strLine);
                     if(matcher.find()){
@@ -94,19 +94,19 @@ public class TeacherDesk {
     }
 
     protected String getEmail() throws IOException, ParseException {
-        MassageUserDesk massageTeacherDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
-        return Controller.getInstance().userDeskEmail(massageTeacherDesk);
+        MassageUserDesk massageEducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().userDeskEmail(massageEducationalAssistantDesk);
 
     }
 
     protected String getUsername() throws IOException, ParseException {
-        MassageUserDesk massageTeacherDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
-        return Controller.getInstance().userDeskUserName(massageTeacherDesk);
+        MassageUserDesk massageducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().userDeskUserName(massageducationalAssistantDesk);
     }
 
     protected String getUserType() throws IOException, ParseException {
-        MassageUserDesk massageTeacherDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
-        return Controller.getInstance().userDeskType(massageTeacherDesk);
+        MassageUserDesk massageducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().userDeskType(massageducationalAssistantDesk);
     }
 
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
@@ -127,4 +127,5 @@ public class TeacherDesk {
         userImage.setFitWidth(140);
         noidea.getChildren().add(userImage);
     }
+
 }

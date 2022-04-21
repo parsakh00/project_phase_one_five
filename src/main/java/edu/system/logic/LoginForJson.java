@@ -23,6 +23,12 @@ public class LoginForJson {
         JSONObject jsonObject = (JSONObject)obj;
         return (String) jsonObject.get("type");
     }
+    public String getUserDegree() throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject)obj;
+        return (String) jsonObject.get("degree");
+    }
 
     public String getUserName() throws IOException, ParseException {
         JSONParser parser = new JSONParser();

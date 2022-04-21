@@ -1,6 +1,5 @@
 package edu.system;
 
-import edu.system.gui.StudentDesk;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

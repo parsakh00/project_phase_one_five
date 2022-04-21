@@ -6,7 +6,7 @@ import org.json.simple.parser.JSONParser;
 import java.io.File;
 import java.io.FileReader;
 
-public class Login {
+public class LoginController {
     boolean isNameValid;
     boolean isPassValid;
     String name;
@@ -43,6 +43,8 @@ public class Login {
         }
         return res;
     }
+
+
 
 //    public void deserializeUser(){
 //        JSONParser parser = new JSONParser();

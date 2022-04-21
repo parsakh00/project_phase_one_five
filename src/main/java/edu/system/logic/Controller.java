@@ -23,26 +23,26 @@ public class Controller {
     public boolean login(MassageLogin massage){
         String name = massage.getName();
         String pass = massage.getPass();
-        Login login2 = new Login();
+        LoginController login2 = new LoginController();
         return (login2.checkName(name) && login2.checkPass(pass, name));
     }
 
-    public String studentDeskEmail(MassageStudentDesk massageStudentDesk) throws IOException, ParseException {
+    public String userDeskEmail(MassageUserDesk massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        studentController studentController = new studentController();
+        userController studentController = new userController();
         return studentController.getEmail(name);
 
     }
 
-    public String studentDeskUserName(MassageStudentDesk massageStudentDesk) throws IOException, ParseException {
+    public String userDeskUserName(MassageUserDesk massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        studentController studentController = new studentController();
+        userController studentController = new userController();
         return studentController.getUserName(name);
     }
 
-    public String studentDeskType(MassageStudentDesk massageStudentDesk) throws IOException, ParseException {
+    public String userDeskType(MassageUserDesk massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        studentController studentController = new studentController();
+        userController studentController = new userController();
         return studentController.getType(name);
 
     }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="studentView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.StudentUndergraduateDesk">
+   <children>
+      <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
+         <children>
+            <Button fx:id="logOut" layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#logoutClicked" text="log out" />
+            <Label fx:id="timeDate" layoutX="8.0" layoutY="49.0" prefHeight="27.0" prefWidth="133.0" />
+            <Label fx:id="lastTimeLogIn" layoutX="8.0" layoutY="85.0" prefHeight="27.0" prefWidth="146.0" />
+            <MenuBar layoutX="393.0" layoutY="99.0" prefHeight="26.0" prefWidth="407.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Profile" />
+                <Menu mnemonicParsing="false" text="Record affairs">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Temporary scores" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Student's educational status" />
+                  </items>
+                </Menu>
+                  <Menu mnemonicParsing="false" text="Educational services">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Weekly Schedule" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="student exams" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <Menu mnemonicParsing="false" text="Requests">
+                          <items>
+                              <MenuItem mnemonicParsing="false" text="Recommendations" />
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                              <MenuItem mnemonicParsing="false" text="Apply for a certificate of employment" />
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                              <MenuItem mnemonicParsing="false" text="Minor" />
+                              <SeparatorMenuItem mnemonicParsing="false" />
+                            <MenuItem mnemonicParsing="false" text="Withdrawal from education" />
+                          </items>
+                        </Menu>
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Registration matters">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Lesson lists" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                      <MenuItem mnemonicParsing="false" text="Teachers list" />
+                    </items>
+                  </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </Pane>
+      <Label fx:id="username" layoutX="6.0" layoutY="161.0" prefHeight="35.0" prefWidth="240.0" />
+      <Label fx:id="email" layoutX="6.0" layoutY="126.0" prefHeight="35.0" prefWidth="270.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Pane fx:id="noidea" layoutX="14.0" layoutY="196.0" prefHeight="160.0" prefWidth="140.0" />
+   </children>
+</AnchorPane>
