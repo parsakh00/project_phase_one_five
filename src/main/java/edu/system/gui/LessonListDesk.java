@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import org.json.simple.parser.ParseException;
@@ -28,12 +30,35 @@ public class LessonListDesk {
     protected Label email;
     @FXML
     protected Label userName;
+    @FXML
+    protected ChoiceBox<String> stageChoiceBox;
+    @FXML
+    protected ChoiceBox<String> unityChoiceBox;
+    @FXML
+    protected ChoiceBox<String> facultyChoiceBox;
+    @FXML
+    protected CheckBox stageCheckBox;
+    @FXML
+    protected CheckBox unityCheckBox;
+
+    protected String[] stagee = {"undergraduate","master","phd"};
+
+    protected String[] unity = {"0","1","2","3","4"};
+
+    protected String[] faculty = {"Chemistry","MathSci","MechanicEng"};
 
 
     public void initialize() throws IOException, ParseException {
         timeDisplay();
         email.setText("Email : " + getEmail());
         userName.setText("Username : " + getUsername());
+        facultyChoiceBox.getItems().addAll(faculty);
+        unityChoiceBox.getItems().addAll(unity);
+        stageChoiceBox.getItems().addAll(stagee);
+        facultyChoiceBox.setOnAction(this::getFaculty);
+        unityChoiceBox.setOnAction(this::getUnit);
+        stageChoiceBox.setOnAction(this::getStage);
+
     }
 
     public void timeDisplay(){
@@ -61,6 +86,27 @@ public class LessonListDesk {
         //ToDo
         return null;
     }
+
+
+
+    protected String getFaculty(ActionEvent actionEvent){
+        return facultyChoiceBox.getValue();
+    }
+    protected String getStage(ActionEvent actionEvent){
+        if (stageCheckBox.isSelected()) {
+            return stageChoiceBox.getValue();
+        }
+        else return null;
+    }
+
+    protected String getUnit(ActionEvent actionEvent){
+        if (unityCheckBox.isSelected()) {
+            return unityChoiceBox.getValue();
+        }
+        else return null;
+    }
+
+
 
 
 }
