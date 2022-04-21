@@ -8,6 +8,7 @@ module edu.system {
     requires org.kordamp.bootstrapfx.core;
     requires com.google.gson;
     requires json.simple;
+    requires log4j;
 
     opens edu.system to javafx.fxml;
     opens edu.system.gui to javafx.fxml;

@@ -40,6 +40,13 @@ public class Controller {
         return studentController.getUserName(name);
     }
 
+    public String studentDeskType(MassageStudentDesk massageStudentDesk) throws IOException, ParseException {
+        String name = massageStudentDesk.getName();
+        studentController studentController = new studentController();
+        return studentController.getType(name);
+
+    }
+
 
 
 }

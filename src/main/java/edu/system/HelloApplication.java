@@ -1,5 +1,6 @@
 package edu.system;
 
+import edu.system.gui.StudentDesk;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,14 +9,16 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class HelloApplication extends Application {
+    static Logger log = LogManager.getLogger(HelloApplication.class);
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("fxml/login-view.fxml"));
@@ -44,6 +47,22 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
+        log.info("launch");
+//        try{
+//            FileInputStream fstream = new FileInputStream("./src/main/resources/logs/userActivity.log");
+//            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+//            String strLine;
+//            /* read log line by line */
+//            while ((strLine = br.readLine()) != null)   {
+//                /* parse strLine to obtain what you want */
+//                System.out.println (strLine);
+//            }
+//            fstream.close();
+//        } catch (Exception e) {
+//            System.err.println("Error: " + e.getMessage());
+//        }
+        //System.out.println(log.getParent());
+
         //deserializeUser();
         //serializeUser();
         //currentDirectory();

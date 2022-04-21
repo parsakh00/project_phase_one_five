@@ -17,15 +17,26 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.apache.log4j.LogManager;
 import org.json.simple.parser.ParseException;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.apache.log4j.Logger;
 
 public class StudentDesk {
 
+    static Logger log = LogManager.getLogger(StudentDesk.class);
+
+    String lastLogIn;
     Stage stage;
     @FXML
     protected AnchorPane studentView;
@@ -41,11 +52,16 @@ public class StudentDesk {
     protected Pane noidea;
     @FXML
     protected ImageView userImage;
+    @FXML
+    protected Label lastTimeLogIn;
 
 
     public void initialize() throws IOException, ParseException {
+        log.info("logged in");
+        getLoginTime();
         setUserImage();
         timeDisplay();
+        lastTimeLogIn.setText("last log in : " + getLoginTime());
         username.setText("User : " + getUsername());
         email.setText("Email : " + getEmail());
 
@@ -61,6 +77,30 @@ public class StudentDesk {
         timer.start();
     }
 
+    public String getLoginTime(){
+
+        try{
+            FileInputStream fstream = new FileInputStream("./src/main/resources/logs/userActivity.log");
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            String strLine;
+            while ((strLine = br.readLine()) != null){
+                if (strLine.contains("StudentDesk")){
+                    System.out.println(strLine);
+                    Pattern pattern = Pattern.compile("\\d{2}:\\d{2}:\\d{2}");
+                    Matcher matcher = pattern.matcher(strLine);
+                    if(matcher.find()){
+                        lastLogIn = matcher.group();
+                    }
+                    break;
+                }
+            }
+            fstream.close();
+        } catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return lastLogIn;
+    }
+
     protected String getEmail() throws IOException, ParseException {
         MassageStudentDesk massageStudentDesk = new MassageStudentDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().studentDeskEmail(massageStudentDesk);
@@ -70,6 +110,11 @@ public class StudentDesk {
     protected String getUsername() throws IOException, ParseException {
         MassageStudentDesk massageStudentDesk = new MassageStudentDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().studentDeskUserName(massageStudentDesk);
+    }
+
+    protected String getUserType() throws IOException, ParseException {
+        MassageStudentDesk massageStudentDesk = new MassageStudentDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().studentDeskType(massageStudentDesk);
     }
 
     public void logoutClicked(ActionEvent actionEvent) throws IOException {

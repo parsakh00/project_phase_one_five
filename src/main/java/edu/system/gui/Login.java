@@ -174,13 +174,18 @@ public class Login {
                     stage.show();
                 }
                 else if (Objects.equals(loginForJson.getUserType(), "teacher")){
+                    CurrentUser.getInstance().setUser(loginForJson.getUserName());
                     stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-                    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
+                    FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/TeacherDesk-view.fxml"));
                     Scene scene = new Scene(loader.load());
+                    stage.setHeight(650);
+                    stage.setWidth(800);
+                    stage.setResizable(false);
                     stage.setScene(scene);
-                    stage.setTitle("educational system/student/" + loginForJson.getUserName());
+                    stage.setTitle("educational system");
                     stage.show();
                 }
+
 
 
             }
