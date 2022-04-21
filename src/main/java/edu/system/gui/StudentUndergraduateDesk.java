@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -52,6 +53,8 @@ public class StudentUndergraduateDesk {
     protected ImageView userImage;
     @FXML
     protected Label lastTimeLogIn;
+    @FXML
+    MenuItem lessonLists;
 
 
     public void initialize() throws IOException, ParseException {
@@ -131,5 +134,19 @@ public class StudentUndergraduateDesk {
         userImage.setFitHeight(160);
         userImage.setFitWidth(140);
         noidea.getChildren().add(userImage);
+    }
+
+    public void lessonListsClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/lessonLists-view.fxml"));
+        System.out.println("1");
+        Scene scene = new Scene(loader.load());
+        System.out.println("2");
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
     }
 }

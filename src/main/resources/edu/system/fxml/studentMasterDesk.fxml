@@ -55,5 +55,27 @@
             </font>
         </Label>
         <Pane fx:id="noidea" layoutX="14.0" layoutY="196.0" prefHeight="160.0" prefWidth="140.0" />
+      <GridPane layoutX="205.0" layoutY="458.0" prefHeight="91.0" prefWidth="474.0">
+          <children>
+              <Label alignment="CENTER" prefHeight="26.0" prefWidth="170.0" styleClass="loginBox" stylesheets="@../styles.css" text=": Educational status" GridPane.columnIndex="1" />
+              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="164.0" text=": Supervisor" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+              <Label alignment="CENTER" prefHeight="26.0" prefWidth="154.0" styleClass="loginBox" stylesheets="@../styles.css" text=": Registration license" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+              <Label alignment="CENTER" prefHeight="34.0" prefWidth="154.0" text=": Registration time" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="370.0" />
+              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="370.0" styleClass="loginBox" stylesheets="@../styles.css" GridPane.rowIndex="1" />
+              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="370.0" GridPane.rowIndex="2" />
+              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="338.0" styleClass="loginBox" stylesheets="@../styles.css" GridPane.rowIndex="3" />
+          </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+      </GridPane>
     </children>
 </AnchorPane>

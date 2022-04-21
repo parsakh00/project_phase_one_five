@@ -1,0 +1,44 @@
+{
+  "general chemistry 1": {
+    "unity": "3",
+    "stage": "undergraduate",
+    "id": "23011",
+    "teacher": "davood taherniya",
+    "isPresent": true
+  },
+  "general chemistry 2": {
+    "unity": "3",
+    "stage": "undergraduate",
+    "id": "23012",
+    "teacher": "bahram ghanbari",
+    "isPresent": true
+  },
+  "Analytical spectroscopy": {
+    "unity": "2",
+    "stage": "master",
+    "id": "23257",
+    "teacher": "mohammadreza hormozinezhad",
+    "isPresent": true
+  },
+  "Analytical electrochemistry": {
+    "unity": "3",
+    "stage": "master",
+    "id": "23261",
+    "teacher": "saeed shahrokhian dehkordi",
+    "isPresent": false
+  },
+  "Structure and link": {
+    "unity": "3",
+    "stage": "phd",
+    "id": "23701",
+    "teacher": "mojtaba bagerzadeh",
+    "isPresent": true
+  },
+  "Molecular spectroscopy": {
+    "unity": "3",
+    "stage": "phd",
+    "id": "23729",
+    "teacher": "zahra jamshidi",
+    "isPresent": false
+  }
+}
