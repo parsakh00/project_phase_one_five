@@ -22,6 +22,7 @@ public class LoginController {
                 Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
                 JSONObject jsonObject = (JSONObject)obj;
                 if(passHash(pass) == (long)jsonObject.get("password")){
+
                     isPassValid = true;
                 }
             } catch(Exception e) {

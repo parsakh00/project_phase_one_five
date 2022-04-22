@@ -12,6 +12,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.*;
 
@@ -45,7 +46,33 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+
+//        JSONParser parser = new JSONParser();
+//        try {
+//            //Read JSON file
+//            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + "bahram ghanbari" + ".json"));
+//            JSONObject user = (JSONObject) obj;
+//            System.out.println(user.toString());
+//            if (!((Boolean) user.get("isEducationalAssistantSet"))) {
+//                user.put("isEducationalAssistantSet", true);
+//
+//
+//            }
+//            else{
+//                System.out.println("true");
+//                user.put("isEducationalAssistantSet", false);
+//                user.toString();
+//                System.out.println(user.toJSONString());
+//
+//            }
+//
+//        } catch (ParseException | IOException e) {
+//            e.printStackTrace();
+//        }
+        //System.out.println(passHash("96102132"));
+        //System.out.println(passHash("97231023"));
         log.info("launch");
 //        try{
 //            FileInputStream fstream = new FileInputStream("./src/main/resources/logs/userActivity.log");

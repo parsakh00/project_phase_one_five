@@ -1,44 +1,50 @@
-{
-  "general math 1": {
+[
+  {
+    "lesson": "general math 1",
     "unity": "4",
     "stage": "undergraduate",
     "id": "22015",
     "teacher": "amir jafari",
     "isPresent": true
   },
-  "differential equation": {
+  {
+    "lesson" : "differential equation",
     "unity": "3",
     "stage": "undergraduate",
     "id": "22034",
     "teacher": "masoud beyrami",
     "isPresent": true
   },
-  "Structural Mathematics": {
+  {
+    "lesson" : "Structural Mathematics",
     "unity": "4",
     "stage": "master",
     "id": "22128",
     "teacher": "mohammad ardeshir",
     "isPresent": true
   },
-  "Neural Network Seminar": {
+  {
+    "lesson" : "Neural Network Seminar",
     "unity": "1",
     "stage": "master",
     "id": "22140",
     "teacher": "mostafa esfahanizadeh",
     "isPresent": false
   },
-  "Analysis of algorithms": {
+  {
+    "lesson" : "Analysis of algorithms",
     "unity": "3",
     "stage": "phd",
     "id": "22891",
     "teacher": "mojtaba bagerzadeh",
     "isPresent": false
   },
-  "Information theory": {
+  {
+    "lesson" : "Information theory",
     "unity": "3",
     "stage": "phd",
     "id": "22641",
     "teacher": "javad ebrahimi",
     "isPresent": true
   }
-}
+]

@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -32,6 +33,7 @@ import java.util.regex.Pattern;
 public class TeacherDesk {
 
     static Logger log = LogManager.getLogger(TeacherDesk.class);
+
 
     String lastLogIn;
     Stage stage;
@@ -126,5 +128,29 @@ public class TeacherDesk {
         userImage.setFitHeight(160);
         userImage.setFitWidth(140);
         noidea.getChildren().add(userImage);
+    }
+
+    public void lessonListsClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/lessonLists-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+    public void teachersListsClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherLists-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
     }
 }

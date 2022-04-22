@@ -1,44 +1,50 @@
-{
-  "Statics and strength of materials": {
+[
+  {
+    "lesson" : "Statics and strength of materials",
     "unity": "3",
     "stage": "undergraduate",
     "id": "28065",
     "teacher": "mohammadtaghi omidvar",
     "isPresent": true
   },
-  "Heat transfer 1": {
+  {
+    "lesson" : "Heat transfer 1",
     "unity": "3",
     "stage": "undergraduate",
     "id": "28113",
     "teacher": "mohammadbehshad shafiei",
     "isPresent": true
   },
-  "Computational fluid dynamics": {
+  {
+    "lesson" : "Computational fluid dynamics",
     "unity": "3",
     "stage": "master",
     "id": "28016",
     "teacher": "mohammad khorasanchi",
     "isPresent": true
   },
-  "Boundary layer theory": {
+  {
+    "lesson" : "Boundary layer theory",
     "unity": "3",
     "stage": "master",
     "id": "28056",
     "teacher": "bizhan farahaniye",
     "isPresent": true
   },
-  "Applied micro-nanotechnology": {
+  {
+    "lesson" : "Applied micro-nanotechnology",
     "unity": "3",
     "stage": "phd",
     "id": "28182",
     "teacher": "amir shamloo",
     "isPresent": false
   },
-  "Maintenance of machinery": {
+  {
+    "lesson" : "Maintenance of machinery",
     "unity": "2",
     "stage": "phd",
     "id": "28242",
     "teacher": "mehdi behzad",
     "isPresent": true
   }
-}
+]

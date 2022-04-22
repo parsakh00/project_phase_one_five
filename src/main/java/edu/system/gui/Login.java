@@ -177,7 +177,7 @@ public class Login {
                     else if(Objects.equals(loginForJson.getUserDegree(), "master")) {
                         CurrentUser.getInstance().setUser(loginForJson.getUserName());
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk-view.fxml"));
+                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk.fxml"));
                         Scene scene = new Scene(loader.load());
                         stage.setHeight(650);
                         stage.setWidth(800);
@@ -189,7 +189,7 @@ public class Login {
                     else if(Objects.equals(loginForJson.getUserDegree(), "phd")) {
                         CurrentUser.getInstance().setUser(loginForJson.getUserName());
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentPhdDesk-view.fxml"));
+                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk.fxml"));
                         Scene scene = new Scene(loader.load());
                         stage.setHeight(650);
                         stage.setWidth(800);
@@ -204,7 +204,7 @@ public class Login {
                     if ((loginForJson.getUserDegree() == null) || (Objects.equals(loginForJson.getUserDegree(), "manager"))) {
                         CurrentUser.getInstance().setUser(loginForJson.getUserName());
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/TeacherDesk-view.fxml"));
+                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
                         Scene scene = new Scene(loader.load());
                         stage.setHeight(650);
                         stage.setWidth(800);
@@ -214,7 +214,16 @@ public class Login {
                         stage.show();
                     }
                     else{
-
+                        CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                        stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
+                        Scene scene = new Scene(loader.load());
+                        stage.setHeight(650);
+                        stage.setWidth(800);
+                        stage.setResizable(false);
+                        stage.setScene(scene);
+                        stage.setTitle("educational system");
+                        stage.show();
                     }
                 }
 
@@ -261,7 +270,7 @@ public class Login {
                         else if(Objects.equals(loginForJson.getUserDegree(), "master")) {
                             CurrentUser.getInstance().setUser(loginForJson.getUserName());
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
-                            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk-view.fxml"));
+                            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk.fxml"));
                             Scene scene = new Scene(loader.load());
                             stage.setHeight(650);
                             stage.setWidth(800);
@@ -273,7 +282,7 @@ public class Login {
                         else if(Objects.equals(loginForJson.getUserDegree(), "phd")) {
                             CurrentUser.getInstance().setUser(loginForJson.getUserName());
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
-                            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentPhdDesk-view.fxml"));
+                            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentPhdDesk.fxml"));
                             Scene scene = new Scene(loader.load());
                             stage.setHeight(650);
                             stage.setWidth(800);
@@ -288,7 +297,7 @@ public class Login {
                         if ((loginForJson.getUserDegree() == null) || (Objects.equals(loginForJson.getUserDegree(), "manager"))) {
                             CurrentUser.getInstance().setUser(loginForJson.getUserName());
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
-                            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/TeacherDesk-view.fxml"));
+                            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
                             Scene scene = new Scene(loader.load());
                             stage.setHeight(650);
                             stage.setWidth(800);
@@ -298,7 +307,16 @@ public class Login {
                             stage.show();
                         }
                         else{
-
+                            CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                            stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
+                            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
+                            Scene scene = new Scene(loader.load());
+                            stage.setHeight(650);
+                            stage.setWidth(800);
+                            stage.setResizable(false);
+                            stage.setScene(scene);
+                            stage.setTitle("educational system");
+                            stage.show();
                         }
                     }
 
@@ -332,13 +350,6 @@ public class Login {
             MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText());
             if (Controller.getInstance().login(massage)){
                 return true;
-//                edu.system.logic.Login logType = new edu.system.logic.Login();
-//                if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "student")){
-//
-//                }
-//                else if (Objects.equals(logType.getUserType(UserNameTextField.getText()), "teacher")){
-//
-//                }
             }
             else{
                 wrongUserPass.setText("wrong username or password");

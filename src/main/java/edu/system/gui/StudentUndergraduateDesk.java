@@ -139,9 +139,18 @@ public class StudentUndergraduateDesk {
     public void lessonListsClicked() throws IOException {
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/lessonLists-view.fxml"));
-        System.out.println("1");
         Scene scene = new Scene(loader.load());
-        System.out.println("2");
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+    public void teachersListsClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherLists-view.fxml"));
+        Scene scene = new Scene(loader.load());
         stage.setHeight(650);
         stage.setWidth(800);
         stage.setResizable(false);

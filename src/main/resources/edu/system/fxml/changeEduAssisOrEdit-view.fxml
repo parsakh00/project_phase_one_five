@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.ChangeEduAssisOrEdit">
+   <children>
+      <Button fx:id="drawBack" layoutX="31.0" layoutY="22.0" mnemonicParsing="false" onAction="#returnBtn" text="&lt;-" />
+      <Pane layoutX="84.0" layoutY="84.0" prefHeight="172.0" prefWidth="630.0" styleClass="titleBar" stylesheets="@../styles.css">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" layoutY="14.0" prefHeight="25.0" prefWidth="261.0" textFill="RED" />
+            <Label layoutX="26.0" layoutY="39.0" prefHeight="18.0" prefWidth="59.0" text="relegate : " />
+            <Label layoutX="26.0" layoutY="97.0" prefHeight="25.0" prefWidth="59.0" text="select :" />
+            <TextField fx:id="preEdu" layoutX="85.0" layoutY="36.0" prefHeight="25.0" prefWidth="218.0" promptText="Relegate Previous Educational Assistant" />
+            <TextField fx:id="newEdu" layoutX="86.0" layoutY="97.0" prefHeight="25.0" prefWidth="218.0" promptText="Selec New Educational Assistant" />
+            <Button fx:id="okPreEduChange" layoutX="315.0" layoutY="36.0" mnemonicParsing="false" onAction="#preEduClicked" text="okey" />
+            <Button fx:id="okNewEduChange" layoutX="315.0" layoutY="97.0" mnemonicParsing="false" onAction="#newEduClicked" prefHeight="25.0" prefWidth="41.0" text="okey" />
+            <Label fx:id="warningSec" layoutX="373.0" layoutY="97.0" prefHeight="25.0" prefWidth="243.0" />
+            <Label fx:id="warningRel" layoutX="373.0" layoutY="36.0" prefHeight="25.0" prefWidth="243.0" />
+         </children></Pane>
+      <Pane layoutX="84.0" layoutY="346.0" prefHeight="280.0" prefWidth="630.0" styleClass="titleBar" stylesheets="@../styles.css">
+         <children>
+            <Label layoutX="21.0" layoutY="17.0" prefHeight="26.0" prefWidth="65.0" text="Remove :" />
+            <TextField layoutX="76.0" layoutY="18.0" promptText="Teacher username" />
+            <Label layoutX="21.0" layoutY="75.0" prefHeight="25.0" prefWidth="65.0" text="Edit :" />
+            <TextField layoutX="76.0" layoutY="75.0" promptText="Teacher username" />
+            <TextField layoutX="241.0" layoutY="74.0" prefHeight="26.0" prefWidth="149.0" promptText="Teacher password(Optional)">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="399.0" layoutY="74.0" prefHeight="26.0" prefWidth="149.0" promptText="Email(Optional)">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </TextField>
+            <TextField layoutX="76.0" layoutY="108.0" promptText="Room No(Optional)" />
+            <TextField layoutX="241.0" layoutY="108.0" promptText="Phone(Optional)" />
+            <Label layoutX="21.0" layoutY="174.0" text="Add : " />
+            <Button layoutX="399.0" layoutY="108.0" mnemonicParsing="false" text="okey" />
+            <Button layoutX="233.0" layoutY="18.0" mnemonicParsing="false" text="okey" />
+            <TextField layoutX="76.0" layoutY="170.0" prefHeight="25.0" prefWidth="149.0" promptText="username(mandatory)" />
+            <TextField layoutX="241.0" layoutY="170.0" prefHeight="25.0" prefWidth="149.0" promptText="password(mandatory)" />
+            <TextField layoutX="399.0" layoutY="169.0" prefHeight="26.0" prefWidth="149.0" promptText="email(mandatory)" />
+            <Button layoutX="76.0" layoutY="207.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Pick Image" />
+            <Button layoutX="241.0" layoutY="207.0" mnemonicParsing="false" text="okay" />
+         </children>
+      </Pane>
+      <Label alignment="CENTER" layoutX="294.0" layoutY="48.0" prefHeight="18.0" prefWidth="211.0" text="Relegation/selected" />
+      <Label alignment="CENTER" layoutX="294.0" layoutY="315.0" prefHeight="18.0" prefWidth="211.0" text="Edit teacher" />
+   </children>
+</AnchorPane>

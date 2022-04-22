@@ -44,7 +44,7 @@
                     <items>
                         <MenuItem fx:id="lessonLists" mnemonicParsing="false" onAction="#lessonListsClicked" text="Lesson lists" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                      <MenuItem mnemonicParsing="false" text="Teachers list" />
+                      <MenuItem fx:id="teacherslist" mnemonicParsing="false" onAction="#teachersListsClicked" text="Teachers list" />
                     </items>
                   </Menu>
               </menus>

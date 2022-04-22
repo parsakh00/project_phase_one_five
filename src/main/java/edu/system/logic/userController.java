@@ -32,4 +32,11 @@ public class userController {
         JSONObject jsonObject = (JSONObject) obj;
         return (String) jsonObject.get("type");
     }
+    public String getUserDegree(String name) throws IOException, ParseException {
+
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        return (String) jsonObject.get("degree");
+    }
 }

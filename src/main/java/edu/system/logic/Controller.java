@@ -3,6 +3,7 @@ package edu.system.logic;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Controller {
     public static  Controller controller;
@@ -44,8 +45,61 @@ public class Controller {
         String name = massageStudentDesk.getName();
         userController studentController = new userController();
         return studentController.getType(name);
-
     }
+    public String userDeskDegreee(MassageUserDesk massageStudentDesk) throws IOException, ParseException {
+        String name = massageStudentDesk.getName();
+        userController studentController = new userController();
+        return studentController.getUserDegree(name);
+    }
+
+    public String[] facultyLessons(MassageUserDesk massageFacultyName) {
+        String name = massageFacultyName.getName();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.getFacultyData(name);
+    }
+    public String[] facultyTeachers(MassageUserDesk massageFacultyName) {
+        String name = massageFacultyName.getName();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.getFacultyTeachers(name);
+    }
+    public String[] facultyUnitLessons(MassageFacultyUnit massageFacultyUnit) {
+        String name = massageFacultyUnit.getName();
+        String unit = massageFacultyUnit.getUnit();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.getFacultyUnitData(name, unit);
+    }
+    public String[] facultyStageLessons(MassageFacultyUnit massageFacultyUnit) {
+        String name = massageFacultyUnit.getName();
+        String unit = massageFacultyUnit.getUnit();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.getFacultyStageData(name, unit);
+    }
+    public Boolean isChosen (MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.isChosenBefore(name);
+    }
+    public void valueChanger (MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        LessonListController lessonListController = new LessonListController();
+        lessonListController.change(name);
+    }
+
+    public void promotion (MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        LessonListController lessonListController = new LessonListController();
+        lessonListController.promotion(name);
+    }
+    public void relegation (MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        LessonListController lessonListController = new LessonListController();
+        lessonListController.relegation(name);
+    }
+
+
+
+
+
 
 
 

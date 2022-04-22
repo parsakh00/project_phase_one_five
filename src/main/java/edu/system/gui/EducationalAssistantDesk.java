@@ -127,5 +127,29 @@ public class EducationalAssistantDesk {
         userImage.setFitWidth(140);
         noidea.getChildren().add(userImage);
     }
+    public void lessonListsClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/lessonLists-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+    public void teachersListsClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherLists-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
 
 }
