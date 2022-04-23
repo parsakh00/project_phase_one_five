@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -19,35 +20,41 @@
             <Label fx:id="warningSec" layoutX="373.0" layoutY="97.0" prefHeight="25.0" prefWidth="243.0" />
             <Label fx:id="warningRel" layoutX="373.0" layoutY="36.0" prefHeight="25.0" prefWidth="243.0" />
          </children></Pane>
-      <Pane layoutX="84.0" layoutY="346.0" prefHeight="280.0" prefWidth="630.0" styleClass="titleBar" stylesheets="@../styles.css">
+      <Pane layoutX="85.0" layoutY="306.0" prefHeight="280.0" prefWidth="630.0" styleClass="titleBar" stylesheets="@../styles.css">
          <children>
             <Label layoutX="21.0" layoutY="17.0" prefHeight="26.0" prefWidth="65.0" text="Remove :" />
-            <TextField layoutX="76.0" layoutY="18.0" promptText="Teacher username" />
+            <TextField fx:id="teacherForRemove" layoutX="76.0" layoutY="18.0" promptText="Teacher username" />
             <Label layoutX="21.0" layoutY="75.0" prefHeight="25.0" prefWidth="65.0" text="Edit :" />
-            <TextField layoutX="76.0" layoutY="75.0" promptText="Teacher username" />
-            <TextField layoutX="241.0" layoutY="74.0" prefHeight="26.0" prefWidth="149.0" promptText="Teacher password(Optional)">
+            <TextField fx:id="editTeacher" layoutX="76.0" layoutY="75.0" promptText="Teacher username" />
+            <TextField fx:id="editPassword" layoutX="241.0" layoutY="74.0" prefHeight="26.0" prefWidth="149.0" promptText="Teacher password(Optional)">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
-            <TextField layoutX="399.0" layoutY="74.0" prefHeight="26.0" prefWidth="149.0" promptText="Email(Optional)">
+            <TextField fx:id="editEmail" layoutX="407.0" layoutY="74.0" prefHeight="26.0" prefWidth="149.0" promptText="Email(Optional)">
                <font>
                   <Font size="11.0" />
                </font>
             </TextField>
-            <TextField layoutX="76.0" layoutY="108.0" promptText="Room No(Optional)" />
-            <TextField layoutX="241.0" layoutY="108.0" promptText="Phone(Optional)" />
             <Label layoutX="21.0" layoutY="174.0" text="Add : " />
-            <Button layoutX="399.0" layoutY="108.0" mnemonicParsing="false" text="okey" />
-            <Button layoutX="233.0" layoutY="18.0" mnemonicParsing="false" text="okey" />
-            <TextField layoutX="76.0" layoutY="170.0" prefHeight="25.0" prefWidth="149.0" promptText="username(mandatory)" />
-            <TextField layoutX="241.0" layoutY="170.0" prefHeight="25.0" prefWidth="149.0" promptText="password(mandatory)" />
-            <TextField layoutX="399.0" layoutY="169.0" prefHeight="26.0" prefWidth="149.0" promptText="email(mandatory)" />
-            <Button layoutX="76.0" layoutY="207.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Pick Image" />
-            <Button layoutX="241.0" layoutY="207.0" mnemonicParsing="false" text="okay" />
+            <Button fx:id="okeyBtn" layoutX="563.0" layoutY="74.0" mnemonicParsing="false" onAction="#editTeacher" text="okey" />
+            <Button fx:id="remove" layoutX="233.0" layoutY="18.0" mnemonicParsing="false" onAction="#removeClicked" text="okey" />
+            <TextField fx:id="userAdd" layoutX="76.0" layoutY="170.0" prefHeight="25.0" prefWidth="149.0" promptText="username(mandatory)" />
+            <TextField fx:id="passAdd" layoutX="241.0" layoutY="170.0" prefHeight="25.0" prefWidth="149.0" promptText="password(mandatory)" />
+            <TextField fx:id="emailAdd" layoutX="407.0" layoutY="170.0" prefHeight="26.0" prefWidth="149.0" promptText="email(mandatory)" />
+            <Button fx:id="pickker" layoutX="407.0" layoutY="208.0" mnemonicParsing="false" onAction="#pickImage" prefHeight="25.0" prefWidth="149.0" text="Pick Image" />
+            <Button fx:id="addBtn" layoutX="564.0" layoutY="170.0" mnemonicParsing="false" onAction="#addBtnClicked" text="okay" />
+            <Label fx:id="warningDel" layoutX="282.0" layoutY="18.0" prefHeight="25.0" prefWidth="173.0" />
+            <Label fx:id="warningEdit" layoutX="241.0" layoutY="115.0" prefHeight="25.0" prefWidth="149.0" />
+            <Label fx:id="editEmailWarning" layoutX="399.0" layoutY="115.0" prefHeight="26.0" prefWidth="149.0" />
+            <TextField fx:id="phoneAdd" layoutX="76.0" layoutY="208.0" promptText="phone(mandatory)" />
+            <TextField fx:id="roomAdd" layoutX="241.0" layoutY="208.0" promptText="Room No.(mandatory)" />
+            <Label layoutX="407.0" layoutY="141.0" prefHeight="17.0" prefWidth="125.0" text="must be in .png format" />
+            <ImageView fx:id="image" fitHeight="128.0" fitWidth="92.0" layoutX="558.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="addWarning" layoutX="241.0" layoutY="243.0" prefHeight="26.0" prefWidth="149.0" />
          </children>
       </Pane>
       <Label alignment="CENTER" layoutX="294.0" layoutY="48.0" prefHeight="18.0" prefWidth="211.0" text="Relegation/selected" />
-      <Label alignment="CENTER" layoutX="294.0" layoutY="315.0" prefHeight="18.0" prefWidth="211.0" text="Edit teacher" />
+      <Label alignment="CENTER" layoutX="294.0" layoutY="274.0" prefHeight="18.0" prefWidth="211.0" text="Edit teacher" />
    </children>
 </AnchorPane>

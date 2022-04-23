@@ -346,7 +346,6 @@ public class Login {
     protected Boolean MainLogIn(){
         if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
             wrongCaptcha.setText(null);
-            //ToDo
             MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText());
             if (Controller.getInstance().login(massage)){
                 return true;

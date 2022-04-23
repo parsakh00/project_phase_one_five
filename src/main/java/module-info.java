@@ -9,6 +9,8 @@ module edu.system {
     requires com.google.gson;
     requires json.simple;
     requires log4j;
+    requires java.desktop;
+    requires javafx.swing;
 
     opens edu.system to javafx.fxml;
     opens edu.system.gui to javafx.fxml;

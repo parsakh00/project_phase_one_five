@@ -52,6 +52,7 @@ public class TeacherDesk {
     @FXML
     protected Label lastTimeLogIn;
 
+
     public void initialize() throws IOException, ParseException {
         log.info("logged in");
         getLoginTime();

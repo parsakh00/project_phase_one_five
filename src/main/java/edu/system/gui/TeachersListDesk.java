@@ -45,8 +45,25 @@ public class TeachersListDesk {
     @FXML
     protected GridPane TeachersLists;
 
+    @FXML
+    protected Button editEduBtn;
 
 
+    public void editingEduLesson(ActionEvent actionEvent) throws IOException, ParseException {
+        if (Objects.equals(getUserType(), "teacher")){
+            if (Objects.equals(getUserDegree(), "education assistant")){
+                stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/EditLesson-view.fxml"));
+                Scene scene = new Scene(loader.load());
+                stage.setHeight(650);
+                stage.setWidth(800);
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.setTitle("educational system");
+                stage.show();
+            }
+        }
+    }
 
     public void initialize() throws IOException, ParseException {
         timeDisplay();
@@ -78,7 +95,7 @@ public class TeachersListDesk {
     }
 
     public void returnBtn() throws IOException, ParseException {
-        //ToDo
+
         stage = ((Stage) (email).getScene().getWindow());
         if (Objects.equals(getUserDegree(), "master")) {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk.fxml"));
@@ -110,7 +127,7 @@ public class TeachersListDesk {
             stage.setTitle("educational system");
             stage.show();
         }
-        else if (Objects.equals(getUserDegree(), null) || Objects.equals(getUserType(), "manager")){
+        else if (Objects.equals(getUserDegree(), "manager") || Objects.equals(getUserType(), null)){
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setHeight(650);
@@ -120,7 +137,7 @@ public class TeachersListDesk {
             stage.setTitle("educational system");
             stage.show();
         }
-        else if (Objects.equals(getUserDegree(), "educational assistant")){
+        else if (Objects.equals(getUserDegree(), "education assistant")){
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setHeight(650);
@@ -183,11 +200,8 @@ public class TeachersListDesk {
         if (Objects.equals(getUserType(), "teacher")){
             if (Objects.equals(getUserDegree(), "manager")){
                 stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-                System.out.println("dodoli");
                 FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/changeEduAssisOrEdit-view.fxml"));
-                System.out.println("1");
                 Scene scene = new Scene(loader.load());
-                System.out.println("2");
                 stage.setHeight(650);
                 stage.setWidth(800);
                 stage.setResizable(false);

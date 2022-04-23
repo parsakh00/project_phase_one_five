@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -32,6 +33,7 @@ import java.util.regex.Pattern;
 public class EducationalAssistantDesk {
 
     static Logger log = LogManager.getLogger(EducationalAssistantDesk.class);
+    public MenuItem lessonlists;
 
     String lastLogIn;
     Stage stage;

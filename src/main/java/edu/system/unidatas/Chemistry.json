@@ -5,7 +5,9 @@
     "stage": "undergraduate",
     "id": "23011",
     "teacher": "davood taherniya",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "Chemistry",
+    "time": "9:30"
   },
   {
     "lesson" : "general chemistry 2",
@@ -13,7 +15,9 @@
     "stage": "undergraduate",
     "id": "23012",
     "teacher": "bahram ghanbari",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "Chemistry",
+    "time": "11:00"
   },
   {
     "lesson" : "Analytical spectroscopy",
@@ -21,7 +25,9 @@
     "stage": "master",
     "id": "23257",
     "teacher": "mohammadreza hormozinezhad",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "Chemistry",
+    "time": "3:30"
   },
   {
     "lesson" : "Analytical electrochemistry",
@@ -29,7 +35,9 @@
     "stage": "master",
     "id": "23261",
     "teacher": "saeed shahrokhian dehkordi",
-    "isPresent": false
+    "isPresent": false,
+    "faculty" : "Chemistry",
+    "time": "5:00"
   },
   {
     "lesson" : "Structure and link",
@@ -37,7 +45,9 @@
     "stage": "phd",
     "id": "23701",
     "teacher": "mojtaba bagerzadeh",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "Chemistry",
+    "time": "7:00"
   },
   {
     "lesson" : "Molecular spectroscopy",
@@ -45,6 +55,8 @@
     "stage": "phd",
     "id": "23729",
     "teacher": "zahra jamshidi",
-    "isPresent": false
+    "isPresent": false,
+    "faculty" : "Chemistry",
+    "time": "9:00"
   }
 ]

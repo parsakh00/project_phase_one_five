@@ -36,6 +36,8 @@
       <Label fx:id="email" layoutX="14.0" layoutY="133.0" prefHeight="26.0" prefWidth="180.0" />
       <Label fx:id="username" layoutX="14.0" layoutY="173.0" prefHeight="26.0" prefWidth="180.0" />
       <Button fx:id="forEduAssis" layoutX="465.0" layoutY="137.0" mnemonicParsing="false" onAction="#changingEdiAssis" text="Edit" />
-      <Label layoutX="279.0" layoutY="137.0" prefHeight="26.0" prefWidth="164.0" text="Only Head of Faculty Can Use:" />
+      <Label layoutX="279.0" layoutY="137.0" prefHeight="26.0" prefWidth="164.0" text="Only Head of Faculty Can Use :" />
+      <Button fx:id="editEduBtn" layoutX="464.0" layoutY="173.0" mnemonicParsing="false" onAction="#editingEduLesson" prefHeight="26.0" prefWidth="37.0" text="Edit" />
+      <Label layoutX="251.0" layoutY="177.0" prefHeight="18.0" prefWidth="192.0" text="only Educational Assistant Can Use :" />
    </children>
 </AnchorPane>

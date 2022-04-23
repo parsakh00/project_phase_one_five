@@ -218,6 +218,8 @@ public class LessonListDesk {
     }
 
     public void returnBtn() throws IOException, ParseException {
+        System.out.println(getUserDegree());
+
         //ToDo
         stage = ((Stage) (email).getScene().getWindow());
         if (Objects.equals(getUserDegree(), "master")) {
@@ -250,7 +252,7 @@ public class LessonListDesk {
             stage.setTitle("educational system");
             stage.show();
         }
-        else if (Objects.equals(getUserDegree(), null) || Objects.equals(getUserType(), "manager")){
+        else if (Objects.equals(getUserDegree(), "manager") || Objects.equals(getUserDegree(),"")){
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setHeight(650);
@@ -260,7 +262,9 @@ public class LessonListDesk {
             stage.setTitle("educational system");
             stage.show();
         }
-        else if (Objects.equals(getUserDegree(), "educational assistant")){
+
+        else if (Objects.equals(getUserDegree(), "education assistant")){
+            System.out.println("true");
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setHeight(650);
