@@ -80,6 +80,10 @@ public class ChangeEduAssisOrEdit {
     protected Label addWarning;
     @FXML
     protected Button pickker;
+    @FXML
+    protected TextField masterDegreeAdd;
+    @FXML
+    protected TextField idAdd;
 
 
     public void initialize(){
@@ -94,6 +98,8 @@ public class ChangeEduAssisOrEdit {
         phoneAdd.setText(null);
         roomAdd.setText(null);
         emailAdd.setText(null);
+        masterDegreeAdd.setText(null);
+        idAdd.setText(null);
     }
 
     public void returnBtn(ActionEvent actionEvent) throws IOException {
@@ -140,28 +146,34 @@ public class ChangeEduAssisOrEdit {
     }
     @FXML
     protected void pickImage() throws IOException {
-        stage = new Stage();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("choose an image");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files",  "*.png"));
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        if (selectedFile != null) {
-            Image originalPhoto = new Image(selectedFile.toURI().toString());
-            image.setImage(originalPhoto);
+        if (userAdd.getText()!=null) {
+            stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("choose an image");
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png"));
+            File selectedFile = fileChooser.showOpenDialog(stage);
+            if (selectedFile != null) {
+                Image originalPhoto = new Image(selectedFile.toURI().toString());
+                image.setImage(originalPhoto);
+            }
+            Image imageToBeSaved = image.getImage();
+            File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\edu\\system\\images\\" + userAdd.getText() + ".png");
+            try {
+                ImageIO.write(SwingFXUtils.fromFXImage(imageToBeSaved, null), "png", file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        Image imageToBeSaved = image.getImage();
-        File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\edu\\system\\images\\" + userAdd.getText() + ".png");
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(imageToBeSaved,null),"png",file);
-        }catch (IOException e){
-            e.printStackTrace();
+        else {
+            addWarning.setText("First fill username");
         }
 
 
     }
     protected void addUser() throws IOException, ParseException {
         MassageSignUp massageSignUp = new MassageSignUp(userAdd.getText(),passAdd.getText(),
-                emailAdd.getText(),phoneAdd.getText(),roomAdd.getText(), currentUserFaculty());
+                emailAdd.getText(),phoneAdd.getText(),roomAdd.getText(), currentUserFaculty()
+                ,masterDegreeAdd.getText(),idAdd.getId());
         Controller.getInstance().addUser(massageSignUp);
     }
     protected void editPassword(){

@@ -24,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.cert.Certificate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -34,6 +35,8 @@ import org.apache.log4j.Logger;
 public class StudentUndergraduateDesk {
 
     static Logger log = LogManager.getLogger(StudentUndergraduateDesk.class);
+    @FXML
+    public MenuItem minor;
 
     String lastLogIn;
     Stage stage;
@@ -54,7 +57,99 @@ public class StudentUndergraduateDesk {
     @FXML
     protected Label lastTimeLogIn;
     @FXML
-    MenuItem lessonLists;
+    protected MenuItem lessonLists;
+    @FXML
+    protected Label condition;
+    @FXML
+    protected Label supervisor;
+    @FXML
+    protected MenuItem weeklyScheduleList;
+    @FXML
+    protected MenuItem studentExam;
+    @FXML
+    protected MenuItem Certificate;
+    @FXML
+    protected MenuItem Recomm;
+    @FXML
+    protected MenuItem WithdrawalEducation;
+    public void minorClicked(ActionEvent actionEvent) throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/Minor-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+    @FXML
+    protected void WithdrawalEducation() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/withdrawalFromEducation-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+    @FXML
+    protected void certificateClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/ApplyCertificateEmployment-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+    @FXML
+    protected void recommendationClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/Recommendation-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+
+    @FXML
+    protected void scheduleClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/weeklySchedule-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+    @FXML
+    protected void examClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/examsLists.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+
 
 
     public void initialize() throws IOException, ParseException {
@@ -65,7 +160,8 @@ public class StudentUndergraduateDesk {
         lastTimeLogIn.setText("last log in : " + getLoginTime());
         username.setText("User : " + getUsername());
         email.setText("Email : " + getEmail());
-
+        condition.setText(getEducationalStatus());
+        supervisor.setText(getSupervisor());
     }
 
     public void timeDisplay(){
@@ -112,6 +208,14 @@ public class StudentUndergraduateDesk {
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
 
+    protected String getEducationalStatus() throws IOException, ParseException {
+        MassageUserDesk EducationalStatus = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().educationalStatus(EducationalStatus);
+    }
+    protected String getSupervisor() throws IOException, ParseException {
+        MassageUserDesk supervisor = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().supervisor(supervisor);
+    }
     protected String getUserType() throws IOException, ParseException {
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskType(massageStudentUndergraduateDesk);
@@ -158,4 +262,6 @@ public class StudentUndergraduateDesk {
         stage.setTitle("educational system");
         stage.show();
     }
+
+
 }

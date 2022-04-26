@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.MinorDesk">
+   <children>
+      <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtnClicked" text="&lt;-" />
+            <Label alignment="CENTER" layoutX="349.0" layoutY="18.0" prefHeight="17.0" prefWidth="102.0" text="Minor Request">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Pane layoutX="51.0" layoutY="164.0" prefHeight="182.0" prefWidth="580.0" styleClass="loginBox" stylesheets="@../styles.css">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="216.0" text="Minor request :                                  to:" />
+            <TextField fx:id="facultyName" layoutX="230.0" layoutY="10.0" promptText="Faculty Name" />
+            <Button layoutX="399.0" layoutY="10.0" mnemonicParsing="false" onAction="#sendRequestClicked" text="send request" />
+            <Label fx:id="minorWarning" alignment="CENTER" layoutX="367.0" layoutY="51.0" prefHeight="17.0" prefWidth="149.0" />
+            <Button layoutX="14.0" layoutY="116.0" mnemonicParsing="false" onAction="#showResultClicked" text="Show result" />
+            <Label fx:id="warningResult" layoutX="122.0" layoutY="120.0" prefHeight="17.0" prefWidth="335.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

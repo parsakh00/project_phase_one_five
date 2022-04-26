@@ -56,6 +56,7 @@ public class EditLessonsDesk {
 
 
 
+
     public void initialize(){
         removeLesson.setText(null);
         editTeacher.setText(null);

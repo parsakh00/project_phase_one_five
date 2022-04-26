@@ -1,0 +1,50 @@
+[
+  {
+    "lesson" : "Physics 1",
+    "unity": "3",
+    "stage": "undergraduate",
+    "id": "24011",
+    "teacher": "aliakbar abolhassani",
+    "isPresent": true,
+    "faculty" : "Physics",
+    "time": "9:30",
+    "day": "2",
+    "exam":"0305"
+  },
+  {
+    "lesson" : "Physics 2",
+    "unity": "3",
+    "stage": "undergraduate",
+    "id": "24012",
+    "teacher": "mahmood bahmanabadi",
+    "isPresent": true,
+    "faculty" : "Physics",
+    "time": "11:00",
+    "day": "5",
+    "exam":"0326"
+  },
+  {
+    "lesson" : "Wave",
+    "unity": "3",
+    "stage": "master",
+    "id": "24131",
+    "teacher": "amin faraji",
+    "isPresent": true,
+    "faculty" : "Physics",
+    "time": "13:30",
+    "day": "2",
+    "exam":"0306"
+  },
+  {
+    "lesson" : "Special relativity",
+    "unity": "3",
+    "stage": "master",
+    "id": "24144",
+    "teacher": "vahid karimipoor",
+    "isPresent": false,
+    "faculty" : "Physics",
+    "time": "17:00",
+    "day": "1",
+    "exam":"0309"
+  }
+]

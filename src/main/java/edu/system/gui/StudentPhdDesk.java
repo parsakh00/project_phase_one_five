@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -31,6 +32,8 @@ import java.util.regex.Pattern;
 public class StudentPhdDesk {
 
     static Logger log = LogManager.getLogger(StudentPhdDesk.class);
+    public MenuItem teacherslist;
+    public MenuItem lessonLists;
 
     String lastLogIn;
     Stage stage;
@@ -44,10 +47,89 @@ public class StudentPhdDesk {
     protected Button logOut;
     @FXML
     protected Pane noidea;
-    @FXML
+
     protected ImageView userImage;
     @FXML
     protected Label lastTimeLogIn;
+    @FXML
+    protected Label condition;
+    @FXML
+    protected Label supervisor;
+    @FXML
+    protected MenuItem weeklyScheduleList;
+    @FXML
+    protected MenuItem studentExam;
+    @FXML
+    protected MenuItem Certificate;
+    @FXML
+    protected MenuItem WithdrawalEducation;
+    @FXML
+    protected MenuItem requestDefendDissertation;
+
+
+
+    @FXML
+    protected void requestDefendDissertation() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/requestDefendDissertation-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+    @FXML
+    protected void WithdrawalEducation() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/withdrawalFromEducation-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+    @FXML
+    protected void certificateClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/ApplyCertificateEmployment-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+    @FXML
+    protected void scheduleClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/weeklySchedule-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+    @FXML
+    protected void examClicked() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/examsLists.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
 
 
     public void initialize() throws IOException, ParseException {
@@ -58,7 +140,8 @@ public class StudentPhdDesk {
         lastTimeLogIn.setText("last log in : " + getLoginTime());
         username.setText("User : " + getUsername());
         email.setText("Email : " + getEmail());
-
+        condition.setText(getEducationalStatus());
+        supervisor.setText(getSupervisor());
     }
 
     public void timeDisplay(){
@@ -122,6 +205,14 @@ public class StudentPhdDesk {
         stage.show();
     }
 
+    protected String getEducationalStatus() throws IOException, ParseException {
+        MassageUserDesk EducationalStatus = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().educationalStatus(EducationalStatus);
+    }
+    protected String getSupervisor() throws IOException, ParseException {
+        MassageUserDesk supervisor = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().supervisor(supervisor);
+    }
     public void setUserImage() throws IOException, ParseException {
         userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
         userImage.setFitHeight(160);

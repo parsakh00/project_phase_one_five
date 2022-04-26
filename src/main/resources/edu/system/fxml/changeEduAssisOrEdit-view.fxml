@@ -51,7 +51,9 @@
             <TextField fx:id="roomAdd" layoutX="241.0" layoutY="208.0" promptText="Room No.(mandatory)" />
             <Label layoutX="407.0" layoutY="141.0" prefHeight="17.0" prefWidth="125.0" text="must be in .png format" />
             <ImageView fx:id="image" fitHeight="128.0" fitWidth="92.0" layoutX="558.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="addWarning" layoutX="241.0" layoutY="243.0" prefHeight="26.0" prefWidth="149.0" />
+            <Label fx:id="addWarning" layoutX="407.0" layoutY="240.0" prefHeight="26.0" prefWidth="149.0" />
+            <TextField fx:id="masterDegreeAdd" layoutX="76.0" layoutY="241.0" promptText="master degree(mandatory)" />
+            <TextField fx:id="idAdd" layoutX="241.0" layoutY="241.0" promptText="id(mandatory)" />
          </children>
       </Pane>
       <Label alignment="CENTER" layoutX="294.0" layoutY="48.0" prefHeight="18.0" prefWidth="211.0" text="Relegation/selected" />

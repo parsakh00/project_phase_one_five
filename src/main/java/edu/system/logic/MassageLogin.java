@@ -22,6 +22,14 @@ public class MassageLogin {
         this.time = time;
         this.teacher = teacher;
     }
+    public MassageLogin(String name, String pass, String time, String teacher, String id) {
+        this.name = name;
+        this.pass = pass;
+        this.time = time;
+        this.teacher = teacher;
+        this.id = id;
+    }
+
 
     public MassageLogin(String name, String pass, String time, String teacher, String unity, String stage, String id, Boolean isPresent) {
         this.name = name;

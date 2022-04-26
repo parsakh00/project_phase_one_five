@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.TeacherRecommendRequest">
+   <children>
+      <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtn" text="&lt;-" />
+            <Label layoutX="322.0" layoutY="18.0" prefHeight="17.0" prefWidth="157.0" text="Recommendation requests">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label fx:id="source" layoutX="14.0" layoutY="144.0" prefHeight="18.0" prefWidth="113.0" text="student's requests :" />
+      <TextField fx:id="choiceUser" layoutX="128.0" layoutY="141.0" promptText="choose from students" />
+      <ChoiceBox fx:id="chooseUser" layoutX="128.0" layoutY="173.0" prefWidth="150.0" />
+      <Button layoutX="296.0" layoutY="141.0" mnemonicParsing="false" onAction="#accept" text="Accept" />
+      <Button layoutX="361.0" layoutY="141.0" mnemonicParsing="false" onAction="#rejection" text="Reject" />
+   </children>
+</AnchorPane>

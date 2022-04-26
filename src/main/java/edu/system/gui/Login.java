@@ -23,6 +23,8 @@ import java.util.Objects;
 
 public class Login {
     Stage stage;
+
+    String userCondition;
     private int i = 0;
     @FXML
     protected Label wrongCaptcha;
@@ -53,7 +55,8 @@ public class Login {
     @FXML
     protected Button captchaRepeat;
 
-    public void initialize (){
+
+    public void initialize () throws IOException, ParseException {
         ImageView imageRepeat = new ImageView(String.valueOf(HelloApplication.class.getResource("images/repeat_icon.png")));
         ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("images/captcha_1.png")));
         imageRepeat.setFitHeight(18);
@@ -189,7 +192,7 @@ public class Login {
                     else if(Objects.equals(loginForJson.getUserDegree(), "phd")) {
                         CurrentUser.getInstance().setUser(loginForJson.getUserName());
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk.fxml"));
+                        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentphd.fxml"));
                         Scene scene = new Scene(loader.load());
                         stage.setHeight(650);
                         stage.setWidth(800);
@@ -282,7 +285,7 @@ public class Login {
                         else if(Objects.equals(loginForJson.getUserDegree(), "phd")) {
                             CurrentUser.getInstance().setUser(loginForJson.getUserName());
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
-                            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentPhdDesk.fxml"));
+                            FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentPhd.fxml"));
                             Scene scene = new Scene(loader.load());
                             stage.setHeight(650);
                             stage.setWidth(800);
@@ -343,19 +346,34 @@ public class Login {
         }
     }
 
-    protected Boolean MainLogIn(){
-        if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
-            wrongCaptcha.setText(null);
-            MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText());
-            if (Controller.getInstance().login(massage)){
-                return true;
-            }
-            else{
-                wrongUserPass.setText("wrong username or password");
+    protected Boolean MainLogIn() throws IOException, ParseException {
+            if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
+                wrongCaptcha.setText(null);
+                MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText());
+                CurrentUser.getInstance().setUser(UserNameTextField.getText());
+                getCondition();
+                if (!Objects.equals(getCondition(), "withdrawal from education")) {
+                    if (Controller.getInstance().login(massage)) {
+                        return true;
+                    } else {
+                        wrongUserPass.setText("wrong username or password");
+                    }
+
+                }
+                else{
+                    wrongUserPass.setText("Not Allow!!");
+                    return false;
+                }
             }
 
-        }
+
+
         return false;
 
+    }
+    protected String getCondition() throws IOException, ParseException {
+        MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        userCondition = Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
+        return Controller.getInstance().userCondition(massageStudentUndergraduateDesk);
     }
 }

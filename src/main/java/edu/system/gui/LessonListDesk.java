@@ -52,7 +52,7 @@ public class LessonListDesk {
 
     protected String[] unity = {"0","1","2","3","4"};
 
-    protected String[] faculty = {"Chemistry","MathSci","MechanicEng"};
+    protected String[] faculty = {"Chemistry","MathSci","MechanicEng","Physics","ElectricalEng"};
 
 
     public void initialize() throws IOException, ParseException {
@@ -114,7 +114,6 @@ public class LessonListDesk {
                 else if (i%5 == 4) label.setText(eachElement);
                 else if (i%5 == 0) label.setText(eachElement);
                 label.setAlignment(Pos.CENTER);
-
                 filterGrid.add(label,i%5 ,j);
                 i += 1;
                 if (i%5 == 0) j+= 1;
@@ -218,7 +217,6 @@ public class LessonListDesk {
     }
 
     public void returnBtn() throws IOException, ParseException {
-        System.out.println(getUserDegree());
 
         //ToDo
         stage = ((Stage) (email).getScene().getWindow());

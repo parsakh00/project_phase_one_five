@@ -1,17 +1,13 @@
 package edu.system.logic;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 public class LessonListController {
     String[] facultyData;
@@ -26,12 +22,12 @@ public class LessonListController {
 
     String UserPut;
     String userFaculty;
-    String selectedUserFaculty;
-    String courseTeacher;
+    String[] userLessonData;
     String lessonTarget;
     String lessonTargetEdit;
     String lessonTimeEdit;
     String lessonTeacherEdit;
+    String idOfLesson;
     public void removeLesson(String lesson, String faculty){
         this.lessonTarget = lesson;
         JSONParser parser = new JSONParser();
@@ -263,6 +259,247 @@ public class LessonListController {
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
+    }
+    public String[] nameLists(String name) throws IOException, ParseException {
+        String tmp = "/";
+
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\withdrawal.json"));
+        JSONObject user = (JSONObject) obj;
+        if (user.size() != 0) {
+            List<String> names = new ArrayList<String>(user.keySet());
+            for (String element : names) {
+                tmp += element + "/";
+            }
+
+        }
+        return tmp.split("/");
+    }
+    public void rejectMinor(String name, String faculty) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\minor.json"));
+        JSONObject user = (JSONObject) obj;
+        JSONObject user2 = (JSONObject)user.get(name);
+        user2.put(faculty,"0");
+        String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\minor.json";
+        try(PrintWriter out = new PrintWriter(new FileWriter(path))){
+            Gson gson = new Gson();
+            String json = gson.toJson(user2);
+            out.write(json);
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void acceptMinor(String name, String faculty) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\minor.json"));
+        JSONObject user = (JSONObject) obj;
+        JSONObject user2 = (JSONObject)user.get(name);
+        user2.put(faculty,"1");
+        System.out.println(user2.get(faculty));
+        String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\minor.json";
+        try(PrintWriter out = new PrintWriter(new FileWriter(path))){
+            Gson gson = new Gson();
+            String json = gson.toJson(user2);
+            out.write(json);
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public String[] nameListsMinor(String name, String faculty) throws IOException, ParseException {
+        String tmp = "/";
+
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\minor.json"));
+        JSONObject user = (JSONObject) obj;
+
+        if (user.size() != 0) {
+            List<String> names = new ArrayList<String>(user.keySet());
+
+            for (String element : names) {
+                JSONObject user2 = (JSONObject)user.get(element);
+                List<String> namess = new ArrayList<String>(user2.keySet());
+                for (String elements : namess){
+                    System.out.println(elements);
+                    if (Objects.equals((String) elements, (String) faculty)){
+                        tmp += element;
+                    }
+                }
+            }
+        }
+        System.out.println(tmp);
+        return tmp.split("/");
+    }
+    public String[] nameListsRecommend(String name) throws IOException, ParseException {
+        String tmp = "/";
+
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\recommendation.json"));
+        JSONObject user = (JSONObject) obj;
+
+        if (user.size() != 0) {
+            List<String> names = new ArrayList<String>(user.keySet());
+
+            for (String element : names) {
+                if (Objects.equals((String) element, (String) name)) {
+                    JSONObject user2 = (JSONObject)user.get(name);
+
+                    tmp += ((String) user2.get("username")) + "/";
+                    System.out.println(tmp);
+
+                }
+            }
+
+        }
+        return tmp.split("/");
+    }
+
+    public String[] nameOfLesson(String name) throws IOException, ParseException {
+        String tmp = "/";
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject user = (JSONObject) obj;
+        String facultyOfLesson;
+        JSONObject getId = (JSONObject) user.get("lessons");
+        for(int i = 0 ; i < 5; i++) {
+            if (i == 0) facultyOfLesson = "Chemistry";
+            else if (i == 1) facultyOfLesson = "MechanicEng";
+            else if (i == 2) facultyOfLesson = "ElectricalEng";
+            else if (i == 3) facultyOfLesson = "MathSci";
+            else facultyOfLesson = "Physics";
+            idOfLesson = (String) getId.get(facultyOfLesson);
+            if (!Objects.equals((String)idOfLesson, null)) {
+
+                JSONParser parser2 = new JSONParser();
+
+                try {
+                    //Read JSON file
+                    Object obj2 = parser2.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\unidatas\\" + facultyOfLesson + ".json"));
+                    JSONArray faculty = (JSONArray) obj2;
+
+
+                    faculty.forEach(fac -> eachLessonName((JSONObject) fac));
+
+                } catch (ParseException | IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (eachLesson != null) userLessonData = eachLesson.split("/");
+        else userLessonData = tmp.split("/");
+        return userLessonData;
+
+    }
+    private void eachLessonName(JSONObject facultyData) {
+
+        if (Objects.equals((String) idOfLesson, (String) facultyData.get("id"))) {
+            String lesson = (String) facultyData.get("lesson");
+            String time = (String) facultyData.get("time");
+            String day = (String) facultyData.get("day");
+            String exam = (String) facultyData.get("exam");
+            eachLesson = (String) eachLesson +"/" + lesson;
+        }
+        //else if (eachLesson == null) eachLesson = "/" ;
+    }
+    public String[] examOfLesson(String name) throws IOException, ParseException {
+        String tmp = "/";
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject user = (JSONObject) obj;
+        String facultyOfLesson;
+        JSONObject getId = (JSONObject) user.get("lessons");
+        for(int i = 0 ; i < 5; i++) {
+            if (i == 0) facultyOfLesson = "Chemistry";
+            else if (i == 1) facultyOfLesson = "MechanicEng";
+            else if (i == 2) facultyOfLesson = "ElectricalEng";
+            else if (i == 3) facultyOfLesson = "MathSci";
+            else facultyOfLesson = "Physics";
+            idOfLesson = (String) getId.get(facultyOfLesson);
+            if (!Objects.equals((String)idOfLesson, null)) {
+
+                JSONParser parser2 = new JSONParser();
+
+                try {
+                    //Read JSON file
+                    Object obj2 = parser2.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\unidatas\\" + facultyOfLesson + ".json"));
+                    JSONArray faculty = (JSONArray) obj2;
+
+
+                    faculty.forEach(fac -> eachLessonExam((JSONObject) fac));
+
+                } catch (ParseException | IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (eachLesson != null) userLessonData = eachLesson.split("/");
+        else userLessonData = tmp.split("/");
+        return userLessonData;
+
+    }
+    private void eachLessonExam(JSONObject facultyData) {
+
+        if (Objects.equals((String) idOfLesson, (String) facultyData.get("id"))) {
+            String lesson = (String) facultyData.get("lesson");
+            String time = (String) facultyData.get("time");
+            String day = (String) facultyData.get("day");
+            String exam = (String) facultyData.get("exam");
+            eachLesson = (String) eachLesson + "/" + exam;
+        }
+        //else if (eachLesson == null) eachLesson = "/" ;
+    }
+    public String[] lessonsOfUser(String name) throws IOException, ParseException {
+        String tmp = "/";
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject user = (JSONObject) obj;
+        String facultyOfLesson;
+        JSONObject getId = (JSONObject) user.get("lessons");
+        for(int i = 0 ; i < 5; i++) {
+            if (i == 0) facultyOfLesson = "Chemistry";
+            else if (i == 1) facultyOfLesson = "MechanicEng";
+            else if (i == 2) facultyOfLesson = "ElectricalEng";
+            else if (i == 3) facultyOfLesson = "MathSci";
+            else facultyOfLesson = "Physics";
+            idOfLesson = (String) getId.get(facultyOfLesson);
+            if (!Objects.equals((String)idOfLesson, null)) {
+
+                JSONParser parser2 = new JSONParser();
+
+                try {
+                    //Read JSON file
+                    Object obj2 = parser2.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\unidatas\\" + facultyOfLesson + ".json"));
+                    JSONArray faculty = (JSONArray) obj2;
+
+
+                    faculty.forEach(fac -> eachLessonOfUser((JSONObject) fac));
+
+                } catch (ParseException | IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (eachLesson != null) userLessonData = eachLesson.split("/");
+        else userLessonData = tmp.split("/");
+        return userLessonData;
+    }
+    private void eachLessonOfUser(JSONObject facultyData) {
+
+        if (Objects.equals((String) idOfLesson, (String) facultyData.get("id"))) {
+            String lesson = (String) facultyData.get("lesson");
+            String time = (String) facultyData.get("time");
+            String day = (String) facultyData.get("day");
+            String exam = (String) facultyData.get("exam");
+            eachLesson = (String) eachLesson +"/" + lesson + "/"+ time + "/"+ day + "/"+ exam;
+        }
+        //else if (eachLesson == null) eachLesson = "/" ;
     }
 
     public String[] getFacultyData(String name) {

@@ -1,0 +1,50 @@
+[
+  {
+    "lesson" : "electronic 1",
+    "unity": "3",
+    "stage": "undergraduate",
+    "id": "25031",
+    "teacher": "reza soroori",
+    "isPresent": true,
+    "faculty" : "ElectricalEng",
+    "time": "9:30",
+    "day": "3",
+    "exam":"0326"
+  },
+  {
+    "lesson" : "electronic 2",
+    "unity": "3",
+    "stage": "undergraduate",
+    "id": "25032",
+    "teacher": "mohammad fakharzadehjahromi",
+    "isPresent": true,
+    "faculty" : "ElectricalEng",
+    "time": "11:00",
+    "day": "2",
+    "exam":"0325"
+  },
+  {
+    "lesson" : "electronic foundations 1",
+    "unity": "3",
+    "stage": "undergraduate",
+    "id": "25091",
+    "teacher": "mehran hajiaghapoor",
+    "isPresent": true,
+    "faculty" : "ElectricalEng",
+    "time": "15:30",
+    "day": "1",
+    "exam":"0420"
+  },
+  {
+    "lesson" : "electronic foundations 2",
+    "unity": "3",
+    "stage": "undergraduate",
+    "id": "25093",
+    "teacher": "hamed laserji",
+    "isPresent": false,
+    "faculty" : "ElectricalEng",
+    "time": "17:00",
+    "day": "4",
+    "exam":"0322"
+  }
+]

@@ -23,7 +23,11 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Educational services">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" onAction="#recommendationRequest" text="Recommendation Request" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                                <MenuItem mnemonicParsing="false" onAction="#withdrawRequest" text="withdraw request" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#minorRequest" text="Minor Request" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Registration matters">
@@ -44,17 +48,6 @@
             </font>
         </Label>
         <Pane fx:id="noidea" layoutX="14.0" layoutY="196.0" prefHeight="160.0" prefWidth="140.0" />
-      <GridPane layoutX="220.0" layoutY="454.0" prefHeight="103.0" prefWidth="523.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="370.0" minWidth="10.0" prefWidth="370.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="256.0" minWidth="10.0" prefWidth="154.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
+      <Button fx:id="signupBtn" layoutX="193.0" layoutY="126.0" mnemonicParsing="false" onAction="#signUpBtnClicked" prefHeight="26.0" prefWidth="105.0" text="sign up student" />
     </children>
 </AnchorPane>

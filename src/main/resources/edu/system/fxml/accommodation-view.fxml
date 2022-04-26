@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.AccommodationDesk">
+   <children>
+      <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtnClicked" text="&lt;-" />
+         </children></Pane>
+      <Label layoutX="14.0" layoutY="138.0" prefHeight="18.0" prefWidth="180.0" text="I request to use the dormitory : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="reject" alignment="CENTER" layoutX="300.0" layoutY="139.0" prefHeight="20.0" prefWidth="65.0" textFill="#d70f0f" />
+      <Button layoutX="14.0" layoutY="167.0" mnemonicParsing="false" onAction="#requestClicked" prefHeight="26.0" prefWidth="95.0" text="Send Request" />
+      <Label fx:id="accept" alignment="CENTER" layoutX="223.0" layoutY="139.0" prefHeight="20.0" prefWidth="65.0" textFill="#4ca64b" />
+   </children>
+</AnchorPane>

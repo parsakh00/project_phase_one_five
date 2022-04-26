@@ -23,17 +23,17 @@
                         </Menu>
                         <Menu mnemonicParsing="false" text="Educational services">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Weekly Schedule" />
+                                <MenuItem fx:id="weeklyScheduleList" mnemonicParsing="false" onAction="#scheduleClicked" text="Weekly Schedule" />
                                 <SeparatorMenuItem mnemonicParsing="false" />
-                                <MenuItem mnemonicParsing="false" text="student exams" />
+                                <MenuItem fx:id="studentExam" mnemonicParsing="false" onAction="#examClicked" text="student exams" />
                                 <SeparatorMenuItem mnemonicParsing="false" />
                                 <Menu mnemonicParsing="false" text="Requests">
                                     <items>
-                                        <MenuItem mnemonicParsing="false" text="Apply for a certificate of employment" />
+                                        <MenuItem fx:id="Certificate" mnemonicParsing="false" onAction="#certificateClicked" text="Apply for a certificate of employment" />
                               <SeparatorMenuItem mnemonicParsing="false" />
-                                        <MenuItem mnemonicParsing="false" text="Withdrawal from education" />
+                                        <MenuItem fx:id="WithdrawalEducation" mnemonicParsing="false" onAction="#WithdrawalEducation" text="Withdrawal from education" />
                               <SeparatorMenuItem mnemonicParsing="false" />
-                                        <MenuItem mnemonicParsing="false" text="Request the turn to defend the dissertation" />
+                                        <MenuItem fx:id="requestDefendDissertation" mnemonicParsing="false" onAction="#requestDefendDissertation" text="Request the turn to defend the dissertation" />
                                     </items>
                                 </Menu>
                             </items>
@@ -66,6 +66,8 @@
                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="33.0" prefWidth="370.0" styleClass="loginBox" stylesheets="@../styles.css" GridPane.rowIndex="1" />
                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="370.0" GridPane.rowIndex="2" />
                 <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="338.0" styleClass="loginBox" stylesheets="@../styles.css" GridPane.rowIndex="3" />
+            <Label fx:id="condition" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="320.0" />
+            <Label fx:id="supervisor" alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="320.0" GridPane.rowIndex="1" />
             </children>
          <columnConstraints>
             <ColumnConstraints />

@@ -3,6 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.logic.CurrentUser;
+import edu.system.logic.LoginForJson;
 import edu.system.logic.MassageUserDesk;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -27,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,6 +53,23 @@ public class TeacherDesk {
     protected ImageView userImage;
     @FXML
     protected Label lastTimeLogIn;
+
+    public void recommendationRequest() throws IOException {
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherRecommendRequest-view.fxml"));
+
+        System.out.println("sag");
+        Scene scene = new Scene(loader.load());
+        System.out.println("pedar");
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
+
 
 
     public void initialize() throws IOException, ParseException {
@@ -154,4 +173,10 @@ public class TeacherDesk {
         stage.setTitle("educational system");
         stage.show();
     }
+    protected String getUserDegree() throws IOException, ParseException {
+        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        return Controller.getInstance().userDegree(massageUserDegree);
+    }
+
+
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.Recommendation">
+   <children>
+      <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
+         <children>
+            <Label layoutX="350.0" layoutY="13.0" text="Recommendation">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Button layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#backBtnClicked" text="&lt;-" />
+         </children></Pane>
+      <Label layoutX="14.0" layoutY="141.0" prefHeight="18.0" prefWidth="175.0" text="Get recommendation from who :" />
+      <TextField fx:id="nameField" layoutX="194.0" layoutY="138.0" promptText="Teacher's name" />
+      <TextField fx:id="lessonField" layoutX="195.0" layoutY="185.0" promptText="Lesson's name" />
+      <TextField fx:id="scoreField" layoutX="196.0" layoutY="239.0" promptText="Lesson's score" />
+      <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="189.0" prefHeight="18.0" prefWidth="175.0" text="By passin which lessons :" />
+      <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="243.0" prefHeight="18.0" prefWidth="175.0" text="By which scores :" />
+      <Button layoutX="382.0" layoutY="138.0" mnemonicParsing="false" onAction="#sendClicked" text="send" />
+      <Label fx:id="sentWarning" alignment="CENTER" layoutX="458.0" layoutY="141.0" prefHeight="18.0" prefWidth="128.0" />
+      <Label layoutX="89.0" layoutY="291.0" prefHeight="18.0" prefWidth="100.0" text="Teacher Assistant :" />
+      <TextField fx:id="taField" layoutX="197.0" layoutY="288.0" promptText="TA" />
+      <Button layoutX="26.0" layoutY="359.0" mnemonicParsing="false" onAction="#getResult" prefHeight="26.0" prefWidth="75.0" text="Result" />
+      <Label fx:id="resultShow" layoutX="121.0" layoutY="363.0" prefHeight="18.0" prefWidth="203.0" />
+      <Label layoutX="26.0" layoutY="397.0" prefHeight="26.0" prefWidth="703.0" text="I Mr. \ Mrs                        certify that student with number                     ," />
+      <Label layoutX="26.0" layoutY="437.0" prefHeight="26.0" prefWidth="642.0" text="They have passed lessons                              with a grade                and " />
+      <Label layoutX="26.0" layoutY="476.0" prefHeight="26.0" prefWidth="591.0" text="also work as a teaching assistant in                          courses." />
+      <Label fx:id="teacherName" alignment="CENTER" layoutX="88.0" layoutY="402.0" prefHeight="18.0" prefWidth="67.0" />
+      <Label fx:id="id" alignment="CENTER" layoutX="335.0" layoutY="402.0" prefHeight="18.0" prefWidth="67.0" />
+      <Label fx:id="lessonsPassed" alignment="CENTER" layoutX="166.0" layoutY="442.0" prefHeight="18.0" prefWidth="89.0" />
+      <Label fx:id="gradePassed" layoutX="330.0" layoutY="442.0" prefHeight="18.0" prefWidth="42.0" />
+      <Label fx:id="taPassed" alignment="CENTER" layoutX="220.0" layoutY="481.0" prefHeight="18.0" prefWidth="67.0" />
+      <Label layoutX="26.0" layoutY="325.0" prefHeight="18.0" prefWidth="305.0" text="Wait for respond before apply for next recommendation" />
+   </children>
+</AnchorPane>

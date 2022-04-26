@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.ApplyCertificateEmploymentDesk">
+   <children>
+      <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
+         <children>
+            <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtnClicked" text="&lt;-" />
+            <Label layoutX="299.0" layoutY="18.0" text="Apply for Certification Employment">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <Button fx:id="submitRequest" layoutX="338.0" layoutY="557.0" mnemonicParsing="false" onAction="#submissionClicked" prefHeight="26.0" prefWidth="124.0" text="Submit a request" />
+      <Pane layoutX="109.0" layoutY="153.0" prefHeight="210.0" prefWidth="601.0" styleClass="loginBox" stylesheets="@../styles.css">
+         <children>
+            <Pane layoutX="13.0" layoutY="15.0" prefHeight="181.0" prefWidth="576.0" styleClass="request" stylesheets="@../styles.css">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="436.0" text="It is certified that Mr./Ms ">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="8.0" layoutY="39.0" prefHeight="34.0" prefWidth="527.0" text=" With student number               ,is studying in the field ">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+                  <Label layoutX="14.0" layoutY="73.0" prefHeight="34.0" prefWidth="436.0" text="in University                                               Certificate validity date: ">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font></Label>
+                  <Label fx:id="dateName" layoutX="14.0" layoutY="107.0" prefHeight="26.0" prefWidth="124.0" textFill="#346e44" />
+                  <Label fx:id="fieldName" layoutX="344.0" layoutY="48.0" prefHeight="17.0" prefWidth="124.0" textFill="#346e44" />
+                  <Label fx:id="universityName" layoutX="93.0" layoutY="82.0" prefHeight="17.0" prefWidth="176.0" textFill="#346e44" />
+                  <Label fx:id="studentNumber" layoutX="147.0" layoutY="48.0" prefHeight="17.0" prefWidth="54.0" textFill="#346e44" />
+                  <Label fx:id="userName" layoutX="167.0" layoutY="14.0" prefHeight="17.0" prefWidth="188.0" textFill="#346e44" />
+               </children></Pane>
+         </children></Pane>
+      <Label fx:id="warning" layoutX="347.0" layoutY="558.0" prefHeight="25.0" prefWidth="106.0" />
+   </children>
+</AnchorPane>

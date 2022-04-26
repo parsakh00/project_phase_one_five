@@ -5,7 +5,11 @@
     "stage": "undergraduate",
     "id": "22015",
     "teacher": "amir jafari",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "MathSci",
+    "time": "10:30",
+    "day": "3",
+    "exam":"0312"
   },
   {
     "lesson" : "differential equation",
@@ -13,7 +17,11 @@
     "stage": "undergraduate",
     "id": "22034",
     "teacher": "masoud beyrami",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "MathSci",
+    "time": "9:30",
+    "day": "3",
+    "exam":"0314"
   },
   {
     "lesson" : "Structural Mathematics",
@@ -21,7 +29,11 @@
     "stage": "master",
     "id": "22128",
     "teacher": "mohammad ardeshir",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "MathSci",
+    "time": "14:30",
+    "day": "3",
+    "exam":"0410"
   },
   {
     "lesson" : "Neural Network Seminar",
@@ -29,7 +41,11 @@
     "stage": "master",
     "id": "22140",
     "teacher": "mostafa esfahanizadeh",
-    "isPresent": false
+    "isPresent": false,
+    "faculty" : "MathSci",
+    "time": "11:30",
+    "day": "3",
+    "exam":"0329"
   },
   {
     "lesson" : "Analysis of algorithms",
@@ -37,7 +53,11 @@
     "stage": "phd",
     "id": "22891",
     "teacher": "mojtaba foroozan",
-    "isPresent": false
+    "isPresent": false,
+    "faculty" : "MathSci",
+    "time": "12:00",
+    "day": "3",
+    "exam":"0328"
   },
   {
     "lesson" : "Information theory",
@@ -45,6 +65,10 @@
     "stage": "phd",
     "id": "22641",
     "teacher": "javad ebrahimi",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "MathSci",
+    "time": "19:30",
+    "day": "3",
+    "exam":"0327"
   }
 ]

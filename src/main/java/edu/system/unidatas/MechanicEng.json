@@ -5,7 +5,11 @@
     "stage": "undergraduate",
     "id": "28065",
     "teacher": "mohammadtaghi omidvar",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "MechanicEng",
+    "time": "11:00",
+    "day": "3",
+    "exam":"0316"
   },
   {
     "lesson" : "Heat transfer 1",
@@ -13,7 +17,11 @@
     "stage": "undergraduate",
     "id": "28113",
     "teacher": "mohammadbehshad shafiei",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "MechanicEng",
+    "time": "12:30",
+    "day": "2",
+    "exam":"0319"
   },
   {
     "lesson" : "Computational fluid dynamics",
@@ -21,7 +29,11 @@
     "stage": "master",
     "id": "28016",
     "teacher": "mohammad khorasanchi",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "MechanicEng",
+    "time": "13:00",
+    "day": "1",
+    "exam":"0310"
   },
   {
     "lesson" : "Boundary layer theory",
@@ -29,7 +41,11 @@
     "stage": "master",
     "id": "28056",
     "teacher": "bizhan farahaniye",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "MechanicEng",
+    "time": "15:30",
+    "day": "3",
+    "exam":"0316"
   },
   {
     "lesson" : "Applied micro-nanotechnology",
@@ -37,7 +53,11 @@
     "stage": "phd",
     "id": "28182",
     "teacher": "amir shamloo",
-    "isPresent": false
+    "isPresent": false,
+    "faculty" : "MechanicEng",
+    "time": "9:30",
+    "day": "5",
+    "exam":"0311"
   },
   {
     "lesson" : "Maintenance of machinery",
@@ -45,6 +65,10 @@
     "stage": "phd",
     "id": "28242",
     "teacher": "mehdi behzad",
-    "isPresent": true
+    "isPresent": true,
+    "faculty" : "MechanicEng",
+    "time": "16:00",
+    "day": "4",
+    "exam":"0320"
   }
 ]
