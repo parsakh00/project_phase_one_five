@@ -2,16 +2,20 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.*;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.json.simple.parser.ParseException;
 
-import java.awt.*;
+
 import java.io.IOException;
 
 public class EditLessonsDesk {
@@ -54,10 +58,30 @@ public class EditLessonsDesk {
     @FXML
     protected Label addWarning;
 
-
-
+    public void logOut() throws IOException {
+        stage = ((Stage) (removeWarning).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/logOut.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+    PauseTransition timer = new PauseTransition(Duration.seconds(CurrentUser.getInstance().getTimer()));
 
     public void initialize(){
+        timer.playFromStart();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
+        timer.setOnFinished(actionEvent ->{
+            actionEvent.consume();
+            try {
+                logOut();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } );
         removeLesson.setText(null);
         editTeacher.setText(null);
         editLesson.setText(null);
@@ -71,6 +95,8 @@ public class EditLessonsDesk {
         addUnity.setText(null);
     }
     public void backBtnClicked(ActionEvent actionEvent) throws IOException {
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherLists-view.fxml"));
         Scene scene = new Scene(loader.load());
@@ -144,10 +170,7 @@ public class EditLessonsDesk {
                 SelectLesson.getInstance().getTime(),SelectLesson.getInstance().getTeacher());
         Controller.getInstance().editing(editingSelectedLesson);
     }
-//    protected String getUsername() throws IOException, ParseException {
-//        MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
-//        return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
-//    }
+
     protected String currentUserFaculty() throws IOException, ParseException {
         MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userFaculty(massageStudentMasterDesk);

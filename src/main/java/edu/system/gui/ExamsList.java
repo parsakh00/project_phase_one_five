@@ -4,6 +4,7 @@ import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.logic.CurrentUser;
 import edu.system.logic.MassageUserDesk;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -13,6 +14,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -38,12 +42,23 @@ public class ExamsList {
     ArrayList<Integer> examsDays = new ArrayList<>();
     Map<Integer, String> map = new HashMap<Integer, String>();
 
+    PauseTransition timer = new PauseTransition(Duration.seconds(CurrentUser.getInstance().getTimer()));
 
-
-
-
+    static Logger log = LogManager.getLogger(HelloApplication.class);
 
     public void initialize() throws IOException, ParseException {
+        log.info("Open exams list page");
+        timer.playFromStart();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
+        timer.setOnFinished(actionEvent ->{
+            actionEvent.consume();
+            try {
+                logOut();
+            } catch (IOException e) {
+                log.error("exception happened", e);
+                throw new RuntimeException(e);
+            }
+        } );
         getUserLessonExam();
         getUserLessonName();
         turnLessonToArray();
@@ -51,7 +66,23 @@ public class ExamsList {
         mapping();
         sortMapAndShow();
     }
+
+    public void logOut() throws IOException {
+        log.info("Logged out out of time");
+        stage = ((Stage) (one).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/logOut.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
     public void backBtnClicked(ActionEvent actionEvent) throws IOException, ParseException {
+        log.info("Back button clicked");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
         if (Objects.equals(getUserDegree(), "undergraduate")) {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentUndergraduateDesk-view.fxml"));
@@ -84,33 +115,35 @@ public class ExamsList {
             stage.show();
         }
     }
-
     protected String getUserDegree() throws IOException, ParseException {
+        log.info("Get user degree");
         MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDegree(massageUserDegree);
     }
-
     protected void getUserLesson() throws IOException, ParseException {
         MassageUserDesk massageGetUserLesson = new MassageUserDesk(CurrentUser.getInstance().getUser());
         lesson =  Controller.getInstance().userOfLessons(massageGetUserLesson);
     }
     protected void getUserLessonExam() throws IOException, ParseException {
+        log.info("Get user lesson exam");
         MassageUserDesk massageGetLessonExam = new MassageUserDesk(CurrentUser.getInstance().getUser());
         examDay =  Controller.getInstance().nameOfLessons(massageGetLessonExam);
 
     }
     protected void getUserLessonName() throws IOException, ParseException {
+        log.info("Get user lesson name");
         MassageUserDesk massageUserLessonName = new MassageUserDesk(CurrentUser.getInstance().getUser());
         lessonName =  Controller.getInstance().examOfLessons(massageUserLessonName);
 
     }
-
     protected void turnLessonToArray(){
+        log.info("Turn lesson to array");
         for (String element : examDay){
             if (!Objects.equals((String) element, "null")) lessonsNames.add(element);
         }
     }
     protected void turnExamDayToArray(){
+        log.info("Turn exam day to array");
         for (String element : lessonName){
             if (!Objects.equals((String) element, "null")) examsDays.add(Integer.parseInt(element));
         }
@@ -120,8 +153,8 @@ public class ExamsList {
             map.put(examsDays.get(i), lessonsNames.get(i));
         }
     }
-
     protected void sortMapAndShow(){
+        log.info("Sorting arrays");
         Map<Integer, String> treeMap = new TreeMap<Integer, String>(
                 new Comparator<Integer>() {
 
@@ -145,8 +178,4 @@ public class ExamsList {
             i += 1;
         }
     }
-
-
-
-
 }

@@ -74,7 +74,7 @@ public class HelloApplication extends Application {
 //        }
         //System.out.println(passHash("96102132"));
         //System.out.println(passHash("97231023"));
-        log.info("launch");
+        log.info("launch program");
 //        try{
 //            FileInputStream fstream = new FileInputStream("./src/main/resources/logs/userActivity.log");
 //            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -114,37 +114,37 @@ public class HelloApplication extends Application {
 //
 //
 //    }
-    public static void deserializeUser(){
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader("C:\\\\Users\\\\asus\\\\IdeaProjects\\\\project_phase_one_five\\\\src\\\\main\\\\java\\\\edu\\\\system\\\\userdata\\\\user100.json"));
-            JSONObject jsonObject = (JSONObject)obj;
-            String username = (String)jsonObject.get("username");
-            long password = passHash((String)jsonObject.get("password"));
-            String type = (String)jsonObject.get("type");
-            System.out.println("Name: " + username);
-            System.out.println("Course: " + password);
-            System.out.println("type:" + type);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static void currentDirectory(){
-        File file =  new File(System.getProperty("user.dir"),"/" + "\\src\\main\\java\\edu\\system\\userdata\\user100.json");
-        System.out.println(file.exists());
-    }
-    private static long passHash(String str){
-        long res=0;
-        long tavan=1;
-        long mod= 1000000007;
-        long prime=373;
-        for (int i=0;i<str.length();i++){
-            int ascii=str.charAt(i);
-            tavan=(tavan*prime)%mod;
-            res=(res+(tavan*ascii)%mod)%mod;
-        }
-        return res;
-    }
+//    public static void deserializeUser(){
+//        JSONParser parser = new JSONParser();
+//        try {
+//            Object obj = parser.parse(new FileReader("C:\\\\Users\\\\asus\\\\IdeaProjects\\\\project_phase_one_five\\\\src\\\\main\\\\java\\\\edu\\\\system\\\\userdata\\\\user100.json"));
+//            JSONObject jsonObject = (JSONObject)obj;
+//            String username = (String)jsonObject.get("username");
+//            long password = passHash((String)jsonObject.get("password"));
+//            String type = (String)jsonObject.get("type");
+//            System.out.println("Name: " + username);
+//            System.out.println("Course: " + password);
+//            System.out.println("type:" + type);
+//        } catch(Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+//
+//    public static void currentDirectory(){
+//        File file =  new File(System.getProperty("user.dir"),"/" + "\\src\\main\\java\\edu\\system\\userdata\\user100.json");
+//        System.out.println(file.exists());
+//    }
+//    private static long passHash(String str){
+//        long res=0;
+//        long tavan=1;
+//        long mod= 1000000007;
+//        long prime=373;
+//        for (int i=0;i<str.length();i++){
+//            int ascii=str.charAt(i);
+//            tavan=(tavan*prime)%mod;
+//            res=(res+(tavan*ascii)%mod)%mod;
+//        }
+//        return res;
+//    }
 }

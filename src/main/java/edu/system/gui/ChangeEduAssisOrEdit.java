@@ -2,6 +2,7 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.*;
+import javafx.animation.PauseTransition;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 import javafx.embed.swing.SwingNode;
 
@@ -85,8 +89,22 @@ public class ChangeEduAssisOrEdit {
     @FXML
     protected TextField idAdd;
 
+    static Logger log = LogManager.getLogger(HelloApplication.class);
 
+    PauseTransition timer = new PauseTransition(Duration.seconds(CurrentUser.getInstance().getTimer()));
     public void initialize(){
+        log.info("Open change education assistant or edit");
+        timer.playFromStart();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
+        timer.setOnFinished(actionEvent ->{
+            actionEvent.consume();
+            try {
+                logOut();
+            } catch (IOException e) {
+                log.error("exception happened!");
+                throw new RuntimeException(e);
+            }
+        } );
         teacherForRemove.setText(null);
         preEdu.setText(null);
         newEdu.setText(null);
@@ -101,8 +119,23 @@ public class ChangeEduAssisOrEdit {
         masterDegreeAdd.setText(null);
         idAdd.setText(null);
     }
+    public void logOut() throws IOException {
+        log.info("Logged out out of time");
+        stage = ((Stage) (addWarning).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/logOut.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
 
     public void returnBtn(ActionEvent actionEvent) throws IOException {
+        log.info("Return back");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherLists-view.fxml"));
         Scene scene = new Scene(loader.load());
@@ -115,6 +148,7 @@ public class ChangeEduAssisOrEdit {
     }
     @FXML
     protected void editTeacher() throws IOException, ParseException {
+        log.info("Edit teacher info");
         if (editTeacher != null){
             if (editPassword.getText() != null){
                 editPassword();
@@ -136,6 +170,7 @@ public class ChangeEduAssisOrEdit {
     }
     @FXML
     protected void addBtnClicked() throws IOException, ParseException {
+        log.info("Add button clicked");
         if (userAdd.getText() != null && passAdd.getText() != null && emailAdd.getText() != null && roomAdd.getText() != null && phoneAdd.getText() != null){
             addUser();
 
@@ -146,6 +181,7 @@ public class ChangeEduAssisOrEdit {
     }
     @FXML
     protected void pickImage() throws IOException {
+        log.info("Pick image");
         if (userAdd.getText()!=null) {
             stage = new Stage();
             FileChooser fileChooser = new FileChooser();
@@ -161,6 +197,7 @@ public class ChangeEduAssisOrEdit {
             try {
                 ImageIO.write(SwingFXUtils.fromFXImage(imageToBeSaved, null), "png", file);
             } catch (IOException e) {
+                log.error("exception happened");
                 e.printStackTrace();
             }
         }
@@ -171,21 +208,25 @@ public class ChangeEduAssisOrEdit {
 
     }
     protected void addUser() throws IOException, ParseException {
+        log.info("Add user");
         MassageSignUp massageSignUp = new MassageSignUp(userAdd.getText(),passAdd.getText(),
                 emailAdd.getText(),phoneAdd.getText(),roomAdd.getText(), currentUserFaculty()
                 ,masterDegreeAdd.getText(),idAdd.getId());
         Controller.getInstance().addUser(massageSignUp);
     }
     protected void editPassword(){
+        log.info("Edited password");
         MassageLogin massageEditPassword = new MassageLogin(editTeacher.getText(), editPassword.getText());
         Controller.getInstance().editPass(massageEditPassword);
     }
     protected void editEmail(){
+        log.info("Email edited");
         MassageLogin massageEditEmail = new MassageLogin(editTeacher.getText(), editEmail.getText());
         Controller.getInstance().editEmail(massageEditEmail);
     }
     @FXML
     protected void newEduClicked() throws IOException, ParseException {
+        log.info("New education assistant submit");
         warningSec.setText(null);
         warningRel.setText(null);
         if (newEdu.getText()!=null){
@@ -211,6 +252,7 @@ public class ChangeEduAssisOrEdit {
     }
     @FXML
     protected void preEduClicked() throws IOException, ParseException {
+        log.info("previous education assistant confirmation");
         warningSec.setText(null);
         warningRel.setText(null);
         if (preEdu.getText() != null){
@@ -233,12 +275,11 @@ public class ChangeEduAssisOrEdit {
                 warningRel.setText("Didn't choose before");
             }
 
-
-
         }
     }
     @FXML
     protected void removeClicked() throws IOException, ParseException {
+        log.info("Removal");
         if (teacherForRemove.getText() != null){
             if (Objects.equals(currentUserFaculty(), SelectedUserFacultyForDelete())) {
                 deleteCourseTeacher();
@@ -255,51 +296,61 @@ public class ChangeEduAssisOrEdit {
         }
     }
     private Boolean isChosen(){
+        log.info("Check is education assistant chose or not");
         MassageUserDesk isChosenBefore = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().isChosen(isChosenBefore);
 
     }
     private void promoteUser(){
+        log.info("Promote user");
         CurrentFaculty.getInstance().setFaculty(newEdu.getText());
         MassageUserDesk promotion = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
         Controller.getInstance().promotion(promotion);
 
     }
     private void relegateUser(){
+        log.info("Relegate user");
         CurrentFaculty.getInstance().setFaculty(preEdu.getText());
         MassageUserDesk relegation = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
         Controller.getInstance().relegation(relegation);
 
     }
     private void changeChosen(){
+        log.info("change is chose education assistant boolean");
         MassageUserDesk changeChosen = new MassageUserDesk(CurrentUser.getInstance().getUser());
         Controller.getInstance().valueChanger(changeChosen);
     }
     private void deleteCourseTeacher() throws IOException, ParseException {
+        log.info("Deleting course of teacher");
         MassageLogin massage = new MassageLogin(teacherForRemove.getText(), currentUserFaculty());
         Controller.getInstance().deletingCourse(massage);
 
     }
     private void deleteTeacher(){
+        log.info("Delete teacher");
         CurrentFaculty.getInstance().setFaculty(teacherForRemove.getText());
         MassageUserDesk deleting = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
         Controller.getInstance().deletingTeacher(deleting);
     }
     protected String currentUserFaculty() throws IOException, ParseException {
+        log.info("Find current user faculty");
         MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userFaculty(massageStudentMasterDesk);
     }
     private String SelectedUserFacultyForDelete() throws IOException, ParseException {
+        log.info("Select user faculty for deleting");
         CurrentFaculty.getInstance().setFaculty(teacherForRemove.getText());
         MassageUserDesk selectedFaculty = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);
     }
     private String SelectedUserFacultyForNewEdu() throws IOException, ParseException {
+        log.info("new educational assistant faculty");
         CurrentFaculty.getInstance().setFaculty(newEdu.getText());
         MassageUserDesk selectedFaculty = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);
     }
     private String SelectedUserFacultyForPreEdu() throws IOException, ParseException {
+        log.info("previous educational assistant faculty");
         CurrentFaculty.getInstance().setFaculty(preEdu.getText());
         MassageUserDesk selectedFaculty = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);

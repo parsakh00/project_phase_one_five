@@ -5,6 +5,7 @@ import edu.system.logic.Controller;
 import edu.system.logic.CurrentUser;
 import edu.system.logic.MassageUserDesk;
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
@@ -55,7 +57,9 @@ public class EducationalAssistantDesk {
     @FXML
     protected Button signupBtn;
 
+
     public void recommendationRequest() throws IOException {
+        log.info("Recommendation request clicked");
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherRecommendRequest-view.fxml"));
         Scene scene = new Scene(loader.load());
@@ -66,8 +70,20 @@ public class EducationalAssistantDesk {
         stage.setTitle("educational system");
         stage.show();
     }
+    PauseTransition timer = new PauseTransition(Duration.seconds(10800));
 
     public void initialize() throws IOException, ParseException {
+        log.info("Open educational assistant main page");
+        timer.playFromStart();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
+        timer.setOnFinished(actionEvent ->{
+            actionEvent.consume();
+            try {
+                logOut();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } );
         log.info("logged in");
         getLoginTime();
         setUserImage();
@@ -78,6 +94,9 @@ public class EducationalAssistantDesk {
     }
 
     public void signUpBtnClicked(ActionEvent actionEvent) throws IOException {
+        log.info("sign up new user clicked");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/signupStudent-view.fxml"));
         Scene scene = new Scene(loader.load());
@@ -123,12 +142,14 @@ public class EducationalAssistantDesk {
     }
 
     protected String getEmail() throws IOException, ParseException {
+        log.info("Current user email");
         MassageUserDesk massageEducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskEmail(massageEducationalAssistantDesk);
 
     }
 
     protected String getUsername() throws IOException, ParseException {
+        log.info("Current user name");
         MassageUserDesk massageducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskUserName(massageducationalAssistantDesk);
     }
@@ -139,6 +160,9 @@ public class EducationalAssistantDesk {
     }
 
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
+        log.info("Current user Logged out by him self");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/login-view.fxml"));
         Scene scene = new Scene(loader.load());
@@ -151,12 +175,28 @@ public class EducationalAssistantDesk {
     }
 
     public void setUserImage() throws IOException, ParseException {
+        log.info("Current user image");
         userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
         userImage.setFitHeight(160);
         userImage.setFitWidth(140);
         noidea.getChildren().add(userImage);
     }
+    public void logOut() throws IOException {
+        log.info("Current user logged out out of time");
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/logOut.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
     public void lessonListsClicked() throws IOException {
+        log.info("Current user lessons lists");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/lessonLists-view.fxml"));
         Scene scene = new Scene(loader.load());
@@ -169,6 +209,9 @@ public class EducationalAssistantDesk {
     }
 
     public void teachersListsClicked() throws IOException {
+        log.info("Current user teachers lists");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherLists-view.fxml"));
         Scene scene = new Scene(loader.load());
@@ -181,7 +224,9 @@ public class EducationalAssistantDesk {
     }
 
     public void withdrawRequest(ActionEvent actionEvent) throws IOException, ParseException {
-
+        log.info("Current user withdraw request");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/EduWithdrawRequest-view.fxml"));
         Scene scene = new Scene(loader.load());
@@ -195,11 +240,15 @@ public class EducationalAssistantDesk {
 
     }
     protected String getUserDegree() throws IOException, ParseException {
+        log.info("get Current user degree");
         MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDegree(massageUserDegree);
     }
 
     public void minorRequest(ActionEvent actionEvent) throws IOException {
+        log.info("Current user minor request");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/eduMinorRequest-view.fxml"));
         Scene scene = new Scene(loader.load());
@@ -210,5 +259,50 @@ public class EducationalAssistantDesk {
         stage.setTitle("educational system");
         stage.show();
 
+    }
+
+    public void profileClicked(ActionEvent actionEvent) throws IOException {
+        log.info("Current user profile");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherProfile.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+    public void temporaryScoreClicked(ActionEvent actionEvent) throws IOException {
+        log.info("Temporary score clicked");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/temporaryScoreTeacher-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+
+    }
+
+    public void studentsStatusClicked(ActionEvent actionEvent) throws IOException {
+        log.info("students status clicked");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/StudentsEducationalStatusEdu-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
     }
 }

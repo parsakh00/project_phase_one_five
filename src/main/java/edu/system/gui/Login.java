@@ -14,6 +14,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -55,8 +57,10 @@ public class Login {
     @FXML
     protected Button captchaRepeat;
 
+    static Logger log = LogManager.getLogger(HelloApplication.class);
 
     public void initialize () throws IOException, ParseException {
+        log.info("Log in page");
         ImageView imageRepeat = new ImageView(String.valueOf(HelloApplication.class.getResource("images/repeat_icon.png")));
         ImageView captcha_image = new ImageView(String.valueOf(HelloApplication.class.getResource("images/captcha_1.png")));
         imageRepeat.setFitHeight(18);
@@ -68,7 +72,6 @@ public class Login {
         captchaRepeat.setGraphic(imageRepeat);
         timeDisplay();
     }
-
     public void timeDisplay(){
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -78,7 +81,6 @@ public class Login {
         };
         timer.start();
     }
-
     @FXML
     protected void onCheckBoxPassWordLogInClicked(){
 
@@ -91,7 +93,6 @@ public class Login {
             PasswordField.toFront();
         }
     }
-
     protected void randomCaptchaIcon(){
         i += 1;
         if (i%6 == 1){
@@ -153,12 +154,10 @@ public class Login {
             CaptchaInput.setText(null);
         }
     }
-
     @FXML
     protected void repeatCaptchaIconClicked(){
         randomCaptchaIcon();
     }
-
     @FXML
     protected void LoginClicked(ActionEvent actionEvent) throws IOException {
         try {
@@ -250,7 +249,6 @@ public class Login {
             throw new RuntimeException(e);
         }
     }
-
     @FXML
     protected void logInEntered(KeyEvent keyEvent) throws IOException{
         if (keyEvent.getCode() == KeyCode.ENTER) {
@@ -345,7 +343,6 @@ public class Login {
 
         }
     }
-
     protected Boolean MainLogIn() throws IOException, ParseException {
             if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
                 wrongCaptcha.setText(null);

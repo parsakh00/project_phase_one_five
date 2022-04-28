@@ -1,0 +1,25 @@
+{
+  "student2" : [
+    {
+      "teacherName" : "bahram ghanbari",
+      "lesson" : "general chemistry 2",
+      "score" : "19",
+      "objection" : "",
+      "response": ""
+    },
+    {
+      "teacherName" : "zahra jamshidi",
+      "lesson" : "Molecular spectroscopy",
+      "score" : "12",
+      "objection" : "",
+      "response": ""
+    },
+    {
+      "teacherName" : "davood taherniya",
+      "lesson" : "general chemistry 1",
+      "score" : "16",
+      "objection" : "",
+      "response": ""
+    }
+  ]
+}

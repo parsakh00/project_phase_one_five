@@ -11,11 +11,19 @@ public class MassageLogin {
 
     Boolean isPresent;
 
+    public MassageLogin(String name){
+        this.name = name;
+    }
+
     public MassageLogin(String name, String pass){
         this.name = name;
         this.pass = pass;
     }
-
+    public MassageLogin(String name, String pass, String id){
+        this.name = name;
+        this.pass = pass;
+        this.id = id;
+    }
     public MassageLogin(String name, String pass, String time, String teacher) {
         this.name = name;
         this.pass = pass;
@@ -29,7 +37,6 @@ public class MassageLogin {
         this.teacher = teacher;
         this.id = id;
     }
-
 
     public MassageLogin(String name, String pass, String time, String teacher, String unity, String stage, String id, Boolean isPresent) {
         this.name = name;

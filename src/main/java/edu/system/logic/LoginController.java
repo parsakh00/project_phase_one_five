@@ -1,6 +1,9 @@
 package edu.system.logic;
 
 import com.google.gson.Gson;
+import edu.system.HelloApplication;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,9 +16,14 @@ public class LoginController {
     String courseTeacher;
     boolean isNameValid;
     boolean isPassValid;
+    boolean isPassLogOutChange;
     String name;
 
+    static Logger log = LogManager.getLogger(HelloApplication.class);
+
+
     public void editingPassWord(String username, String password){
+        log.info(" open and rewrite password");
         JSONParser parser = new JSONParser();
         try {
             Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + username + ".json"));
@@ -28,11 +36,41 @@ public class LoginController {
                 out.write(json);
             }
             catch (Exception e){
+                log.error("exception happened", e);
                 e.printStackTrace();
             }
         } catch(Exception e) {
+            log.error("exception happened", e);
             e.printStackTrace();
         }
+    }
+    public Boolean editPassLogOut(String username, String newPassword, String oldPassword){
+        log.info("Read and rewrite file to edit password");
+        JSONParser parser = new JSONParser();
+        boolean isAble = false;
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + username + ".json"));
+            JSONObject jsonObject = (JSONObject)obj;
+            if (Objects.equals((Long) jsonObject.get("password"), (Long) passHash(oldPassword))) {
+                jsonObject.put("password", (Long) passHash(newPassword));
+                String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + username + ".json";
+                try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
+                    Gson gson = new Gson();
+                    String json = gson.toJson(jsonObject);
+                    out.write(json);
+                } catch (Exception e) {
+                    log.error("exception happened", e);
+                    e.printStackTrace();
+                }
+                isAble = true;
+            }
+        } catch(Exception e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+
+        return isAble;
+
     }
     public void signUpUser(String user,String id, String phone,String supervisor,String faculty, String enteringYear,
                            String condition,String pass, String email,String degree){
@@ -61,6 +99,7 @@ public class LoginController {
     }
 
     public void getRecommend(String teacherName, String lesson, String score, String ta,String userName) throws IOException, ParseException {
+        log.info("write new recommendation request file for user");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\recommendation.json"));
         JSONObject jsonObject2 = new JSONObject();
@@ -81,10 +120,12 @@ public class LoginController {
             out.write(json);
         }
         catch (Exception e){
+            log.error("exception happened", e);
             e.printStackTrace();
         }
     }
     public void userMinorRequest(String name, String faculty1,String faculty2) throws IOException, ParseException {
+        log.info("Open and rewrite minor file acceptation or rejection condition");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\minor.json"));
         JSONObject jsonObject2 = new JSONObject();
@@ -101,11 +142,13 @@ public class LoginController {
             out.write(json);
         }
         catch (Exception e){
+            log.error("exception happened", e);
             e.printStackTrace();
         }
     }
 
     public void addingTeacherUser(String user,String pass ,String email,String room,String phone, String faculty, String masterDegree, String id){
+        log.info("write new user file");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("username", user);
         jsonObject.put("password", passHash(pass));
@@ -123,16 +166,42 @@ public class LoginController {
             file.write(jsonObject.toJSONString());
             file.close();
         } catch (IOException e) {
+            log.error("exception happened", e);
             e.printStackTrace();
         }
 
     }
-    public void editingEmail(String username, String email){
+
+    public void emailEditProfile(String username, String email){
+        log.info("Read and rewrite userdata file");
         JSONParser parser = new JSONParser();
         try {
             Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + username + ".json"));
             JSONObject jsonObject = (JSONObject)obj;
             jsonObject.put("email", (String)email);
+            String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + username + ".json";
+            try(PrintWriter out = new PrintWriter(new FileWriter(path))){
+                Gson gson = new Gson();
+                String json = gson.toJson(jsonObject);
+                out.write(json);
+            }
+            catch (Exception e){
+                log.error("exception happened", e);
+                e.printStackTrace();
+            }
+        } catch(Exception e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+    }
+
+    public void passEditProfile(String username, String phone){
+        log.info("Read and rewrite userdata file to edit password of user");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + username + ".json"));
+            JSONObject jsonObject = (JSONObject)obj;
+            jsonObject.put("phone number", (String)phone);
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + username + ".json";
             try(PrintWriter out = new PrintWriter(new FileWriter(path))){
                 Gson gson = new Gson();
@@ -146,7 +215,30 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+    public void editingEmail(String username, String email){
+        log.info("Open and rewrite email");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + username + ".json"));
+            JSONObject jsonObject = (JSONObject)obj;
+            jsonObject.put("email", (String)email);
+            String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + username + ".json";
+            try(PrintWriter out = new PrintWriter(new FileWriter(path))){
+                Gson gson = new Gson();
+                String json = gson.toJson(jsonObject);
+                out.write(json);
+            }
+            catch (Exception e){
+                log.error("exception happened",e);
+                e.printStackTrace();
+            }
+        } catch(Exception e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+    }
     public void deleteCourseTeacher(String name,String faculty){
+        log.info("Open and rewrite for delete course teacher");
         this.courseTeacher = name;
         JSONParser parser = new JSONParser();
         try {
@@ -165,10 +257,12 @@ public class LoginController {
 
             }
             catch (Exception e){
+                log.error("exception happened", e);
                 e.printStackTrace();
             }
 
         } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
             e.printStackTrace();
         }
     }

@@ -6,6 +6,7 @@ import edu.system.logic.CurrentFaculty;
 import edu.system.logic.CurrentUser;
 import edu.system.logic.MassageUserDesk;
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -47,9 +51,45 @@ public class TeachersListDesk {
 
     @FXML
     protected Button editEduBtn;
+    PauseTransition timer = new PauseTransition(Duration.seconds(CurrentUser.getInstance().getTimer()));
+    static Logger log = LogManager.getLogger(HelloApplication.class);
 
+    public void initialize() throws IOException, ParseException {
+        log.info("Open teacher list desk");
+        timer.playFromStart();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
+        timer.setOnFinished(actionEvent ->{
+            actionEvent.consume();
+            try {
+                logOut();
+            } catch (IOException e) {
+                log.error("exception happened", e);
+                throw new RuntimeException(e);
+            }
+        } );
+        timeDisplay();
+        teacherChoiceBox.getItems().addAll(faculty);
+        teacherChoiceBox.setOnAction(this::getFaculty);
+        email.setText(getEmail());
+        username.setText(getUsername());
 
+    }
+    public void logOut() throws IOException {
+        log.info("Logged out, out of time");
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/logOut.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
     public void editingEduLesson(ActionEvent actionEvent) throws IOException, ParseException {
+        log.info("Editing lessons");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         if (Objects.equals(getUserType(), "teacher")){
             if (Objects.equals(getUserDegree(), "education assistant")){
                 stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
@@ -64,38 +104,31 @@ public class TeachersListDesk {
             }
         }
     }
-
-    public void initialize() throws IOException, ParseException {
-        timeDisplay();
-        teacherChoiceBox.getItems().addAll(faculty);
-        teacherChoiceBox.setOnAction(this::getFaculty);
-        email.setText(getEmail());
-        username.setText(getUsername());
-
-    }
-
     protected String getEmail() throws IOException, ParseException {
+        log.info("Get user email");
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
 
     }
-
     protected String getUsername() throws IOException, ParseException {
+        log.info("Get user, username");
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
     protected String getUserType() throws IOException, ParseException {
+        log.info("Get user type");
         MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskType(massageStudentMasterDesk);
     }
-
     protected String getUserDegree() throws IOException, ParseException {
+        log.info("Get user degree");
         MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskDegreee(massageStudentMasterDesk);
     }
-
     public void returnBtn() throws IOException, ParseException {
-
+        log.info("Return button click");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         if (Objects.equals(getUserDegree(), "master")) {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk.fxml"));
@@ -149,7 +182,6 @@ public class TeachersListDesk {
         }
 
     }
-
     public void timeDisplay(){
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -159,8 +191,8 @@ public class TeachersListDesk {
         };
         timer.start();
     }
-
     protected void getFaculty(ActionEvent actionEvent) {
+        log.info("Get user faculty");
         String filter1 =  teacherChoiceBox.getValue();
         TeachersLists.getChildren().clear();
         for (int i = 0; i < 4; i++){
@@ -192,11 +224,14 @@ public class TeachersListDesk {
 
     }
     protected void getFacultyData() {
+        log.info("Get faculty teachers details");
         MassageUserDesk massageTeacherListDesk = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
         facultyTeachers =  Controller.getInstance().facultyTeachers(massageTeacherListDesk);
     }
-
     public void changingEdiAssis(ActionEvent actionEvent) throws IOException, ParseException {
+        log.info("Change education assistant");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         if (Objects.equals(getUserType(), "teacher")){
             if (Objects.equals(getUserDegree(), "manager")){
                 stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());

@@ -1,6 +1,10 @@
 package edu.system.logic;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import edu.system.HelloApplication;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -11,6 +15,11 @@ import java.util.*;
 
 public class LessonListController {
     String[] facultyData;
+    ArrayList<String> scores = new ArrayList<String>();
+    ArrayList<String> teacher = new ArrayList<String>();
+    ArrayList<String> lessonsss = new ArrayList<String>();
+    ArrayList<String> objection = new ArrayList<String>();
+    ArrayList<String> respond = new ArrayList<String>();
     String eachLesson;
 
     String eachTeacher;
@@ -28,6 +37,9 @@ public class LessonListController {
     String lessonTimeEdit;
     String lessonTeacherEdit;
     String idOfLesson;
+
+    static Logger log = LogManager.getLogger(HelloApplication.class);
+
     public void removeLesson(String lesson, String faculty){
         this.lessonTarget = lesson;
         JSONParser parser = new JSONParser();
@@ -134,11 +146,44 @@ public class LessonListController {
         }
     }
     public void TeacherDeleting(String name){
+        log.info("Delete file of teacher");
         File file =  new File(System.getProperty("user.dir"),"/" + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json");
         file.delete();
 
     }
+
+    public String getNationalId(String name){
+        log.info("Get user national id from userdata file");
+        JSONParser parser = new JSONParser();
+        try {
+            //Read JSON file
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+            JSONObject user = (JSONObject) obj;
+            userFaculty =  (String) user.get("id");
+
+
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        return userFaculty;
+    }
+    public String getRoomNo(String name){
+        log.info("Read userdata to get teacher room No");
+        JSONParser parser = new JSONParser();
+        try {
+            //Read JSON file
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+            JSONObject user = (JSONObject) obj;
+            userFaculty =  (String) user.get("room No.");
+
+
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+        return userFaculty;
+    }
     public String getFaculty(String name){
+        log.info("Read file to get faculty of user");
         JSONParser parser = new JSONParser();
         try {
             //Read JSON file
@@ -148,11 +193,13 @@ public class LessonListController {
 
 
         } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
             e.printStackTrace();
         }
         return userFaculty;
     }
     public String  getSelectedFaculty(String name){
+        log.info("Read file to get selected faculty");
         JSONParser parser = new JSONParser();
         try {
             //Read JSON file
@@ -162,11 +209,13 @@ public class LessonListController {
 
 
         } catch (ParseException | IOException e) {
+            log.error("exception happened!");
             e.printStackTrace();
         }
         return userFaculty;
     }
     public Boolean isChosenBefore(String name){
+        log.info("Read manager info if educational assistant chosen or not");
         JSONParser parser = new JSONParser();
         try {
             //Read JSON file
@@ -176,11 +225,13 @@ public class LessonListController {
 
 
         } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
             e.printStackTrace();
         }
         return isChoose;
     }
     public void change(String name) {
+        log.info("Open and rewrite file to change is chosen boolean");
         JSONParser parser = new JSONParser();
         try {
             //Read JSON file
@@ -213,6 +264,7 @@ public class LessonListController {
     }
 
     public void relegation(String name){
+        log.info("Read and rewrite for to relegate user");
         JSONParser parser = new JSONParser();
         try {
             //Read JSON file
@@ -228,15 +280,18 @@ public class LessonListController {
 
             }
             catch (Exception e){
+                log.error("exception happened", e);
                 e.printStackTrace();
             }
 
         } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
             e.printStackTrace();
         }
     }
 
     public void promotion(String name){
+        log.info("Read and rewrite file for promote user");
         JSONParser parser = new JSONParser();
         try {
             //Read JSON file
@@ -252,11 +307,13 @@ public class LessonListController {
 
             }
             catch (Exception e){
+                log.error("exception happened", e);
                 e.printStackTrace();
             }
 
 
         } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
             e.printStackTrace();
         }
     }
@@ -276,6 +333,7 @@ public class LessonListController {
         return tmp.split("/");
     }
     public void rejectMinor(String name, String faculty) throws IOException, ParseException {
+        log.info("Open filr to reject minor request");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\minor.json"));
         JSONObject user = (JSONObject) obj;
@@ -289,10 +347,12 @@ public class LessonListController {
 
         }
         catch (Exception e){
+            log.error("exception happened", e);
             e.printStackTrace();
         }
     }
     public void acceptMinor(String name, String faculty) throws IOException, ParseException {
+        log.info("Open and rewrite file for accepting minor");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\minor.json"));
         JSONObject user = (JSONObject) obj;
@@ -307,6 +367,7 @@ public class LessonListController {
 
         }
         catch (Exception e){
+            log.error("exception happened!", e);
             e.printStackTrace();
         }
 
@@ -338,25 +399,19 @@ public class LessonListController {
         return tmp.split("/");
     }
     public String[] nameListsRecommend(String name) throws IOException, ParseException {
+        log.info("Open and read list of users from recommendation file");
         String tmp = "/";
-
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\recommendation.json"));
         JSONObject user = (JSONObject) obj;
-
         if (user.size() != 0) {
             List<String> names = new ArrayList<String>(user.keySet());
-
             for (String element : names) {
                 if (Objects.equals((String) element, (String) name)) {
                     JSONObject user2 = (JSONObject)user.get(name);
-
                     tmp += ((String) user2.get("username")) + "/";
-                    System.out.println(tmp);
-
                 }
             }
-
         }
         return tmp.split("/");
     }
@@ -408,6 +463,88 @@ public class LessonListController {
         }
         //else if (eachLesson == null) eachLesson = "/" ;
     }
+//    public ArrayList<String> setUserObject(String name){
+//
+//    }
+    public ArrayList<String> userRespond(String name){
+        log.info("Read temporaryScores file to get teacher respond");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\temporaryScores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+            faculty.forEach(fac -> eachRespondShow( (JSONObject) fac ) );
+
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+        return respond;
+    }
+    private void eachRespondShow(JSONObject facultyData) {
+        String score = (String) facultyData.get("response");
+        respond.add(score);
+    }
+    public ArrayList<String> userScore(String name){
+        log.info("Read temporaryScores file to get user scores");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\temporaryScores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+            faculty.forEach(fac -> eachScoreShow( (JSONObject) fac ) );
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+        return scores;
+    }
+    private void eachScoreShow(JSONObject facultyData) {
+        String score = (String) facultyData.get("score");
+        scores.add(score);
+    }
+    public ArrayList<String> userTeacher(String name){
+        log.info("Read temporaryScores file to get user teachers");
+        JSONParser parser = new JSONParser();
+        try {
+
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\temporaryScores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+            faculty.forEach(fac -> eachTeacherShow( (JSONObject) fac ) );
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+        return teacher;
+    }
+    private void eachTeacherShow(JSONObject facultyData) {
+        String teachers = (String) facultyData.get("teacherName");
+        teacher.add(teachers);
+    }
+    public ArrayList<String> userLessonss(String name){
+        log.info("Read temporaryScores file to get user lessons");
+        JSONParser parser = new JSONParser();
+        try {
+
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\temporaryScores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+
+
+            faculty.forEach(fac -> eachLessonShow( (JSONObject) fac ) );
+
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+        return lessonsss;
+    }
+    private void eachLessonShow(JSONObject facultyData) {
+        String lesson = (String) facultyData.get("lesson");
+        lessonsss.add(lesson);
+    }
+
     public String[] examOfLesson(String name) throws IOException, ParseException {
         String tmp = "/";
         JSONParser parser = new JSONParser();
@@ -456,6 +593,7 @@ public class LessonListController {
         //else if (eachLesson == null) eachLesson = "/" ;
     }
     public String[] lessonsOfUser(String name) throws IOException, ParseException {
+        log.info("Read userdata file to get lesson of user");
         String tmp = "/";
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
@@ -503,6 +641,7 @@ public class LessonListController {
     }
 
     public String[] getFacultyData(String name) {
+        log.info("Open and read faculty data");
         JSONParser parser = new JSONParser();
         String tmp = "/";
 
@@ -515,6 +654,7 @@ public class LessonListController {
             faculty.forEach(fac -> eachLessonProperties( (JSONObject) fac ) );
 
         } catch (ParseException | IOException e) {
+            log.error("exception error", e);
             e.printStackTrace();
         }
         if (eachLesson != null) facultyData = eachLesson.split("/");
@@ -523,6 +663,7 @@ public class LessonListController {
         return facultyData;
     }
     public String[] getFacultyUnitData(String name, String unit){
+        log.info("Open and read faculty unit data");
         JSONParser parser = new JSONParser();
         this.Unt = unit;
         String tmp = "/";
@@ -537,6 +678,7 @@ public class LessonListController {
             faculty.forEach(fac -> eachLessonUnitProperties( (JSONObject) fac ) );
 
         } catch (ParseException | IOException e) {
+            log.error("exception error", e);
             e.printStackTrace();
         }
         if (eachLesson != null) facultyData = eachLesson.split("/");
@@ -576,6 +718,7 @@ public class LessonListController {
     }
 
     public String[] getFacultyStageData(String name, String unit) {
+        log.info("Open and read faculty stage data from file");
         JSONParser parser = new JSONParser();
         this.Unt = unit;
         String tmp = "/";
@@ -590,6 +733,7 @@ public class LessonListController {
             faculty.forEach(fac -> eachLessonStageProperties( (JSONObject) fac ) );
 
         } catch (ParseException | IOException e) {
+            log.error("exception error", e);
             e.printStackTrace();
         }
         if (eachLesson != null) facultyData = eachLesson.split("/");
@@ -613,26 +757,20 @@ public class LessonListController {
     }
 
     public String[] getFacultyTeachers(String name){
-        //ToDo
-
+        log.info("Read unidatas file to get teachers data");
         JSONParser parser = new JSONParser();
         String tmp = "/";
-
         try {
-
-            //Read JSON file
             Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\unidatas\\" + name + ".json"));
             JSONArray faculty = (JSONArray) obj;
-
-
             faculty.forEach(fac -> eachFacultyTeacherProperties( (JSONObject) fac ) );
 
         } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
             e.printStackTrace();
         }
         if (eachTeacher != null) TeacherData = eachTeacher.split("/");
         else TeacherData = tmp.split("/");
-
         return TeacherData;
     }
     private void eachFacultyTeacherProperties(JSONObject facultyData) {

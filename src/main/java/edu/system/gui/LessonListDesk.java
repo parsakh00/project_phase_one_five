@@ -3,6 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.*;
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -54,8 +58,23 @@ public class LessonListDesk {
 
     protected String[] faculty = {"Chemistry","MathSci","MechanicEng","Physics","ElectricalEng"};
 
+    PauseTransition timer = new PauseTransition(Duration.seconds(CurrentUser.getInstance().getTimer()));
+
+    static Logger log = LogManager.getLogger(HelloApplication.class);
 
     public void initialize() throws IOException, ParseException {
+        log.info("Open lesson list desk page");
+        timer.playFromStart();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
+        timer.setOnFinished(actionEvent ->{
+            actionEvent.consume();
+            try {
+                logOut();
+            } catch (IOException e) {
+                log.error("exception error", e);
+                throw new RuntimeException(e);
+            }
+        } );
         timeDisplay();
         email.setText("Email : " + getEmail());
         userName.setText("Username : " + getUsername());
@@ -65,7 +84,18 @@ public class LessonListDesk {
         facultyChoiceBox.setOnAction(this::getFaculty);
         unityChoiceBox.setOnAction(this::getUnit);
         stageChoiceBox.setOnAction(this::getStage);
-
+    }
+    public void logOut() throws IOException {
+        log.info("Logged out , out of time");
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/logOut.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
     }
 
     public void timeDisplay(){
@@ -79,17 +109,20 @@ public class LessonListDesk {
     }
 
     protected String getEmail() throws IOException, ParseException {
+        log.info("Get user email");
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
 
     }
 
     protected String getUsername() throws IOException, ParseException {
+        log.info("Get current username");
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
 
     protected void getFaculty(ActionEvent actionEvent) {
+        log.info("get current user faculty");
         String filter1 =  facultyChoiceBox.getValue();
         filterGrid.getChildren().clear();
         for (int i = 0; i < 5; i++){
@@ -122,7 +155,7 @@ public class LessonListDesk {
 
     }
     protected void getStage(ActionEvent actionEvent){
-        //ToDo
+        log.info("Get user stage");
         if (stageCheckBox.isSelected()) {
             String filter1 =  facultyChoiceBox.getValue();
             filterGrid.getChildren().clear();
@@ -158,6 +191,7 @@ public class LessonListDesk {
         }
     }
     protected void getUnit(ActionEvent actionEvent){
+        log.info("Get array of unit");
         if (unityCheckBox.isSelected()) {
             String filter1 =  facultyChoiceBox.getValue();
             filterGrid.getChildren().clear();
@@ -194,14 +228,17 @@ public class LessonListDesk {
 
     }
     protected void getFacultyData() {
+        log.info("get faculty data");
         MassageUserDesk massageLessonListDesk = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
         facultyLessons =  Controller.getInstance().facultyLessons(massageLessonListDesk);
     }
     protected void getFacultyUnit(){
+        log.info("get faculty unit");
         MassageFacultyUnit massageFacultyUnit = new MassageFacultyUnit(CurrentFacultyUnit.getInstance().getFaculty(), CurrentFacultyUnit.getInstance().getUnit());
         facultyLessons = Controller.getInstance().facultyUnitLessons(massageFacultyUnit);
     }
     protected void getFacultyStage(){
+        log.info("get faculty stage");
         MassageFacultyUnit massageFacultyUnit = new MassageFacultyUnit(CurrentFacultyUnit.getInstance().getFaculty(), CurrentFacultyUnit.getInstance().getUnit());
         facultyLessons = Controller.getInstance().facultyStageLessons(massageFacultyUnit);
     }
@@ -212,13 +249,15 @@ public class LessonListDesk {
     }
 
     protected String getUserDegree() throws IOException, ParseException {
+        log.info("Get current user degree");
         MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskDegreee(massageStudentMasterDesk);
     }
 
     public void returnBtn() throws IOException, ParseException {
-
-        //ToDo
+        log.info("Return Button");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         if (Objects.equals(getUserDegree(), "master")) {
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk.fxml"));

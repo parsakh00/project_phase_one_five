@@ -13,12 +13,15 @@
             <Label fx:id="lastTimeLogIn" layoutX="8.0" layoutY="85.0" prefHeight="27.0" prefWidth="146.0" />
             <MenuBar layoutX="393.0" layoutY="99.0" prefHeight="26.0" prefWidth="407.0">
               <menus>
-                <Menu mnemonicParsing="false" text="Profile" />
+                <Menu mnemonicParsing="false" text="Profile">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#profileClicked" text="Profile" />
+                     </items></Menu>
                 <Menu mnemonicParsing="false" text="Record affairs">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Temporary scores" />
+                    <MenuItem mnemonicParsing="false" onAction="#temporaryScoreClicked" text="Temporary scores" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Student's educational status" />
+                        <MenuItem mnemonicParsing="false" onAction="#studentsStatusClicked" text="Student's educational status" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Educational services">
