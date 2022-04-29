@@ -1,0 +1,22 @@
+{
+  "username":"student5",
+  "id":"0041990076",
+  "phone number" : "09123245635",
+  "total score": "14",
+  "faculty": "Chemistry",
+  "supervisor": "bahram ghanbari",
+  "entering year" : "99",
+  "condition" : "studying",
+  "password":161555492,
+  "type":"student",
+  "email":"student5@gmail.com",
+  "degree":"phd",
+  "student number" : "97231023",
+  "lessons": {
+    "Chemistry": "23011",
+    "MechanicEng": "",
+    "ElectricalEng": "25031",
+    "MathSci": "",
+    "Physics": "24144"
+  }
+}

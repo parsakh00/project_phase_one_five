@@ -1,0 +1,22 @@
+{
+  "username":"student6",
+  "id":"0041434500",
+  "phone number" : "09193244635",
+  "total score": "18.5",
+  "faculty": "Chemistry",
+  "supervisor": "davood taherniya",
+  "entering year" : "00",
+  "condition" : "studying",
+  "password":539153596,
+  "type":"student",
+  "email":"student6@gmail.com",
+  "degree":"phd",
+  "student number" : "98106164",
+  "lessons": {
+    "Chemistry": "",
+    "MechanicEng": "28242",
+    "ElectricalEng": "25031",
+    "MathSci": "22015",
+    "Physics": ""
+  }
+}

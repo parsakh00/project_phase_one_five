@@ -1,0 +1,23 @@
+{
+  "username":"student4",
+  "id":"0231434576",
+  "phone number" : "09198245635",
+  "total score": "16.5",
+  "faculty": "Chemistry",
+  "supervisor": "zahra jamshidi",
+  "entering year" : "98",
+  "condition" : "studying",
+  "password": 34800657,
+  "type":"student",
+  "email":"student4@gmail.com",
+  "degree":"master",
+  "student number" : "98102224",
+  "lessons": {
+    "Chemistry": "",
+    "MechanicEng": "28242",
+    "ElectricalEng": "25091",
+    "MathSci": "22015",
+    "Physics": ""
+
+  }
+}
