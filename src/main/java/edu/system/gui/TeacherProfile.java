@@ -142,24 +142,31 @@ public class TeacherProfile {
         MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userRoomNo(massageUserDegree);
     }
-
     protected String getEmail() throws IOException, ParseException {
         log.info("Get teacher email");
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
     }
-
     protected String getUsername() throws IOException, ParseException {
         log.info("Get user, username");
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
     public void setUserImage() throws IOException, ParseException {
-        log.info("Get teacher image");
-        ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
-        userImage.setFitHeight(160);
-        userImage.setFitWidth(140);
-        imageOfUser.getChildren().add(userImage);
+        if (String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")) == null) {
+            log.info("Show image of user");
+            ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
+            userImage.setFitHeight(160);
+            userImage.setFitWidth(140);
+            imageOfUser.getChildren().add(userImage);
+        }
+        else {
+            log.info("Show default image");
+            ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/default.png")));
+            userImage.setFitHeight(160);
+            userImage.setFitWidth(140);
+            imageOfUser.getChildren().add(userImage);
+        }
     }
     protected String phoneNumber() throws IOException, ParseException {
         log.info("Get teacher phone number");

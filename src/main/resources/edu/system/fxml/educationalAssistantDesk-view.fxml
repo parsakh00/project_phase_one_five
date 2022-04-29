@@ -52,5 +52,6 @@
         </Label>
         <Pane fx:id="noidea" layoutX="14.0" layoutY="196.0" prefHeight="160.0" prefWidth="140.0" />
       <Button fx:id="signupBtn" layoutX="193.0" layoutY="126.0" mnemonicParsing="false" onAction="#signUpBtnClicked" prefHeight="26.0" prefWidth="105.0" text="sign up student" />
+      <Button layoutX="193.0" layoutY="152.0" mnemonicParsing="false" onAction="#signUpBtnTeacherClicked" prefHeight="26.0" prefWidth="106.0" text="sign up teacher" />
     </children>
 </AnchorPane>

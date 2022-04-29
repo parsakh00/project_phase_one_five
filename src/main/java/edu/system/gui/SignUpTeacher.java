@@ -22,15 +22,13 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.json.simple.parser.ParseException;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.security.PublicKey;
 import java.util.Objects;
 
-public class SignUpStudent {
+public class SignUpTeacher {
     Stage stage;
     @FXML
     protected Button returnBack;
@@ -55,9 +53,9 @@ public class SignUpStudent {
 
     protected String[] facultyChoice = {"Chemistry","MathSci","MechanicEng","Physics","ElectricalEng"};
 
-    protected String[] conditionChoice = {"withdrawal from education","studying","graduated"};
+    protected String[] conditionChoice = {"assistant professor","professor","education assistant"};
 
-    protected String[] degreeChoice = {"phd","undergraduate","master"};
+    protected String[] degreeChoice = {"education assistant","-"};
 
     static Logger log = LogManager.getLogger(HelloApplication.class);
     public void initialize(){
@@ -133,18 +131,18 @@ public class SignUpStudent {
         log.info("sign up Button clicked");
         if (!Objects.equals((String) username.getText(), (String) "") && !Objects.equals((String) id.getText(), (String) "") && !Objects.equals((String) phoneNumber.getText(), (String) "") && !Objects.equals((String) supervisor.getText(), (String) "") && !Objects.equals((String) faculty.getText(), (String) "") &&
                 !Objects.equals((String) enteringYear.getText(), (String) "") && !Objects.equals((String) condition.getText(), (String) "") && !Objects.equals((String) password.getText(), (String) "") && !Objects.equals((String) email.getText(), (String) "") && !Objects.equals((String) degree.getText(), (String) "")){
-            signUpDone();
+            signUpDoneTeacher();
             sigUpWarning.setText("Done");
         }
         else{
             sigUpWarning.setText("Must fill all parts.");
         }
     }
-    public void signUpDone(){
+    public void signUpDoneTeacher(){
         log.info("Accomplish sign up");
         MassageSignUp massageSignUp = new MassageSignUp(username.getText(),id.getText(),phoneNumber.getText(),supervisor.getText(),
                 faculty.getText(),enteringYear.getText(),condition.getText(),password.getText(), email.getText(), degree.getText());
-        Controller.getInstance().signUpUser(massageSignUp);
+        Controller.getInstance().signUpTeacher(massageSignUp);
     }
     @FXML
     protected void pickImage(ActionEvent actionEvent) throws IOException {

@@ -180,11 +180,20 @@ public class StudentProfile {
         return Controller.getInstance().userFaculty(massageUserDegree);
     }
     public void setUserImage() throws IOException, ParseException {
-        log.info("Show image of user");
-        ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
-        userImage.setFitHeight(160);
-        userImage.setFitWidth(140);
-        imageOfUser.getChildren().add(userImage);
+        if (String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")) == null) {
+            log.info("Show image of user");
+            ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
+            userImage.setFitHeight(160);
+            userImage.setFitWidth(140);
+            imageOfUser.getChildren().add(userImage);
+        }
+        else {
+            log.info("Show default image");
+            ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/default.png")));
+            userImage.setFitHeight(160);
+            userImage.setFitWidth(140);
+            imageOfUser.getChildren().add(userImage);
+        }
     }
     protected String phoneNumber() throws IOException, ParseException {
         log.info("Get phone number");

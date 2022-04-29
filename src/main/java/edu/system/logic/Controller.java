@@ -84,6 +84,24 @@ public class Controller {
         addingTeacher.signUpUser(user, id, phone, supervisor, faculty,enteringYear, condition, pass, email,degree);
 
     }
+    public void signUpTeacher(MassageSignUp massageSignUp){
+        log.info("write new file for new user");
+        String user = massageSignUp.getUsername();
+        String id = massageSignUp.getId();
+        String supervisor = massageSignUp.getSupervisor();
+        String enteringYear = massageSignUp.getEnteringYear();
+        String condition = massageSignUp.getCondition();
+        String pass = massageSignUp.getPassword();
+        String email = massageSignUp.getEmail();
+        String room = massageSignUp.getRoomNo();
+        String phone = massageSignUp.getPhone();
+        String faculty = massageSignUp.getFaculty();
+        String degree = massageSignUp.getDegree();
+        String masterDegree = massageSignUp.getMasterDegree();
+        LoginController addingTeacher = new LoginController();
+        addingTeacher.signUpTeachers(user, id, phone, supervisor, faculty,enteringYear, condition, pass, email,degree);
+
+    }
     public void addRecommendRequest(MassageLogin massageLogin) throws IOException, ParseException {
         String teacherName = massageLogin.getName();
         String lessonName = massageLogin.getPass();

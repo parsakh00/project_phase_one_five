@@ -270,7 +270,7 @@ public class LessonListController {
             //Read JSON file
             Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
             JSONObject user = (JSONObject) obj;
-            user.put("degree", "");
+            user.put("degree", "-");
             String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json";
 
             try(PrintWriter out = new PrintWriter(new FileWriter(path))){

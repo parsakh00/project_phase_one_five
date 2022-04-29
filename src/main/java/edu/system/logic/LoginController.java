@@ -74,6 +74,7 @@ public class LoginController {
     }
     public void signUpUser(String user,String id, String phone,String supervisor,String faculty, String enteringYear,
                            String condition,String pass, String email,String degree){
+        log.info("Sign Up new student");
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("username", user);
         jsonObject.put("id", id);
@@ -97,6 +98,33 @@ public class LoginController {
         }
 
     }
+
+    public void signUpTeachers(String user,String id, String phone,String supervisor,String faculty, String enteringYear,
+                           String condition,String pass, String email,String degree){
+        log.info("Sign Up nre teacher");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("username", user);
+        jsonObject.put("id", id);
+        jsonObject.put("phone number", phone);
+        jsonObject.put("faculty", faculty);
+        jsonObject.put("room No.", supervisor);
+        jsonObject.put("phone", enteringYear);
+        jsonObject.put("master degree", condition);
+        jsonObject.put("password", passHash(pass));
+        jsonObject.put("type","teacher");
+        jsonObject.put("email", email);
+        jsonObject.put("degree",degree);
+        jsonObject.put("teacher number", pass);
+        try {
+            FileWriter file = new FileWriter(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + user + ".json");
+            file.write(jsonObject.toJSONString());
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public void getRecommend(String teacherName, String lesson, String score, String ta,String userName) throws IOException, ParseException {
         log.info("write new recommendation request file for user");
@@ -277,16 +305,19 @@ public class LoginController {
     }
 
     public boolean checkName(String name){
+        log.info("Read name of user from userdata file");
         File file =  new File(System.getProperty("user.dir"),"/" + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json");
         isNameValid = file.exists();
         return isNameValid;
     }
     public boolean checkPass(String pass,String name){
+        log.info("Read password of user from userdata file");
         if (isNameValid){
             JSONParser parser = new JSONParser();
             try {
                 Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
                 JSONObject jsonObject = (JSONObject)obj;
+                log.info("check equality of hash of pass that entered by pass that user field in password field");
                 if(passHash(pass) == (long)jsonObject.get("password")){
 
                     isPassValid = true;

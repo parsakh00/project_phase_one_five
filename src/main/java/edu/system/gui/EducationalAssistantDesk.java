@@ -35,7 +35,6 @@ import java.util.regex.Pattern;
 
 public class EducationalAssistantDesk {
 
-    static Logger log = LogManager.getLogger(EducationalAssistantDesk.class);
     public MenuItem lessonlists;
 
     String lastLogIn;
@@ -56,21 +55,10 @@ public class EducationalAssistantDesk {
     protected Label lastTimeLogIn;
     @FXML
     protected Button signupBtn;
-
-
-    public void recommendationRequest() throws IOException {
-        log.info("Recommendation request clicked");
-        stage = ((Stage) (email).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherRecommendRequest-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
-    }
+    static Logger log = LogManager.getLogger(EducationalAssistantDesk.class);
     PauseTransition timer = new PauseTransition(Duration.seconds(10800));
+
+
 
     public void initialize() throws IOException, ParseException {
         log.info("Open educational assistant main page");
@@ -92,9 +80,20 @@ public class EducationalAssistantDesk {
         username.setText("User : " + getUsername());
         email.setText("Email : " + getEmail());
     }
-
+    public void recommendationRequest() throws IOException {
+        log.info("Recommendation request clicked");
+        stage = ((Stage) (email).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherRecommendRequest-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
     public void signUpBtnClicked(ActionEvent actionEvent) throws IOException {
-        log.info("sign up new user clicked");
+        log.info("sign up new student clicked");
         timer.pause();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
@@ -107,7 +106,20 @@ public class EducationalAssistantDesk {
         stage.setTitle("educational system");
         stage.show();
     }
-
+    public void signUpBtnTeacherClicked(ActionEvent actionEvent) throws IOException {
+        log.info("sign up new teacher clicked");
+        timer.pause();
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/signupTeacher.fxml"));
+        Scene scene = new Scene(loader.load());
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
     public void timeDisplay(){
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -117,7 +129,6 @@ public class EducationalAssistantDesk {
         };
         timer.start();
     }
-
     public String getLoginTime(){
 
         try{
@@ -140,25 +151,21 @@ public class EducationalAssistantDesk {
         }
         return lastLogIn;
     }
-
     protected String getEmail() throws IOException, ParseException {
         log.info("Current user email");
         MassageUserDesk massageEducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskEmail(massageEducationalAssistantDesk);
 
     }
-
     protected String getUsername() throws IOException, ParseException {
         log.info("Current user name");
         MassageUserDesk massageducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskUserName(massageducationalAssistantDesk);
     }
-
     protected String getUserType() throws IOException, ParseException {
         MassageUserDesk massageducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskType(massageducationalAssistantDesk);
     }
-
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
         log.info("Current user Logged out by him self");
         timer.pause();
@@ -173,13 +180,21 @@ public class EducationalAssistantDesk {
         stage.setTitle("educational system");
         stage.show();
     }
-
     public void setUserImage() throws IOException, ParseException {
-        log.info("Current user image");
-        userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
-        userImage.setFitHeight(160);
-        userImage.setFitWidth(140);
-        noidea.getChildren().add(userImage);
+        if (String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")) == null) {
+            log.info("Show image of user");
+            ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
+            userImage.setFitHeight(160);
+            userImage.setFitWidth(140);
+            noidea.getChildren().add(userImage);
+        }
+        else {
+            log.info("Show default image");
+            ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/default.png")));
+            userImage.setFitHeight(160);
+            userImage.setFitWidth(140);
+            noidea.getChildren().add(userImage);
+        }
     }
     public void logOut() throws IOException {
         log.info("Current user logged out out of time");
@@ -207,7 +222,6 @@ public class EducationalAssistantDesk {
         stage.setTitle("educational system");
         stage.show();
     }
-
     public void teachersListsClicked() throws IOException {
         log.info("Current user teachers lists");
         timer.pause();
@@ -222,7 +236,6 @@ public class EducationalAssistantDesk {
         stage.setTitle("educational system");
         stage.show();
     }
-
     public void withdrawRequest(ActionEvent actionEvent) throws IOException, ParseException {
         log.info("Current user withdraw request");
         timer.pause();
@@ -244,7 +257,6 @@ public class EducationalAssistantDesk {
         MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDegree(massageUserDegree);
     }
-
     public void minorRequest(ActionEvent actionEvent) throws IOException {
         log.info("Current user minor request");
         timer.pause();
@@ -260,7 +272,6 @@ public class EducationalAssistantDesk {
         stage.show();
 
     }
-
     public void profileClicked(ActionEvent actionEvent) throws IOException {
         log.info("Current user profile");
         timer.pause();
@@ -290,7 +301,6 @@ public class EducationalAssistantDesk {
         stage.show();
 
     }
-
     public void studentsStatusClicked(ActionEvent actionEvent) throws IOException {
         log.info("students status clicked");
         timer.pause();

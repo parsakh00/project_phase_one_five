@@ -83,7 +83,6 @@ public class Login {
     }
     @FXML
     protected void onCheckBoxPassWordLogInClicked(){
-
         if (ShowPassWord.isSelected()){
             passwordVisibleTextField.setText(PasswordField.getText());
             passwordVisibleTextField.toFront();
@@ -203,7 +202,7 @@ public class Login {
 
                 }
                 else if (Objects.equals(loginForJson.getUserType(), "teacher")){
-                    if ((loginForJson.getUserDegree() == null) || (Objects.equals(loginForJson.getUserDegree(), "manager"))) {
+                    if ((Objects.equals((String) loginForJson.getUserDegree(), (String) "-")) || (Objects.equals(loginForJson.getUserDegree(), "manager"))) {
                         CurrentUser.getInstance().setUser(loginForJson.getUserName());
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
                         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
@@ -292,10 +291,9 @@ public class Login {
                             stage.setTitle("educational system");
                             stage.show();
                         }
-
                     }
                     else if (Objects.equals(loginForJson.getUserType(), "teacher")){
-                        if ((loginForJson.getUserDegree() == null) || (Objects.equals(loginForJson.getUserDegree(), "manager"))) {
+                        if ((Objects.equals((String) loginForJson.getUserDegree(), (String) "-")) || (Objects.equals(loginForJson.getUserDegree(), "manager"))) {
                             CurrentUser.getInstance().setUser(loginForJson.getUserName());
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
                             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
@@ -307,7 +305,7 @@ public class Login {
                             stage.setTitle("educational system");
                             stage.show();
                         }
-                        else{
+                        else if (Objects.equals(loginForJson.getUserDegree(), "education assistant")){
                             CurrentUser.getInstance().setUser(loginForJson.getUserName());
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
                             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
@@ -320,7 +318,6 @@ public class Login {
                             stage.show();
                         }
                     }
-
                 }
                 else{
                     if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
@@ -333,14 +330,12 @@ public class Login {
                         randomCaptchaIcon();
                         CaptchaInput.setText(null);
                     }
-
                 }
             }catch (IOException ex){
                 ex.printStackTrace();
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
-
         }
     }
     protected Boolean MainLogIn() throws IOException, ParseException {
@@ -348,27 +343,22 @@ public class Login {
                 wrongCaptcha.setText(null);
                 MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText());
                 CurrentUser.getInstance().setUser(UserNameTextField.getText());
-                getCondition();
-                if (!Objects.equals(getCondition(), "withdrawal from education")) {
-                    if (Controller.getInstance().login(massage)) {
+                if (Controller.getInstance().login(massage)) {
+                    getCondition();
+                    if (!Objects.equals(getCondition(), "withdrawal from education")) {
                         return true;
-                    } else {
-                        wrongUserPass.setText("wrong username or password");
                     }
-
-                }
-                else{
-                    wrongUserPass.setText("Not Allow!!");
-                    return false;
+                    else {
+                        wrongUserPass.setText("Not allow");
+                    }
+                } else {
+                    wrongUserPass.setText("wrong username or password");
                 }
             }
-
-
-
         return false;
-
     }
     protected String getCondition() throws IOException, ParseException {
+        log.info("Check validity of condition for enterance");
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         userCondition = Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
         return Controller.getInstance().userCondition(massageStudentUndergraduateDesk);

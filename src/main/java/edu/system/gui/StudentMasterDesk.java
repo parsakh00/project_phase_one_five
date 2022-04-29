@@ -266,11 +266,20 @@ public class StudentMasterDesk {
         stage.show();
     }
     public void setUserImage() throws IOException, ParseException {
-        log.info("Current user image" );
-        userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
-        userImage.setFitHeight(160);
-        userImage.setFitWidth(140);
-        noidea.getChildren().add(userImage);
+        if (String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")) == null) {
+            log.info("Show image of user");
+            ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/" + getUsername() + ".png")));
+            userImage.setFitHeight(160);
+            userImage.setFitWidth(140);
+            noidea.getChildren().add(userImage);
+        }
+        else {
+            log.info("Show default image");
+            ImageView userImage = new ImageView(String.valueOf(HelloApplication.class.getResource("images/default.png")));
+            userImage.setFitHeight(160);
+            userImage.setFitWidth(140);
+            noidea.getChildren().add(userImage);
+        }
     }
     public void lessonListsClicked() throws IOException {
         log.info("Current user lessons list clicked");

@@ -10,6 +10,7 @@ import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -160,7 +161,7 @@ public class TeachersListDesk {
             stage.setTitle("educational system");
             stage.show();
         }
-        else if (Objects.equals(getUserDegree(), "manager") || Objects.equals(getUserType(), null)){
+        else if (Objects.equals(getUserDegree(), "manager") || Objects.equals(getUserType(), "-")){
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setHeight(650);
@@ -202,6 +203,7 @@ public class TeachersListDesk {
             if (i == 2) label.setText("Email");
             if (i == 3) label.setText("Name");
             TeachersLists.add(label,i,0);
+            GridPane.setHalignment(label, HPos.CENTER);
         }
         CurrentFaculty.getInstance().setFaculty(teacherChoiceBox.getValue());
         getFacultyData();
@@ -215,7 +217,7 @@ public class TeachersListDesk {
                 else if (i%4 == 3) label.setText(eachElement);
                 else if (i%4 == 0) label.setText(eachElement);
                 label.setAlignment(Pos.CENTER);
-
+                GridPane.setHalignment(label, HPos.CENTER);
                 TeachersLists.add(label,i%4 ,j);
                 i += 1;
                 if (i%4 == 0) j+= 1;

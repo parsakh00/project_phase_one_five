@@ -9,7 +9,7 @@
       <Button fx:id="returnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtnClicked" text="&lt;-" />
       <Pane layoutX="95.0" layoutY="27.0" prefHeight="538.0" prefWidth="610.0" styleClass="titleBar" stylesheets="@../styles.css">
          <children>
-            <Label layoutX="291.0" layoutY="26.0" text="Label" />
+            <Label layoutX="291.0" layoutY="26.0" text="Sign Up student" />
             <TextField fx:id="username" layoutX="100.0" layoutY="58.0" prefHeight="25.0" prefWidth="190.0" promptText="username" />
             <TextField fx:id="id" layoutX="100.0" layoutY="123.0" prefHeight="25.0" prefWidth="150.0" promptText="id" />
             <TextField fx:id="phoneNumber" layoutX="100.0" layoutY="184.0" prefHeight="25.0" prefWidth="150.0" promptText="phone number" />
@@ -32,8 +32,8 @@
             <Label layoutX="45.0" layoutY="317.0" text="faculty :" />
             <Label layoutX="37.0" layoutY="62.0" text="username :" />
             <Label layoutX="325.0" layoutY="317.0" text="Degree :" />
-            <Button fx:id="signUpBtn" layoutX="276.0" layoutY="478.0" mnemonicParsing="false" onAction="#signUpBtnClicked" text="Sign Up" />
-            <Button fx:id="picker" layoutX="310.0" layoutY="381.0" mnemonicParsing="false" onAction="#pickImage" text="Pick image" />
+            <Button layoutX="276.0" layoutY="478.0" mnemonicParsing="false" onAction="#signUpBtnClicked" text="Sign Up" />
+            <Button layoutX="310.0" layoutY="381.0" mnemonicParsing="false" onAction="#pickImage" text="Pick image" />
             <ChoiceBox fx:id="degreeList" layoutX="382.0" layoutY="343.0" prefWidth="150.0" />
             <ImageView fx:id="userPhoto" fitHeight="150.0" fitWidth="149.0" layoutX="391.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="sigUpWarning" layoutX="255.0" layoutY="431.0" prefHeight="25.0" prefWidth="106.0" />

@@ -7,6 +7,7 @@ import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -97,7 +98,6 @@ public class LessonListDesk {
         stage.setTitle("educational system");
         stage.show();
     }
-
     public void timeDisplay(){
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -107,20 +107,17 @@ public class LessonListDesk {
         };
         timer.start();
     }
-
     protected String getEmail() throws IOException, ParseException {
         log.info("Get user email");
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
 
     }
-
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current username");
         MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
-
     protected void getFaculty(ActionEvent actionEvent) {
         log.info("get current user faculty");
         String filter1 =  facultyChoiceBox.getValue();
@@ -133,6 +130,7 @@ public class LessonListDesk {
             if (i == 3) label.setText("Unity");
             if (i == 4) label.setText("Id");
             filterGrid.add(label,i,0);
+            GridPane.setHalignment(label, HPos.CENTER);
         }
         CurrentFaculty.getInstance().setFaculty(facultyChoiceBox.getValue());
         getFacultyData();
@@ -148,6 +146,7 @@ public class LessonListDesk {
                 else if (i%5 == 0) label.setText(eachElement);
                 label.setAlignment(Pos.CENTER);
                 filterGrid.add(label,i%5 ,j);
+                GridPane.setHalignment(label, HPos.CENTER);
                 i += 1;
                 if (i%5 == 0) j+= 1;
             }
@@ -167,6 +166,7 @@ public class LessonListDesk {
                 if (i == 3) label.setText("Unity");
                 if (i == 4) label.setText("Id");
                 filterGrid.add(label,i,0);
+                GridPane.setHalignment(label, HPos.CENTER);
             }
             CurrentFacultyUnit.getInstance().setFaculty(facultyChoiceBox.getValue());
             CurrentFacultyUnit.getInstance().setUnit(stageChoiceBox.getValue());
@@ -182,7 +182,7 @@ public class LessonListDesk {
                     else if (i%5 == 4) label.setText(eachElement);
                     else if (i%5 == 0) label.setText(eachElement);
                     label.setAlignment(Pos.CENTER);
-
+                    GridPane.setHalignment(label, HPos.CENTER);
                     filterGrid.add(label,i%5 ,j);
                     i += 1;
                     if (i%5 == 0) j+= 1;
@@ -203,6 +203,7 @@ public class LessonListDesk {
                 if (i == 3) label.setText("Unity");
                 if (i == 4) label.setText("Id");
                 filterGrid.add(label,i,0);
+                GridPane.setHalignment(label, HPos.CENTER);
             }
             CurrentFacultyUnit.getInstance().setFaculty(facultyChoiceBox.getValue());
             CurrentFacultyUnit.getInstance().setUnit(unityChoiceBox.getValue());
@@ -218,6 +219,7 @@ public class LessonListDesk {
                     else if (i%5 == 4) label.setText(eachElement);
                     else if (i%5 == 0) label.setText(eachElement);
                     label.setAlignment(Pos.CENTER);
+                    GridPane.setHalignment(label, HPos.CENTER);
 
                     filterGrid.add(label,i%5 ,j);
                     i += 1;
@@ -225,6 +227,7 @@ public class LessonListDesk {
                 }
             }
         }
+
 
     }
     protected void getFacultyData() {
@@ -289,7 +292,7 @@ public class LessonListDesk {
             stage.setTitle("educational system");
             stage.show();
         }
-        else if (Objects.equals(getUserDegree(), "manager") || Objects.equals(getUserDegree(),"")){
+        else if (Objects.equals(getUserDegree(), "manager") || Objects.equals(getUserDegree(),"-")){
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setHeight(650);
@@ -301,7 +304,6 @@ public class LessonListDesk {
         }
 
         else if (Objects.equals(getUserDegree(), "education assistant")){
-            System.out.println("true");
             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
             stage.setHeight(650);

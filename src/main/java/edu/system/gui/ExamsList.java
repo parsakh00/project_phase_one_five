@@ -151,6 +151,7 @@ public class ExamsList {
     protected void mapping(){
         for (int i = 0; i < examsDays.size() ; i++){
             map.put(examsDays.get(i), lessonsNames.get(i));
+
         }
     }
     protected void sortMapAndShow(){
