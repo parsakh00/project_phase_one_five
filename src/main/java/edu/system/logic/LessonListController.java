@@ -14,10 +14,12 @@ import java.io.*;
 import java.util.*;
 
 public class LessonListController {
+    ArrayList<String> objections;
     String[] facultyData;
     ArrayList<String> scores = new ArrayList<String>();
     ArrayList<String> teacher = new ArrayList<String>();
     ArrayList<String> lessonsss = new ArrayList<String>();
+    ArrayList<String> units = new ArrayList<>();
     ArrayList<String> objection = new ArrayList<String>();
     ArrayList<String> respond = new ArrayList<String>();
     String eachLesson;
@@ -37,6 +39,9 @@ public class LessonListController {
     String lessonTimeEdit;
     String lessonTeacherEdit;
     String idOfLesson;
+
+    int j = 0;
+    int jj = 0;
 
     static Logger log = LogManager.getLogger(HelloApplication.class);
 
@@ -358,7 +363,6 @@ public class LessonListController {
         JSONObject user = (JSONObject) obj;
         JSONObject user2 = (JSONObject)user.get(name);
         user2.put(faculty,"1");
-        System.out.println(user2.get(faculty));
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\minor.json";
         try(PrintWriter out = new PrintWriter(new FileWriter(path))){
             Gson gson = new Gson();
@@ -500,8 +504,73 @@ public class LessonListController {
         return scores;
     }
     private void eachScoreShow(JSONObject facultyData) {
+        if (!((Boolean) facultyData.get("final"))) {
+            String score = "N/A";
+            scores.add(score);
+        }
+    }
+    public ArrayList<String> userScoreNew(String name){
+        log.info("Read permanent Scores file to get user scores");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\permanent Scores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+            if (faculty != null) {
+                faculty.forEach(fac -> eachScoreShowNew((JSONObject) fac));
+            }
+            else return scores;
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+        return scores;
+    }
+    private void eachScoreShowNew(JSONObject facultyData) {
         String score = (String) facultyData.get("score");
         scores.add(score);
+
+    }
+
+
+    public ArrayList<String> lessonUnit(String name){
+        log.info("Read temporaryScores file to get lessons unit");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\temporaryScores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+            faculty.forEach(fac -> eachLessonUnit( (JSONObject) fac ) );
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+        return units;
+    }
+    private void eachLessonUnit(JSONObject facultyData) {
+        String unit = (String) facultyData.get("unit");
+        units.add(unit);
+    }
+    public ArrayList<String> lessonUnitNew(String name){
+        log.info("Read permanent Scores file to get lessons unit");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\permanent Scores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+            if (faculty != null) {
+                faculty.forEach(fac -> eachLessonUnitNew((JSONObject) fac));
+            }
+            else return units;
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+        return units;
+    }
+    private void eachLessonUnitNew(JSONObject facultyData) {
+        String unit = (String) facultyData.get("unit");
+        units.add(unit);
     }
     public ArrayList<String> userTeacher(String name){
         log.info("Read temporaryScores file to get user teachers");
@@ -522,6 +591,57 @@ public class LessonListController {
         String teachers = (String) facultyData.get("teacherName");
         teacher.add(teachers);
     }
+    public ArrayList<String> userTeacherNew(String name){
+        log.info("Read permanent Scores file to get user teachers");
+        JSONParser parser = new JSONParser();
+        try {
+
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\permanent scores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+            if (faculty != null) {
+                faculty.forEach(fac -> eachTeacherShowNew((JSONObject) fac));
+            }
+            else return teacher;
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+        return teacher;
+    }
+    private void eachTeacherShowNew(JSONObject facultyData) {
+        String teachers = (String) facultyData.get("teacherName");
+        teacher.add(teachers);
+    }
+    public void userObjections(String name, ArrayList<String> objection){
+        objections = objection;
+        log.info("open and write objections in temporary scores");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\temporaryScores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+            faculty.forEach(fac -> eachObjection( (JSONObject) fac ) );
+            String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\temporaryScores.json";
+            try(PrintWriter out = new PrintWriter(new FileWriter(path))){
+                Gson gson = new Gson();
+                String json = gson.toJson(faculty);
+                out.write(json);
+
+            }
+            catch (Exception e){
+                log.error("exception happened!", e);
+                e.printStackTrace();
+            }
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+    }
+    private void eachObjection(JSONObject facultyData) {
+        facultyData.put("objection", objections.get(j));
+        j += 1;
+    }
     public ArrayList<String> userLessonss(String name){
         log.info("Read temporaryScores file to get user lessons");
         JSONParser parser = new JSONParser();
@@ -541,6 +661,30 @@ public class LessonListController {
         return lessonsss;
     }
     private void eachLessonShow(JSONObject facultyData) {
+        String lesson = (String) facultyData.get("lesson");
+        lessonsss.add(lesson);
+    }
+    public ArrayList<String> userLessonssNew(String name){
+        log.info("Read permanent Scores file to get user lessons");
+        JSONParser parser = new JSONParser();
+        try {
+
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\requests\\permanent Scores.json"));
+            JSONObject user = (JSONObject) obj;
+            JSONArray faculty = (JSONArray) user.get(name);
+
+            if (faculty != null) {
+                faculty.forEach(fac -> eachLessonShowNew((JSONObject) fac));
+            }
+            else return lessonsss;
+
+        } catch (ParseException | IOException e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+        return lessonsss;
+    }
+    private void eachLessonShowNew(JSONObject facultyData) {
         String lesson = (String) facultyData.get("lesson");
         lessonsss.add(lesson);
     }

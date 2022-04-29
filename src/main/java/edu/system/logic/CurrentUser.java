@@ -1,10 +1,13 @@
 package edu.system.logic;
 
 
+import java.util.ArrayList;
+
 public class CurrentUser {
 
     String user;
     int timer;
+
     private static CurrentUser currentuser;
     public static CurrentUser getInstance(){
         if (currentuser == null){

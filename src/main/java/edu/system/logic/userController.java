@@ -40,6 +40,23 @@ public class userController {
         JSONObject jsonObject = (JSONObject) obj;
         return (String) jsonObject.get("total score");
     }
+    public void setUserNewScore(String name, String totalScore) throws IOException, ParseException {
+        log.info("Read and rewrite withdrawal file to set new total score of student");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\"+name+".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        jsonObject.put("total score", totalScore);
+        String path = System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\"+name+".json";
+        try(PrintWriter out = new PrintWriter(new FileWriter(path))){
+            Gson gson = new Gson();
+            String json = gson.toJson(jsonObject);
+            out.write(json);
+        }
+        catch (Exception e){
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+    }
     public String getUserYear(String name) throws IOException, ParseException {
         log.info("Read user enterance year from user data file");
         JSONParser parser = new JSONParser();

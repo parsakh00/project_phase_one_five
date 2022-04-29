@@ -9,12 +9,62 @@
         <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
             <children>
                 <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtn" text="&lt;-" />
-                <Label fx:id="score" layoutX="352.0" layoutY="18.0" text="Temporary Score">
+                <Label fx:id="tmpScore" layoutX="352.0" layoutY="18.0" text="Temporary Score">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
             </children>
         </Pane>
+        <GridPane fx:id="chart" layoutX="190.0" layoutY="153.0" prefHeight="26.0" prefWidth="597.0" stylesheets="@../styles.css">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                    <children>
+                        <Label layoutX="57.0" layoutY="5.0" text="Student" />
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" styleClass="loginBox" stylesheets="@../styles.css" GridPane.columnIndex="2">
+                    <children>
+                        <Label layoutX="54.0" layoutY="5.0" text="Lesson" />
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                    <children>
+                        <Label layoutX="61.0" layoutY="5.0" text="score" />
+                    </children>
+                </Pane>
+                <Pane prefHeight="200.0" prefWidth="200.0" styleClass="loginBox" stylesheets="@../styles.css">
+                    <children>
+                        <Label alignment="CENTER" layoutX="20.0" layoutY="5.0" prefHeight="17.0" prefWidth="111.0" text="Objection" />
+                    </children>
+                </Pane>
+            </children>
+        </GridPane>
+      <Pane layoutX="39.0" layoutY="153.0" prefHeight="26.0" prefWidth="150.0">
+         <children>
+            <Label layoutX="49.0" layoutY="5.0" text="Respond" />
+         </children>
+      </Pane>
+      <TextField fx:id="textField1" layoutX="40.0" layoutY="179.0" />
+      <TextField fx:id="textField2" layoutX="40.0" layoutY="205.0" />
+      <TextField fx:id="textField3" layoutX="40.0" layoutY="231.0" />
+      <TextField fx:id="textField4" layoutX="40.0" layoutY="257.0" />
+      <TextField fx:id="textField5" layoutX="40.0" layoutY="283.0" />
+      <TextField fx:id="textField6" layoutX="40.0" layoutY="309.0" />
+      <TextField fx:id="textField7" layoutX="40.0" layoutY="335.0" />
+      <TextField fx:id="textField8" layoutX="40.0" layoutY="361.0" />
+      <Button layoutX="71.0" layoutY="438.0" mnemonicParsing="false" text="save respond" />
+      <Label layoutX="80.0" layoutY="482.0" prefHeight="18.0" prefWidth="69.0" />
+      <Button layoutX="400.0" layoutY="127.0" mnemonicParsing="false" text="Edit" />
+      <Button layoutX="372.0" layoutY="438.0" mnemonicParsing="false" text="Finalize scores" />
     </children>
 </AnchorPane>

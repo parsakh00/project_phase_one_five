@@ -1,41 +1,43 @@
-2022-04-29 14:48:22 INFO  HelloApplication:77 - launch program
-2022-04-29 14:48:23 INFO  HelloApplication:63 - Log in page
-2022-04-29 14:48:36 INFO  HelloApplication:308 - Read name of user from userdata file
-2022-04-29 14:48:36 INFO  HelloApplication:314 - Read password of user from userdata file
-2022-04-29 14:48:36 INFO  HelloApplication:320 - check equality of hash of pass that entered by pass that user field in password field
-2022-04-29 14:48:36 INFO  HelloApplication:361 - Check validity of condition for enterance
-2022-04-29 14:48:36 INFO  HelloApplication:30 - Read name of user from file
-2022-04-29 14:48:36 INFO  HelloApplication:361 - Check validity of condition for enterance
-2022-04-29 14:48:36 INFO  HelloApplication:30 - Read name of user from file
-2022-04-29 14:48:36 INFO  EducationalAssistantDesk:64 - Open educational assistant main page
-2022-04-29 14:48:36 INFO  EducationalAssistantDesk:75 - logged in
-2022-04-29 14:48:36 INFO  EducationalAssistantDesk:161 - Current user name
-2022-04-29 14:48:36 INFO  HelloApplication:30 - Read name of user from file
-2022-04-29 14:48:36 INFO  EducationalAssistantDesk:192 - Show default image
-2022-04-29 14:48:36 INFO  EducationalAssistantDesk:161 - Current user name
-2022-04-29 14:48:36 INFO  HelloApplication:30 - Read name of user from file
-2022-04-29 14:48:36 INFO  EducationalAssistantDesk:155 - Current user email
-2022-04-29 14:48:38 INFO  EducationalAssistantDesk:96 - sign up new student clicked
-2022-04-29 14:48:38 INFO  HelloApplication:64 - Open sign up student page
-2022-04-29 14:48:40 INFO  HelloApplication:106 - Back Button clicked
-2022-04-29 14:48:40 INFO  EducationalAssistantDesk:64 - Open educational assistant main page
-2022-04-29 14:48:40 INFO  EducationalAssistantDesk:75 - logged in
-2022-04-29 14:48:40 INFO  EducationalAssistantDesk:161 - Current user name
-2022-04-29 14:48:40 INFO  HelloApplication:30 - Read name of user from file
-2022-04-29 14:48:40 INFO  EducationalAssistantDesk:192 - Show default image
-2022-04-29 14:48:40 INFO  EducationalAssistantDesk:161 - Current user name
-2022-04-29 14:48:40 INFO  HelloApplication:30 - Read name of user from file
-2022-04-29 14:48:40 INFO  EducationalAssistantDesk:155 - Current user email
-2022-04-29 14:48:42 INFO  EducationalAssistantDesk:110 - sign up new teacher clicked
-2022-04-29 14:48:42 INFO  HelloApplication:62 - Open sign up student page
-2022-04-29 14:48:52 INFO  HelloApplication:104 - Back Button clicked
-2022-04-29 14:48:52 INFO  EducationalAssistantDesk:64 - Open educational assistant main page
-2022-04-29 14:48:52 INFO  EducationalAssistantDesk:75 - logged in
-2022-04-29 14:48:52 INFO  EducationalAssistantDesk:161 - Current user name
-2022-04-29 14:48:52 INFO  HelloApplication:30 - Read name of user from file
-2022-04-29 14:48:52 INFO  EducationalAssistantDesk:192 - Show default image
-2022-04-29 14:48:52 INFO  EducationalAssistantDesk:161 - Current user name
-2022-04-29 14:48:52 INFO  HelloApplication:30 - Read name of user from file
-2022-04-29 14:48:52 INFO  EducationalAssistantDesk:155 - Current user email
-2022-04-29 14:48:53 INFO  EducationalAssistantDesk:170 - Current user Logged out by him self
-2022-04-29 14:48:53 INFO  HelloApplication:63 - Log in page
+2022-04-29 21:02:56 INFO  HelloApplication:77 - launch program
+2022-04-29 21:02:56 INFO  HelloApplication:63 - Log in page
+2022-04-29 21:03:05 INFO  HelloApplication:308 - Read name of user from userdata file
+2022-04-29 21:03:05 INFO  HelloApplication:314 - Read password of user from userdata file
+2022-04-29 21:03:05 INFO  HelloApplication:320 - check equality of hash of pass that entered by pass that user field in password field
+2022-04-29 21:03:05 INFO  HelloApplication:361 - Check validity of condition for enterance
+2022-04-29 21:03:05 INFO  HelloApplication:30 - Read name of user from file
+2022-04-29 21:03:05 INFO  HelloApplication:361 - Check validity of condition for enterance
+2022-04-29 21:03:05 INFO  HelloApplication:30 - Read name of user from file
+2022-04-29 21:03:05 INFO  StudentUndergraduateDesk:82 - Undergraduate student main, logged in
+2022-04-29 21:03:05 INFO  StudentUndergraduateDesk:101 - logged in
+2022-04-29 21:03:05 INFO  StudentUndergraduateDesk:248 - Get current student Username
+2022-04-29 21:03:05 INFO  HelloApplication:30 - Read name of user from file
+2022-04-29 21:03:05 INFO  StudentUndergraduateDesk:288 - Show default image
+2022-04-29 21:03:05 INFO  StudentUndergraduateDesk:248 - Get current student Username
+2022-04-29 21:03:05 INFO  HelloApplication:30 - Read name of user from file
+2022-04-29 21:03:05 INFO  StudentUndergraduateDesk:243 - Get current student Email
+2022-04-29 21:03:05 INFO  StudentUndergraduateDesk:253 - Get current student Educational status
+2022-04-29 21:03:05 INFO  HelloApplication:351 - Read user education status from userdata file
+2022-04-29 21:03:05 INFO  StudentUndergraduateDesk:258 - Get current student supervisor
+2022-04-29 21:03:05 INFO  HelloApplication:358 - Read user supervisor from userdata file
+2022-04-29 21:03:07 INFO  StudentUndergraduateDesk:353 - Students status clicked
+2022-04-29 21:03:07 INFO  HelloApplication:52 - Open students educational status
+2022-04-29 21:03:07 INFO  HelloApplication:177 - get user Scores from temporary scores
+2022-04-29 21:03:07 INFO  HelloApplication:493 - Read temporaryScores file to get user scores
+2022-04-29 21:03:07 INFO  HelloApplication:167 - Get user lessons from temporary scores
+2022-04-29 21:03:07 INFO  HelloApplication:646 - Read temporaryScores file to get user lessons
+2022-04-29 21:03:07 INFO  HelloApplication:172 - Get teachers from temporary scores
+2022-04-29 21:03:07 INFO  HelloApplication:576 - Read temporaryScores file to get user teachers
+2022-04-29 21:03:07 INFO  HelloApplication:182 - get lesson's unit from temporary scores
+2022-04-29 21:03:07 INFO  HelloApplication:537 - Read temporaryScores file to get lessons unit
+2022-04-29 21:03:07 INFO  HelloApplication:157 - get user Scores from permanent scores
+2022-04-29 21:03:07 INFO  HelloApplication:513 - Read permanent Scores file to get user scores
+2022-04-29 21:03:07 INFO  HelloApplication:147 - Get user lessons from permanent scores
+2022-04-29 21:03:07 INFO  HelloApplication:668 - Read permanent Scores file to get user lessons
+2022-04-29 21:03:07 INFO  HelloApplication:152 - Get teachers from permanent scores
+2022-04-29 21:03:07 INFO  HelloApplication:595 - Read permanent Scores file to get user teachers
+2022-04-29 21:03:07 INFO  HelloApplication:162 - get lesson's unit from permanent scores
+2022-04-29 21:03:07 INFO  HelloApplication:555 - Read permanent Scores file to get lessons unit
+2022-04-29 21:03:07 INFO  HelloApplication:135 - Calculate total score of student
+2022-04-29 21:03:07 INFO  HelloApplication:78 - Make grid
+2022-04-29 21:03:07 INFO  HelloApplication:118 - set New score for student in profile
+2022-04-29 21:03:07 INFO  HelloApplication:44 - Read and rewrite withdrawal file to set new total score of student
