@@ -2,7 +2,6 @@ package edu.system.logic;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import edu.system.individual.studentIndividual;
 
 public class MassageLogin {
     String name;

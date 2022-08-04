@@ -3,7 +3,7 @@ package edu.system.individual;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class studentIndividual {
+public class Individual {
 
     private String username;
     private String id;
@@ -23,8 +23,18 @@ public class studentIndividual {
     private String electricalEng;
     private String mathSci;
     private String physics;
+    private String masterDegree;
+    private String lesson;
+    private String teacherNumber;
+    private String roomNo;
 
-    public studentIndividual(String username, String id, String phoneNumber, String totalScore, String faculty, String supervisor, String enteringYear, String condition, int password, String type, String email, String degree, String studentNumber, String chemistry, String mechanicEng, String electricalEng, String mathSci, String physics) {
+
+    public Individual(String username, int password){
+        this.username = username;
+        this.password = password;
+    }
+
+    public Individual(String username, String id, String phoneNumber, String totalScore, String faculty, String supervisor, String enteringYear, String condition, int password, String type, String email, String degree, String studentNumber, String chemistry, String mechanicEng, String electricalEng, String mathSci, String physics, String masterDegree, String lesson, String teacherNumber, String roomNo) {
         this.username = username;
         this.id = id;
         this.phoneNumber = phoneNumber;
@@ -43,6 +53,10 @@ public class studentIndividual {
         this.electricalEng = electricalEng;
         this.mathSci = mathSci;
         this.physics = physics;
+        this.masterDegree = masterDegree;
+        this.lesson = lesson;
+        this.teacherNumber = teacherNumber;
+        this.roomNo = roomNo;
     }
 
     public String getUsername() {
@@ -117,11 +131,27 @@ public class studentIndividual {
         return physics;
     }
 
-    public static studentIndividual jsonToMessage(String json){
+    public String getMasterDegree() {
+        return masterDegree;
+    }
+
+    public String getLesson() {
+        return lesson;
+    }
+
+    public String getTeacherNumber() {
+        return teacherNumber;
+    }
+
+    public String getRoomNo() {
+        return roomNo;
+    }
+
+    public static Individual jsonToMessage(String json){
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         Gson gson = gsonBuilder.create();
-        return gson.fromJson(json, studentIndividual.class);
+        return gson.fromJson(json, Individual.class);
     }
 
     public String toJson(){

@@ -269,7 +269,6 @@ public class Login {
             if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
                 wrongCaptcha.setText(null);
                 MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText());
-                massage.toJson();
                 CurrentUser.getInstance().setUser(UserNameTextField.getText());
                 if (Controller.getInstance().login(massage)) {
                     getCondition();
