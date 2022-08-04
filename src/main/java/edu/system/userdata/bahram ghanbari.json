@@ -1,17 +1,16 @@
 {
-  "password":521611128,
-  "phone":"66101315",
+  "master degree":"professor",
   "degree":"manager",
   "lesson":"general chemistry 2",
-  "room No.":"7",
+  "teacher number":"99103232",
   "type":"teacher",
-  "phone number" : "09133245621",
-  "email":"teacher8@gmail.com",
-  "isEducationalAssistantSet":false,
-  "username":"bahram ghanbari",
+  "phone number":"09133245621",
   "faculty":"Chemistry",
-  "master degree" : "professor",
-  "teacher number": "99103232",
-  "id" : "0031234567"
-
+  "password":521611128,
+  "phone":"66101315",
+  "room No.":"7",
+  "id":"0031234567",
+  "email":"teacher8@gmail.com",
+  "isEducationalAssistantSet":true,
+  "username":"bahram ghanbari"
 }

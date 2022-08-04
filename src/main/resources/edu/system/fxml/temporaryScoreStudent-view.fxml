@@ -16,9 +16,8 @@
             </Label>
          </children>
       </Pane>
-      <GridPane fx:id="chart" layoutX="41.0" layoutY="153.0" prefHeight="26.0" prefWidth="746.0" stylesheets="@../styles.css">
+      <GridPane fx:id="chart" layoutX="190.0" layoutY="153.0" prefHeight="26.0" prefWidth="597.0" stylesheets="@../styles.css">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -28,33 +27,42 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                <children>
-                  <Label layoutX="57.0" layoutY="5.0" text="Lesson" />
+                  <Label layoutX="57.0" layoutY="5.0" text="Student" />
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="loginBox" stylesheets="@../styles.css" GridPane.columnIndex="3">
+            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="loginBox" stylesheets="@../styles.css" GridPane.columnIndex="2">
                <children>
-                  <Label layoutX="54.0" layoutY="5.0" text="Teacher" />
+                  <Label layoutX="54.0" layoutY="5.0" text="Lesson" />
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
                   <Label layoutX="61.0" layoutY="5.0" text="score" />
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="loginBox" stylesheets="@../styles.css" GridPane.columnIndex="1">
+            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="loginBox" stylesheets="@../styles.css">
                <children>
                   <Label alignment="CENTER" layoutX="20.0" layoutY="5.0" prefHeight="17.0" prefWidth="111.0" text="Objection" />
-               </children>
-            </Pane>
-            <Pane prefHeight="26.0" prefWidth="94.0">
-               <children>
-                  <Label layoutX="52.0" layoutY="5.0" text="Respond" />
                </children>
             </Pane>
          </children>
       </GridPane>
       <Button layoutX="351.0" layoutY="567.0" mnemonicParsing="false" onAction="#saveObjection" text="save objections" />
+      <TextField fx:id="textField1" layoutX="41.0" layoutY="179.0" />
+      <TextField fx:id="textField2" layoutX="41.0" layoutY="205.0" />
+      <TextField fx:id="textField3" layoutX="41.0" layoutY="231.0" />
+      <TextField fx:id="textField4" layoutX="41.0" layoutY="257.0" />
+      <TextField fx:id="textField5" layoutX="41.0" layoutY="283.0" />
+      <TextField fx:id="textField6" layoutX="41.0" layoutY="309.0" />
+      <TextField fx:id="textField7" layoutX="41.0" layoutY="335.0" />
+      <TextField fx:id="textField8" layoutX="41.0" layoutY="361.0" />
+      <Pane layoutX="39.0" layoutY="153.0" prefHeight="26.0" prefWidth="150.0">
+         <children>
+            <Label layoutX="49.0" layoutY="5.0" text="Respond" />
+         </children>
+      </Pane>
+      <Label fx:id="confirm" layoutX="371.0" layoutY="593.0" prefHeight="18.0" prefWidth="57.0" />
    </children>
 </AnchorPane>

@@ -163,6 +163,12 @@ public class Controller {
         userController studentController = new userController();
         return studentController.getUserScore(name);
     }
+    public void userNewScore(MassageUserDesk massageUserDesk) throws IOException, ParseException {
+        String name = massageUserDesk.getName();
+        String score = massageUserDesk.getScore();
+        userController studentController = new userController();
+        studentController.setUserNewScore(name, score);
+    }
     public String userYear(MassageUserDesk massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
         userController studentController = new userController();
@@ -387,15 +393,48 @@ public class Controller {
         LessonListController lessonListController = new LessonListController();
         return lessonListController.userLessonss(name);
     }
+    public ArrayList<String> getLessonsNew(MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.userLessonssNew(name);
+    }
+
+    public void setObjection(MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        ArrayList<String> objection = massageUserDesk.getObjections();
+        LessonListController lessonListController = new LessonListController();
+        lessonListController.userObjections(name, objection);
+    }
     public ArrayList<String> getTeachers(MassageUserDesk massageUserDesk){
         String name = massageUserDesk.getName();
         LessonListController lessonListController = new LessonListController();
         return lessonListController.userTeacher(name);
     }
+    public ArrayList<String> getTeachersNew(MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.userTeacherNew(name);
+    }
     public ArrayList<String> getScores(MassageUserDesk massageUserDesk){
         String name = massageUserDesk.getName();
         LessonListController lessonListController = new LessonListController();
         return lessonListController.userScore(name);
+    }
+    public ArrayList<String> getScoresNew(MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.userScoreNew(name);
+    }
+
+    public ArrayList<String> getUnits(MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.lessonUnit(name);
+    }
+    public ArrayList<String> getUnitsNew(MassageUserDesk massageUserDesk){
+        String name = massageUserDesk.getName();
+        LessonListController lessonListController = new LessonListController();
+        return lessonListController.lessonUnitNew(name);
     }
     public ArrayList<String> getRespond(MassageUserDesk massageUserDesk){
         String name = massageUserDesk.getName();

@@ -1,14 +1,15 @@
 {
-  "password":162319966,
-  "lesson" : "Structure and link",
-  "phone":"66101205","degree":"-",
-  "room No.":"4",
+  "master degree":"professor",
+  "lesson":"Structure and link",
+  "degree":"education assistant",
+  "teacher number":"99102322",
   "type":"teacher",
-  "email":"teacher11@gmail.com",
-  "username":"mojtaba bagerzadeh",
+  "phone number":"09133245005",
   "faculty":"Chemistry",
-  "master degree" : "professor",
-  "phone number" : "09133245005",
-  "teacher number": "99102322",
-  "id" : "2132234567"
+  "password":162319966,
+  "phone":"66101205",
+  "room No.":"4",
+  "id":"2132234567",
+  "email":"teacher11@gmail.com",
+  "username":"mojtaba bagerzadeh"
 }

@@ -1,5 +1,9 @@
 package edu.system.logic;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import edu.system.individual.studentIndividual;
+
 public class MassageLogin {
     String name;
     String pass;
@@ -8,7 +12,6 @@ public class MassageLogin {
     String unity;
     String stage;
     String id;
-
     Boolean isPresent;
 
     public MassageLogin(String name){
@@ -62,7 +65,6 @@ public class MassageLogin {
     }
 
     public void setPass(String pass) {
-
         this.pass = pass;
     }
 
@@ -96,5 +98,19 @@ public class MassageLogin {
 
     public Boolean getPresent() {
         return isPresent;
+    }
+
+    public static MassageLogin jsonToMessage(String json){
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setPrettyPrinting();
+        Gson gson = gsonBuilder.create();
+        return gson.fromJson(json, MassageLogin.class);
+    }
+
+    public String toJson(){
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setPrettyPrinting();
+        Gson gson = gsonBuilder.create();
+        return gson.toJson(this);
     }
 }

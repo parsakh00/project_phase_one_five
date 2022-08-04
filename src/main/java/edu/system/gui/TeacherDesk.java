@@ -218,7 +218,7 @@ public class TeacherDesk {
         timer.pause();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/temporaryScoreTeacher-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/temporaryScoreTeacher.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setHeight(650);
         stage.setWidth(800);

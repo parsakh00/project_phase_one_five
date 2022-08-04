@@ -77,7 +77,7 @@ public class StudentUndergraduateDesk {
     protected MenuItem WithdrawalEducation;
 
     static Logger log = LogManager.getLogger(StudentUndergraduateDesk.class);
-    PauseTransition timer = new PauseTransition(Duration.seconds(10800));
+    PauseTransition timer = new PauseTransition(Duration.seconds(10000));
     public void initialize() throws IOException, ParseException {
         log.info("Undergraduate student main, logged in");
         timer.playFromStart();

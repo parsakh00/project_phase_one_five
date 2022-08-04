@@ -30,9 +30,21 @@ import java.util.Objects;
 
 public class TemporaryScoresStudent {
 
+    public Label confirm;
+
     public GridPane chart;
     public Label score;
+    public TextField textField1;
+    public TextField textField2;
+    public TextField textField4;
+    public TextField textField3;
+    public TextField textField5;
+    public TextField textField6;
+    public TextField textField7;
+    public TextField textField8;
+
     Stage stage;
+
     ArrayList<String> lesson = new ArrayList<String>();
     ArrayList<String> teachers = new ArrayList<String>();
     ArrayList<String> scores = new ArrayList<String>();
@@ -118,29 +130,42 @@ public class TemporaryScoresStudent {
         }
     }
     protected void makeGrid(){
+        textField1.setVisible(false);
+        textField2.setVisible(false);
+        textField3.setVisible(false);
+        textField4.setVisible(false);
+        textField5.setVisible(false);
+        textField6.setVisible(false);
+        textField7.setVisible(false);
+        textField8.setVisible(false);
         log.info("Make grid");
         chart.getChildren().clear();
         for (int i = 0; i < 5; i++){
             javafx.scene.control.Label label = new Label();
             if (i == 0) label.setText("Respond");
-            if (i == 1) label.setText("Objection");
-            if (i == 2) label.setText("Score");
-            if (i == 3) label.setText("Teacher");
-            if (i == 4) label.setText("Lesson");
+            if (i == 1) label.setText("Score");
+            if (i == 2) label.setText("Teacher");
+            if (i == 3) label.setText("Lesson");
             label.setAlignment(Pos.CENTER_RIGHT);
             GridPane.setHalignment(label, HPos.CENTER);
             chart.setVgap(10);
             chart.add(label,i,0);
         }
         for (int j = 0; j < lesson.size(); j++){
+            if (j == 0) textField1.setVisible(true);
+            else if (j == 1) textField2.setVisible(true);
+            else if (j == 2) textField3.setVisible(true);
+            else if (j == 3) textField4.setVisible(true);
+            else if (j == 4) textField5.setVisible(true);
+            else if (j == 5) textField6.setVisible(true);
+            else if (j == 6) textField7.setVisible(true);
+            else if (j == 7) textField8.setVisible(true);
             for (int i = 0; i < 5; i++){
                 javafx.scene.control.Label label = new javafx.scene.control.Label();
-                TextField textField = new TextField();
                 if (i == 0) label.setText(respond.get(j));
-                else if (i == 1) chart.add(textField, i,j+1);
-                else if (i == 2) label.setText(scores.get(j));
-                else if (i == 3) label.setText(teachers.get(j));
-                else label.setText(lesson.get(j));
+                if (i == 1) label.setText(scores.get(j));
+                if (i == 2) label.setText(teachers.get(j));
+                if (i == 3) label.setText(lesson.get(j));
                 label.setAlignment(Pos.CENTER_RIGHT);
                 GridPane.setHalignment(label, HPos.CENTER);
                 chart.setVgap(10);
@@ -152,6 +177,18 @@ public class TemporaryScoresStudent {
 
     @FXML
     protected void saveObjection(){
+        for (int j = 0; j < lesson.size(); j++){
+            if (j == 0) objection.add(textField1.getText());
+            else if (j == 1) objection.add(textField2.getText());
+            else if (j == 2) objection.add(textField3.getText());
+            else if (j == 3) objection.add(textField4.getText());
+            else if (j == 4) objection.add(textField5.getText());
+            else if (j == 5) objection.add(textField6.getText());
+            else if (j == 6) objection.add(textField7.getText());
+            else if (j == 7) objection.add(textField8.getText());
+        }
+        setObjections();
+        confirm.setText("Done");
 
     }
 
@@ -160,7 +197,11 @@ public class TemporaryScoresStudent {
         MassageUserDesk massageUserLesson = new MassageUserDesk(CurrentUser.getInstance().getUser());
         lesson = Controller.getInstance().getLessons(massageUserLesson);
     }
-
+    protected void setObjections(){
+        log.info("set objections of each student");
+        MassageUserDesk massageUserLesson = new MassageUserDesk(CurrentUser.getInstance().getUser(), objection);
+        Controller.getInstance().setObjection(massageUserLesson);
+    }
     protected void getTeachers(){
         log.info("Get teachers");
         MassageUserDesk massageUserTeachers = new MassageUserDesk(CurrentUser.getInstance().getUser());
