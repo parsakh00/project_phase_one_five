@@ -1,7 +1,5 @@
-package edu.system.logic;
+package edu.system.currentUser;
 
-
-import java.util.ArrayList;
 
 public class CurrentUser {
 

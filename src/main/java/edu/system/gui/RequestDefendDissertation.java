@@ -1,9 +1,7 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
-import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageUserDesk;
+import edu.system.currentUser.CurrentUser;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,11 +14,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class RequestDefendDissertation {
 

@@ -1,6 +1,7 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
+import edu.system.currentUser.CurrentUser;
 import edu.system.logic.*;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -80,7 +81,7 @@ public class Recommendation {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get current user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void sendClicked() throws IOException, ParseException {
@@ -132,42 +133,42 @@ public class Recommendation {
     protected void addRequest() throws IOException, ParseException {
         log.info("Add user request for recommendation");
         MassageLogin massageLogin = new MassageLogin(nameField.getText(), lessonField.getText(), scoreField.getText(),
-                taField.getText(), getUsername());
+                taField.getText(),null,null, getUsername(),null,null,null);
         Controller.getInstance().addRecommendRequest(massageLogin);
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current user user name");
-        MassageUserDesk massageStudentPhdDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         return Controller.getInstance().userDeskUserName(massageStudentPhdDesk);
     }
     protected String getUserId() throws IOException, ParseException {
         log.info("Get current user student Id");
-        MassageUserDesk massageStudentPhdDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userId(massageStudentPhdDesk);
     }
     protected void getCondition() throws IOException, ParseException {
         log.info("get user condition");
-        MassageUserDesk massageResult = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         condition = Controller.getInstance().recommendResult(massageResult);
     }
     public void getTeacher() throws IOException, ParseException {
         log.info("Get user name for recommendation");
-        MassageUserDesk massageResult = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         teacher = Controller.getInstance().recommendGetTeacher(massageResult);
     }
     public void getLessons() throws IOException, ParseException {
         log.info("get lessons that user passed with related teacher");
-        MassageUserDesk massageResult = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         lessons = Controller.getInstance().recommendGetLessons(massageResult);
     }
     public void getScores() throws IOException, ParseException {
         log.info("Get scores for write in recommendation");
-        MassageUserDesk massageResult = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         scores = Controller.getInstance().recommendGetScores(massageResult);
     }
     public void getTa() throws IOException, ParseException {
         log.info("Get if user has been ta or not");
-        MassageUserDesk massageResult = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         ta = Controller.getInstance().recommendGetTa(massageResult);
 
     }

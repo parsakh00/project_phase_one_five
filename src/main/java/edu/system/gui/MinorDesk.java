@@ -1,6 +1,7 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
+import edu.system.currentUser.CurrentUser;
 import edu.system.logic.*;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -56,12 +57,12 @@ public class MinorDesk {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get current user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected String getFacultyUser() throws IOException, ParseException {
         log.info("Get current user faculty");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userFaculty(massageUserDegree);
     }
     public void backBtnClicked(ActionEvent actionEvent) throws IOException, ParseException {
@@ -82,7 +83,7 @@ public class MinorDesk {
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current user name");
-        MassageUserDesk massageStudentPhdDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentPhdDesk);
     }
     public void sendRequestClicked() throws IOException, ParseException {
@@ -97,7 +98,7 @@ public class MinorDesk {
     }
     public void sendMinorRequest() throws IOException, ParseException {
         log.info("Send minor request");
-        MassageFacultyUnit sendMinor = new MassageFacultyUnit(getUsername(),getFacultyUser(),facultyName.getText());
+        MassageLogin sendMinor = new MassageLogin(getUsername(),getFacultyUser(),facultyName.getText());
         Controller.getInstance().addMinorRequest(sendMinor);
     }
     public void showResultClicked() throws IOException, ParseException {
@@ -111,7 +112,7 @@ public class MinorDesk {
     }
     public String showResult() throws IOException, ParseException {
         log.info("Show result");
-        MassageUserDesk howManyFacultyMinor = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin howManyFacultyMinor = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().facultyForMinors(howManyFacultyMinor);
     }
 }

@@ -2,9 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
+import edu.system.currentUser.CurrentUser;
 import edu.system.logic.MassageLogin;
-import edu.system.logic.MassageUserDesk;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,7 +17,6 @@ import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class LogOutDesk {
     public Pane forSource;
@@ -60,12 +58,12 @@ public class LogOutDesk {
     }
     protected Boolean changePassword() throws IOException, ParseException {
         log.info("Change password boolean");
-        MassageLogin massageEditPassword = new MassageLogin(getUsername(), newPassword.getText(), oldPassword.getText());
+        MassageLogin massageEditPassword = new MassageLogin(getUsername(), newPassword.getText(),null,null,null,null, oldPassword.getText(),null,null,null);
         return Controller.getInstance().editPassLogOut(massageEditPassword);
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current user , username");
-        MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
 }

@@ -1,6 +1,7 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
+import edu.system.currentUser.CurrentUser;
 import edu.system.logic.*;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -151,14 +152,14 @@ public class EditLessonsDesk {
         SelectLesson.getInstance().setTime(addIsPresent.getText());
         MassageLogin addSelectedLesson = new MassageLogin(SelectLesson.getInstance().getLesson(),SelectLesson.getInstance().getFaculty(),
                 SelectLesson.getInstance().getTime(),SelectLesson.getInstance().getTeacher(),SelectLesson.getInstance().getUnity(),SelectLesson.getInstance().getStage(),SelectLesson.getInstance().getId()
-                ,SelectLesson.getInstance().getPresent());
+                ,SelectLesson.getInstance().getPresent(),null,null);
         Controller.getInstance().adding(addSelectedLesson);
     }
 
     protected void removeLesson() throws IOException, ParseException {
         SelectLesson.getInstance().setLesson(removeLesson.getText());
         SelectLesson.getInstance().setFaculty(currentUserFaculty());
-        MassageLogin removeSelectedLesson = new MassageLogin(SelectLesson.getInstance().getLesson(),SelectLesson.getInstance().getFaculty());
+        MassageLogin removeSelectedLesson = new MassageLogin(SelectLesson.getInstance().getLesson(),SelectLesson.getInstance().getFaculty(), null,null,null,null,null,null,null,null);
         Controller.getInstance().removal(removeSelectedLesson);
     }
     private void editLesson() throws IOException, ParseException {
@@ -167,12 +168,12 @@ public class EditLessonsDesk {
         SelectLesson.getInstance().setTeacher(editTeacher.getText());
         SelectLesson.getInstance().setTime(editTime.getText());
         MassageLogin editingSelectedLesson = new MassageLogin(SelectLesson.getInstance().getLesson(),SelectLesson.getInstance().getFaculty(),
-                SelectLesson.getInstance().getTime(),SelectLesson.getInstance().getTeacher());
+                SelectLesson.getInstance().getTime(),SelectLesson.getInstance().getTeacher(),null,null,null,null,null,null);
         Controller.getInstance().editing(editingSelectedLesson);
     }
 
     protected String currentUserFaculty() throws IOException, ParseException {
-        MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userFaculty(massageStudentMasterDesk);
     }
 

@@ -2,8 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageUserDesk;
+import edu.system.currentUser.CurrentUser;
+import edu.system.logic.MassageLogin;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -97,7 +97,7 @@ public class TemporaryScoreTeacher {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void backBtn(ActionEvent actionEvent) throws IOException, ParseException {

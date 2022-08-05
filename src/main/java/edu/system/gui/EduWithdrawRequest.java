@@ -2,8 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageUserDesk;
+import edu.system.currentUser.CurrentUser;
+import edu.system.logic.MassageLogin;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,8 +19,6 @@ import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.Objects;
-import java.util.Stack;
 
 public class EduWithdrawRequest {
     public TextField choiceUser;
@@ -70,7 +68,7 @@ public class EduWithdrawRequest {
     }
     protected void getUsers() throws IOException, ParseException {
         log.info("Get users");
-        MassageUserDesk massageGetUsers = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageGetUsers = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         userNames =  Controller.getInstance().listOfUser(massageGetUsers);
 
 
@@ -92,25 +90,25 @@ public class EduWithdrawRequest {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void reject() throws IOException, ParseException {
         log.info("Reject withdrawal request");
         CurrentUser.getInstance().setUser(choiceUser.getText());
-        MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         Controller.getInstance().rejection(massageStudentMasterDesk);
     }
     protected void acception() throws IOException, ParseException {
         log.info("Accept user withdrawal request");
         CurrentUser.getInstance().setUser(choiceUser.getText());
-        MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         Controller.getInstance().accept(massageStudentMasterDesk);
     }
     protected void condition() throws IOException, ParseException {
         log.info("Change user condition");
         CurrentUser.getInstance().setUser(choiceUser.getText());
-        MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         Controller.getInstance().changeCondition(massageStudentMasterDesk);
     }
     public void rejection(ActionEvent actionEvent) throws IOException, ParseException {

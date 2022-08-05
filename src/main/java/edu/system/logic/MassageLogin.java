@@ -1,7 +1,6 @@
 package edu.system.logic;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 
 public class MassageLogin {
     String name;
@@ -12,35 +11,56 @@ public class MassageLogin {
     String stage;
     String id;
     Boolean isPresent;
+    String unit;
+    String faculty;
+    String username;
+    String password;
+    String email;
+    String phone;
+    String roomNo;
+    String masterDegree;
+    String supervisor;
+    String enteringYear;
+    String condition;
+    String degree;
+    ArrayList<String> objections;
+    String score;
 
-    public MassageLogin(String name){
+    public MassageLogin(String name, String unit) {
         this.name = name;
+        this.unit = unit;
     }
 
-    public MassageLogin(String name, String pass){
+    public MassageLogin(String name, ArrayList<String> objections) {
         this.name = name;
-        this.pass = pass;
+        this.objections = objections;
     }
-    public MassageLogin(String name, String pass, String id){
+
+    public MassageLogin(String name, String unit, String faculty) {
         this.name = name;
-        this.pass = pass;
+        this.unit = unit;
+        this.faculty = faculty;
+    }
+
+    public MassageLogin(String name, String score, String unit, String time) {
+        this.name = name;
+        this.score = score;
+        this.unit = unit;
+        this.time = time;
+    }
+
+    public MassageLogin(String username, String password, String email, String phone, String roomNo, String faculty, String masterDegree, String id) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.roomNo = roomNo;
+        this.faculty = faculty;
+        this.masterDegree = masterDegree;
         this.id = id;
     }
-    public MassageLogin(String name, String pass, String time, String teacher) {
-        this.name = name;
-        this.pass = pass;
-        this.time = time;
-        this.teacher = teacher;
-    }
-    public MassageLogin(String name, String pass, String time, String teacher, String id) {
-        this.name = name;
-        this.pass = pass;
-        this.time = time;
-        this.teacher = teacher;
-        this.id = id;
-    }
 
-    public MassageLogin(String name, String pass, String time, String teacher, String unity, String stage, String id, Boolean isPresent) {
+    public MassageLogin(String name, String pass, String time, String teacher, String unity, String stage, String id, Boolean isPresent, String unit, String faculty) {
         this.name = name;
         this.pass = pass;
         this.time = time;
@@ -49,6 +69,24 @@ public class MassageLogin {
         this.stage = stage;
         this.id = id;
         this.isPresent = isPresent;
+        this.unit = unit;
+        this.faculty = faculty;
+    }
+
+    public MassageLogin(String username, String id, String phone, String supervisor, String faculty,
+                        String enteringYear, String condition, String password, String email, String degree, String time
+    ) {
+        this.username = username;
+        this.id = id;
+        this.phone = phone;
+        this.supervisor = supervisor;
+        this.faculty = faculty;
+        this.enteringYear = enteringYear;
+        this.condition = condition;
+        this.password = password;
+        this.degree = degree;
+        this.email = email;
+        this.time = time;
     }
 
     public String getName() {
@@ -99,17 +137,111 @@ public class MassageLogin {
         return isPresent;
     }
 
-    public static MassageLogin jsonToMessage(String json){
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setPrettyPrinting();
-        Gson gson = gsonBuilder.create();
-        return gson.fromJson(json, MassageLogin.class);
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 
-    public String toJson(){
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.setPrettyPrinting();
-        Gson gson = gsonBuilder.create();
-        return gson.toJson(this);
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setSupervisor(String supervisor) {
+        this.supervisor = supervisor;
+    }
+
+    public String getSupervisor() {
+        return supervisor;
+    }
+
+    public String getEnteringYear() {
+        return enteringYear;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setEnteringYear(String enteringYear) {
+        this.enteringYear = enteringYear;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
+    }
+
+    public void setMasterDegree(String masterDegree) {
+        this.masterDegree = masterDegree;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMasterDegree() {
+        return masterDegree;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setRoomNo(String roomNo) {
+        this.roomNo = roomNo;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getRoomNo() {
+        return roomNo;
+    }
+
+    public ArrayList<String> getObjections() {
+        return objections;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public String getScore() {
+        return score;
     }
 }

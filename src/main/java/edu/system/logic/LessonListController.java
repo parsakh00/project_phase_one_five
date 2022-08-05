@@ -813,7 +813,6 @@ public class LessonListController {
         String tmp = "/";
 
         try {
-
             //Read JSON file
             Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\unidatas\\" + name + ".json"));
             JSONArray faculty = (JSONArray) obj;

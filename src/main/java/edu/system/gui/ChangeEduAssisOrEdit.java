@@ -1,6 +1,7 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
+import edu.system.currentUser.CurrentUser;
 import edu.system.logic.*;
 import javafx.animation.PauseTransition;
 import javafx.embed.swing.SwingFXUtils;
@@ -20,12 +21,8 @@ import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
-import javafx.embed.swing.SwingNode;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
@@ -209,19 +206,19 @@ public class ChangeEduAssisOrEdit {
     }
     protected void addUser() throws IOException, ParseException {
         log.info("Add user");
-        MassageSignUp massageSignUp = new MassageSignUp(userAdd.getText(),passAdd.getText(),
+        MassageLogin massageSignUp = new MassageLogin(userAdd.getText(),passAdd.getText(),
                 emailAdd.getText(),phoneAdd.getText(),roomAdd.getText(), currentUserFaculty()
                 ,masterDegreeAdd.getText(),idAdd.getId());
         Controller.getInstance().addUser(massageSignUp);
     }
     protected void editPassword(){
         log.info("Edited password");
-        MassageLogin massageEditPassword = new MassageLogin(editTeacher.getText(), editPassword.getText());
+        MassageLogin massageEditPassword = new MassageLogin(editTeacher.getText(), editPassword.getText(), null,null,null,null,null,null,null,null);
         Controller.getInstance().editPass(massageEditPassword);
     }
     protected void editEmail(){
         log.info("Email edited");
-        MassageLogin massageEditEmail = new MassageLogin(editTeacher.getText(), editEmail.getText());
+        MassageLogin massageEditEmail = new MassageLogin(editTeacher.getText(), editEmail.getText(), null,null,null,null,null,null,null,null);
         Controller.getInstance().editEmail(massageEditEmail);
     }
     @FXML
@@ -297,62 +294,62 @@ public class ChangeEduAssisOrEdit {
     }
     private Boolean isChosen(){
         log.info("Check is education assistant chose or not");
-        MassageUserDesk isChosenBefore = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin isChosenBefore = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().isChosen(isChosenBefore);
 
     }
     private void promoteUser(){
         log.info("Promote user");
         CurrentFaculty.getInstance().setFaculty(newEdu.getText());
-        MassageUserDesk promotion = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
+        MassageLogin promotion = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
         Controller.getInstance().promotion(promotion);
 
     }
     private void relegateUser(){
         log.info("Relegate user");
         CurrentFaculty.getInstance().setFaculty(preEdu.getText());
-        MassageUserDesk relegation = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
+        MassageLogin relegation = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
         Controller.getInstance().relegation(relegation);
 
     }
     private void changeChosen(){
         log.info("change is chose education assistant boolean");
-        MassageUserDesk changeChosen = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin changeChosen = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         Controller.getInstance().valueChanger(changeChosen);
     }
     private void deleteCourseTeacher() throws IOException, ParseException {
         log.info("Deleting course of teacher");
-        MassageLogin massage = new MassageLogin(teacherForRemove.getText(), currentUserFaculty());
+        MassageLogin massage = new MassageLogin(teacherForRemove.getText(), currentUserFaculty(), null,null,null,null,null,null,null,null);
         Controller.getInstance().deletingCourse(massage);
 
     }
     private void deleteTeacher(){
         log.info("Delete teacher");
         CurrentFaculty.getInstance().setFaculty(teacherForRemove.getText());
-        MassageUserDesk deleting = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
+        MassageLogin deleting = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
         Controller.getInstance().deletingTeacher(deleting);
     }
     protected String currentUserFaculty() throws IOException, ParseException {
         log.info("Find current user faculty");
-        MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userFaculty(massageStudentMasterDesk);
     }
     private String SelectedUserFacultyForDelete() throws IOException, ParseException {
         log.info("Select user faculty for deleting");
         CurrentFaculty.getInstance().setFaculty(teacherForRemove.getText());
-        MassageUserDesk selectedFaculty = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
+        MassageLogin selectedFaculty = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);
     }
     private String SelectedUserFacultyForNewEdu() throws IOException, ParseException {
         log.info("new educational assistant faculty");
         CurrentFaculty.getInstance().setFaculty(newEdu.getText());
-        MassageUserDesk selectedFaculty = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
+        MassageLogin selectedFaculty = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);
     }
     private String SelectedUserFacultyForPreEdu() throws IOException, ParseException {
         log.info("previous educational assistant faculty");
         CurrentFaculty.getInstance().setFaculty(preEdu.getText());
-        MassageUserDesk selectedFaculty = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
+        MassageLogin selectedFaculty = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);
     }
 

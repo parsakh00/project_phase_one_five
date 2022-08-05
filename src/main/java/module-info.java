@@ -17,4 +17,6 @@ module edu.system {
     exports edu.system;
     exports edu.system.logic;
     opens edu.system.logic to javafx.fxml;
+    exports edu.system.currentUser;
+    opens edu.system.currentUser to javafx.fxml;
 }

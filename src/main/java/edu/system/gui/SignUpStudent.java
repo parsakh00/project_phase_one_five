@@ -2,8 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageSignUp;
+import edu.system.currentUser.CurrentUser;
+import edu.system.logic.MassageLogin;
 import javafx.animation.PauseTransition;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -22,12 +22,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.json.simple.parser.ParseException;
 
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
-import java.security.PublicKey;
 import java.util.Objects;
 
 public class SignUpStudent {
@@ -142,8 +140,8 @@ public class SignUpStudent {
     }
     public void signUpDone(){
         log.info("Accomplish sign up");
-        MassageSignUp massageSignUp = new MassageSignUp(username.getText(),id.getText(),phoneNumber.getText(),supervisor.getText(),
-                faculty.getText(),enteringYear.getText(),condition.getText(),password.getText(), email.getText(), degree.getText());
+        MassageLogin massageSignUp = new MassageLogin(username.getText(),id.getText(),phoneNumber.getText(),supervisor.getText(),
+                faculty.getText(),enteringYear.getText(),condition.getText(),password.getText(), email.getText(), degree.getText(),null);
         Controller.getInstance().signUpUser(massageSignUp);
     }
     @FXML

@@ -1,15 +1,12 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
-import edu.system.logic.Controller;
-import edu.system.logic.CurrentFaculty;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageUserDesk;
+import edu.system.currentUser.CurrentUser;
+import edu.system.logic.*;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -19,9 +16,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class WeeklySchedule {
@@ -112,13 +107,13 @@ public class WeeklySchedule {
         }
     }
     protected String getUserDegree() throws IOException, ParseException {
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         log.info("Get user degree");
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void getUserLesson() throws IOException, ParseException {
         log.info("Get user lessons");
-        MassageUserDesk massageGetUserLesson = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageGetUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         lesson =  Controller.getInstance().userOfLessons(massageGetUserLesson);
     }
     protected void showSchedule() throws IOException, ParseException {

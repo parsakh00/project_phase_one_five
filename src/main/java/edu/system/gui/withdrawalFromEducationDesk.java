@@ -2,8 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageUserDesk;
+import edu.system.currentUser.CurrentUser;
+import edu.system.logic.MassageLogin;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -69,7 +68,7 @@ public class withdrawalFromEducationDesk {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void backBtnClicked(javafx.event.ActionEvent actionEvent) throws IOException, ParseException {
@@ -111,12 +110,12 @@ public class withdrawalFromEducationDesk {
     }
     protected void addRequest() throws IOException, ParseException {
         log.info("Add request");
-        MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         Controller.getInstance().withdrawRequest(massageStudentMasterDesk);
     }
     protected String result() throws IOException, ParseException {
         log.info("Get request result");
-        MassageUserDesk massageResult = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         return Controller.getInstance().withdrawResult(massageResult);
     }
 

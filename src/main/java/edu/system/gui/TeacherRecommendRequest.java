@@ -2,9 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
+import edu.system.currentUser.CurrentUser;
 import edu.system.logic.MassageLogin;
-import edu.system.logic.MassageUserDesk;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,7 +67,7 @@ public class TeacherRecommendRequest {
     }
     protected void getUsers() throws IOException, ParseException {
         log.info("Get users");
-        MassageUserDesk massageGetUsers = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageGetUsers = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         userNames =  Controller.getInstance().listOfUserRecommend(massageGetUsers);
     }
     @FXML
@@ -101,17 +100,17 @@ public class TeacherRecommendRequest {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void reject() throws IOException, ParseException {
         log.info("Reject recommendation");
-        MassageLogin rejection = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUser());
+        MassageLogin rejection = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUser(), null,null,null,null,null,null,null,null);
         Controller.getInstance().rejectionRequest(rejection);
     }
     protected void acception() throws IOException, ParseException {
         log.info("Accept recommendation");
-        MassageLogin acceptions = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUser());
+        MassageLogin acceptions = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUser(), null,null,null,null,null,null,null,null);
         Controller.getInstance().acceptRequest(acceptions);
     }
     public void rejection(ActionEvent actionEvent) throws IOException, ParseException {

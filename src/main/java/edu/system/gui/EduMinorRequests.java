@@ -2,9 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
+import edu.system.currentUser.CurrentUser;
 import edu.system.logic.MassageLogin;
-import edu.system.logic.MassageUserDesk;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,7 +68,7 @@ public class EduMinorRequests {
         choiceUser.setText(chooseUser.getValue());
     }
     protected void getUsers() throws IOException, ParseException {
-        MassageLogin GetUsers = new MassageLogin(CurrentUser.getInstance().getUser(), getUserFaculty());
+        MassageLogin GetUsers = new MassageLogin(CurrentUser.getInstance().getUser(), getUserFaculty(), null,null,null,null,null,null,null,null);
         userNames =  Controller.getInstance().listOfUserMinor(GetUsers);
     }
     @FXML
@@ -91,22 +90,22 @@ public class EduMinorRequests {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get current user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected String getUserFaculty() throws IOException, ParseException {
         log.info("Get current user faculty");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userFaculty(massageUserDegree);
     }
     protected void reject() throws IOException, ParseException {
         log.info("Reject request");
-        MassageLogin GetUsers = new MassageLogin(choiceUser.getText(), getUserFaculty());
+        MassageLogin GetUsers = new MassageLogin(choiceUser.getText(), getUserFaculty(), null,null,null,null,null,null,null,null);
         Controller.getInstance().rejectMinorRequest(GetUsers);
     }
     protected void acception() throws IOException, ParseException {
         log.info("Accept minor");
-        MassageLogin GetUsers = new MassageLogin(choiceUser.getText(), getUserFaculty());
+        MassageLogin GetUsers = new MassageLogin(choiceUser.getText(), getUserFaculty(), null,null,null,null,null,null,null,null);
         Controller.getInstance().acceptMinorRequest(GetUsers);
     }
     public void rejection(ActionEvent actionEvent) throws IOException, ParseException {

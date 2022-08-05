@@ -2,8 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageUserDesk;
+import edu.system.currentUser.CurrentUser;
+import edu.system.logic.MassageLogin;
 import javafx.animation.AnimationTimer;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -15,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -29,7 +28,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -153,17 +151,17 @@ public class EducationalAssistantDesk {
     }
     protected String getEmail() throws IOException, ParseException {
         log.info("Current user email");
-        MassageUserDesk massageEducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageEducationalAssistantDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         return Controller.getInstance().userDeskEmail(massageEducationalAssistantDesk);
 
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Current user name");
-        MassageUserDesk massageducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageducationalAssistantDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDeskUserName(massageducationalAssistantDesk);
     }
     protected String getUserType() throws IOException, ParseException {
-        MassageUserDesk massageducationalAssistantDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageducationalAssistantDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDeskType(massageducationalAssistantDesk);
     }
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
@@ -254,7 +252,7 @@ public class EducationalAssistantDesk {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("get Current user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void minorRequest(ActionEvent actionEvent) throws IOException {

@@ -1,21 +1,44 @@
-2022-08-04 17:08:34 INFO  HelloApplication:77 - launch program
-2022-08-04 17:08:34 INFO  HelloApplication:61 - Log in page
-2022-08-04 17:08:54 INFO  HelloApplication:308 - Read name of user from userdata file
-2022-08-04 17:08:54 INFO  HelloApplication:314 - Read password of user from userdata file
-2022-08-04 17:08:54 INFO  HelloApplication:320 - check equality of hash of pass that entered by pass that user field in password field
-2022-08-04 17:08:54 INFO  HelloApplication:288 - Check validity of condition for enterance
-2022-08-04 17:08:54 INFO  HelloApplication:30 - Read name of user from file
-2022-08-04 17:08:54 INFO  HelloApplication:288 - Check validity of condition for enterance
-2022-08-04 17:08:54 INFO  HelloApplication:30 - Read name of user from file
-2022-08-04 17:08:54 INFO  StudentUndergraduateDesk:82 - Undergraduate student main, logged in
-2022-08-04 17:08:54 INFO  StudentUndergraduateDesk:101 - logged in
-2022-08-04 17:08:54 INFO  StudentUndergraduateDesk:248 - Get current student Username
-2022-08-04 17:08:54 INFO  HelloApplication:30 - Read name of user from file
-2022-08-04 17:08:54 INFO  StudentUndergraduateDesk:288 - Show default image
-2022-08-04 17:08:54 INFO  StudentUndergraduateDesk:248 - Get current student Username
-2022-08-04 17:08:54 INFO  HelloApplication:30 - Read name of user from file
-2022-08-04 17:08:54 INFO  StudentUndergraduateDesk:243 - Get current student Email
-2022-08-04 17:08:54 INFO  StudentUndergraduateDesk:253 - Get current student Educational status
-2022-08-04 17:08:54 INFO  HelloApplication:351 - Read user education status from userdata file
-2022-08-04 17:08:54 INFO  StudentUndergraduateDesk:258 - Get current student supervisor
-2022-08-04 17:08:54 INFO  HelloApplication:358 - Read user supervisor from userdata file
+2022-08-05 12:15:59 INFO  HelloApplication:77 - launch program
+2022-08-05 12:15:59 INFO  HelloApplication:61 - Log in page
+2022-08-05 12:16:12 INFO  HelloApplication:302 - Read username and password of user from userdata file and check them
+2022-08-05 12:16:12 INFO  HelloApplication:308 - check equality of hash of pass that entered by pass that user field in password field
+2022-08-05 12:16:12 INFO  HelloApplication:288 - Check validity of condition for enterance
+2022-08-05 12:16:12 INFO  HelloApplication:30 - Read name of user from file
+2022-08-05 12:16:12 INFO  HelloApplication:288 - Check validity of condition for enterance
+2022-08-05 12:16:12 INFO  HelloApplication:30 - Read name of user from file
+2022-08-05 12:16:12 INFO  StudentUndergraduateDesk:81 - Undergraduate student main, logged in
+2022-08-05 12:16:12 INFO  StudentUndergraduateDesk:100 - logged in
+2022-08-05 12:16:12 INFO  StudentUndergraduateDesk:247 - Get current student Username
+2022-08-05 12:16:12 INFO  HelloApplication:30 - Read name of user from file
+2022-08-05 12:16:12 INFO  StudentUndergraduateDesk:287 - Show default image
+2022-08-05 12:16:12 INFO  StudentUndergraduateDesk:247 - Get current student Username
+2022-08-05 12:16:12 INFO  HelloApplication:30 - Read name of user from file
+2022-08-05 12:16:12 INFO  StudentUndergraduateDesk:242 - Get current student Email
+2022-08-05 12:16:12 INFO  StudentUndergraduateDesk:252 - Get current student Educational status
+2022-08-05 12:16:12 INFO  HelloApplication:351 - Read user education status from userdata file
+2022-08-05 12:16:12 INFO  StudentUndergraduateDesk:257 - Get current student supervisor
+2022-08-05 12:16:12 INFO  HelloApplication:358 - Read user supervisor from userdata file
+2022-08-05 12:16:16 INFO  StudentUndergraduateDesk:352 - Students status clicked
+2022-08-05 12:16:16 INFO  HelloApplication:53 - Open students educational status
+2022-08-05 12:16:16 INFO  HelloApplication:178 - get user Scores from temporary scores
+2022-08-05 12:16:16 INFO  HelloApplication:493 - Read temporaryScores file to get user scores
+2022-08-05 12:16:28 INFO  StudentUndergraduateDesk:337 - Temporary score clicked
+2022-08-05 12:16:28 INFO  HelloApplication:58 - Open temporary student's score page
+2022-08-05 12:16:28 INFO  HelloApplication:208 - get user Scores
+2022-08-05 12:16:28 INFO  HelloApplication:493 - Read temporaryScores file to get user scores
+2022-08-05 12:16:38 INFO  StudentUndergraduateDesk:337 - Temporary score clicked
+2022-08-05 12:16:38 INFO  HelloApplication:58 - Open temporary student's score page
+2022-08-05 12:16:38 INFO  HelloApplication:208 - get user Scores
+2022-08-05 12:16:38 INFO  HelloApplication:493 - Read temporaryScores file to get user scores
+2022-08-05 12:16:46 INFO  StudentUndergraduateDesk:352 - Students status clicked
+2022-08-05 12:16:46 INFO  HelloApplication:53 - Open students educational status
+2022-08-05 12:16:46 INFO  HelloApplication:178 - get user Scores from temporary scores
+2022-08-05 12:16:46 INFO  HelloApplication:493 - Read temporaryScores file to get user scores
+2022-08-05 12:16:58 INFO  StudentUndergraduateDesk:337 - Temporary score clicked
+2022-08-05 12:16:58 INFO  HelloApplication:58 - Open temporary student's score page
+2022-08-05 12:16:58 INFO  HelloApplication:208 - get user Scores
+2022-08-05 12:16:58 INFO  HelloApplication:493 - Read temporaryScores file to get user scores
+2022-08-05 12:17:08 INFO  StudentUndergraduateDesk:352 - Students status clicked
+2022-08-05 12:17:08 INFO  HelloApplication:53 - Open students educational status
+2022-08-05 12:17:08 INFO  HelloApplication:178 - get user Scores from temporary scores
+2022-08-05 12:17:08 INFO  HelloApplication:493 - Read temporaryScores file to get user scores

@@ -1,10 +1,8 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
-import edu.system.logic.Controller;
-import edu.system.logic.CurrentFaculty;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageUserDesk;
+import edu.system.currentUser.CurrentUser;
+import edu.system.logic.*;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,14 +14,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -90,7 +86,7 @@ public class TemporaryScoresStudent {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void backBtn(ActionEvent actionEvent) throws IOException, ParseException {
@@ -194,27 +190,27 @@ public class TemporaryScoresStudent {
 
     protected void getLesson(){
         log.info("Get user lessons");
-        MassageUserDesk massageUserLesson = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         lesson = Controller.getInstance().getLessons(massageUserLesson);
     }
     protected void setObjections(){
         log.info("set objections of each student");
-        MassageUserDesk massageUserLesson = new MassageUserDesk(CurrentUser.getInstance().getUser(), objection);
+        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(), objection);
         Controller.getInstance().setObjection(massageUserLesson);
     }
     protected void getTeachers(){
         log.info("Get teachers");
-        MassageUserDesk massageUserTeachers = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserTeachers = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         teachers = Controller.getInstance().getTeachers(massageUserTeachers);
     }
     protected void getScores(){
         log.info("get user Scores");
-        MassageUserDesk massageUserScores = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         scores = Controller.getInstance().getScores(massageUserScores);
     }
     protected void getRespond(){
         log.info("get teacher respond");
-        MassageUserDesk massageUserScores = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         respond = Controller.getInstance().getRespond(massageUserScores);
 
     }

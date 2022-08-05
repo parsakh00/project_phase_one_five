@@ -2,8 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageSignUp;
+import edu.system.currentUser.CurrentUser;
+import edu.system.logic.MassageLogin;
 import javafx.animation.PauseTransition;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -140,8 +140,8 @@ public class SignUpTeacher {
     }
     public void signUpDoneTeacher(){
         log.info("Accomplish sign up");
-        MassageSignUp massageSignUp = new MassageSignUp(username.getText(),id.getText(),phoneNumber.getText(),supervisor.getText(),
-                faculty.getText(),enteringYear.getText(),condition.getText(),password.getText(), email.getText(), degree.getText());
+        MassageLogin massageSignUp = new MassageLogin(username.getText(),id.getText(),phoneNumber.getText(),supervisor.getText(),
+                faculty.getText(),enteringYear.getText(),condition.getText(),password.getText(), email.getText(), degree.getText(),null);
         Controller.getInstance().signUpTeacher(massageSignUp);
     }
     @FXML

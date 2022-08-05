@@ -1,6 +1,7 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
+import edu.system.currentUser.CurrentUser;
 import edu.system.logic.*;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -268,7 +269,7 @@ public class Login {
     protected Boolean MainLogIn() throws IOException, ParseException {
             if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
                 wrongCaptcha.setText(null);
-                MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText());
+                MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText(), null,null,null,null,null,null,null,null);
                 CurrentUser.getInstance().setUser(UserNameTextField.getText());
                 if (Controller.getInstance().login(massage)) {
                     getCondition();
@@ -286,7 +287,7 @@ public class Login {
     }
     protected String getCondition() throws IOException, ParseException {
         log.info("Check validity of condition for enterance");
-        MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         userCondition = Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
         return Controller.getInstance().userCondition(massageStudentUndergraduateDesk);
     }

@@ -1,6 +1,7 @@
 package edu.system.gui;
 
 import edu.system.HelloApplication;
+import edu.system.currentUser.CurrentUser;
 import edu.system.logic.*;
 import javafx.animation.AnimationTimer;
 import javafx.animation.PauseTransition;
@@ -10,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -24,8 +24,6 @@ import org.json.simple.parser.ParseException;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class LessonListDesk {
@@ -109,13 +107,13 @@ public class LessonListDesk {
     }
     protected String getEmail() throws IOException, ParseException {
         log.info("Get user email");
-        MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
         return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
 
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current username");
-        MassageUserDesk massageStudentUndergraduateDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
     protected void getFaculty(ActionEvent actionEvent) {
@@ -232,28 +230,28 @@ public class LessonListDesk {
     }
     protected void getFacultyData() {
         log.info("get faculty data");
-        MassageUserDesk massageLessonListDesk = new MassageUserDesk(CurrentFaculty.getInstance().getFaculty());
+        MassageLogin massageLessonListDesk = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
         facultyLessons =  Controller.getInstance().facultyLessons(massageLessonListDesk);
     }
     protected void getFacultyUnit(){
         log.info("get faculty unit");
-        MassageFacultyUnit massageFacultyUnit = new MassageFacultyUnit(CurrentFacultyUnit.getInstance().getFaculty(), CurrentFacultyUnit.getInstance().getUnit());
+        MassageLogin massageFacultyUnit = new MassageLogin(CurrentFacultyUnit.getInstance().getFaculty(), CurrentFacultyUnit.getInstance().getUnit());
         facultyLessons = Controller.getInstance().facultyUnitLessons(massageFacultyUnit);
     }
     protected void getFacultyStage(){
         log.info("get faculty stage");
-        MassageFacultyUnit massageFacultyUnit = new MassageFacultyUnit(CurrentFacultyUnit.getInstance().getFaculty(), CurrentFacultyUnit.getInstance().getUnit());
+        MassageLogin massageFacultyUnit = new MassageLogin(CurrentFacultyUnit.getInstance().getFaculty(), CurrentFacultyUnit.getInstance().getUnit());
         facultyLessons = Controller.getInstance().facultyStageLessons(massageFacultyUnit);
     }
 
     protected String getUserType() throws IOException, ParseException {
-        MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDeskType(massageStudentMasterDesk);
     }
 
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get current user degree");
-        MassageUserDesk massageStudentMasterDesk = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         return Controller.getInstance().userDeskDegreee(massageStudentMasterDesk);
     }
 

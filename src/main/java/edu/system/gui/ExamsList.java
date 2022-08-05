@@ -2,8 +2,8 @@ package edu.system.gui;
 
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
-import edu.system.logic.CurrentUser;
-import edu.system.logic.MassageUserDesk;
+import edu.system.currentUser.CurrentUser;
+import edu.system.logic.MassageLogin;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -117,22 +117,22 @@ public class ExamsList {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageUserDesk massageUserDegree = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(), null, null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void getUserLesson() throws IOException, ParseException {
-        MassageUserDesk massageGetUserLesson = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageGetUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         lesson =  Controller.getInstance().userOfLessons(massageGetUserLesson);
     }
     protected void getUserLessonExam() throws IOException, ParseException {
         log.info("Get user lesson exam");
-        MassageUserDesk massageGetLessonExam = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageGetLessonExam = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         examDay =  Controller.getInstance().nameOfLessons(massageGetLessonExam);
 
     }
     protected void getUserLessonName() throws IOException, ParseException {
         log.info("Get user lesson name");
-        MassageUserDesk massageUserLessonName = new MassageUserDesk(CurrentUser.getInstance().getUser());
+        MassageLogin massageUserLessonName = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
         lessonName =  Controller.getInstance().examOfLessons(massageUserLessonName);
 
     }
