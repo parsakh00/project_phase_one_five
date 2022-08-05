@@ -1,7 +1,8 @@
 package edu.system.currentUser;
 
 
-import edu.system.logic.userController;
+import edu.system.logic.Logic;
+import edu.system.logic.Logic;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -28,8 +29,9 @@ public class CurrentUser {
 
     int timer;
     private static CurrentUser currentuser;
-    public static CurrentUser getInstance(){
-        if (currentuser == null){
+
+    public static CurrentUser getInstance() {
+        if (currentuser == null) {
             currentuser = new CurrentUser();
 
         }
@@ -43,23 +45,23 @@ public class CurrentUser {
 
     public void setData() throws IOException, ParseException {
         //ToDo set data from json files for user
-        this.type = userController.getType(userName);
-        this.degree = userController.getDegree(userName);
-        this.faculty = userController.getFaculty(userName);
-        this.phoneNumber = userController.getUserPhoneNumber(userName);
-        this.email = userController.getEmail(userName);
-        this.id = userController.getId(userName);
+        this.type = Logic.getType(userName);
+        this.degree = Logic.getDegree(userName);
+        this.faculty = Logic.getFaculty(userName);
+        this.phoneNumber = Logic.getUserPhoneNumber(userName);
+        this.email = Logic.getEmail(userName);
+        this.id = Logic.getId(userName);
 
-        if(userController.isStudent(getUserName())){
-            this.supervisor = userController.getSupervisor(userName);
-            this.enteringYear = userController.getEnteringYear(userName);
-            this.condition = userController.getCondition(userName);
-        }
-        else{
-            this.phone = userController.getPhone(userName);
-            this.roomNo = userController.getRoomNo(userName);
+        if (Logic.isStudent(getUserName())) {
+            this.supervisor = Logic.getSupervisor(userName);
+            this.enteringYear = Logic.getEnteringYear(userName);
+            this.condition = Logic.getCondition(userName);
+        } else {
+            this.phone = Logic.getPhone(userName);
+            this.roomNo = Logic.getRoomNo(userName);
         }
     }
+
     public String getUserName() {
         return userName;
     }
@@ -71,6 +73,7 @@ public class CurrentUser {
     public int getTimer() {
         return timer;
     }
+
     public String getId() {
         return id;
     }

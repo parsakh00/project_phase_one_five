@@ -5,8 +5,9 @@ public class CurrentFaculty {
     String faculty;
 
     private static CurrentFaculty currentFaculty;
-    public static CurrentFaculty getInstance(){
-        if (currentFaculty == null){
+
+    public static CurrentFaculty getInstance() {
+        if (currentFaculty == null) {
             currentFaculty = new CurrentFaculty();
 
         }

@@ -9,38 +9,44 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller {
-    public static  Controller controller;
 
-    private Controller(){
+    public static Controller controller;
+
+    private Controller() {
 
     }
 
-    public static Controller getInstance(){
-        if (controller == null){
+    public static Controller getInstance() {
+        if (controller == null) {
             controller = new Controller();
         }
         return controller;
     }
+
     static Logger log = LogManager.getLogger(HelloApplication.class);
-    public boolean login(MassageLogin massage){
+
+    public boolean login(MassageLogin massage) {
         String name = massage.getName();
         String pass = massage.getPass();
         Logic login2 = new Logic();
         return (login2.checkUserPass(pass, name));
     }
-    public void deletingCourse(MassageLogin massageLogin){
+
+    public void deletingCourse(MassageLogin massageLogin) {
         String username = massageLogin.getName();
         String faculty = massageLogin.getPass();
         Logic deleting = new Logic();
         deleting.deleteCourseTeacher(username, faculty);
 
     }
-    public void editPass(MassageLogin massageLogin){
+
+    public void editPass(MassageLogin massageLogin) {
         String username = massageLogin.getName();
         String password = massageLogin.getPass();
         Logic editingPass = new Logic();
         editingPass.editingPassWord(username, password);
     }
+
     public Boolean editPassLogOut(MassageLogin massageLogin) throws IOException, ParseException {
         String username = massageLogin.getName();
         String newPassword = massageLogin.getPass();
@@ -48,7 +54,8 @@ public class Controller {
         Logic editingPass = new Logic();
         return editingPass.editPassLogOut(username, newPassword, oldPassword);
     }
-    public void addUser(MassageLogin massageSignUp){
+
+    public void addUser(MassageLogin massageSignUp) {
         String user = massageSignUp.getUsername();
         String pass = massageSignUp.getPassword();
         String email = massageSignUp.getEmail();
@@ -61,7 +68,8 @@ public class Controller {
         addingTeacher.addingTeacherUser(user, pass, email, room, phone, faculty, masterDegree, id);
 
     }
-    public void signUpUser(MassageLogin massageSignUp){
+
+    public void signUpUser(MassageLogin massageSignUp) {
         log.info("write new file for new user");
         String user = massageSignUp.getUsername();
         String id = massageSignUp.getId();
@@ -76,9 +84,10 @@ public class Controller {
         String degree = massageSignUp.getDegree();
         String masterDegree = massageSignUp.getMasterDegree();
         Logic addingTeacher = new Logic();
-        addingTeacher.signUpUser(user, id, phone, supervisor, faculty,enteringYear, condition, pass, email,degree);
+        addingTeacher.signUpUser(user, id, phone, supervisor, faculty, enteringYear, condition, pass, email, degree);
     }
-    public void signUpTeacher(MassageLogin massageSignUp){
+
+    public void signUpTeacher(MassageLogin massageSignUp) {
         log.info("write new file for new user");
         String user = massageSignUp.getUsername();
         String id = massageSignUp.getId();
@@ -93,8 +102,9 @@ public class Controller {
         String degree = massageSignUp.getDegree();
         String masterDegree = massageSignUp.getMasterDegree();
         Logic addingTeacher = new Logic();
-        addingTeacher.signUpTeachers(user, id, phone, supervisor, faculty,enteringYear, condition, pass, email,degree);
+        addingTeacher.signUpTeachers(user, id, phone, supervisor, faculty, enteringYear, condition, pass, email, degree);
     }
+
     public void addRecommendRequest(MassageLogin massageLogin) throws IOException, ParseException {
         String teacherName = massageLogin.getName();
         String lessonName = massageLogin.getPass();
@@ -104,6 +114,7 @@ public class Controller {
         Logic addRecommendRequest = new Logic();
         addRecommendRequest.getRecommend(teacherName, lessonName, score, ta, userName);
     }
+
     public void addMinorRequest(MassageLogin massageFacultyUnit) throws IOException, ParseException {
         String userName = massageFacultyUnit.getName();
         String faculty1 = massageFacultyUnit.getUnit();
@@ -111,172 +122,184 @@ public class Controller {
         Logic addMinority = new Logic();
         addMinority.userMinorRequest(userName, faculty1, faculty2);
     }
-    public void editEmail(MassageLogin massageLogin){
+
+    public void editEmail(MassageLogin massageLogin) {
         String username = massageLogin.getName();
         String email = massageLogin.getPass();
         Logic editingEmail = new Logic();
         editingEmail.editingEmail(username, email);
     }
-    public void editEmailProfile(MassageLogin massageLogin){
+
+    public void editEmailProfile(MassageLogin massageLogin) {
         log.info("Read and rewrite user email from userdata file");
         String username = massageLogin.getName();
         String email = massageLogin.getPass();
         Logic editingEmail = new Logic();
         editingEmail.emailEditProfile(username, email);
     }
-    public void editPassProfile(MassageLogin massageLogin){
+
+    public void editPassProfile(MassageLogin massageLogin) {
         String username = massageLogin.getName();
         String phone = massageLogin.getPass();
         Logic editingEmail = new Logic();
         editingEmail.passEditProfile(username, phone);
     }
+
     public String userDeskEmail(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        return userController.getEmail(name);
+        return Logic.getEmail(name);
     }
+
     public String userDeskUserName(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        return userController.getUserName(name);
+        return Logic.getUserName(name);
     }
+
     public String userScore(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController studentController = new userController();
-        return studentController.getUserScore(name);
+        return Logic.getUserScore(name);
     }
+
     public void userNewScore(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
         String score = massageUserDesk.getScore();
-        userController studentController = new userController();
-        studentController.setUserNewScore(name, score);
+        Logic.setUserNewScore(name, score);
     }
+
     public String userYear(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        return userController.getUserYear(name);
+        return Logic.getUserYear(name);
     }
+
     public String userId(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        return userController.getId(name);
+        return Logic.getId(name);
     }
+
     public String userphoneNumber(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        return userController.getUserPhoneNumber(name);
+        return Logic.getUserPhoneNumber(name);
     }
+
     public void withdrawRequest(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController userWithdrawRequest = new userController();
-        userWithdrawRequest.userWithdraw(name);
+        Logic.userWithdraw(name);
     }
+
     public void rejection(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController userWithdrawRequest = new userController();
-        userWithdrawRequest.rejectUSer(name);
+        Logic.rejectUser(name);
     }
+
     public void rejectionRequest(MassageLogin massageLogin) throws IOException, ParseException {
         String nameStudent = massageLogin.getName();
         String nameTeacher = massageLogin.getPass();
-        userController userWithdrawRequest = new userController();
-        userWithdrawRequest.rejectRecommend(nameStudent, nameTeacher);
+        Logic.rejectRecommend(nameStudent, nameTeacher);
     }
+
     public void acceptRequest(MassageLogin massageLogin) throws IOException, ParseException {
         String nameStudent = massageLogin.getName();
         String nameTeacher = massageLogin.getPass();
-        userController userWithdrawRequest = new userController();
-        userWithdrawRequest.acceptRecommend(nameStudent, nameTeacher);
+        Logic.acceptRecommend(nameStudent, nameTeacher);
     }
+
     public void accept(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController userWithdrawRequest = new userController();
-        userWithdrawRequest.acceptUser(name);
+        Logic.acceptUser(name);
     }
+
     public void changeCondition(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController userWithdrawRequest = new userController();
-        userWithdrawRequest.condition(name);
+        Logic.condition(name);
     }
+
     public String userCondition(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        userController studentController = new userController();
-        return studentController.getUserCondition(name);
+        return Logic.getUserCondition(name);
     }
+
     public String getUserFaculty(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        userController studentController = new userController();
-        return studentController.getUserFaculty(name);
+        return Logic.getUserFaculty(name);
     }
+
     public String getUserStudentNumber(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        userController studentController = new userController();
-        return studentController.getUserStudentNumber(name);
+        return Logic.getUserStudentNumber(name);
     }
+
     public String userDegree(MassageLogin massageUserDegree) throws IOException, ParseException {
         String name = massageUserDegree.getName();
-        userController studentController = new userController();
-        return studentController.getUserDegree(name);
+        return Logic.getUserDegree(name);
     }
+
     public String userMastery(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController studentController = new userController();
-        return studentController.getUserMastery(name);
+        return Logic.getUserMastery(name);
     }
+
     public String withdrawResult(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController studentController = new userController();
-        return studentController.userWithdrawResult(name);
+        return Logic.userWithdrawResult(name);
     }
+
     public String recommendResult(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController studentController = new userController();
-        return studentController.userResult(name);
+        return Logic.userResult(name);
     }
+
     public String facultyForMinors(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController studentMinor = new userController();
-        return studentMinor.minor(name);
+        return Logic.minor(name);
     }
+
     public String recommendGetTeacher(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController studentController = new userController();
-        return studentController.teacherGetName(name);
+        return Logic.teacherGetName(name);
     }
+
     public String recommendGetLessons(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController studentController = new userController();
-        return studentController.teacherGetLesson(name);
+        return Logic.teacherGetLesson(name);
     }
+
     public String recommendGetScores(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController studentController = new userController();
-        return studentController.teacherGetScore(name);
+        return Logic.teacherGetScore(name);
     }
+
     public String recommendGetTa(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        userController studentController = new userController();
-        return studentController.teacherGetTa(name);
+        return Logic.teacherGetTa(name);
     }
+
     public String educationalStatus(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        userController studentController = new userController();
-        return studentController.getEducationalStatus(name);
+        return Logic.getEducationalStatus(name);
     }
+
     public String supervisor(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        return userController.getSupervisor(name);
+        return Logic.getSupervisor(name);
     }
-    public void removal(MassageLogin removalLesson){
+
+    public void removal(MassageLogin removalLesson) {
         String lesson = removalLesson.getName();
         String faculty = removalLesson.getPass();
-        LessonListController removeLessons = new LessonListController();
+        Logic removeLessons = new Logic();
         removeLessons.removeLesson(lesson, faculty);
     }
-    public void editing(MassageLogin editingLesson){
+
+    public void editing(MassageLogin editingLesson) {
         String lesson = editingLesson.getName();
         String faculty = editingLesson.getPass();
         String time = editingLesson.getTime();
         String teacher = editingLesson.getTeacher();
-        LessonListController editingLessons = new LessonListController();
+        Logic editingLessons = new Logic();
         editingLessons.edit(lesson, faculty, time, teacher);
     }
-    public void adding(MassageLogin editingLesson){
+
+    public void adding(MassageLogin editingLesson) {
         String lesson = editingLesson.getName();
         String faculty = editingLesson.getPass();
         String time = editingLesson.getTime();
@@ -285,116 +308,135 @@ public class Controller {
         String stage = editingLesson.getStage();
         String id = editingLesson.getId();
         Boolean isPresent = editingLesson.getPresent();
-        LessonListController editingLessons = new LessonListController();
+        Logic editingLessons = new Logic();
         editingLessons.add(lesson, faculty, time, teacher, unity, stage, id, isPresent);
     }
+
     public String userDeskType(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        return userController.getType(name);
+        return Logic.getType(name);
     }
+
     public String userDeskDegreee(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        userController studentController = new userController();
-        return studentController.getUserDegree(name);
+        return Logic.getUserDegree(name);
     }
+
     public String[] facultyLessons(MassageLogin massageFacultyName) {
         String name = massageFacultyName.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.getFacultyData(name);
     }
 
     public String[] userOfLessons(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.lessonsOfUser(name);
     }
+
     public String[] nameOfLessons(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.nameOfLesson(name);
     }
+
     public String[] listOfUser(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.nameLists(name);
     }
+
     public String[] listOfUserRecommend(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.nameListsRecommend(name);
     }
+
     public String[] listOfUserMinor(MassageLogin massageLogin) throws IOException, ParseException {
         String name = massageLogin.getName();
         String faculty = massageLogin.getPass();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.nameListsMinor(name, faculty);
     }
+
     public void rejectMinorRequest(MassageLogin massageLogin) throws IOException, ParseException {
         String name = massageLogin.getName();
         String faculty = massageLogin.getPass();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         lessonListController.rejectMinor(name, faculty);
     }
+
     public void acceptMinorRequest(MassageLogin massageLogin) throws IOException, ParseException {
         String name = massageLogin.getName();
         String faculty = massageLogin.getPass();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         lessonListController.acceptMinor(name, faculty);
     }
+
     public String[] examOfLessons(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.examOfLesson(name);
     }
-    public ArrayList<String> getLessons(MassageLogin massageUserDesk){
+
+    public ArrayList<String> getLessons(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.userLessonss(name);
     }
-    public ArrayList<String> getLessonsNew(MassageLogin massageUserDesk){
+
+    public ArrayList<String> getLessonsNew(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.userLessonssNew(name);
     }
-    public void setObjection(MassageLogin massageUserDesk){
+
+    public void setObjection(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
         ArrayList<String> objection = massageUserDesk.getObjections();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         lessonListController.userObjections(name, objection);
     }
-    public ArrayList<String> getTeachers(MassageLogin massageUserDesk){
+
+    public ArrayList<String> getTeachers(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.userTeacher(name);
     }
-    public ArrayList<String> getTeachersNew(MassageLogin massageUserDesk){
+
+    public ArrayList<String> getTeachersNew(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.userTeacherNew(name);
     }
-    public ArrayList<String> getScores(MassageLogin massageUserDesk){
+
+    public ArrayList<String> getScores(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.userScore(name);
     }
-    public ArrayList<String> getScoresNew(MassageLogin massageUserDesk){
+
+    public ArrayList<String> getScoresNew(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.userScoreNew(name);
     }
-    public ArrayList<String> getUnits(MassageLogin massageUserDesk){
+
+    public ArrayList<String> getUnits(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.lessonUnit(name);
     }
-    public ArrayList<String> getUnitsNew(MassageLogin massageUserDesk){
+
+    public ArrayList<String> getUnitsNew(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.lessonUnitNew(name);
     }
-    public ArrayList<String> getRespond(MassageLogin massageUserDesk){
+
+    public ArrayList<String> getRespond(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.userRespond(name);
     }
 
@@ -406,64 +448,73 @@ public class Controller {
 
     public String[] facultyTeachers(MassageLogin massageFacultyName) {
         String name = massageFacultyName.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.getFacultyTeachers(name);
     }
+
     public String[] facultyUnitLessons(MassageLogin massageFacultyUnit) {
         String name = massageFacultyUnit.getName();
         String unit = massageFacultyUnit.getUnit();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.getFacultyUnitData(name, unit);
     }
+
     public String[] facultyStageLessons(MassageLogin massageFacultyUnit) {
         String name = massageFacultyUnit.getName();
         String unit = massageFacultyUnit.getUnit();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.getFacultyStageData(name, unit);
     }
-    public Boolean isChosen (MassageLogin massageUserDesk){
+
+    public Boolean isChosen(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.isChosenBefore(name);
     }
-    public void valueChanger (MassageLogin massageUserDesk){
+
+    public void valueChanger(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         lessonListController.change(name);
     }
-    public void promotion (MassageLogin massageUserDesk){
+
+    public void promotion(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         lessonListController.promotion(name);
     }
-    public void relegation (MassageLogin massageUserDesk){
+
+    public void relegation(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         lessonListController.relegation(name);
     }
-    public void deletingTeacher(MassageLogin massageUserDesk){
+
+    public void deletingTeacher(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         lessonListController.TeacherDeleting(name);
     }
+
     public String userFaculty(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        LessonListController lessonListController = new LessonListController();
-        return lessonListController.getFaculty(name);
+        return Logic.getFaculty(name);
     }
-    public String userNationalId(MassageLogin massageUserDesk){
+
+    public String userNationalId(MassageLogin massageUserDesk) {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.getNationalId(name);
     }
-    public String userRoomNo(MassageLogin massageUserDesk){
+
+    public String userRoomNo(MassageLogin massageUserDesk) throws IOException, ParseException {
         String name = massageUserDesk.getName();
-        LessonListController lessonListController = new LessonListController();
-        return lessonListController.getRoomNo(name);
+        return Logic.getRoomNo(name);
     }
+
     public String selectedUserFaculty(MassageLogin massageStudentDesk) throws IOException, ParseException {
         String name = massageStudentDesk.getName();
-        LessonListController lessonListController = new LessonListController();
+        Logic lessonListController = new Logic();
         return lessonListController.getSelectedFaculty(name);
     }
 }

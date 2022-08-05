@@ -135,7 +135,7 @@ public class TeacherProfile {
         MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userNationalId(massageUserDegree);
     }
-    protected String getRoomNo(){
+    protected String getRoomNo() throws IOException, ParseException {
         log.info("Get teacher room No.");
         MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userRoomNo(massageUserDegree);
