@@ -3,7 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.currentUser.CurrentUser;
-import edu.system.logic.MassageLogin;
+import edu.system.logic.MassageInNetwork;
 import javafx.animation.PauseTransition;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -140,7 +140,7 @@ public class SignUpTeacher {
     }
     public void signUpDoneTeacher(){
         log.info("Accomplish sign up");
-        MassageLogin massageSignUp = new MassageLogin(username.getText(),id.getText(),phoneNumber.getText(),supervisor.getText(),
+        MassageInNetwork massageSignUp = new MassageInNetwork(username.getText(),id.getText(),phoneNumber.getText(),supervisor.getText(),
                 faculty.getText(),enteringYear.getText(),condition.getText(),password.getText(), email.getText(), degree.getText(),null);
         Controller.getInstance().signUpTeacher(massageSignUp);
     }

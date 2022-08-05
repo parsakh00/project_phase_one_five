@@ -81,7 +81,7 @@ public class Recommendation {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get current user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageUserDegree = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void sendClicked() throws IOException, ParseException {
@@ -132,43 +132,43 @@ public class Recommendation {
     }
     protected void addRequest() throws IOException, ParseException {
         log.info("Add user request for recommendation");
-        MassageLogin massageLogin = new MassageLogin(nameField.getText(), lessonField.getText(), scoreField.getText(),
+        MassageInNetwork massageInNetwork = new MassageInNetwork(nameField.getText(), lessonField.getText(), scoreField.getText(),
                 taField.getText(),null,null, getUsername(),null,null,null);
-        Controller.getInstance().addRecommendRequest(massageLogin);
+        Controller.getInstance().addRecommendRequest(massageInNetwork);
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current user user name");
-        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageStudentPhdDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().userDeskUserName(massageStudentPhdDesk);
     }
     protected String getUserId() throws IOException, ParseException {
         log.info("Get current user student Id");
-        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentPhdDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userId(massageStudentPhdDesk);
     }
     protected void getCondition() throws IOException, ParseException {
         log.info("get user condition");
-        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageResult = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         condition = Controller.getInstance().recommendResult(massageResult);
     }
     public void getTeacher() throws IOException, ParseException {
         log.info("Get user name for recommendation");
-        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageResult = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         teacher = Controller.getInstance().recommendGetTeacher(massageResult);
     }
     public void getLessons() throws IOException, ParseException {
         log.info("get lessons that user passed with related teacher");
-        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageResult = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         lessons = Controller.getInstance().recommendGetLessons(massageResult);
     }
     public void getScores() throws IOException, ParseException {
         log.info("Get scores for write in recommendation");
-        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageResult = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         scores = Controller.getInstance().recommendGetScores(massageResult);
     }
     public void getTa() throws IOException, ParseException {
         log.info("Get if user has been ta or not");
-        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageResult = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         ta = Controller.getInstance().recommendGetTa(massageResult);
 
     }

@@ -206,19 +206,19 @@ public class ChangeEduAssisOrEdit {
     }
     protected void addUser() throws IOException, ParseException {
         log.info("Add user");
-        MassageLogin massageSignUp = new MassageLogin(userAdd.getText(),passAdd.getText(),
+        MassageInNetwork massageSignUp = new MassageInNetwork(userAdd.getText(),passAdd.getText(),
                 emailAdd.getText(),phoneAdd.getText(),roomAdd.getText(), currentUserFaculty()
                 ,masterDegreeAdd.getText(),idAdd.getId());
         Controller.getInstance().addUser(massageSignUp);
     }
     protected void editPassword(){
         log.info("Edited password");
-        MassageLogin massageEditPassword = new MassageLogin(editTeacher.getText(), editPassword.getText(), null,null,null,null,null,null,null,null);
+        MassageInNetwork massageEditPassword = new MassageInNetwork(editTeacher.getText(), editPassword.getText(), null,null,null,null,null,null,null,null);
         Controller.getInstance().editPass(massageEditPassword);
     }
     protected void editEmail(){
         log.info("Email edited");
-        MassageLogin massageEditEmail = new MassageLogin(editTeacher.getText(), editEmail.getText(), null,null,null,null,null,null,null,null);
+        MassageInNetwork massageEditEmail = new MassageInNetwork(editTeacher.getText(), editEmail.getText(), null,null,null,null,null,null,null,null);
         Controller.getInstance().editEmail(massageEditEmail);
     }
     @FXML
@@ -294,62 +294,56 @@ public class ChangeEduAssisOrEdit {
     }
     private Boolean isChosen(){
         log.info("Check is education assistant chose or not");
-        MassageLogin isChosenBefore = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork isChosenBefore = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().isChosen(isChosenBefore);
 
     }
     private void promoteUser(){
         log.info("Promote user");
-        CurrentFaculty.getInstance().setFaculty(newEdu.getText());
-        MassageLogin promotion = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
+        MassageInNetwork promotion = new MassageInNetwork(newEdu.getText(),null,null);
         Controller.getInstance().promotion(promotion);
 
     }
     private void relegateUser(){
         log.info("Relegate user");
-        CurrentFaculty.getInstance().setFaculty(preEdu.getText());
-        MassageLogin relegation = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
+        MassageInNetwork relegation = new MassageInNetwork(preEdu.getText(),null,null);
         Controller.getInstance().relegation(relegation);
 
     }
     private void changeChosen(){
         log.info("change is chose education assistant boolean");
-        MassageLogin changeChosen = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork changeChosen = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         Controller.getInstance().valueChanger(changeChosen);
     }
     private void deleteCourseTeacher() throws IOException, ParseException {
         log.info("Deleting course of teacher");
-        MassageLogin massage = new MassageLogin(teacherForRemove.getText(), currentUserFaculty(), null,null,null,null,null,null,null,null);
+        MassageInNetwork massage = new MassageInNetwork(teacherForRemove.getText(), currentUserFaculty(), null,null,null,null,null,null,null,null);
         Controller.getInstance().deletingCourse(massage);
 
     }
     private void deleteTeacher(){
         log.info("Delete teacher");
-        CurrentFaculty.getInstance().setFaculty(teacherForRemove.getText());
-        MassageLogin deleting = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
+        MassageInNetwork deleting = new MassageInNetwork(teacherForRemove.getText(),null,null);
         Controller.getInstance().deletingTeacher(deleting);
     }
     protected String currentUserFaculty() throws IOException, ParseException {
         log.info("Find current user faculty");
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userFaculty(massageStudentMasterDesk);
     }
     private String SelectedUserFacultyForDelete() throws IOException, ParseException {
         log.info("Select user faculty for deleting");
-        CurrentFaculty.getInstance().setFaculty(teacherForRemove.getText());
-        MassageLogin selectedFaculty = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
+        MassageInNetwork selectedFaculty = new MassageInNetwork(teacherForRemove.getText(),null,null);
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);
     }
     private String SelectedUserFacultyForNewEdu() throws IOException, ParseException {
         log.info("new educational assistant faculty");
-        CurrentFaculty.getInstance().setFaculty(newEdu.getText());
-        MassageLogin selectedFaculty = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
+        MassageInNetwork selectedFaculty = new MassageInNetwork(newEdu.getText(),null,null);
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);
     }
     private String SelectedUserFacultyForPreEdu() throws IOException, ParseException {
         log.info("previous educational assistant faculty");
-        CurrentFaculty.getInstance().setFaculty(preEdu.getText());
-        MassageLogin selectedFaculty = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
+        MassageInNetwork selectedFaculty = new MassageInNetwork(preEdu.getText(),null,null);
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);
     }
 

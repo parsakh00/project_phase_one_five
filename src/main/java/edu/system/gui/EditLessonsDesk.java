@@ -18,6 +18,7 @@ import org.json.simple.parser.ParseException;
 
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class EditLessonsDesk {
     Stage stage;
@@ -140,48 +141,26 @@ public class EditLessonsDesk {
             removeWarning.setText("First set lesson");
         }
     }
-
+    protected Boolean presentValue(String isPresent){
+        return Objects.equals(isPresent, "true");
+    }
     protected void addLesson() throws IOException, ParseException {
-        SelectLesson.getInstance().setLesson(addLesson.getText());
-        SelectLesson.getInstance().setFaculty(currentUserFaculty());
-        SelectLesson.getInstance().setTeacher(addUnity.getText());
-        SelectLesson.getInstance().setTime(addStage.getText());
-        SelectLesson.getInstance().setTime(addTime.getText());
-        SelectLesson.getInstance().setTime(addId.getText());
-        SelectLesson.getInstance().setTime(addTeacher.getText());
-        SelectLesson.getInstance().setTime(addIsPresent.getText());
-        MassageLogin addSelectedLesson = new MassageLogin(SelectLesson.getInstance().getLesson(),SelectLesson.getInstance().getFaculty(),
-                SelectLesson.getInstance().getTime(),SelectLesson.getInstance().getTeacher(),SelectLesson.getInstance().getUnity(),SelectLesson.getInstance().getStage(),SelectLesson.getInstance().getId()
-                ,SelectLesson.getInstance().getPresent(),null,null);
+        MassageInNetwork addSelectedLesson = new MassageInNetwork(addLesson.getText(),currentUserFaculty(),
+                addTime.getText(),addTeacher.getText(),addUnity.getText(),addStage.getText(),addId.getText()
+                ,presentValue(addIsPresent.getText()),null,null);
         Controller.getInstance().adding(addSelectedLesson);
     }
-
     protected void removeLesson() throws IOException, ParseException {
-        SelectLesson.getInstance().setLesson(removeLesson.getText());
-        SelectLesson.getInstance().setFaculty(currentUserFaculty());
-        MassageLogin removeSelectedLesson = new MassageLogin(SelectLesson.getInstance().getLesson(),SelectLesson.getInstance().getFaculty(), null,null,null,null,null,null,null,null);
+        MassageInNetwork removeSelectedLesson = new MassageInNetwork(removeLesson.getText(),currentUserFaculty(), null,null,null,null,null,null,null,null);
         Controller.getInstance().removal(removeSelectedLesson);
     }
     private void editLesson() throws IOException, ParseException {
-        SelectLesson.getInstance().setLesson(editLesson.getText());
-        SelectLesson.getInstance().setFaculty(currentUserFaculty());
-        SelectLesson.getInstance().setTeacher(editTeacher.getText());
-        SelectLesson.getInstance().setTime(editTime.getText());
-        MassageLogin editingSelectedLesson = new MassageLogin(SelectLesson.getInstance().getLesson(),SelectLesson.getInstance().getFaculty(),
-                SelectLesson.getInstance().getTime(),SelectLesson.getInstance().getTeacher(),null,null,null,null,null,null);
+        MassageInNetwork editingSelectedLesson = new MassageInNetwork(editLesson.getText(),currentUserFaculty(),
+                editTime.getText(),editTeacher.getText(),null,null,null,null,null,null);
         Controller.getInstance().editing(editingSelectedLesson);
     }
-
     protected String currentUserFaculty() throws IOException, ParseException {
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userFaculty(massageStudentMasterDesk);
     }
-
-
-
-
-
-
-
-
 }

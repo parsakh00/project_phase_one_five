@@ -3,7 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.currentUser.CurrentUser;
-import edu.system.logic.MassageLogin;
+import edu.system.logic.MassageInNetwork;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -67,7 +67,7 @@ public class TeacherRecommendRequest {
     }
     protected void getUsers() throws IOException, ParseException {
         log.info("Get users");
-        MassageLogin massageGetUsers = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageGetUsers = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         userNames =  Controller.getInstance().listOfUserRecommend(massageGetUsers);
     }
     @FXML
@@ -100,17 +100,17 @@ public class TeacherRecommendRequest {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageUserDegree = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void reject() throws IOException, ParseException {
         log.info("Reject recommendation");
-        MassageLogin rejection = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUserName(), null,null,null,null,null,null,null,null);
+        MassageInNetwork rejection = new MassageInNetwork(choiceUser.getText(), CurrentUser.getInstance().getUserName(), null,null,null,null,null,null,null,null);
         Controller.getInstance().rejectionRequest(rejection);
     }
     protected void acception() throws IOException, ParseException {
         log.info("Accept recommendation");
-        MassageLogin acceptions = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUserName(), null,null,null,null,null,null,null,null);
+        MassageInNetwork acceptions = new MassageInNetwork(choiceUser.getText(), CurrentUser.getInstance().getUserName(), null,null,null,null,null,null,null,null);
         Controller.getInstance().acceptRequest(acceptions);
     }
     public void rejection(ActionEvent actionEvent) throws IOException, ParseException {

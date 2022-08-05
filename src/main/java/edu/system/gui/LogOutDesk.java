@@ -3,7 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.currentUser.CurrentUser;
-import edu.system.logic.MassageLogin;
+import edu.system.logic.MassageInNetwork;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -58,12 +58,12 @@ public class LogOutDesk {
     }
     protected Boolean changePassword() throws IOException, ParseException {
         log.info("Change password boolean");
-        MassageLogin massageEditPassword = new MassageLogin(getUsername(), newPassword.getText(),null,null,null,null, oldPassword.getText(),null,null,null);
+        MassageInNetwork massageEditPassword = new MassageInNetwork(getUsername(), newPassword.getText(),null,null,null,null, oldPassword.getText(),null,null,null);
         return Controller.getInstance().editPassLogOut(massageEditPassword);
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current user , username");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
 }

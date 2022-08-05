@@ -105,23 +105,23 @@ public class TeachersListDesk {
     }
     protected String getEmail() throws IOException, ParseException {
         log.info("Get user email");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
 
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get user, username");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
     protected String getUserType() throws IOException, ParseException {
         log.info("Get user type");
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskType(massageStudentMasterDesk);
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskDegreee(massageStudentMasterDesk);
     }
     public void returnBtn() throws IOException, ParseException {
@@ -203,8 +203,7 @@ public class TeachersListDesk {
             TeachersLists.add(label,i,0);
             GridPane.setHalignment(label, HPos.CENTER);
         }
-        CurrentFaculty.getInstance().setFaculty(teacherChoiceBox.getValue());
-        getFacultyData();
+        getFacultyData(teacherChoiceBox.getValue());
         int i = 0;
         int j = 1;
         for (String eachElement : facultyTeachers){
@@ -223,9 +222,9 @@ public class TeachersListDesk {
         }
 
     }
-    protected void getFacultyData() {
+    protected void getFacultyData(String faculty) {
         log.info("Get faculty teachers details");
-        MassageLogin massageTeacherListDesk = new MassageLogin(CurrentFaculty.getInstance().getFaculty(),null,null);
+        MassageInNetwork massageTeacherListDesk = new MassageInNetwork(faculty,null,null);
         facultyTeachers =  Controller.getInstance().facultyTeachers(massageTeacherListDesk);
     }
     public void changingEdiAssis(ActionEvent actionEvent) throws IOException, ParseException {

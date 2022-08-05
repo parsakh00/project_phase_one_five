@@ -129,17 +129,17 @@ public class TeacherDesk {
     }
     protected String getEmail() throws IOException, ParseException {
         log.info("Get current user Ebail");
-        MassageLogin massageTeacherDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageTeacherDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskEmail(massageTeacherDesk);
 
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current user username");
-        MassageLogin massageTeacherDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageTeacherDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskUserName(massageTeacherDesk);
     }
     protected String getUserType() throws IOException, ParseException {
-        MassageLogin massageTeacherDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageTeacherDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskType(massageTeacherDesk);
     }
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
@@ -191,7 +191,7 @@ public class TeacherDesk {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Current user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageUserDegree = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void profileClicked(ActionEvent actionEvent) throws IOException {

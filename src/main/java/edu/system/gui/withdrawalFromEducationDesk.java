@@ -3,7 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.currentUser.CurrentUser;
-import edu.system.logic.MassageLogin;
+import edu.system.logic.MassageInNetwork;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -68,7 +68,7 @@ public class withdrawalFromEducationDesk {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageUserDegree = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void backBtnClicked(javafx.event.ActionEvent actionEvent) throws IOException, ParseException {
@@ -110,12 +110,12 @@ public class withdrawalFromEducationDesk {
     }
     protected void addRequest() throws IOException, ParseException {
         log.info("Add request");
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         Controller.getInstance().withdrawRequest(massageStudentMasterDesk);
     }
     protected String result() throws IOException, ParseException {
         log.info("Get request result");
-        MassageLogin massageResult = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageResult = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().withdrawResult(massageResult);
     }
 

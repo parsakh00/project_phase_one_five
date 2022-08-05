@@ -2,7 +2,7 @@ package edu.system.logic;
 
 import java.util.ArrayList;
 
-public class MassageLogin {
+public class MassageInNetwork {
     String name;
     String pass;
     String time;
@@ -26,30 +26,30 @@ public class MassageLogin {
     ArrayList<String> objections;
     String score;
 
-    public MassageLogin(String name, String unit) {
+    public MassageInNetwork(String name, String unit) {
         this.name = name;
         this.unit = unit;
     }
 
-    public MassageLogin(String name, ArrayList<String> objections) {
+    public MassageInNetwork(String name, ArrayList<String> objections) {
         this.name = name;
         this.objections = objections;
     }
 
-    public MassageLogin(String name, String unit, String faculty) {
+    public MassageInNetwork(String name, String unit, String faculty) {
         this.name = name;
         this.unit = unit;
         this.faculty = faculty;
     }
 
-    public MassageLogin(String name, String score, String unit, String time) {
+    public MassageInNetwork(String name, String score, String unit, String time) {
         this.name = name;
         this.score = score;
         this.unit = unit;
         this.time = time;
     }
 
-    public MassageLogin(String username, String password, String email, String phone, String roomNo, String faculty, String masterDegree, String id) {
+    public MassageInNetwork(String username, String password, String email, String phone, String roomNo, String faculty, String masterDegree, String id) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -60,7 +60,7 @@ public class MassageLogin {
         this.id = id;
     }
 
-    public MassageLogin(String name, String pass, String time, String teacher, String unity, String stage, String id, Boolean isPresent, String unit, String faculty) {
+    public MassageInNetwork(String name, String pass, String time, String teacher, String unity, String stage, String id, Boolean isPresent, String unit, String faculty) {
         this.name = name;
         this.pass = pass;
         this.time = time;
@@ -73,9 +73,8 @@ public class MassageLogin {
         this.faculty = faculty;
     }
 
-    public MassageLogin(String username, String id, String phone, String supervisor, String faculty,
-                        String enteringYear, String condition, String password, String email, String degree, String time
-    ) {
+    public MassageInNetwork(String username, String id, String phone, String supervisor, String faculty,
+                            String enteringYear, String condition, String password, String email, String degree, String time) {
         this.username = username;
         this.id = id;
         this.phone = phone;
@@ -99,10 +98,6 @@ public class MassageLogin {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
     }
 
     public String getTime() {
@@ -169,20 +164,12 @@ public class MassageLogin {
         return degree;
     }
 
-    public void setEnteringYear(String enteringYear) {
-        this.enteringYear = enteringYear;
-    }
-
     public void setCondition(String condition) {
         this.condition = condition;
     }
 
     public void setDegree(String degree) {
         this.degree = degree;
-    }
-
-    public void setMasterDegree(String masterDegree) {
-        this.masterDegree = masterDegree;
     }
 
     public void setId(String id) {
@@ -207,10 +194,6 @@ public class MassageLogin {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public void setRoomNo(String roomNo) {
-        this.roomNo = roomNo;
     }
 
     public String getUsername() {

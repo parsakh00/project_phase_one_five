@@ -3,7 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.currentUser.CurrentUser;
-import edu.system.logic.MassageLogin;
+import edu.system.logic.MassageInNetwork;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,7 +68,7 @@ public class EduWithdrawRequest {
     }
     protected void getUsers() throws IOException, ParseException {
         log.info("Get users");
-        MassageLogin massageGetUsers = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageGetUsers = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         userNames =  Controller.getInstance().listOfUser(massageGetUsers);
 
 
@@ -90,25 +90,25 @@ public class EduWithdrawRequest {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageUserDegree = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void reject() throws IOException, ParseException {
         log.info("Reject withdrawal request");
         CurrentUser.getInstance().setUser(choiceUser.getText());
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         Controller.getInstance().rejection(massageStudentMasterDesk);
     }
     protected void acception() throws IOException, ParseException {
         log.info("Accept user withdrawal request");
         CurrentUser.getInstance().setUser(choiceUser.getText());
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         Controller.getInstance().accept(massageStudentMasterDesk);
     }
     protected void condition() throws IOException, ParseException {
         log.info("Change user condition");
         CurrentUser.getInstance().setUser(choiceUser.getText());
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         Controller.getInstance().changeCondition(massageStudentMasterDesk);
     }
     public void rejection(ActionEvent actionEvent) throws IOException, ParseException {

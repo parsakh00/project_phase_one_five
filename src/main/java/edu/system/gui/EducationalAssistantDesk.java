@@ -3,7 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.currentUser.CurrentUser;
-import edu.system.logic.MassageLogin;
+import edu.system.logic.MassageInNetwork;
 import javafx.animation.AnimationTimer;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -151,17 +151,17 @@ public class EducationalAssistantDesk {
     }
     protected String getEmail() throws IOException, ParseException {
         log.info("Current user email");
-        MassageLogin massageEducationalAssistantDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageEducationalAssistantDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().userDeskEmail(massageEducationalAssistantDesk);
 
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Current user name");
-        MassageLogin massageducationalAssistantDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageducationalAssistantDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskUserName(massageducationalAssistantDesk);
     }
     protected String getUserType() throws IOException, ParseException {
-        MassageLogin massageducationalAssistantDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageducationalAssistantDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskType(massageducationalAssistantDesk);
     }
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
@@ -252,7 +252,7 @@ public class EducationalAssistantDesk {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("get Current user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageUserDegree = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void minorRequest(ActionEvent actionEvent) throws IOException {

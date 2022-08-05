@@ -3,7 +3,7 @@ package edu.system.gui;
 import edu.system.HelloApplication;
 import edu.system.logic.Controller;
 import edu.system.currentUser.CurrentUser;
-import edu.system.logic.MassageLogin;
+import edu.system.logic.MassageInNetwork;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -117,22 +117,22 @@ public class ExamsList {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(), null, null);
+        MassageInNetwork massageUserDegree = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void getUserLesson() throws IOException, ParseException {
-        MassageLogin massageGetUserLesson = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageGetUserLesson = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         lesson =  Controller.getInstance().userOfLessons(massageGetUserLesson);
     }
     protected void getUserLessonExam() throws IOException, ParseException {
         log.info("Get user lesson exam");
-        MassageLogin massageGetLessonExam = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageGetLessonExam = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         examDay =  Controller.getInstance().nameOfLessons(massageGetLessonExam);
 
     }
     protected void getUserLessonName() throws IOException, ParseException {
         log.info("Get user lesson name");
-        MassageLogin massageUserLessonName = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageUserLessonName = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         lessonName =  Controller.getInstance().examOfLessons(massageUserLessonName);
 
     }

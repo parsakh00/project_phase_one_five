@@ -256,7 +256,7 @@ public class Login {
     protected Boolean MainLogIn() throws IOException, ParseException {
             if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
                 wrongCaptcha.setText(null);
-                MassageLogin massage = new MassageLogin(UserNameTextField.getText(), PasswordField.getText(), null,null,null,null,null,null,null,null);
+                MassageInNetwork massage = new MassageInNetwork(UserNameTextField.getText(), PasswordField.getText(), null,null,null,null,null,null,null,null);
                 CurrentUser.getInstance().setUser(UserNameTextField.getText());
                 if (Controller.getInstance().login(massage)) {
                     getCondition();
@@ -274,7 +274,7 @@ public class Login {
     }
     protected String getCondition() throws IOException, ParseException {
         log.info("Check validity of condition for enterance");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
+        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
         userCondition = Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
         return Controller.getInstance().userCondition(massageStudentUndergraduateDesk);
     }
