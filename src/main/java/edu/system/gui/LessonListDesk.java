@@ -107,13 +107,13 @@ public class LessonListDesk {
     }
     protected String getEmail() throws IOException, ParseException {
         log.info("Get user email");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
 
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current username");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
     protected void getFaculty(ActionEvent actionEvent) {
@@ -245,13 +245,13 @@ public class LessonListDesk {
     }
 
     protected String getUserType() throws IOException, ParseException {
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskType(massageStudentMasterDesk);
     }
 
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get current user degree");
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskDegreee(massageStudentMasterDesk);
     }
 

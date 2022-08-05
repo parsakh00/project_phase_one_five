@@ -1,4 +1,5 @@
 {
+  "is student": false,
   "master degree":"professor",
   "degree":"manager",
   "lesson":"general chemistry 2",

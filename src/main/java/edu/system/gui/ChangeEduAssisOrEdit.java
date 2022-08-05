@@ -294,7 +294,7 @@ public class ChangeEduAssisOrEdit {
     }
     private Boolean isChosen(){
         log.info("Check is education assistant chose or not");
-        MassageLogin isChosenBefore = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin isChosenBefore = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().isChosen(isChosenBefore);
 
     }
@@ -314,7 +314,7 @@ public class ChangeEduAssisOrEdit {
     }
     private void changeChosen(){
         log.info("change is chose education assistant boolean");
-        MassageLogin changeChosen = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin changeChosen = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         Controller.getInstance().valueChanger(changeChosen);
     }
     private void deleteCourseTeacher() throws IOException, ParseException {
@@ -331,7 +331,7 @@ public class ChangeEduAssisOrEdit {
     }
     protected String currentUserFaculty() throws IOException, ParseException {
         log.info("Find current user faculty");
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userFaculty(massageStudentMasterDesk);
     }
     private String SelectedUserFacultyForDelete() throws IOException, ParseException {

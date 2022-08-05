@@ -240,26 +240,26 @@ public class StudentUndergraduateDesk {
     }
     protected String getEmail() throws IOException, ParseException {
         log.info("Get current student Email");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current student Username");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
     protected String getEducationalStatus() throws IOException, ParseException {
         log.info("Get current student Educational status");
-        MassageLogin EducationalStatus = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin EducationalStatus = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().educationalStatus(EducationalStatus);
     }
     protected String getSupervisor() throws IOException, ParseException {
         log.info("Get current student supervisor");
-        MassageLogin supervisor = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin supervisor = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().supervisor(supervisor);
     }
     protected String getUserType() throws IOException, ParseException {
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskType(massageStudentUndergraduateDesk);
     }
     public void logoutClicked(ActionEvent actionEvent) throws IOException {

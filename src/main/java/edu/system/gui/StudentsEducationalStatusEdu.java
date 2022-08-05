@@ -56,7 +56,7 @@ public class StudentsEducationalStatusEdu {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void backBtn(ActionEvent actionEvent) throws IOException, ParseException {

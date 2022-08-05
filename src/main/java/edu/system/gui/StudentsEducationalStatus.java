@@ -116,13 +116,13 @@ public class StudentsEducationalStatus {
 
     protected void setNewScore() throws IOException, ParseException {
         log.info("set New score for student in profile");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(), String.valueOf(finalScore), null, null);
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), String.valueOf(finalScore), null, null);
         Controller.getInstance().userNewScore(massageStudentUndergraduateDesk);
     }
 
     protected String getScore() throws IOException, ParseException {
         log.info("Get user score");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().userScore(massageStudentUndergraduateDesk);
     }
     protected void combineToPermanentTemporaryData(){
@@ -145,42 +145,42 @@ public class StudentsEducationalStatus {
     }
     protected void getLessonNew(){
         log.info("Get user lessons from permanent scores");
-        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         lessonNew = Controller.getInstance().getLessonsNew(massageUserLesson);
     }
     protected void getTeachersNew(){
         log.info("Get teachers from permanent scores");
-        MassageLogin massageUserTeachers = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserTeachers = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         teachersNew = Controller.getInstance().getTeachersNew(massageUserTeachers);
     }
     protected void getScoresNew(){
         log.info("get user Scores from permanent scores");
-        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         scoreNew = Controller.getInstance().getScoresNew(massageUserScores);
     }
     protected void getUnitNew(){
         log.info("get lesson's unit from permanent scores");
-        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         unitNew = Controller.getInstance().getUnitsNew(massageUserScores);
     }
     protected void getLesson(){
         log.info("Get user lessons from temporary scores");
-        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         lesson = Controller.getInstance().getLessons(massageUserLesson);
     }
     protected void getTeachers(){
         log.info("Get teachers from temporary scores");
-        MassageLogin massageUserTeachers = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserTeachers = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         teachers = Controller.getInstance().getTeachers(massageUserTeachers);
     }
     protected void getScores(){
         log.info("get user Scores from temporary scores");
-        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         scores = Controller.getInstance().getScores(massageUserScores);
     }
     protected void getUnit(){
         log.info("get lesson's unit from temporary scores");
-        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         unit = Controller.getInstance().getUnits(massageUserScores);
     }
     public void logOut() throws IOException {
@@ -197,7 +197,7 @@ public class StudentsEducationalStatus {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void backBtn(ActionEvent actionEvent) throws IOException, ParseException {

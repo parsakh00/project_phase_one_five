@@ -68,7 +68,7 @@ public class EduMinorRequests {
         choiceUser.setText(chooseUser.getValue());
     }
     protected void getUsers() throws IOException, ParseException {
-        MassageLogin GetUsers = new MassageLogin(CurrentUser.getInstance().getUser(), getUserFaculty(), null,null,null,null,null,null,null,null);
+        MassageLogin GetUsers = new MassageLogin(CurrentUser.getInstance().getUserName(), getUserFaculty(), null,null,null,null,null,null,null,null);
         userNames =  Controller.getInstance().listOfUserMinor(GetUsers);
     }
     @FXML
@@ -90,12 +90,12 @@ public class EduMinorRequests {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get current user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected String getUserFaculty() throws IOException, ParseException {
         log.info("Get current user faculty");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userFaculty(massageUserDegree);
     }
     protected void reject() throws IOException, ParseException {

@@ -19,14 +19,14 @@ public class userController {
 
 
 
-    public String getEmail(String name) throws IOException, ParseException {
+    public static String getEmail(String name) throws IOException, ParseException {
 
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
         JSONObject jsonObject = (JSONObject) obj;
         return (String) jsonObject.get("email");
     }
-    public String getUserName(String name) throws IOException, ParseException {
+    public static String getUserName(String name) throws IOException, ParseException {
         log.info("Read name of user from file");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
@@ -57,35 +57,68 @@ public class userController {
             e.printStackTrace();
         }
     }
-    public String getUserYear(String name) throws IOException, ParseException {
+    public static String getUserYear(String name) throws IOException, ParseException {
         log.info("Read user enterance year from user data file");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
         JSONObject jsonObject = (JSONObject) obj;
         return (String) jsonObject.get("entering year");
     }
-    public String getId(String name) throws IOException, ParseException {
+    public static String getId(String name) throws IOException, ParseException {
         log.info("Open user data file to read student id of student");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
         JSONObject jsonObject = (JSONObject) obj;
-        return (String) jsonObject.get("student number");
+        return (String) jsonObject.get("id");
     }
-    public String getUserPhoneNumber(String name) throws IOException, ParseException {
+    public static String getCondition(String name) throws IOException, ParseException {
+        log.info("Open user data file to read student id of student");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        return (String) jsonObject.get("condition");
+    }
+    public static String getPhone(String name) throws IOException, ParseException {
+        log.info("Open user data file to read student id of student");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        return (String) jsonObject.get("phone");
+    }
+    public static String getEnteringYear(String name) throws IOException, ParseException {
+        log.info("Open user data file to read student id of student");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        return (String) jsonObject.get("entering year");
+    }
+    public static String getRoomNo(String name) throws IOException, ParseException {
+        log.info("Open user data file to read student id of student");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        return (String) jsonObject.get("room No.");
+    }
+    public static String getFaculty(String name) throws IOException, ParseException {
+        log.info("Read user type from userdata file");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        return (String) jsonObject.get("faculty");
+    }
+    public static String getUserPhoneNumber(String name) throws IOException, ParseException {
         log.info("Read and rewrite phone number from userdata file");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
         JSONObject jsonObject = (JSONObject) obj;
         return (String) jsonObject.get("phone number");
     }
-    public String getIdTeacher(String name) throws IOException, ParseException {
-        log.info("Read userdata file to get teacher number");
+    public static Boolean isStudent(String name) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
         JSONObject jsonObject = (JSONObject) obj;
-        return (String) jsonObject.get("teacher number");
+        return (Boolean) jsonObject.get("is student");
     }
-
     public void userWithdraw(String name) throws IOException, ParseException {
         log.info("Read and rewrite withdrawal file to set withdrawal request");
         JSONParser parser = new JSONParser();
@@ -354,7 +387,7 @@ public class userController {
         JSONObject jsonObject = (JSONObject) obj;
         return (String) jsonObject.get("condition");
     }
-    public String getSupervisor(String name) throws IOException, ParseException {
+    public static String getSupervisor(String name) throws IOException, ParseException {
         log.info("Read user supervisor from userdata file");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
@@ -362,12 +395,19 @@ public class userController {
         return (String) jsonObject.get("supervisor");
     }
 
-    public String getType(String name) throws IOException, ParseException {
+    public static String getType(String name) throws IOException, ParseException {
         log.info("Read user type from userdata file");
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
         JSONObject jsonObject = (JSONObject) obj;
         return (String) jsonObject.get("type");
+    }
+    public static String getDegree(String name) throws IOException, ParseException {
+        log.info("Read user type from userdata file");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\edu\\system\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        return (String) jsonObject.get("degree");
     }
     public String getUserDegree(String name) throws IOException, ParseException {
         log.info("Read degree of user from file");

@@ -107,13 +107,13 @@ public class WeeklySchedule {
         }
     }
     protected String getUserDegree() throws IOException, ParseException {
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         log.info("Get user degree");
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void getUserLesson() throws IOException, ParseException {
         log.info("Get user lessons");
-        MassageLogin massageGetUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageGetUserLesson = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         lesson =  Controller.getInstance().userOfLessons(massageGetUserLesson);
     }
     protected void showSchedule() throws IOException, ParseException {

@@ -86,7 +86,7 @@ public class TemporaryScoresStudent {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void backBtn(ActionEvent actionEvent) throws IOException, ParseException {
@@ -190,27 +190,27 @@ public class TemporaryScoresStudent {
 
     protected void getLesson(){
         log.info("Get user lessons");
-        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         lesson = Controller.getInstance().getLessons(massageUserLesson);
     }
     protected void setObjections(){
         log.info("set objections of each student");
-        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(), objection);
+        MassageLogin massageUserLesson = new MassageLogin(CurrentUser.getInstance().getUserName(), objection);
         Controller.getInstance().setObjection(massageUserLesson);
     }
     protected void getTeachers(){
         log.info("Get teachers");
-        MassageLogin massageUserTeachers = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserTeachers = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         teachers = Controller.getInstance().getTeachers(massageUserTeachers);
     }
     protected void getScores(){
         log.info("get user Scores");
-        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         scores = Controller.getInstance().getScores(massageUserScores);
     }
     protected void getRespond(){
         log.info("get teacher respond");
-        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserScores = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         respond = Controller.getInstance().getRespond(massageUserScores);
 
     }

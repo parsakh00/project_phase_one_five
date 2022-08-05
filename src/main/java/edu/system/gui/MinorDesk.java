@@ -57,12 +57,12 @@ public class MinorDesk {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get current user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected String getFacultyUser() throws IOException, ParseException {
         log.info("Get current user faculty");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userFaculty(massageUserDegree);
     }
     public void backBtnClicked(ActionEvent actionEvent) throws IOException, ParseException {
@@ -83,7 +83,7 @@ public class MinorDesk {
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current user name");
-        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentPhdDesk);
     }
     public void sendRequestClicked() throws IOException, ParseException {
@@ -112,7 +112,7 @@ public class MinorDesk {
     }
     public String showResult() throws IOException, ParseException {
         log.info("Show result");
-        MassageLogin howManyFacultyMinor = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin howManyFacultyMinor = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().facultyForMinors(howManyFacultyMinor);
     }
 }

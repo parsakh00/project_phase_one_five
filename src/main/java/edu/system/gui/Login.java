@@ -143,40 +143,34 @@ public class Login {
     protected void LoginClicked(ActionEvent actionEvent) throws IOException {
         try {
             if (MainLogIn()) {
-                LoginForJson loginForJson = new LoginForJson(UserNameTextField.getText(), PasswordField.getText());
-                if (Objects.equals(loginForJson.getUserType(), "student")){
-                    if(Objects.equals(loginForJson.getUserDegree(), "undergraduate")) {
-                        CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                if (Objects.equals(CurrentUser.getInstance().getType(), "student")){
+                    if(Objects.equals(CurrentUser.getInstance().getDegree(), "undergraduate")) {
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
                         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentUndergraduateDesk-view.fxml"));
                         Scene scene = new Scene(loader.load());
                         setStageProp(stage, scene);
                     }
-                    else if(Objects.equals(loginForJson.getUserDegree(), "master")) {
-                        CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                    else if(Objects.equals(CurrentUser.getInstance().getDegree(), "master")) {
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
                         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk.fxml"));
                         Scene scene = new Scene(loader.load());
                         setStageProp(stage, scene);
                     }
-                    else if(Objects.equals(loginForJson.getUserDegree(), "phd")) {
-                        CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                    else if(Objects.equals(CurrentUser.getInstance().getDegree(), "phd")) {
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
                         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentphd.fxml"));
                         Scene scene = new Scene(loader.load());
                         setStageProp(stage, scene);
                     }
                 }
-                else if (Objects.equals(loginForJson.getUserType(), "teacher")){
-                    if ((Objects.equals((String) loginForJson.getUserDegree(), (String) "-")) || (Objects.equals(loginForJson.getUserDegree(), "manager"))) {
-                        CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                else if (Objects.equals(CurrentUser.getInstance().getType(), "teacher")){
+                    if ((Objects.equals((String) CurrentUser.getInstance().getDegree(), (String) "-")) || (Objects.equals(CurrentUser.getInstance().getDegree(), "manager"))) {
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
                         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
                         Scene scene = new Scene(loader.load());
                         setStageProp(stage, scene);
                     }
                     else{
-                        CurrentUser.getInstance().setUser(loginForJson.getUserName());
                         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
                         FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
                         Scene scene = new Scene(loader.load());
@@ -206,40 +200,34 @@ public class Login {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             try {
                 if (MainLogIn()) {
-                    LoginForJson loginForJson = new LoginForJson(UserNameTextField.getText(), PasswordField.getText());
-                    if (Objects.equals(loginForJson.getUserType(), "student")){
-                        if(Objects.equals(loginForJson.getUserDegree(), "undergraduate")) {
-                            CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                    if (Objects.equals(CurrentUser.getInstance().getType(), "student")){
+                        if(Objects.equals(CurrentUser.getInstance().getDegree(), "undergraduate")) {
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
                             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentUndergraduateDesk-view.fxml"));
                             Scene scene = new Scene(loader.load());
                             setStageProp(stage, scene);
                         }
-                        else if(Objects.equals(loginForJson.getUserDegree(), "master")) {
-                            CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                        else if(Objects.equals(CurrentUser.getInstance().getDegree(), "master")) {
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
                             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentMasterDesk.fxml"));
                             Scene scene = new Scene(loader.load());
                             setStageProp(stage, scene);
                         }
-                        else if(Objects.equals(loginForJson.getUserDegree(), "phd")) {
-                            CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                        else if(Objects.equals(CurrentUser.getInstance().getDegree(), "phd")) {
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
                             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/studentPhd.fxml"));
                             Scene scene = new Scene(loader.load());
                             setStageProp(stage, scene);
                         }
                     }
-                    else if (Objects.equals(loginForJson.getUserType(), "teacher")){
-                        if ((Objects.equals((String) loginForJson.getUserDegree(), (String) "-")) || (Objects.equals(loginForJson.getUserDegree(), "manager"))) {
-                            CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                    else if (Objects.equals(CurrentUser.getInstance().getType(), "teacher")){
+                        if ((Objects.equals((String) CurrentUser.getInstance().getDegree(), (String) "-")) || (Objects.equals(CurrentUser.getInstance().getDegree(), "manager"))) {
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
                             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/teacherDesk-view.fxml"));
                             Scene scene = new Scene(loader.load());
                             setStageProp(stage, scene);
                         }
-                        else if (Objects.equals(loginForJson.getUserDegree(), "education assistant")){
-                            CurrentUser.getInstance().setUser(loginForJson.getUserName());
+                        else if (Objects.equals(CurrentUser.getInstance().getDegree(), "education assistant")){
                             stage = ((Stage) ((Node) (keyEvent.getSource())).getScene().getWindow());
                             FXMLLoader loader = new FXMLLoader(HelloApplication.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
                             Scene scene = new Scene(loader.load());
@@ -250,7 +238,6 @@ public class Login {
                 else{
                     if (Objects.equals(CaptchaInput.getText(), Captcha.getId()) && CaptchaInput.getText() != null) {
                         wrongCaptcha.setText(null);
-
                     }
                     else {
                         wrongCaptcha.setText("Enter numbers correctly");
@@ -287,7 +274,7 @@ public class Login {
     }
     protected String getCondition() throws IOException, ParseException {
         log.info("Check validity of condition for enterance");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(), null,null);
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(), null,null);
         userCondition = Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
         return Controller.getInstance().userCondition(massageStudentUndergraduateDesk);
     }

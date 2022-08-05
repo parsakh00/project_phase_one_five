@@ -210,17 +210,17 @@ public class StudentPhdDesk {
     }
     protected String getEmail() throws IOException, ParseException {
         log.info("Current user email");
-        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskEmail(massageStudentPhdDesk);
 
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Current user username");
-        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentPhdDesk);
     }
     protected String getUserType() throws IOException, ParseException {
-        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentPhdDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskType(massageStudentPhdDesk);
     }
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
@@ -239,12 +239,12 @@ public class StudentPhdDesk {
     }
     protected String getEducationalStatus() throws IOException, ParseException {
         log.info("Current user education status");
-        MassageLogin EducationalStatus = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin EducationalStatus = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().educationalStatus(EducationalStatus);
     }
     protected String getSupervisor() throws IOException, ParseException {
         log.info("Current user supervisor");
-        MassageLogin supervisor = new MassageLogin(CurrentUser.getInstance().getUser(), null, null);
+        MassageLogin supervisor = new MassageLogin(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().supervisor(supervisor);
     }
     public void setUserImage() throws IOException, ParseException {

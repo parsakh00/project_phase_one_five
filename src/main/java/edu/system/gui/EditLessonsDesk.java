@@ -173,7 +173,7 @@ public class EditLessonsDesk {
     }
 
     protected String currentUserFaculty() throws IOException, ParseException {
-        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentMasterDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userFaculty(massageStudentMasterDesk);
     }
 

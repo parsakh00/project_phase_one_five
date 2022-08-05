@@ -117,22 +117,22 @@ public class ExamsList {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(), null, null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void getUserLesson() throws IOException, ParseException {
-        MassageLogin massageGetUserLesson = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageGetUserLesson = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         lesson =  Controller.getInstance().userOfLessons(massageGetUserLesson);
     }
     protected void getUserLessonExam() throws IOException, ParseException {
         log.info("Get user lesson exam");
-        MassageLogin massageGetLessonExam = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageGetLessonExam = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         examDay =  Controller.getInstance().nameOfLessons(massageGetLessonExam);
 
     }
     protected void getUserLessonName() throws IOException, ParseException {
         log.info("Get user lesson name");
-        MassageLogin massageUserLessonName = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserLessonName = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         lessonName =  Controller.getInstance().examOfLessons(massageUserLessonName);
 
     }

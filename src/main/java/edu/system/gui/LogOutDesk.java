@@ -63,7 +63,7 @@ public class LogOutDesk {
     }
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current user , username");
-        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageStudentUndergraduateDesk = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
 }

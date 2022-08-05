@@ -45,7 +45,7 @@ public class AccommodationDesk {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Current user get degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(), null, null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     public void logOut() throws IOException {

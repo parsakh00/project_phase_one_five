@@ -67,7 +67,7 @@ public class TeacherRecommendRequest {
     }
     protected void getUsers() throws IOException, ParseException {
         log.info("Get users");
-        MassageLogin massageGetUsers = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageGetUsers = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         userNames =  Controller.getInstance().listOfUserRecommend(massageGetUsers);
     }
     @FXML
@@ -100,17 +100,17 @@ public class TeacherRecommendRequest {
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
-        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUser(),null,null);
+        MassageLogin massageUserDegree = new MassageLogin(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
     protected void reject() throws IOException, ParseException {
         log.info("Reject recommendation");
-        MassageLogin rejection = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUser(), null,null,null,null,null,null,null,null);
+        MassageLogin rejection = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUserName(), null,null,null,null,null,null,null,null);
         Controller.getInstance().rejectionRequest(rejection);
     }
     protected void acception() throws IOException, ParseException {
         log.info("Accept recommendation");
-        MassageLogin acceptions = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUser(), null,null,null,null,null,null,null,null);
+        MassageLogin acceptions = new MassageLogin(choiceUser.getText(), CurrentUser.getInstance().getUserName(), null,null,null,null,null,null,null,null);
         Controller.getInstance().acceptRequest(acceptions);
     }
     public void rejection(ActionEvent actionEvent) throws IOException, ParseException {
