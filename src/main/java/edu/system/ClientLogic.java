@@ -22,6 +22,8 @@ public class ClientLogic {
     private TeacherProfile teacherProfile;
     private TeachersListDesk teachersListDesk;
     private LessonListDesk lessonListDesk;
+    private ChangeEduAssisOrEdit changeEduAssisOrEdit;
+    private EditLessonsDesk editLessonsDesk;
     private LogOutDesk logOutDesk;
 
     private ClientLogic() {
@@ -50,7 +52,9 @@ public class ClientLogic {
         if (message.getRequest().equals("get degree lesson list")) {
             getUserDegreeLessonList(message.getContent());
         }
-
+        if (message.getRequest().equals("get degree teacher list")) {
+            getUserDegreeTeacherList(message.getContent());
+        }
         if (message.getRequest().equals("show data student")) {
             showStudentData(message);
         }
@@ -72,7 +76,9 @@ public class ClientLogic {
         if (message.getRequest().equals("get faculty prop stage")) {
             showFacultyPropStage(message);
         }
-
+        if (message.getRequest().equals("get teacher list of faculty")) {
+            showFacultyTeacherProp(message);
+        }
 
     }
     private void showFacultyPropUnit(Message message){
@@ -84,6 +90,9 @@ public class ClientLogic {
 
     private void showFacultyProp(Message message){
         lessonListDesk.getFacultyData(message);
+    }
+    private void showFacultyTeacherProp(Message message){
+        teachersListDesk.getTeacherListData(message);
     }
     private void showStudentDegreeName(Message message){
         studentProfile.setUserDegreeAndName(message.getContent());
@@ -116,6 +125,9 @@ public class ClientLogic {
     }
     private void getUserDegreeLessonList(String content){
         lessonListDesk.setDegree(content);
+    }
+    private void getUserDegreeTeacherList(String content){
+        teachersListDesk.setDegree(content);
     }
 
     public void setLogin(FXMLLoader fxmlLoader, Stage stage) throws IOException {
@@ -189,6 +201,18 @@ public class ClientLogic {
         System.out.println("lesson list disk");
         this.stage = stage;
         this.lessonListDesk = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("lesson list desk is null");
+    }
+    public void setEditLessonsDesk(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("edit lessons desk disk");
+        this.stage = stage;
+        this.editLessonsDesk = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("edit lessons desk is null");
+    }
+    public void setChangeEduAssisOrEdit(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("ChangeEduAssisOrEdit disk");
+        this.stage = stage;
+        this.changeEduAssisOrEdit = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("lesson list desk is null");
     }
 

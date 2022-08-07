@@ -1,5 +1,7 @@
 package gui;
 
+import edu.system.Client;
+import edu.system.ClientLogic;
 import edu.system.ClientMain;
 import currentUser.CurrentUser;
 import javafx.animation.PauseTransition;
@@ -17,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import message.Message;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
@@ -90,11 +93,12 @@ public class ChangeEduAssisOrEdit {
     static Logger log = LogManager.getLogger(ClientMain.class);
 
     PauseTransition timer = new PauseTransition(Duration.seconds(CurrentUser.getInstance().getTimer()));
-    public void initialize(){
+
+    public void initialize() {
         log.info("Open change education assistant or edit");
         timer.playFromStart();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
-        timer.setOnFinished(actionEvent ->{
+        timer.setOnFinished(actionEvent -> {
             actionEvent.consume();
             try {
                 logOut();
@@ -102,7 +106,7 @@ public class ChangeEduAssisOrEdit {
                 log.error("exception happened!");
                 throw new RuntimeException(e);
             }
-        } );
+        });
         teacherForRemove.setText(null);
         preEdu.setText(null);
         newEdu.setText(null);
@@ -117,11 +121,18 @@ public class ChangeEduAssisOrEdit {
         masterDegreeAdd.setText(null);
         idAdd.setText(null);
     }
+
     public void logOut() throws IOException {
         log.info("Logged out out of time");
         stage = ((Stage) (addWarning).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
         Scene scene = new Scene(loader.load());
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setLogOutDesk(loader, stage);
+    }
+
+    private void setStageProp(Stage stage, Scene scene) {
         stage.setHeight(650);
         stage.setWidth(800);
         stage.setResizable(false);
@@ -133,54 +144,58 @@ public class ChangeEduAssisOrEdit {
     public void returnBtn(ActionEvent actionEvent) throws IOException {
         log.info("Return back");
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "back to main page"));
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/teacherLists-view.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setTeachersListDesk(loader, stage);
     }
+
     @FXML
     protected void editTeacher() throws IOException, ParseException {
         log.info("Edit teacher info");
-        if (editTeacher != null){
-            if (editPassword.getText() != null){
-                editPassword();
+        if (editTeacher != null) {
+            if (editPassword.getText() != null) {
+                log.info("Edited password");
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), editTeacher.getText() + "-" + editPassword.getText()
+                        , "edit password in edu assistant"));
                 warningEdit.setText("password changed");
                 editPassword.setText(null);
             }
-            if (editEmail.getText() != null){
-                editEmail();
+            if (editEmail.getText() != null) {
+                log.info("Email edited");
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), editTeacher.getText() + "-" + editEmail.getText()
+                        , "edit email in edu assistant"));
                 editEmailWarning.setText("email changed");
                 editEmail.setText(null);
 
             }
-        }
-        else {
+        } else {
             warningEdit.setText("First specify teacher");
             editEmail.setText(null);
             editPassword.setText(null);
         }
     }
+
     @FXML
     protected void addBtnClicked() throws IOException, ParseException {
         log.info("Add button clicked");
-        if (userAdd.getText() != null && passAdd.getText() != null && emailAdd.getText() != null && roomAdd.getText() != null && phoneAdd.getText() != null){
-            addUser();
-
-        }
-        else{
+        if (userAdd.getText() != null && passAdd.getText() != null && emailAdd.getText() != null && roomAdd.getText() != null && phoneAdd.getText() != null) {
+            log.info("Add user");
+            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(),
+                    userAdd.getText() + "-" + passAdd.getText() + "-" + emailAdd.getText() + "-" + phoneAdd.getText() + "-" + roomAdd.getText()
+                            + "-" + currentUserFaculty() + "-" + masterDegreeAdd.getText() + "-" + idAdd.getId(), "add new teacher"));
+        } else {
             addWarning.setText("Must fill out all parts");
         }
     }
+
     @FXML
     protected void pickImage() throws IOException {
         log.info("Pick image");
-        if (userAdd.getText()!=null) {
+        if (userAdd.getText() != null) {
             stage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("choose an image");
@@ -198,154 +213,113 @@ public class ChangeEduAssisOrEdit {
                 log.error("exception happened");
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             addWarning.setText("First fill username");
         }
 
 
     }
-    protected void addUser() throws IOException, ParseException {
-        log.info("Add user");
-        MassageInNetwork massageSignUp = new MassageInNetwork(userAdd.getText(),passAdd.getText(),
-                emailAdd.getText(),phoneAdd.getText(),roomAdd.getText(), currentUserFaculty()
-                ,masterDegreeAdd.getText(),idAdd.getId());
-        Controller.getInstance().addUser(massageSignUp);
-    }
-    protected void editPassword(){
-        log.info("Edited password");
-        MassageInNetwork massageEditPassword = new MassageInNetwork(editTeacher.getText(), editPassword.getText(), null,null,null,null,null,null,null,null);
-        Controller.getInstance().editPass(massageEditPassword);
-    }
-    protected void editEmail(){
-        log.info("Email edited");
-        MassageInNetwork massageEditEmail = new MassageInNetwork(editTeacher.getText(), editEmail.getText(), null,null,null,null,null,null,null,null);
-        Controller.getInstance().editEmail(massageEditEmail);
-    }
+
     @FXML
     protected void newEduClicked() throws IOException, ParseException {
         log.info("New education assistant submit");
         warningSec.setText(null);
         warningRel.setText(null);
-        if (newEdu.getText()!=null){
-            if (isChosen()){
+        if (newEdu.getText() != null) {
+            if (isChosen()) {
                 warningSec.setText("First relegate previous education assistant");
                 newEdu.setText(null);
-            }
-            else{
+            } else {
                 if (Objects.equals(currentUserFaculty(), SelectedUserFacultyForNewEdu())) {
                     warningSec.setText(null);
-                    promoteUser();
-                    changeChosen();
+                    log.info("Promote user");
+                    log.info("change is chose education assistant boolean");
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), newEdu.getText(), "promote user"));
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "change chosen"));
                     warningSec.setText("Done");
                     newEdu.setText(null);
-                }
-                else {
+                } else {
                     newEdu.setText(null);
                     warningSec.setText("Illegal");
                 }
             }
         }
-
     }
+
     @FXML
     protected void preEduClicked() throws IOException, ParseException {
         log.info("previous education assistant confirmation");
         warningSec.setText(null);
         warningRel.setText(null);
-        if (preEdu.getText() != null){
-            if (isChosen()){
+        if (preEdu.getText() != null) {
+            if (isChosen()) {
                 if (Objects.equals(currentUserFaculty(), SelectedUserFacultyForPreEdu())) {
                     warningRel.setText(null);
-                    relegateUser();
-                    changeChosen();
+                    log.info("Relegate user");
+                    log.info("change is chose education assistant boolean");
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), preEdu.getText(), "relegate user"));
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "change chosen"));
                     warningRel.setText("Done");
                     preEdu.setText(null);
-                }
-                else{
+                } else {
                     preEdu.setText(null);
                     warningRel.setText("Illegal");
                 }
 
-            }
-            else{
+            } else {
                 preEdu.setText(null);
                 warningRel.setText("Didn't choose before");
             }
 
         }
     }
+
     @FXML
     protected void removeClicked() throws IOException, ParseException {
         log.info("Removal");
-        if (teacherForRemove.getText() != null){
+        if (teacherForRemove.getText() != null) {
             if (Objects.equals(currentUserFaculty(), SelectedUserFacultyForDelete())) {
-                deleteCourseTeacher();
-                deleteTeacher();
+                log.info("Deleting course of teacher");
+                log.info("Delete teacher");
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), teacherForRemove.getText() + "-" + currentUserFaculty(), "delete course teacher"));
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), teacherForRemove.getText(), "delete teacher"));
                 warningDel.setText("Done");
                 teacherForRemove.setText(null);
-            }
-            else {
+            } else {
                 warningDel.setText("Illegal removal");
             }
-        }
-        else{
+        } else {
             warningDel.setText("First select teacher");
         }
     }
-    private Boolean isChosen(){
+
+    private Boolean isChosen() {
         log.info("Check is education assistant chose or not");
-        MassageInNetwork isChosenBefore = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork isChosenBefore = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().isChosen(isChosenBefore);
+    }
 
-    }
-    private void promoteUser(){
-        log.info("Promote user");
-        MassageInNetwork promotion = new MassageInNetwork(newEdu.getText(),null,null);
-        Controller.getInstance().promotion(promotion);
-
-    }
-    private void relegateUser(){
-        log.info("Relegate user");
-        MassageInNetwork relegation = new MassageInNetwork(preEdu.getText(),null,null);
-        Controller.getInstance().relegation(relegation);
-
-    }
-    private void changeChosen(){
-        log.info("change is chose education assistant boolean");
-        MassageInNetwork changeChosen = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
-        Controller.getInstance().valueChanger(changeChosen);
-    }
-    private void deleteCourseTeacher() throws IOException, ParseException {
-        log.info("Deleting course of teacher");
-        MassageInNetwork massage = new MassageInNetwork(teacherForRemove.getText(), currentUserFaculty(), null,null,null,null,null,null,null,null);
-        Controller.getInstance().deletingCourse(massage);
-
-    }
-    private void deleteTeacher(){
-        log.info("Delete teacher");
-        MassageInNetwork deleting = new MassageInNetwork(teacherForRemove.getText(),null,null);
-        Controller.getInstance().deletingTeacher(deleting);
-    }
     protected String currentUserFaculty() throws IOException, ParseException {
         log.info("Find current user faculty");
-        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().userFaculty(massageStudentMasterDesk);
     }
+
     private String SelectedUserFacultyForDelete() throws IOException, ParseException {
         log.info("Select user faculty for deleting");
-        MassageInNetwork selectedFaculty = new MassageInNetwork(teacherForRemove.getText(),null,null);
-        return Controller.getInstance().selectedUserFaculty(selectedFaculty);
-    }
-    private String SelectedUserFacultyForNewEdu() throws IOException, ParseException {
-        log.info("new educational assistant faculty");
-        MassageInNetwork selectedFaculty = new MassageInNetwork(newEdu.getText(),null,null);
-        return Controller.getInstance().selectedUserFaculty(selectedFaculty);
-    }
-    private String SelectedUserFacultyForPreEdu() throws IOException, ParseException {
-        log.info("previous educational assistant faculty");
-        MassageInNetwork selectedFaculty = new MassageInNetwork(preEdu.getText(),null,null);
+        MassageInNetwork selectedFaculty = new MassageInNetwork(teacherForRemove.getText(), null, null);
         return Controller.getInstance().selectedUserFaculty(selectedFaculty);
     }
 
+    private String SelectedUserFacultyForNewEdu() throws IOException, ParseException {
+        log.info("new educational assistant faculty");
+        MassageInNetwork selectedFaculty = new MassageInNetwork(newEdu.getText(), null, null);
+        return Controller.getInstance().selectedUserFaculty(selectedFaculty);
+    }
+
+    private String SelectedUserFacultyForPreEdu() throws IOException, ParseException {
+        log.info("previous educational assistant faculty");
+        MassageInNetwork selectedFaculty = new MassageInNetwork(preEdu.getText(), null, null);
+        return Controller.getInstance().selectedUserFaculty(selectedFaculty);
+    }
 }

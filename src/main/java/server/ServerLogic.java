@@ -46,6 +46,9 @@ public class ServerLogic {
         if (message.getRequest().equals("get degree lesson list")){
             getDegreeLessonList(message);
         }
+        if (message.getRequest().equals("get degree teacher list")){
+            getDegreeTeacherList(message);
+        }
         if (message.getRequest().equals("show data student")){
             getStudentData(message);
         }
@@ -70,15 +73,108 @@ public class ServerLogic {
         if (message.getRequest().equals("get faculty prop")){
             getFacultyProps(message);
         }
+        if (message.getRequest().equals("get teacher list of faculty")){
+            getTeacherListFacultyProps(message);
+        }
         if (message.getRequest().equals("get faculty prop unit")){
             getFacultyPropsUnit(message);
         }
         if (message.getRequest().equals("get faculty prop stage")){
             getFacultyPropsStage(message);
         }
+        if (message.getRequest().equals("edit password in edu assistant")){
+            editPassEduAssis(message);
+        }
+        if (message.getRequest().equals("edit email in edu assistant")){
+            editEmailEduAssis(message);
+        }
+        if (message.getRequest().equals("add new teacher")){
+            addNewTeacher(message);
+        }
+        if (message.getRequest().equals("promote user")){
+            promoteUser(message);
+        }
+        if (message.getRequest().equals("change chosen")){
+            changeChosen(message);
+        }
+        if (message.getRequest().equals("relegate user")){
+            relegateUser(message);
+        }
+        if (message.getRequest().equals("delete course teacher")){
+            deleteCourseTeacher(message);
+        }
+        if (message.getRequest().equals("delete teacher")){
+            deleteTeacher(message);
+        }
+        if (message.getRequest().equals("edit btn clicked edit lesson desk")){
+            editEditLesson(message);
+        }
+        if (message.getRequest().equals("add btn clicked edit lesson desk")){
+            addEditLesson(message);
+        }
+        if (message.getRequest().equals("removal edit lesson desk")){
+            removalEditLesson(message);
+        }
 
 
-
+    }
+    private void editEditLesson(Message message){
+        String[] data = message.getContent().split("-");
+        MassageInNetwork editingSelectedLesson = new MassageInNetwork(data[0], data[1],
+                data[2], data[3], null, null, null, null, null, null);
+        Controller.getInstance().editing(editingSelectedLesson);
+    }
+    private void addEditLesson(Message message){
+        String[] data = message.getContent().split("-");
+        Boolean present = false;
+        if (Objects.equals(data[7], "true")) present = true;
+        MassageInNetwork addSelectedLesson = new MassageInNetwork(data[0], data[1],
+                data[2], data[3], data[4], data[5], data[6]
+                , present, null, null);
+        Controller.getInstance().adding(addSelectedLesson);
+    }
+    private void removalEditLesson(Message message){
+        String[] data = message.getContent().split("-");
+        MassageInNetwork removeSelectedLesson = new MassageInNetwork(data[0], data[1], null, null, null, null, null, null, null, null);
+        Controller.getInstance().removal(removeSelectedLesson);
+    }
+    private void deleteCourseTeacher(Message message){
+        String[] data = message.getContent().split("-");
+        MassageInNetwork massage = new MassageInNetwork(data[0], data[1], null, null, null, null, null, null, null, null);
+        Controller.getInstance().deletingCourse(massage);
+    }
+    private void deleteTeacher(Message message){
+        MassageInNetwork deleting = new MassageInNetwork(message.getContent(), null, null);
+        Controller.getInstance().deletingTeacher(deleting);
+    }
+    private void relegateUser(Message message){
+        MassageInNetwork relegation = new MassageInNetwork(message.getContent(), null, null);
+        Controller.getInstance().relegation(relegation);
+    }
+    private void promoteUser(Message message){
+        MassageInNetwork promotion = new MassageInNetwork(message.getContent(), null, null);
+        Controller.getInstance().promotion(promotion);
+    }
+    private void changeChosen(Message message){
+        MassageInNetwork changeChosen = new MassageInNetwork(message.getContent(), null, null);
+        Controller.getInstance().valueChanger(changeChosen);
+    }
+    private void addNewTeacher(Message message){
+        String[] data = message.getContent().split("-");
+        MassageInNetwork massageSignUp = new MassageInNetwork(data[0], data[1],
+                data[2], data[3], data[4],data[5], data[6], data[7]);
+        Controller.getInstance().addUser(massageSignUp);
+    }
+    private void editPassEduAssis(Message message){
+        String[] data = message.getContent().split("-");
+        MassageInNetwork massageEditPassword = new MassageInNetwork(data[0], data[1], null, null, null
+                , null, null, null, null, null);
+        Controller.getInstance().editPass(massageEditPassword);
+    }
+    private void editEmailEduAssis(Message message){
+        String[] data = message.getContent().split("-");
+        MassageInNetwork massageEditEmail = new MassageInNetwork(data[0], data[1], null, null, null, null, null, null, null, null);
+        Controller.getInstance().editEmail(massageEditEmail);
     }
     private void getFacultyPropsUnit(Message message){
         String[] data = message.getContent().split("-");
@@ -121,6 +217,22 @@ public class ServerLogic {
         }
 
 
+    }
+    private void getTeacherListFacultyProps(Message message){
+        MassageInNetwork massageTeacherListDesk = new MassageInNetwork(message.getContent(),null,null);
+        String[] facultyTeachers =  Controller.getInstance().facultyTeachers(massageTeacherListDesk);
+        String str = "";
+        for (String s:facultyTeachers){
+            if (!Objects.equals(s, "null")){
+                if (!s.equals(facultyTeachers[facultyTeachers.length - 1])) str += s + "-";
+                else str += s;
+            }
+        }
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(),str,"get teacher list of faculty"));
+            }
+        }
     }
     private void getFacultyProps(Message message){
         MassageInNetwork massageLessonListDesk = new MassageInNetwork(message.getContent(),null,null);
@@ -286,6 +398,13 @@ public class ServerLogic {
         for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
             if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
                 clientHandler.sendMessage(new Message(clientHandler.getAuthToken(),Logic.getDegree(message.getContent()),"get degree"));
+            }
+        }
+    }
+    private void getDegreeTeacherList(Message message) throws IOException, ParseException {
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(),Logic.getDegree(message.getContent()),"get degree teacher list"));
             }
         }
     }

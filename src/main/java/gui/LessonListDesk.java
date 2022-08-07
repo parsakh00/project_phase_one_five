@@ -313,12 +313,13 @@ public class LessonListDesk {
         this.degree = string;
     }
 
-    public void returnBtn() throws IOException, ParseException {
+    public void returnBtn() throws IOException, ParseException, InterruptedException {
         log.info("Return Button");
         timer.pause();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "get degree lesson list"));
         Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), "", "back to main page"));
+        Thread.sleep(200);
         stage = ((Stage) (email).getScene().getWindow());
         if (Objects.equals(degree, "master")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentMasterDesk.fxml"));
