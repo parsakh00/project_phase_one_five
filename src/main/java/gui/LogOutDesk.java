@@ -1,6 +1,9 @@
 package gui;
 
+import edu.system.Client;
+import edu.system.ClientLogic;
 import edu.system.ClientMain;
+import message.Message;
 import server.Controller;
 import currentUser.CurrentUser;
 import server.MassageInNetwork;
@@ -40,21 +43,25 @@ public class LogOutDesk {
         log.info("Change password");
         if (changePassword()){
             stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "back to log in page"));
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/login-view.fxml"));
             Scene scene = new Scene(loader.load());
-            stage.setHeight(650);
-            stage.setWidth(800);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.setTitle("educational system");
-            stage.show();
+            setStageProp(stage, scene);
+            ClientLogic.getInstance().setLogin(loader, stage);
         }
         else {
             warningChange.setText("Try again");
             newPassword.setText(null);
             oldPassword.setText(null);
         }
-
+    }
+    private void setStageProp(Stage stage, Scene scene) {
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
     }
     protected Boolean changePassword() throws IOException, ParseException {
         log.info("Change password boolean");
