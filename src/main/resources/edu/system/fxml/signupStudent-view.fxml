@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.SignUpStudent">
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SignUpStudent">
    <children>
       <Button fx:id="returnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtnClicked" text="&lt;-" />
       <Pane layoutX="95.0" layoutY="27.0" prefHeight="538.0" prefWidth="610.0" styleClass="titleBar" stylesheets="@../styles.css">

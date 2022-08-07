@@ -12,11 +12,14 @@ module edu.system {
     requires java.desktop;
     requires javafx.swing;
 
-    opens edu.system to javafx.fxml;
-    opens edu.system.gui to javafx.fxml;
+    exports message;
     exports edu.system;
-    exports edu.system.logic;
-    opens edu.system.logic to javafx.fxml;
-    exports edu.system.currentUser;
-    opens edu.system.currentUser to javafx.fxml;
+    opens edu.system to javafx.fxml;
+    exports currentUser;
+    opens currentUser to javafx.fxml;
+    exports gui;
+    opens gui to javafx.fxml;
+    exports server;
+    opens server to javafx.fxml;
+    opens message to com.google.gson;
 }

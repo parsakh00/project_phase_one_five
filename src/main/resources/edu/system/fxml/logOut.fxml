@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.LogOutDesk">
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LogOutDesk">
    <children>
       <Pane fx:id="forSource" layoutX="198.0" layoutY="146.0" prefHeight="358.0" prefWidth="422.0" styleClass="loginBox" stylesheets="@../styles.css">
          <children>

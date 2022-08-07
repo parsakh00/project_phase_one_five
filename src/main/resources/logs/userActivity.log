@@ -1,75 +1,21 @@
-2022-08-05 19:51:32 INFO  HelloApplication:77 - launch program
-2022-08-05 19:51:32 INFO  HelloApplication:62 - Log in page
-2022-08-05 19:51:41 INFO  HelloApplication:727 - Read user type from userdata file
-2022-08-05 19:51:41 INFO  HelloApplication:735 - Read user type from userdata file
-2022-08-05 19:51:41 INFO  HelloApplication:431 - Read user type from userdata file
-2022-08-05 19:51:41 INFO  HelloApplication:439 - Read and rewrite phone number from userdata file
-2022-08-05 19:51:41 INFO  HelloApplication:391 - Open user data file to read student id of student
-2022-08-05 19:51:41 INFO  HelloApplication:719 - Read user supervisor from userdata file
-2022-08-05 19:51:41 INFO  HelloApplication:415 - Open user data file to read student id of student
-2022-08-05 19:51:41 INFO  HelloApplication:399 - Open user data file to read student id of student
-2022-08-05 19:51:41 INFO  HelloApplication:323 - Read username and password of user from userdata file and check them
-2022-08-05 19:51:41 INFO  HelloApplication:329 - check equality of hash of pass that entered by pass that user field in password field
-2022-08-05 19:51:41 INFO  HelloApplication:276 - Check validity of condition for enterance
-2022-08-05 19:51:41 INFO  HelloApplication:350 - Read name of user from file
-2022-08-05 19:51:41 INFO  HelloApplication:276 - Check validity of condition for enterance
-2022-08-05 19:51:41 INFO  HelloApplication:350 - Read name of user from file
-2022-08-05 19:51:41 INFO  StudentUndergraduateDesk:81 - Undergraduate student main, logged in
-2022-08-05 19:51:41 INFO  StudentUndergraduateDesk:100 - logged in
-2022-08-05 19:51:41 INFO  StudentUndergraduateDesk:247 - Get current student Username
-2022-08-05 19:51:41 INFO  HelloApplication:350 - Read name of user from file
-2022-08-05 19:51:41 INFO  StudentUndergraduateDesk:287 - Show default image
-2022-08-05 19:51:41 INFO  StudentUndergraduateDesk:247 - Get current student Username
-2022-08-05 19:51:41 INFO  HelloApplication:350 - Read name of user from file
-2022-08-05 19:51:41 INFO  StudentUndergraduateDesk:242 - Get current student Email
-2022-08-05 19:51:41 INFO  StudentUndergraduateDesk:252 - Get current student Educational status
-2022-08-05 19:51:41 INFO  HelloApplication:711 - Read user education status from userdata file
-2022-08-05 19:51:41 INFO  StudentUndergraduateDesk:257 - Get current student supervisor
-2022-08-05 19:51:41 INFO  HelloApplication:719 - Read user supervisor from userdata file
-2022-08-05 19:51:44 INFO  StudentUndergraduateDesk:309 - Teachers list clicked
-2022-08-05 19:51:44 INFO  HelloApplication:57 - Open teacher list desk
-2022-08-05 19:51:44 INFO  HelloApplication:107 - Get user email
-2022-08-05 19:51:44 INFO  HelloApplication:113 - Get user, username
-2022-08-05 19:51:44 INFO  HelloApplication:350 - Read name of user from file
-2022-08-05 19:51:46 INFO  HelloApplication:194 - Get user faculty
-2022-08-05 19:51:46 INFO  HelloApplication:226 - Get faculty teachers details
-2022-08-05 19:51:46 INFO  HelloApplication:1602 - Read unidatas file to get teachers data
-2022-08-05 19:51:49 INFO  HelloApplication:194 - Get user faculty
-2022-08-05 19:51:49 INFO  HelloApplication:226 - Get faculty teachers details
-2022-08-05 19:51:49 INFO  HelloApplication:1602 - Read unidatas file to get teachers data
-2022-08-05 19:51:51 INFO  HelloApplication:194 - Get user faculty
-2022-08-05 19:51:51 INFO  HelloApplication:226 - Get faculty teachers details
-2022-08-05 19:51:51 INFO  HelloApplication:1602 - Read unidatas file to get teachers data
-2022-08-05 19:51:52 INFO  HelloApplication:128 - Return button click
-2022-08-05 19:51:52 INFO  HelloApplication:123 - Get user degree
-2022-08-05 19:51:52 INFO  HelloApplication:743 - Read degree of user from file
-2022-08-05 19:51:52 INFO  HelloApplication:123 - Get user degree
-2022-08-05 19:51:52 INFO  HelloApplication:743 - Read degree of user from file
-2022-08-05 19:51:52 INFO  HelloApplication:123 - Get user degree
-2022-08-05 19:51:52 INFO  HelloApplication:743 - Read degree of user from file
-2022-08-05 19:51:52 INFO  StudentUndergraduateDesk:81 - Undergraduate student main, logged in
-2022-08-05 19:51:52 INFO  StudentUndergraduateDesk:100 - logged in
-2022-08-05 19:51:52 INFO  StudentUndergraduateDesk:247 - Get current student Username
-2022-08-05 19:51:52 INFO  HelloApplication:350 - Read name of user from file
-2022-08-05 19:51:52 INFO  StudentUndergraduateDesk:287 - Show default image
-2022-08-05 19:51:52 INFO  StudentUndergraduateDesk:247 - Get current student Username
-2022-08-05 19:51:52 INFO  HelloApplication:350 - Read name of user from file
-2022-08-05 19:51:52 INFO  StudentUndergraduateDesk:242 - Get current student Email
-2022-08-05 19:51:52 INFO  StudentUndergraduateDesk:252 - Get current student Educational status
-2022-08-05 19:51:52 INFO  HelloApplication:711 - Read user education status from userdata file
-2022-08-05 19:51:52 INFO  StudentUndergraduateDesk:257 - Get current student supervisor
-2022-08-05 19:51:52 INFO  HelloApplication:719 - Read user supervisor from userdata file
-2022-08-05 19:51:55 INFO  StudentUndergraduateDesk:295 - Lesson lists clicked
-2022-08-05 19:51:55 INFO  HelloApplication:65 - Open lesson list desk page
-2022-08-05 19:51:55 INFO  HelloApplication:109 - Get user email
-2022-08-05 19:51:55 INFO  HelloApplication:115 - Get current username
-2022-08-05 19:51:55 INFO  HelloApplication:350 - Read name of user from file
-2022-08-05 19:51:57 INFO  HelloApplication:120 - get current user faculty
-2022-08-05 19:51:57 INFO  HelloApplication:231 - get faculty data
-2022-08-05 19:51:57 INFO  HelloApplication:1484 - Open and read faculty data
-2022-08-05 19:52:02 INFO  HelloApplication:154 - Get user stage
-2022-08-05 19:52:02 INFO  HelloApplication:168 - get faculty stage
-2022-08-05 19:52:02 INFO  HelloApplication:1562 - Open and read faculty stage data from file
-2022-08-05 19:52:05 INFO  HelloApplication:154 - Get user stage
-2022-08-05 19:52:05 INFO  HelloApplication:168 - get faculty stage
-2022-08-05 19:52:05 INFO  HelloApplication:1562 - Open and read faculty stage data from file
+2022-08-07 15:41:00 INFO  ClientMain:699 - Read user type from userdata file
+2022-08-07 15:41:00 INFO  ClientMai2022-08-07 15:41:00 INFO  ClientMain:699 - Read user type from userdata file
+2022-08-07 15:41:00 INFO  ClientMain:707 - Read user type from userdata file
+2022-08-07 15:41:00 INFO  ClientMain:418 - Read user type from userdata file
+2022-08-07 15:41:00 INFO  ClientMain:426 - Read and rewrite phone number from userdata file
+2022-08-07 15:41:00 INFO  ClientMain:378 - Open user data file to read student id of student
+2022-08-07 15:41:00 INFO  ClientMain:691 - Read user supervisor from userdata file
+2022-08-07 15:41:00 INFO  ClientMain:402 - Open user data file to read student id of student
+2022-08-07 15:41:00 INFO  ClientMain:386 - Open user data file to read student id of student
+2022-08-07 15:41:00 INFO  StudentUndergraduateDesk:84 - Undergraduate student main, logged in
+2022-08-07 15:41:00 INFO  StudentUndergraduateDesk:103 - logged in
+2022-08-07 15:41:00 INFO  StudentUndergraduateDesk:250 - Get current student Username
+2022-08-07 15:41:00 INFO  ClientMain:337 - Read name of user from file
+2022-08-07 15:41:00 INFO  StudentUndergraduateDesk:290 - Show default image
+2022-08-07 15:41:01 INFO  StudentUndergraduateDesk:250 - Get current student Username
+2022-08-07 15:41:01 INFO  ClientMain:337 - Read name of user from file
+2022-08-07 15:41:01 INFO  StudentUndergraduateDesk:245 - Get current student Email
+2022-08-07 15:41:01 INFO  StudentUndergraduateDesk:255 - Get current student Educational status
+2022-08-07 15:41:01 INFO  ClientMain:683 - Read user education status from userdata file
+2022-08-07 15:41:01 INFO  StudentUndergraduateDesk:260 - Get current student supervisor
+2022-08-07 15:41:01 INFO  ClientMain:691 - Read user supervisor from userdata file

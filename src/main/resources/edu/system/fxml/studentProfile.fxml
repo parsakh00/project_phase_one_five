@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.system.gui.StudentProfile">
+<AnchorPane prefHeight="650.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StudentProfile">
     <children>
         <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
             <children>
@@ -132,7 +132,6 @@
       <TextField fx:id="changeEmail" layoutX="30.0" layoutY="511.0" promptText="Changing Email" />
       <Label fx:id="warningNumber" alignment="CENTER" layoutX="50.0" layoutY="454.0" prefHeight="18.0" prefWidth="109.0" />
       <Label fx:id="warningEmail" alignment="CENTER" layoutX="50.0" layoutY="581.0" prefHeight="18.0" prefWidth="109.0" />
-      <Button layoutX="593.0" layoutY="143.0" mnemonicParsing="false" onAction="#showData" text="show" />
       <Pane fx:id="imageOfUser" layoutX="30.0" layoutY="143.0" prefHeight="140.0" prefWidth="160.0" />
     </children>
 </AnchorPane>
