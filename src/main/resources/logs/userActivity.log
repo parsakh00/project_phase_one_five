@@ -1,21 +1,15 @@
-2022-08-07 15:41:00 INFO  ClientMain:699 - Read user type from userdata file
-2022-08-07 15:41:00 INFO  ClientMai2022-08-07 15:41:00 INFO  ClientMain:699 - Read user type from userdata file
-2022-08-07 15:41:00 INFO  ClientMain:707 - Read user type from userdata file
-2022-08-07 15:41:00 INFO  ClientMain:418 - Read user type from userdata file
-2022-08-07 15:41:00 INFO  ClientMain:426 - Read and rewrite phone number from userdata file
-2022-08-07 15:41:00 INFO  ClientMain:378 - Open user data file to read student id of student
-2022-08-07 15:41:00 INFO  ClientMain:691 - Read user supervisor from userdata file
-2022-08-07 15:41:00 INFO  ClientMain:402 - Open user data file to read student id of student
-2022-08-07 15:41:00 INFO  ClientMain:386 - Open user data file to read student id of student
-2022-08-07 15:41:00 INFO  StudentUndergraduateDesk:84 - Undergraduate student main, logged in
-2022-08-07 15:41:00 INFO  StudentUndergraduateDesk:103 - logged in
-2022-08-07 15:41:00 INFO  StudentUndergraduateDesk:250 - Get current student Username
-2022-08-07 15:41:00 INFO  ClientMain:337 - Read name of user from file
-2022-08-07 15:41:00 INFO  StudentUndergraduateDesk:290 - Show default image
-2022-08-07 15:41:01 INFO  StudentUndergraduateDesk:250 - Get current student Username
-2022-08-07 15:41:01 INFO  ClientMain:337 - Read name of user from file
-2022-08-07 15:41:01 INFO  StudentUndergraduateDesk:245 - Get current student Email
-2022-08-07 15:41:01 INFO  StudentUndergraduateDesk:255 - Get current student Educational status
-2022-08-07 15:41:01 INFO  ClientMain:683 - Read user education status from userdata file
-2022-08-07 15:41:01 INFO  StudentUndergraduateDesk:260 - Get current student supervisor
-2022-08-07 15:41:01 INFO  ClientMain:691 - Read user supervisor from userdata file
+2022-08-07 20:22:03 INFO  ClientMain:699 - Read user type from userdata file
+2022-08-07 20:22:03 INFO  ClientMai2022-08-07 20:22:03 INFO  ClientMain:699 - Read user type from userdata file
+2022-08-07 20:22:03 INFO  ClientMain:707 - Read user type from userdata file
+2022-08-07 20:22:03 INFO  ClientMain:418 - Read user type from userdata file
+2022-08-07 20:22:03 INFO  ClientMain:426 - Read and rewrite phone number from userdata file
+2022-08-07 20:22:03 INFO  ClientMain:378 - Open user data file to read student id of student
+2022-08-07 20:22:03 INFO  ClientMain:394 - Open user data file to read student id of student
+2022-08-07 20:22:03 INFO  ClientMain:410 - Open user data file to read student id of student
+2022-08-07 20:22:04 INFO  TeacherDesk:57 - Open teacher main, logged in
+2022-08-07 20:22:04 INFO  TeacherDesk:157 - Set current user image
+2022-08-07 20:22:04 INFO  TeacherDesk:140 - Get current user username
+2022-08-07 20:22:04 INFO  ClientMain:337 - Read name of user from file
+2022-08-07 20:22:04 INFO  TeacherDesk:140 - Get current user username
+2022-08-07 20:22:04 INFO  ClientMain:337 - Read name of user from file
+2022-08-07 20:22:04 INFO  TeacherDesk:135 - Get current user Ebail

@@ -43,6 +43,9 @@ public class ServerLogic {
         if (message.getRequest().equals("get degree")){
             getDegree(message);
         }
+        if (message.getRequest().equals("get degree lesson list")){
+            getDegreeLessonList(message);
+        }
         if (message.getRequest().equals("show data student")){
             getStudentData(message);
         }
@@ -64,8 +67,76 @@ public class ServerLogic {
         if (message.getRequest().equals("set name and degree")){
             setDegreeUser(message);
         }
+        if (message.getRequest().equals("get faculty prop")){
+            getFacultyProps(message);
+        }
+        if (message.getRequest().equals("get faculty prop unit")){
+            getFacultyPropsUnit(message);
+        }
+        if (message.getRequest().equals("get faculty prop stage")){
+            getFacultyPropsStage(message);
+        }
 
 
+
+    }
+    private void getFacultyPropsUnit(Message message){
+        String[] data = message.getContent().split("-");
+        String faculty = data[0];
+        String unit = data[1];
+        MassageInNetwork massageFacultyUnit = new MassageInNetwork(faculty, unit);
+        String[] facultyLessons = Controller.getInstance().facultyUnitLessons(massageFacultyUnit);
+        String str = "";
+        for (String s:facultyLessons){
+            if (!Objects.equals(s, "null")){
+                if (!s.equals(facultyLessons[facultyLessons.length - 1])) str += s + "-";
+                else str += s;
+            }
+        }
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(),str,"get faculty prop unit"));
+            }
+        }
+
+
+    }
+    private void getFacultyPropsStage(Message message){
+        String[] data = message.getContent().split("-");
+        String faculty = data[0];
+        String stage = data[1];
+        MassageInNetwork massageFacultyUnit = new MassageInNetwork(faculty, stage);
+        String[] facultyLessons = Controller.getInstance().facultyStageLessons(massageFacultyUnit);
+        String str = "";
+        for (String s:facultyLessons){
+            if (!Objects.equals(s, "null")){
+                if (!s.equals(facultyLessons[facultyLessons.length - 1])) str += s + "-";
+                else str += s;
+            }
+        }
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(),str,"get faculty prop stage"));
+            }
+        }
+
+
+    }
+    private void getFacultyProps(Message message){
+        MassageInNetwork massageLessonListDesk = new MassageInNetwork(message.getContent(),null,null);
+        String[] facultyLessons =  Controller.getInstance().facultyLessons(massageLessonListDesk);
+        String str = "";
+        for (String s:facultyLessons){
+            if (!Objects.equals(s, "null")){
+                if (!s.equals(facultyLessons[facultyLessons.length - 1])) str += s + "-";
+                else str += s;
+            }
+        }
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(),str,"get faculty prop"));
+            }
+        }
     }
     private void setDegreeUser(Message message) throws IOException, ParseException {
         String userName = message.getContent();
@@ -215,6 +286,13 @@ public class ServerLogic {
         for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
             if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
                 clientHandler.sendMessage(new Message(clientHandler.getAuthToken(),Logic.getDegree(message.getContent()),"get degree"));
+            }
+        }
+    }
+    private void getDegreeLessonList(Message message) throws IOException, ParseException {
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(),Logic.getDegree(message.getContent()),"get degree lesson list"));
             }
         }
     }

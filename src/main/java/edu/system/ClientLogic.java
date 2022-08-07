@@ -2,7 +2,6 @@ package edu.system;
 
 import gui.*;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import message.Message;
 
@@ -13,9 +12,7 @@ public class ClientLogic {
     private static ClientLogic clientLogic;
 
     private Stage stage;
-
     private Login login;
-
     private StudentUndergraduateDesk studentUndergraduateDesk;
     private StudentMasterDesk studentMasterDesk;
     private StudentPhdDesk studentPhdDesk;
@@ -23,6 +20,8 @@ public class ClientLogic {
     private EducationalAssistantDesk educationalAssistantDesk;
     private StudentProfile studentProfile;
     private TeacherProfile teacherProfile;
+    private TeachersListDesk teachersListDesk;
+    private LessonListDesk lessonListDesk;
     private LogOutDesk logOutDesk;
 
     private ClientLogic() {
@@ -48,6 +47,10 @@ public class ClientLogic {
         if (message.getRequest().equals("get degree")) {
             getUserDegree(message.getContent());
         }
+        if (message.getRequest().equals("get degree lesson list")) {
+            getUserDegreeLessonList(message.getContent());
+        }
+
         if (message.getRequest().equals("show data student")) {
             showStudentData(message);
         }
@@ -60,9 +63,28 @@ public class ClientLogic {
         if (message.getRequest().equals("get name")) {
             showUserName(message);
         }
+        if (message.getRequest().equals("get faculty prop")) {
+            showFacultyProp(message);
+        }
+        if (message.getRequest().equals("get faculty prop unit")) {
+            showFacultyPropUnit(message);
+        }
+        if (message.getRequest().equals("get faculty prop stage")) {
+            showFacultyPropStage(message);
+        }
+
 
     }
+    private void showFacultyPropUnit(Message message){
+        lessonListDesk.getFacultyUnitData(message);
+    }
+    private void showFacultyPropStage(Message message){
+        lessonListDesk.getFacultyStageData(message);
+    }
 
+    private void showFacultyProp(Message message){
+        lessonListDesk.getFacultyData(message);
+    }
     private void showStudentDegreeName(Message message){
         studentProfile.setUserDegreeAndName(message.getContent());
     }
@@ -72,7 +94,6 @@ public class ClientLogic {
     private void authToken(Message message) {
         Client.getClient().setAuthToken(message.getContent());
     }
-
 
     private void showTeacherData(Message message){
         teacherProfile.showDataList(message.getContent());
@@ -92,6 +113,9 @@ public class ClientLogic {
 
     private void getUserDegree(String content) {
         login.setDegree(content);
+    }
+    private void getUserDegreeLessonList(String content){
+        lessonListDesk.setDegree(content);
     }
 
     public void setLogin(FXMLLoader fxmlLoader, Stage stage) throws IOException {
@@ -150,7 +174,22 @@ public class ClientLogic {
         if (fxmlLoader.getController() == null) System.out.println("teacher profile is null");
     }
     public void setLogOutDesk(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("log out");
         this.stage = stage;
         this.logOutDesk = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("log out is null");
     }
+    public void setTeachersListDesk(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("teacher list desk");
+        this.stage = stage;
+        this.teachersListDesk = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("teacher list disk is  null");
+    }
+    public void setLessonListDesk(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("lesson list disk");
+        this.stage = stage;
+        this.lessonListDesk = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("lesson list desk is null");
+    }
+
 }

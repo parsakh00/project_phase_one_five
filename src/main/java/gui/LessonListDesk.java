@@ -1,9 +1,12 @@
 package gui;
 
+import edu.system.Client;
+import edu.system.ClientLogic;
 import edu.system.ClientMain;
 import currentUser.CurrentUser;
 import javafx.animation.AnimationTimer;
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +19,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import message.Message;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 import server.Controller;
+import server.Logic;
 import server.MassageInNetwork;
 
 import java.io.IOException;
@@ -31,6 +36,7 @@ public class LessonListDesk {
 
     Stage stage;
     String[] facultyLessons;
+    String degree;
     @FXML
     protected Label loginTIme;
     @FXML
@@ -52,11 +58,11 @@ public class LessonListDesk {
     @FXML
     protected CheckBox unityCheckBox;
 
-    protected String[] stagee = {"undergraduate","master","phd"};
+    protected String[] stagee = {"undergraduate", "master", "phd"};
 
-    protected String[] unity = {"0","1","2","3","4"};
+    protected String[] unity = {"0", "1", "2", "3", "4"};
 
-    protected String[] faculty = {"Chemistry","MathSci","MechanicEng","Physics","ElectricalEng"};
+    protected String[] faculty = {"Chemistry", "MathSci", "MechanicEng", "Physics", "ElectricalEng"};
 
     PauseTransition timer = new PauseTransition(Duration.seconds(CurrentUser.getInstance().getTimer()));
 
@@ -66,7 +72,7 @@ public class LessonListDesk {
         log.info("Open lesson list desk page");
         timer.playFromStart();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
-        timer.setOnFinished(actionEvent ->{
+        timer.setOnFinished(actionEvent -> {
             actionEvent.consume();
             try {
                 logOut();
@@ -74,7 +80,7 @@ public class LessonListDesk {
                 log.error("exception error", e);
                 throw new RuntimeException(e);
             }
-        } );
+        });
         timeDisplay();
         email.setText("Email : " + getEmail());
         userName.setText("Username : " + getUsername());
@@ -85,11 +91,18 @@ public class LessonListDesk {
         unityChoiceBox.setOnAction(this::getUnit);
         stageChoiceBox.setOnAction(this::getStage);
     }
+
     public void logOut() throws IOException {
         log.info("Logged out , out of time");
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
         Scene scene = new Scene(loader.load());
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setLogOutDesk(loader, stage);
+    }
+
+    private void setStageProp(Stage stage, Scene scene) {
         stage.setHeight(650);
         stage.setWidth(800);
         stage.setResizable(false);
@@ -97,7 +110,8 @@ public class LessonListDesk {
         stage.setTitle("educational system");
         stage.show();
     }
-    public void timeDisplay(){
+
+    public void timeDisplay() {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -106,204 +120,231 @@ public class LessonListDesk {
         };
         timer.start();
     }
+
     protected String getEmail() throws IOException, ParseException {
         log.info("Get user email");
-        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null,null);
-        return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
-
+        return Logic.getEmail(CurrentUser.getInstance().getUserName());
     }
+
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current username");
-        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
-        return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
+        return Logic.getUserName(CurrentUser.getInstance().getUserName());
     }
+
     protected void getFaculty(ActionEvent actionEvent) {
         log.info("get current user faculty");
-        String filter1 =  facultyChoiceBox.getValue();
-        filterGrid.getChildren().clear();
-        for (int i = 0; i < 5; i++){
-            Label label = new Label();
-            if (i == 0) label.setText("Stage");
-            if (i == 1) label.setText("Teacher");
-            if (i == 2) label.setText("Lesson");
-            if (i == 3) label.setText("Unity");
-            if (i == 4) label.setText("Id");
-            filterGrid.add(label,i,0);
-            GridPane.setHalignment(label, HPos.CENTER);
-        }
-        getFacultyData(facultyChoiceBox.getValue());
-        int i = 0;
-        int j = 1;
-        for (String eachElement : facultyLessons){
-            if (!Objects.equals(eachElement, "null")){
-                Label label = new Label();
-                if (i%5 == 1) label.setText(eachElement);
-                else if (i%5 == 2) label.setText(eachElement);
-                else if (i%5 == 3) label.setText(eachElement);
-                else if (i%5 == 4) label.setText(eachElement);
-                else if (i%5 == 0) label.setText(eachElement);
-                label.setAlignment(Pos.CENTER);
-                filterGrid.add(label,i%5 ,j);
-                GridPane.setHalignment(label, HPos.CENTER);
-                i += 1;
-                if (i%5 == 0) j+= 1;
-            }
-        }
-
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), facultyChoiceBox.getValue(), "get faculty prop"));
     }
-    protected void getStage(ActionEvent actionEvent){
+
+    protected void getStage(ActionEvent actionEvent) {
         log.info("Get user stage");
-        if (stageCheckBox.isSelected()) {
-            String filter1 =  facultyChoiceBox.getValue();
-            filterGrid.getChildren().clear();
-            for (int i = 0; i < 5; i++){
-                Label label = new Label();
-                if (i == 0) label.setText("Stage");
-                if (i == 1) label.setText("Teacher");
-                if (i == 2) label.setText("Lesson");
-                if (i == 3) label.setText("Unity");
-                if (i == 4) label.setText("Id");
-                filterGrid.add(label,i,0);
-                GridPane.setHalignment(label, HPos.CENTER);
-            }
-            log.info("get faculty stage");
-            MassageInNetwork massageFacultyUnit = new MassageInNetwork(facultyChoiceBox.getValue(), stageChoiceBox.getValue());
-            facultyLessons = Controller.getInstance().facultyStageLessons(massageFacultyUnit);
-            int i = 0;
-            int j = 1;
-            for (String eachElement : facultyLessons){
-                if (!Objects.equals(eachElement, "null")){
-                    Label label = new Label();
-                    if (i%5 == 1) label.setText(eachElement);
-                    else if (i%5 == 2) label.setText(eachElement);
-                    else if (i%5 == 3) label.setText(eachElement);
-                    else if (i%5 == 4) label.setText(eachElement);
-                    else if (i%5 == 0) label.setText(eachElement);
-                    label.setAlignment(Pos.CENTER);
-                    GridPane.setHalignment(label, HPos.CENTER);
-                    filterGrid.add(label,i%5 ,j);
-                    i += 1;
-                    if (i%5 == 0) j+= 1;
-                }
-            }
-        }
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), facultyChoiceBox.getValue() + "-" + stageChoiceBox.getValue(), "get faculty prop stage"));
     }
-    protected void getUnit(ActionEvent actionEvent){
+
+    protected void getUnit(ActionEvent actionEvent) {
         log.info("Get array of unit");
-        if (unityCheckBox.isSelected()) {
-            String filter1 =  facultyChoiceBox.getValue();
-            filterGrid.getChildren().clear();
-            for (int i = 0; i < 5; i++){
-                Label label = new Label();
-                if (i == 0) label.setText("Stage");
-                if (i == 1) label.setText("Teacher");
-                if (i == 2) label.setText("Lesson");
-                if (i == 3) label.setText("Unity");
-                if (i == 4) label.setText("Id");
-                filterGrid.add(label,i,0);
-                GridPane.setHalignment(label, HPos.CENTER);
-            }
-            log.info("get faculty unit");
-            MassageInNetwork massageFacultyUnit = new MassageInNetwork(facultyChoiceBox.getValue(), unityChoiceBox.getValue());
-            facultyLessons = Controller.getInstance().facultyUnitLessons(massageFacultyUnit);
-            int i = 0;
-            int j = 1;
-            for (String eachElement : facultyLessons){
-                if (!Objects.equals(eachElement, "null")){
-                    Label label = new Label();
-                    if (i%5 == 1) label.setText(eachElement);
-                    else if (i%5 == 2) label.setText(eachElement);
-                    else if (i%5 == 3) label.setText(eachElement);
-                    else if (i%5 == 4) label.setText(eachElement);
-                    else if (i%5 == 0) label.setText(eachElement);
-                    label.setAlignment(Pos.CENTER);
-                    GridPane.setHalignment(label, HPos.CENTER);
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), facultyChoiceBox.getValue() + "-" + unityChoiceBox.getValue(), "get faculty prop unit"));
+    }
 
-                    filterGrid.add(label,i%5 ,j);
-                    i += 1;
-                    if (i%5 == 0) j+= 1;
+    public void getFacultyStageData(Message message) {
+        if (message.getContent() != null) {
+            this.facultyLessons = message.getContent().split("-");
+            Platform.runLater(() -> {
+                if (stageCheckBox.isSelected()) {
+                    filterGrid.getChildren().clear();
+                    for (int i = 0; i < 5; i++) {
+                        Label label = new Label();
+                        if (i == 0) label.setText("Stage");
+                        if (i == 1) label.setText("Teacher");
+                        if (i == 2) label.setText("Lesson");
+                        if (i == 3) label.setText("Unity");
+                        if (i == 4) label.setText("Id");
+                        filterGrid.add(label, i, 0);
+                        GridPane.setHalignment(label, HPos.CENTER);
+                    }
+                    log.info("get faculty stage");
+                    int i = 0;
+                    int j = 1;
+                    for (String eachElement : facultyLessons) {
+                        if (!Objects.equals(eachElement, "null")) {
+                            Label label = new Label();
+                            if (i % 5 == 1) label.setText(eachElement);
+                            else if (i % 5 == 2) label.setText(eachElement);
+                            else if (i % 5 == 3) label.setText(eachElement);
+                            else if (i % 5 == 4) label.setText(eachElement);
+                            else if (i % 5 == 0) label.setText(eachElement);
+                            label.setAlignment(Pos.CENTER);
+                            GridPane.setHalignment(label, HPos.CENTER);
+                            filterGrid.add(label, i % 5, j);
+                            i += 1;
+                            if (i % 5 == 0) j += 1;
+                        }
+                    }
                 }
-            }
+            });
+        } else {
+            Platform.runLater(() -> {
+                if (unityCheckBox.isSelected()) {
+                    filterGrid.getChildren().clear();
+                    for (int i = 0; i < 5; i++) {
+                        Label label = new Label();
+                        if (i == 0) label.setText("Stage");
+                        if (i == 1) label.setText("Teacher");
+                        if (i == 2) label.setText("Lesson");
+                        if (i == 3) label.setText("Unity");
+                        if (i == 4) label.setText("Id");
+                        filterGrid.add(label, i, 0);
+                        GridPane.setHalignment(label, HPos.CENTER);
+                    }
+                }
+            });
         }
-
-
-    }
-    protected void getFacultyData(String faculty) {
-        log.info("get faculty data");
-        MassageInNetwork massageLessonListDesk = new MassageInNetwork(faculty,null,null);
-        facultyLessons =  Controller.getInstance().facultyLessons(massageLessonListDesk);
-    }
-    protected String getUserType() throws IOException, ParseException {
-        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
-        return Controller.getInstance().userDeskType(massageStudentMasterDesk);
     }
 
-    protected String getUserDegree() throws IOException, ParseException {
-        log.info("Get current user degree");
-        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
-        return Controller.getInstance().userDeskDegreee(massageStudentMasterDesk);
+    public void getFacultyUnitData(Message message) {
+        if (message.getContent() != null) {
+            this.facultyLessons = message.getContent().split("-");
+            Platform.runLater(() -> {
+                if (unityCheckBox.isSelected()) {
+                    filterGrid.getChildren().clear();
+                    for (int i = 0; i < 5; i++) {
+                        Label label = new Label();
+                        if (i == 0) label.setText("Stage");
+                        if (i == 1) label.setText("Teacher");
+                        if (i == 2) label.setText("Lesson");
+                        if (i == 3) label.setText("Unity");
+                        if (i == 4) label.setText("Id");
+                        filterGrid.add(label, i, 0);
+                        GridPane.setHalignment(label, HPos.CENTER);
+                    }
+                    log.info("get faculty unit");
+                    int i = 0;
+                    int j = 1;
+                    for (String eachElement : facultyLessons) {
+                        if (!Objects.equals(eachElement, "null")) {
+                            Label label = new Label();
+                            if (i % 5 == 1) label.setText(eachElement);
+                            else if (i % 5 == 2) label.setText(eachElement);
+                            else if (i % 5 == 3) label.setText(eachElement);
+                            else if (i % 5 == 4) label.setText(eachElement);
+                            else if (i % 5 == 0) label.setText(eachElement);
+                            label.setAlignment(Pos.CENTER);
+                            GridPane.setHalignment(label, HPos.CENTER);
+
+                            filterGrid.add(label, i % 5, j);
+                            i += 1;
+                            if (i % 5 == 0) j += 1;
+                        }
+                    }
+                }
+            });
+        } else {
+            Platform.runLater(() -> {
+                if (unityCheckBox.isSelected()) {
+                    filterGrid.getChildren().clear();
+                    for (int i = 0; i < 5; i++) {
+                        Label label = new Label();
+                        if (i == 0) label.setText("Stage");
+                        if (i == 1) label.setText("Teacher");
+                        if (i == 2) label.setText("Lesson");
+                        if (i == 3) label.setText("Unity");
+                        if (i == 4) label.setText("Id");
+                        filterGrid.add(label, i, 0);
+                        GridPane.setHalignment(label, HPos.CENTER);
+                    }
+                }
+            });
+        }
+    }
+
+    public void getFacultyData(Message message) {
+        if (message.getContent() != null) {
+            this.facultyLessons = message.getContent().split("-");
+            Platform.runLater(() -> {
+                filterGrid.getChildren().clear();
+                for (int i = 0; i < 5; i++) {
+                    Label label = new Label();
+                    if (i == 0) label.setText("Stage");
+                    if (i == 1) label.setText("Teacher");
+                    if (i == 2) label.setText("Lesson");
+                    if (i == 3) label.setText("Unity");
+                    if (i == 4) label.setText("Id");
+                    filterGrid.add(label, i, 0);
+                    GridPane.setHalignment(label, HPos.CENTER);
+                }
+                int i = 0;
+                int j = 1;
+                for (String eachElement : facultyLessons) {
+                    if (!Objects.equals(eachElement, "null")) {
+                        Label label = new Label();
+                        if (i % 5 == 1) label.setText(eachElement);
+                        else if (i % 5 == 2) label.setText(eachElement);
+                        else if (i % 5 == 3) label.setText(eachElement);
+                        else if (i % 5 == 4) label.setText(eachElement);
+                        else if (i % 5 == 0) label.setText(eachElement);
+                        label.setAlignment(Pos.CENTER);
+                        filterGrid.add(label, i % 5, j);
+                        GridPane.setHalignment(label, HPos.CENTER);
+                        i += 1;
+                        if (i % 5 == 0) j += 1;
+                    }
+                }
+            });
+        } else {
+            Platform.runLater(() -> {
+                if (unityCheckBox.isSelected()) {
+                    filterGrid.getChildren().clear();
+                    for (int i = 0; i < 5; i++) {
+                        Label label = new Label();
+                        if (i == 0) label.setText("Stage");
+                        if (i == 1) label.setText("Teacher");
+                        if (i == 2) label.setText("Lesson");
+                        if (i == 3) label.setText("Unity");
+                        if (i == 4) label.setText("Id");
+                        filterGrid.add(label, i, 0);
+                        GridPane.setHalignment(label, HPos.CENTER);
+                    }
+                }
+            });
+        }
+    }
+
+    public void setDegree(String string) {
+        this.degree = string;
     }
 
     public void returnBtn() throws IOException, ParseException {
         log.info("Return Button");
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "get degree lesson list"));
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), "", "back to main page"));
         stage = ((Stage) (email).getScene().getWindow());
-        if (Objects.equals(getUserDegree(), "master")) {
+        if (Objects.equals(degree, "master")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentMasterDesk.fxml"));
             Scene scene = new Scene(loader.load());
-            stage.setHeight(650);
-            stage.setWidth(800);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.setTitle("educational system");
-            stage.show();
-        }
-        else if (Objects.equals(getUserDegree(), "phd")){
+            setStageProp(stage, scene);
+            ClientLogic.getInstance().setStudentMasterDesk(loader, stage);
+        } else if (Objects.equals(degree, "phd")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentPhd.fxml"));
             Scene scene = new Scene(loader.load());
-            stage.setHeight(650);
-            stage.setWidth(800);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.setTitle("educational system");
-            stage.show();
-        }
-        else if (Objects.equals(getUserDegree(), "undergraduate")){
+            setStageProp(stage, scene);
+            ClientLogic.getInstance().setStudentPhdDesk(loader, stage);
+        } else if (Objects.equals(degree, "undergraduate")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentUndergraduateDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
-            stage.setHeight(650);
-            stage.setWidth(800);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.setTitle("educational system");
-            stage.show();
-        }
-        else if (Objects.equals(getUserDegree(), "manager") || Objects.equals(getUserDegree(),"-")){
+            setStageProp(stage, scene);
+            ClientLogic.getInstance().setStudentUndergraduateDesk(loader, stage);
+        } else if (Objects.equals(degree, "manager") || Objects.equals(degree, "-")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/teacherDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
-            stage.setHeight(650);
-            stage.setWidth(800);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.setTitle("educational system");
-            stage.show();
-        }
-
-        else if (Objects.equals(getUserDegree(), "education assistant")){
+            setStageProp(stage, scene);
+            ClientLogic.getInstance().setTeacherDesk(loader, stage);
+        } else if (Objects.equals(degree, "education assistant")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
-            stage.setHeight(650);
-            stage.setWidth(800);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.setTitle("educational system");
-            stage.show();
+            setStageProp(stage, scene);
+            ClientLogic.getInstance().setEducationalAssistantDesk(loader, stage);
         }
-
     }
-
-
-
-
 }
