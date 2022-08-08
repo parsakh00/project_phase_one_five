@@ -13,15 +13,15 @@ public class ClientLogic {
 
     private Stage stage;
     private Login login;
+    private StudentProfile studentProfile;
+    private TeacherProfile teacherProfile;
+    private TeachersListDesk teachersListDesk;
+    private LessonListDesk lessonListDesk;
     private StudentUndergraduateDesk studentUndergraduateDesk;
     private StudentMasterDesk studentMasterDesk;
     private StudentPhdDesk studentPhdDesk;
     private TeacherDesk teacherDesk;
     private EducationalAssistantDesk educationalAssistantDesk;
-    private StudentProfile studentProfile;
-    private TeacherProfile teacherProfile;
-    private TeachersListDesk teachersListDesk;
-    private LessonListDesk lessonListDesk;
     private ChangeEduAssisOrEdit changeEduAssisOrEdit;
     private EditLessonsDesk editLessonsDesk;
     private LogOutDesk logOutDesk;
@@ -30,6 +30,16 @@ public class ClientLogic {
     private TeacherRecommendRequest teacherRecommendRequest;
     private EduWithdrawRequest eduWithdrawRequest;
     private EduMinorRequests eduMinorRequests;
+
+    private MinorDesk minorDesk;
+    private withdrawalFromEducationDesk withdrawalFromEducationDesk;
+    private Recommendation recommendation;
+    private WeeklySchedule weeklySchedule;
+    private ExamsList examsList;
+    private ApplyCertificateEmploymentDesk applyCertificateEmploymentDesk;
+    private RequestDefendDissertation requestDefendDissertation;
+    private AccommodationDesk accommodationDesk;
+
 
     private ClientLogic() {
 
@@ -84,7 +94,21 @@ public class ClientLogic {
         if (message.getRequest().equals("get teacher list of faculty")) {
             showFacultyTeacherProp(message);
         }
+        if (message.getRequest().equals("show weekly schedule")) {
+            showWeeklySchedule(message);
+        }
+        if (message.getRequest().equals("showWithdrawalResult")) {
+            showWithdrawalResult(message);
+        }
 
+    }
+
+    private void showWithdrawalResult(Message message) {
+        withdrawalFromEducationDesk.withdrawalResult(message.getContent());
+    }
+
+    private void showWeeklySchedule(Message message) {
+        weeklySchedule.showStudentSchedule(message.getContent());
     }
 
     private void showFacultyPropUnit(Message message) {
@@ -233,36 +257,95 @@ public class ClientLogic {
         this.changeEduAssisOrEdit = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("lesson list desk is null");
     }
+
     public void setSignUpStudent(FXMLLoader fxmlLoader, Stage stage) {
         System.out.println("signup student desk");
         this.stage = stage;
         this.signUpStudent = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("signup student desk is null");
     }
+
     public void setSignUpTeacher(FXMLLoader fxmlLoader, Stage stage) {
         System.out.println("signup teacher desk");
         this.stage = stage;
         this.signUpTeacher = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("signup teacher desk is null");
     }
+
     public void setEduWithdrawRequest(FXMLLoader fxmlLoader, Stage stage) {
         System.out.println("edu withdraw request");
         this.stage = stage;
-        this.signUpTeacher = fxmlLoader.getController();
+        this.eduWithdrawRequest = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("edu withdraw request is null");
     }
+
     public void setEduMinorRequests(FXMLLoader fxmlLoader, Stage stage) {
         System.out.println("edu minor request desk");
         this.stage = stage;
-        this.signUpTeacher = fxmlLoader.getController();
+        this.eduMinorRequests = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("edu minor request desk is null");
     }
+
     public void setTeacherRecommendRequest(FXMLLoader fxmlLoader, Stage stage) {
         System.out.println("teacher recommendation request desk");
         this.stage = stage;
-        this.signUpTeacher = fxmlLoader.getController();
+        this.teacherRecommendRequest = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("teacher recommendation desk is null");
     }
 
+    public void setMinorDesk(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("Minor Desk");
+        this.stage = stage;
+        this.minorDesk = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("Minor Desk is null");
+    }
 
+    public void setWithdrawalFromEducationDesk(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("Withdrawal From Education desk");
+        this.stage = stage;
+        this.withdrawalFromEducationDesk = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("Withdrawal From Education desk is null");
+    }
+
+    public void setRecommendation(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("Recommendation desk");
+        this.stage = stage;
+        this.recommendation = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("Recommendation desk is null");
+    }
+
+    public void setWeeklySchedule(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("Weekly Schedule desk");
+        this.stage = stage;
+        this.weeklySchedule = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("Weekly Schedule desk is null");
+    }
+
+    public void setExamsList(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("Exams List desk");
+        this.stage = stage;
+        this.examsList = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("Exams List desk is null");
+    }
+
+    public void setApplyCertificateEmploymentDesk(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("Apply Certificate Employment Desk desk");
+        this.stage = stage;
+        this.applyCertificateEmploymentDesk = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("Apply Certificate Employment Desk desk is null");
+    }
+
+    public void setRequestDefendDissertation(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("Request Defend Dissertation desk");
+        this.stage = stage;
+        this.requestDefendDissertation = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("Request Defend Dissertation desk is null");
+    }
+
+    public void setAccommodationDesk(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("Accommodation desk request desk");
+        this.stage = stage;
+        this.accommodationDesk = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("Accommodation desk is null");
+    }
 }

@@ -13,6 +13,7 @@
   "email":"student3@gmail.com",
   "student number":"96102132",
   "username":"student3",
+  "isTA" : true,
   "lessons": {
     "MechanicEng":"28182",
     "Chemistry":"23261",

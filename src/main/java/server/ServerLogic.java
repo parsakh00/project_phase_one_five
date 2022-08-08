@@ -142,6 +142,45 @@ public class ServerLogic {
         if (message.getRequest().equals("accept withdraw")) {
             acceptWithdraw(message);
         }
+        if (message.getRequest().equals("show weekly schedule")) {
+            showWeeklySchedule(message);
+        }
+        if (message.getRequest().equals("request for withdrawal")) {
+            withdrawalRequest(message);
+        }
+        if (message.getRequest().equals("showWithdrawalResult")) {
+            withdrawalResult(message);
+        }
+    }
+    private void withdrawalResult(Message message) throws IOException, ParseException {
+        MassageInNetwork massageResult = new MassageInNetwork(message.getContent(), null,null);
+        String result = Controller.getInstance().withdrawResult(massageResult);
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), result, "showWithdrawalResult"));
+            }
+        }
+    }
+    private void withdrawalRequest(Message message) throws IOException, ParseException {
+        String username = message.getContent();
+        MassageInNetwork massageStudentMasterDesk = new MassageInNetwork(username, null,null);
+        Controller.getInstance().withdrawRequest(massageStudentMasterDesk);
+    }
+    private void showWeeklySchedule(Message message) throws IOException, ParseException {
+        MassageInNetwork massageGetUserLesson = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
+        String[] lesson =  Controller.getInstance().userOfLessons(massageGetUserLesson);
+        String str = "";
+        for (String s : lesson) {
+            if (!Objects.equals(s, "null")) {
+                if (!s.equals(lesson[lesson.length - 1])) str += s + "-";
+                else str += s;
+            }
+        }
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), str, "show weekly schedule"));
+            }
+        }
     }
 
     private void rejectWithdraw(Message message) throws IOException, ParseException {

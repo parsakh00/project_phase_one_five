@@ -13,6 +13,7 @@
   "email":"student1@gmail.com",
   "degree":"undergraduate",
   "student number" : "98103031",
+  "isTA" : false,
   "lessons": {
     "Chemistry": "23011",
     "MechanicEng": "28113",

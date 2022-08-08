@@ -117,12 +117,8 @@ public class StudentUndergraduateDesk {
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/Minor-view.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setMinorDesk(loader, stage);
     }
     @FXML
     protected void WithdrawalEducation() throws IOException {
@@ -132,12 +128,8 @@ public class StudentUndergraduateDesk {
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/withdrawalFromEducation-view.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setWithdrawalFromEducationDesk(loader, stage);
     }
     @FXML
     protected void certificateClicked() throws IOException {
@@ -147,12 +139,8 @@ public class StudentUndergraduateDesk {
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/ApplyCertificateEmployment-view.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setApplyCertificateEmploymentDesk(loader, stage);
     }
     @FXML
     protected void recommendationClicked() throws IOException {
@@ -162,12 +150,8 @@ public class StudentUndergraduateDesk {
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/Recommendation-view.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setRecommendation(loader, stage);
     }
     @FXML
     protected void scheduleClicked() throws IOException {
@@ -177,12 +161,8 @@ public class StudentUndergraduateDesk {
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/weeklySchedule-view.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setWeeklySchedule(loader, stage);
     }
     @FXML
     protected void examClicked() throws IOException {
@@ -192,6 +172,20 @@ public class StudentUndergraduateDesk {
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/examsLists.fxml"));
         Scene scene = new Scene(loader.load());
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setExamsList(loader, stage);
+    }
+    public void logoutClicked(ActionEvent actionEvent) throws IOException {
+        log.info("Current student logged out himself");
+        timer.pause();
+        stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "Current student logged out himself"));
+        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/login-view.fxml"));
+        Scene scene = new Scene(loader.load());
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setLogin(loader, stage);
+    }
+    private void setStageProp(Stage stage, Scene scene) {
         stage.setHeight(650);
         stage.setWidth(800);
         stage.setResizable(false);
@@ -262,19 +256,6 @@ public class StudentUndergraduateDesk {
         log.info("Get current student supervisor");
         MassageInNetwork supervisor = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
         return Controller.getInstance().supervisor(supervisor);
-    }
-    public void logoutClicked(ActionEvent actionEvent) throws IOException {
-        log.info("Current student logged out himself");
-        timer.pause();
-        stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/login-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
     }
     public void setUserImage() throws IOException, ParseException {
         if (String.valueOf(ClientMain.class.getResource("images/" + getUsername() + ".png")) == null) {

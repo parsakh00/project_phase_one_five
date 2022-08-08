@@ -1,18 +1,24 @@
-2022-08-08 12:44:42 INFO  ClientMain:699 - Read user type from userdata file
-2022-08-08 12:44:42 INFO  ClientMai2022-08-08 12:44:42 INFO  ClientMain:699 - Read user type from userdata file
-2022-08-08 12:44:42 INFO  ClientMain:707 - Read user type from userdata file
-2022-08-08 12:44:42 INFO  ClientMain:418 - Read user type from userdata file
-2022-08-08 12:44:42 INFO  ClientMain:426 - Read and rewrite phone number from userdata file
-2022-08-08 12:44:42 INFO  ClientMain:378 - Open user data file to read student id of student
-2022-08-08 12:44:42 INFO  ClientMain:394 - Open user data file to read student id of student
-2022-08-08 12:44:42 INFO  ClientMain:410 - Open user data file to read student id of student
-2022-08-08 12:44:43 INFO  EducationalAssistantDesk:65 - Open educational assistant main page
-2022-08-08 12:44:43 INFO  EducationalAssistantDesk:76 - logged in
-2022-08-08 12:44:43 INFO  EducationalAssistantDesk:154 - Current user name
-2022-08-08 12:44:43 INFO  ClientMain:337 - Read name of user from file
-2022-08-08 12:44:43 INFO  EducationalAssistantDesk:167 - Show default image
-2022-08-08 12:44:43 INFO  EducationalAssistantDesk:154 - Current user name
-2022-08-08 12:44:43 INFO  ClientMain:337 - Read name of user from file
-2022-08-08 12:44:43 INFO  EducationalAssistantDesk:148 - Current user email
-2022-08-08 12:44:44 INFO  EducationalAssistantDesk:107 - Current user Logged out by him self
-2022-08-08 12:44:44 INFO  ClientMain:74 - Log in page
+2022-08-08 18:06:55 INFO  ClientMain:699 - Read user type from userdata file
+2022-08-08 18:06:55 INFO  ClientMai2022-08-08 18:06:55 INFO  ClientMain:699 - Read user type from userdata file
+2022-08-08 18:06:55 INFO  ClientMain:707 - Read user type from userdata file
+2022-08-08 18:06:55 INFO  ClientMain:418 - Read user type from userdata file
+2022-08-08 18:06:55 INFO  ClientMain:426 - Read and rewrite phone number from userdata file
+2022-08-08 18:06:55 INFO  ClientMain:378 - Open user data file to read student id of student
+2022-08-08 18:06:55 INFO  ClientMain:691 - Read user supervisor from userdata file
+2022-08-08 18:06:55 INFO  ClientMain:402 - Open user data file to read student id of student
+2022-08-08 18:06:55 INFO  ClientMain:386 - Open user data file to read student id of student
+2022-08-08 18:06:56 INFO  StudentUndergraduateDesk:84 - Undergraduate student main, logged in
+2022-08-08 18:06:56 INFO  StudentUndergraduateDesk:103 - logged in
+2022-08-08 18:06:56 INFO  StudentUndergraduateDesk:245 - Get current student Username
+2022-08-08 18:06:56 INFO  ClientMain2022-08-08 18:07:03 INFO  ClientMain:652 - Read withdrawal file to show user withdrawal result
+w default image
+2022-08-08 18:06:56 INFO  StudentUndergraduateDesk:245 - Get current student Username
+2022-08-08 18:06:56 INFO  ClientMain:337 - Read name of user from file
+2022-08-08 18:06:56 INFO  StudentUndergraduateDesk:240 - Get current student Email
+2022-08-08 18:06:56 INFO  StudentUndergraduateDesk:250 - Get current student Educational status
+2022-08-08 18:06:56 INFO  ClientMain:683 - Read user education status from userdata file
+2022-08-08 18:06:56 INFO  StudentUndergraduateDesk:255 - Get current student supervisor
+2022-08-08 18:06:56 INFO  ClientMain:691 - Read user supervisor from userdata file
+2022-08-08 18:07:01 INFO  StudentUndergraduateDesk:125 - Withdrawal from education request clicked
+2022-08-08 18:07:01 INFO  ClientMain:36 - Open withdrawal request as a educational assistant
+2022-08-08 18:07:03 INFO  ClientMain:96 - Show result

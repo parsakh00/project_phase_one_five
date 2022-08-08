@@ -67,17 +67,20 @@ public class ExamsList {
         sortMapAndShow();
     }
 
-    public void logOut() throws IOException {
-        log.info("Logged out out of time");
-        stage = ((Stage) (one).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
-        Scene scene = new Scene(loader.load());
+    private void setStageProp(Stage stage, Scene scene) {
         stage.setHeight(650);
         stage.setWidth(800);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("educational system");
         stage.show();
+    }
+    public void logOut() throws IOException {
+        log.info("Logged out out of time");
+        stage = ((Stage) (one).getScene().getWindow());
+        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
+        Scene scene = new Scene(loader.load());
+        setStageProp(stage, scene);
     }
     public void backBtnClicked(ActionEvent actionEvent) throws IOException, ParseException {
         log.info("Back button clicked");
@@ -87,42 +90,23 @@ public class ExamsList {
         if (Objects.equals(getUserDegree(), "undergraduate")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentUndergraduateDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
-            stage.setHeight(650);
-            stage.setWidth(800);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.setTitle("educational system");
-            stage.show();
+            setStageProp(stage, scene);
         }
         else if (Objects.equals(getUserDegree(), "master")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentMasterDesk.fxml"));
             Scene scene = new Scene(loader.load());
-            stage.setHeight(650);
-            stage.setWidth(800);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.setTitle("educational system");
-            stage.show();
+            setStageProp(stage, scene);
         }
         else if (Objects.equals(getUserDegree(), "phd")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentPhd.fxml"));
             Scene scene = new Scene(loader.load());
-            stage.setHeight(650);
-            stage.setWidth(800);
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.setTitle("educational system");
-            stage.show();
+            setStageProp(stage, scene);
         }
     }
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
         MassageInNetwork massageUserDegree = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().userDegree(massageUserDegree);
-    }
-    protected void getUserLesson() throws IOException, ParseException {
-        MassageInNetwork massageGetUserLesson = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
-        lesson =  Controller.getInstance().userOfLessons(massageGetUserLesson);
     }
     protected void getUserLessonExam() throws IOException, ParseException {
         log.info("Get user lesson exam");

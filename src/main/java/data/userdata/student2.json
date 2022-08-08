@@ -1,1 +1,24 @@
-{"is student":true,"degree":"undergraduate","phone number":"09133154789","type":"student","faculty":"Chemistry","entering year":"98","condition":"studying","password":521471999,"total score":"0.0","id":"0041434576","supervisor":"davood taherniya","email":"student21@gmail.com","student number":"98102132","username":"student2","lessons":{"MechanicEng":"28113","Chemistry":"23011","ElectricalEng":"25032","MathSci":"","Physics":""}}
+{
+  "is student":true,
+  "degree":"undergraduate",
+  "phone number":"09133154789",
+  "type":"student",
+  "faculty":"Chemistry",
+  "entering year":"98",
+  "condition":"studying",
+  "password":521471999,
+  "total score":"0.0",
+  "id":"0041434576",
+  "supervisor":"davood taherniya",
+  "email":"student21@gmail.com",
+  "student number":"98102132",
+  "username":"student2",
+  "isTA" : false,
+  "lessons":
+  {
+    "MechanicEng":"28113",
+    "Chemistry":"23011",
+    "ElectricalEng":"25032",
+    "MathSci":"","Physics":""
+  }
+}
