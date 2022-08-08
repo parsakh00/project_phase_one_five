@@ -1,28 +1,18 @@
-2022-08-07 22:47:45 INFO  ClientMain:699 - Read user type from userdata file
-2022-08-07 22:47:45 INFO  ClientMai2022-08-07 22:47:46 INFO  ClientMain:699 - Read user type from userdata file
-2022-08-07 22:47:46 INFO  ClientMain:707 - Read user type from userdata file
-2022-08-07 22:47:46 INFO  ClientMain:418 - Read user type from userdata file
-2022-08-07 22:47:46 INFO  ClientMain:426 - Read and rewrite phone number from userdata file
-2022-08-07 22:47:46 INFO  ClientMain:378 - Open user data file to read student id of student
-2022-08-07 22:47:46 INFO  ClientMain:394 - Open user data file to read student id of student
-2022-08-07 22:47:46 INFO  ClientMain:410 - Open user data file to read student id of student
-2022-08-07 22:47:46 INFO  EducationalAssistantDesk:65 - Open educational assistant main page
-2022-08-07 22:47:46 INFO  EducationalAssistantDesk:76 - logged in
-2022-08-07 22:47:46 INFO  EducationalAssistantDesk:162 - Current user name
-2022-08-07 22:47:46 INFO  ClientMain:337 - Read n2022-08-07 22:48:17 INFO  ClientMain:707 - Read user type from userdata file
-- Show default image
-2022-08-07 22:47:46 INFO  EducationalAssistantDesk:162 - Current user name
-2022-08-07 22:47:46 INFO  ClientMain:337 - Read name of user from file
-2022-08-07 22:47:46 INFO  EducationalAssistantDesk:156 - Current user email
-2022-08-07 22:48:15 INFO  EducationalAssistantDesk:230 - Current user teachers lists
-2022-08-07 22:48:15 INFO  ClientMain:63 - Open teacher list desk
-2022-08-07 22:48:15 INFO  ClientMain:111 - Get user email
-2022-08-07 22:48:15 INFO  ClientMain:118 - Get user, username
-2022-08-07 22:48:15 INFO  ClientMain:337 - Read name of user from file
-2022-08-07 22:48:17 INFO  ClientMain:94 - Editing lessons
-2022-08-07 22:48:17 INFO  ClientMain:124 - Get user type
-2022-08-07 22:48:17 INFO  ClientMain:699 - Read user type from userdata file
-2022-08-07 22:48:50 INFO  ClientMain:63 - Open teacher list desk
-2022-08-07 22:48:50 INFO  ClientMain:111 - Get user email
-2022-08-07 22:48:50 INFO  ClientMain:118 - Get user, username
-2022-08-07 22:48:50 INFO  ClientMain:337 - Read name of user from file
+2022-08-08 12:44:42 INFO  ClientMain:699 - Read user type from userdata file
+2022-08-08 12:44:42 INFO  ClientMai2022-08-08 12:44:42 INFO  ClientMain:699 - Read user type from userdata file
+2022-08-08 12:44:42 INFO  ClientMain:707 - Read user type from userdata file
+2022-08-08 12:44:42 INFO  ClientMain:418 - Read user type from userdata file
+2022-08-08 12:44:42 INFO  ClientMain:426 - Read and rewrite phone number from userdata file
+2022-08-08 12:44:42 INFO  ClientMain:378 - Open user data file to read student id of student
+2022-08-08 12:44:42 INFO  ClientMain:394 - Open user data file to read student id of student
+2022-08-08 12:44:42 INFO  ClientMain:410 - Open user data file to read student id of student
+2022-08-08 12:44:43 INFO  EducationalAssistantDesk:65 - Open educational assistant main page
+2022-08-08 12:44:43 INFO  EducationalAssistantDesk:76 - logged in
+2022-08-08 12:44:43 INFO  EducationalAssistantDesk:154 - Current user name
+2022-08-08 12:44:43 INFO  ClientMain:337 - Read name of user from file
+2022-08-08 12:44:43 INFO  EducationalAssistantDesk:167 - Show default image
+2022-08-08 12:44:43 INFO  EducationalAssistantDesk:154 - Current user name
+2022-08-08 12:44:43 INFO  ClientMain:337 - Read name of user from file
+2022-08-08 12:44:43 INFO  EducationalAssistantDesk:148 - Current user email
+2022-08-08 12:44:44 INFO  EducationalAssistantDesk:107 - Current user Logged out by him self
+2022-08-08 12:44:44 INFO  ClientMain:74 - Log in page

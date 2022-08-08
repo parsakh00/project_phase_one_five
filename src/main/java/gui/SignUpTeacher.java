@@ -1,6 +1,9 @@
 package gui;
 
+import edu.system.Client;
+import edu.system.ClientLogic;
 import edu.system.ClientMain;
+import message.Message;
 import server.Controller;
 import currentUser.CurrentUser;
 import server.MassageInNetwork;
@@ -34,7 +37,7 @@ public class SignUpTeacher {
     protected Button returnBack;
 
     @FXML
-    protected TextField username,id,phoneNumber,supervisor,faculty,degree,email,password,condition,enteringYear;
+    protected TextField username, id, phoneNumber, supervisor, faculty, degree, email, password, condition, enteringYear;
 
     @FXML
     protected Button picker;
@@ -51,18 +54,19 @@ public class SignUpTeacher {
     @FXML
     protected Label sigUpWarning;
 
-    protected String[] facultyChoice = {"Chemistry","MathSci","MechanicEng","Physics","ElectricalEng"};
+    protected String[] facultyChoice = {"Chemistry", "MathSci", "MechanicEng", "Physics", "ElectricalEng"};
 
-    protected String[] conditionChoice = {"assistant professor","professor","education assistant"};
+    protected String[] conditionChoice = {"assistant professor", "professor", "education assistant"};
 
-    protected String[] degreeChoice = {"education assistant","-"};
+    protected String[] degreeChoice = {"education assistant", "-"};
 
     static Logger log = LogManager.getLogger(ClientMain.class);
-    public void initialize(){
+
+    public void initialize() {
         log.info("Open sign up student page");
         timer.playFromStart();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
-        timer.setOnFinished(actionEvent ->{
+        timer.setOnFinished(actionEvent -> {
             actionEvent.consume();
             try {
                 logOut();
@@ -70,7 +74,7 @@ public class SignUpTeacher {
                 log.error("exception happened", e);
                 throw new RuntimeException(e);
             }
-        } );
+        });
         username.setText(null);
         id.setText(null);
         phoneNumber.setText(null);
@@ -84,66 +88,74 @@ public class SignUpTeacher {
         facultyList.getItems().addAll(facultyChoice);
         conditionList.getItems().addAll(conditionChoice);
         degreeList.getItems().addAll(degreeChoice);
-        degreeList.setOnAction(this :: getDegreeChoice);
-        facultyList.setOnAction(this :: getFacultyChoice);
-        conditionList.setOnAction(this :: getConditionChoice);
+        degreeList.setOnAction(this::getDegreeChoice);
+        facultyList.setOnAction(this::getFacultyChoice);
+        conditionList.setOnAction(this::getConditionChoice);
     }
+
+    private void setStageProp(Stage stage, Scene scene) {
+        stage.setHeight(650);
+        stage.setWidth(800);
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.setTitle("educational system");
+        stage.show();
+    }
+
     public void logOut() throws IOException {
         log.info("Logged out, out of time");
         stage = ((Stage) (sigUpWarning).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
         Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setLogOutDesk(loader, stage);
     }
+
     public void backBtnClicked(ActionEvent actionEvent) throws IOException {
         log.info("Back Button clicked");
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "back to main page"));
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
+        setStageProp(stage, scene);
+        ClientLogic.getInstance().setEducationalAssistantDesk(loader, stage);
     }
-    protected void getFacultyChoice(ActionEvent actionEvent){
+
+    protected void getFacultyChoice(ActionEvent actionEvent) {
         log.info("Get faculty choice");
         faculty.setText(facultyList.getValue());
     }
-    protected void getConditionChoice(ActionEvent actionEvent){
+
+    protected void getConditionChoice(ActionEvent actionEvent) {
         log.info("Get condition choice");
         condition.setText(conditionList.getValue());
     }
-    protected void getDegreeChoice(ActionEvent actionEvent){
+
+    protected void getDegreeChoice(ActionEvent actionEvent) {
         log.info("Get degree choice");
         degree.setText(degreeList.getValue());
     }
+
     PauseTransition timer = new PauseTransition(Duration.seconds(CurrentUser.getInstance().getTimer()));
-    public void signUpBtnClicked(){
+
+    public void signUpBtnClicked() {
         log.info("sign up Button clicked");
         if (!Objects.equals((String) username.getText(), (String) "") && !Objects.equals((String) id.getText(), (String) "") && !Objects.equals((String) phoneNumber.getText(), (String) "") && !Objects.equals((String) supervisor.getText(), (String) "") && !Objects.equals((String) faculty.getText(), (String) "") &&
-                !Objects.equals((String) enteringYear.getText(), (String) "") && !Objects.equals((String) condition.getText(), (String) "") && !Objects.equals((String) password.getText(), (String) "") && !Objects.equals((String) email.getText(), (String) "") && !Objects.equals((String) degree.getText(), (String) "")){
-            signUpDoneTeacher();
+                !Objects.equals((String) enteringYear.getText(), (String) "") && !Objects.equals((String) condition.getText(), (String) "") && !Objects.equals((String) password.getText(), (String) "") && !Objects.equals((String) email.getText(), (String) "") && !Objects.equals((String) degree.getText(), (String) "")) {
+            log.info("Accomplish sign up");
+            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(),
+                    username.getText() + "-" + id.getText() + "-" + phoneNumber.getText() + "-" + supervisor.getText() + "-" +
+                            faculty.getText() + "-" + enteringYear.getText() + "-" + condition.getText() + "-" + password.getText() + "-" + email.getText() + "-" + degree.getText()
+                    , "sign up teacher"));
             sigUpWarning.setText("Done");
-        }
-        else{
+        } else {
             sigUpWarning.setText("Must fill all parts.");
         }
     }
-    public void signUpDoneTeacher(){
-        log.info("Accomplish sign up");
-        MassageInNetwork massageSignUp = new MassageInNetwork(username.getText(),id.getText(),phoneNumber.getText(),supervisor.getText(),
-                faculty.getText(),enteringYear.getText(),condition.getText(),password.getText(), email.getText(), degree.getText(),null);
-        Controller.getInstance().signUpTeacher(massageSignUp);
-    }
+
     @FXML
     protected void pickImage(ActionEvent actionEvent) throws IOException {
         log.info("Pick image for new user");
@@ -166,8 +178,7 @@ public class SignUpTeacher {
                 log.error("exception happened", e);
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             sigUpWarning.setText("First fill username");
         }
 

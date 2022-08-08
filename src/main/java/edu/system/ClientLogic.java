@@ -25,6 +25,11 @@ public class ClientLogic {
     private ChangeEduAssisOrEdit changeEduAssisOrEdit;
     private EditLessonsDesk editLessonsDesk;
     private LogOutDesk logOutDesk;
+    private SignUpStudent signUpStudent;
+    private SignUpTeacher signUpTeacher;
+    private TeacherRecommendRequest teacherRecommendRequest;
+    private EduWithdrawRequest eduWithdrawRequest;
+    private EduMinorRequests eduMinorRequests;
 
     private ClientLogic() {
 
@@ -81,30 +86,36 @@ public class ClientLogic {
         }
 
     }
-    private void showFacultyPropUnit(Message message){
+
+    private void showFacultyPropUnit(Message message) {
         lessonListDesk.getFacultyUnitData(message);
     }
-    private void showFacultyPropStage(Message message){
+
+    private void showFacultyPropStage(Message message) {
         lessonListDesk.getFacultyStageData(message);
     }
 
-    private void showFacultyProp(Message message){
+    private void showFacultyProp(Message message) {
         lessonListDesk.getFacultyData(message);
     }
-    private void showFacultyTeacherProp(Message message){
+
+    private void showFacultyTeacherProp(Message message) {
         teachersListDesk.getTeacherListData(message);
     }
-    private void showStudentDegreeName(Message message){
+
+    private void showStudentDegreeName(Message message) {
         studentProfile.setUserDegreeAndName(message.getContent());
     }
-    private void showUserName(Message message){
+
+    private void showUserName(Message message) {
         teacherProfile.setUserName(message.getContent());
     }
+
     private void authToken(Message message) {
         Client.getClient().setAuthToken(message.getContent());
     }
 
-    private void showTeacherData(Message message){
+    private void showTeacherData(Message message) {
         teacherProfile.showDataList(message.getContent());
     }
 
@@ -123,10 +134,12 @@ public class ClientLogic {
     private void getUserDegree(String content) {
         login.setDegree(content);
     }
-    private void getUserDegreeLessonList(String content){
+
+    private void getUserDegreeLessonList(String content) {
         lessonListDesk.setDegree(content);
     }
-    private void getUserDegreeTeacherList(String content){
+
+    private void getUserDegreeTeacherList(String content) {
         teachersListDesk.setDegree(content);
     }
 
@@ -185,35 +198,71 @@ public class ClientLogic {
         this.teacherProfile = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("teacher profile is null");
     }
+
     public void setLogOutDesk(FXMLLoader fxmlLoader, Stage stage) {
         System.out.println("log out");
         this.stage = stage;
         this.logOutDesk = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("log out is null");
     }
+
     public void setTeachersListDesk(FXMLLoader fxmlLoader, Stage stage) {
         System.out.println("teacher list desk");
         this.stage = stage;
         this.teachersListDesk = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("teacher list disk is  null");
     }
+
     public void setLessonListDesk(FXMLLoader fxmlLoader, Stage stage) {
-        System.out.println("lesson list disk");
+        System.out.println("lesson list desk");
         this.stage = stage;
         this.lessonListDesk = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("lesson list desk is null");
     }
+
     public void setEditLessonsDesk(FXMLLoader fxmlLoader, Stage stage) {
-        System.out.println("edit lessons desk disk");
+        System.out.println("edit lessons desk desk");
         this.stage = stage;
         this.editLessonsDesk = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("edit lessons desk is null");
     }
+
     public void setChangeEduAssisOrEdit(FXMLLoader fxmlLoader, Stage stage) {
-        System.out.println("ChangeEduAssisOrEdit disk");
+        System.out.println("ChangeEduAssisOrEdit desk");
         this.stage = stage;
         this.changeEduAssisOrEdit = fxmlLoader.getController();
         if (fxmlLoader.getController() == null) System.out.println("lesson list desk is null");
     }
+    public void setSignUpStudent(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("signup student desk");
+        this.stage = stage;
+        this.signUpStudent = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("signup student desk is null");
+    }
+    public void setSignUpTeacher(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("signup teacher desk");
+        this.stage = stage;
+        this.signUpTeacher = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("signup teacher desk is null");
+    }
+    public void setEduWithdrawRequest(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("edu withdraw request");
+        this.stage = stage;
+        this.signUpTeacher = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("edu withdraw request is null");
+    }
+    public void setEduMinorRequests(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("edu minor request desk");
+        this.stage = stage;
+        this.signUpTeacher = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("edu minor request desk is null");
+    }
+    public void setTeacherRecommendRequest(FXMLLoader fxmlLoader, Stage stage) {
+        System.out.println("teacher recommendation request desk");
+        this.stage = stage;
+        this.signUpTeacher = fxmlLoader.getController();
+        if (fxmlLoader.getController() == null) System.out.println("teacher recommendation desk is null");
+    }
+
 
 }
