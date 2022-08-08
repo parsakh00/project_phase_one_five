@@ -151,6 +151,65 @@ public class ServerLogic {
         if (message.getRequest().equals("showWithdrawalResult")) {
             withdrawalResult(message);
         }
+        if (message.getRequest().equals("get user lesson exam")) {
+            getUserLessonExam(message);
+        }
+        if (message.getRequest().equals("get user lesson name")) {
+            getUserLessonName(message);
+        }
+        if (message.getRequest().equals("send minor request")) {
+            sendMinorRequest(message);
+        }
+        if (message.getRequest().equals("show minor result")) {
+            showMinorRequest(message);
+        }
+
+    }
+    private void showMinorRequest(Message message) throws IOException, ParseException {
+        MassageInNetwork howManyFacultyMinor = new MassageInNetwork(message.getContent(),null,null);
+        String data = Controller.getInstance().facultyForMinors(howManyFacultyMinor);
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), data, "show minor result"));
+            }
+        }
+    }
+    private void sendMinorRequest(Message message) throws IOException, ParseException {
+        String[] data = message.getContent().split("-");
+        MassageInNetwork sendMinor = new MassageInNetwork(data[0], data[1],data[2]);
+        Controller.getInstance().addMinorRequest(sendMinor);
+    }
+    private void getUserLessonExam(Message message) throws IOException, ParseException {
+        MassageInNetwork massageGetLessonExam = new MassageInNetwork(message.getContent(), null, null);
+        String[] examDay = Controller.getInstance().nameOfLessons(massageGetLessonExam);
+        String str = "";
+        for (String s : examDay) {
+            if (!Objects.equals(s, "null")) {
+                if (!s.equals(examDay[examDay.length - 1])) str += s + "-";
+                else str += s;
+            }
+        }
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), str, "get user lesson exam"));
+            }
+        }
+    }
+    private void getUserLessonName(Message message) throws IOException, ParseException {
+        MassageInNetwork massageUserLessonName = new MassageInNetwork(message.getContent(), null, null);
+        String[] lessonName = Controller.getInstance().examOfLessons(massageUserLessonName);
+        String str = "";
+        for (String s : lessonName) {
+            if (!Objects.equals(s, "null")) {
+                if (!s.equals(lessonName[lessonName.length - 1])) str += s + "-";
+                else str += s;
+            }
+        }
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), str, "get user lesson name"));
+            }
+        }
     }
     private void withdrawalResult(Message message) throws IOException, ParseException {
         MassageInNetwork massageResult = new MassageInNetwork(message.getContent(), null,null);

@@ -1,6 +1,7 @@
 package server;
 
 import authToken.AuthenticationToken;
+import constants.Constants;
 import message.Message;
 
 import java.io.IOException;
@@ -33,7 +34,8 @@ public class Server {
 
         System.out.println("Server is running...");
         try {
-            ServerSocket serverSocket = new ServerSocket(8080);
+            int port = Constants.CONFIG.getProperty(Integer.class, "serverPort");
+            ServerSocket serverSocket = new ServerSocket(port);
             while (true) {
                 System.out.println("waiting for a connection...");
                 Socket socket = serverSocket.accept();

@@ -100,7 +100,26 @@ public class ClientLogic {
         if (message.getRequest().equals("showWithdrawalResult")) {
             showWithdrawalResult(message);
         }
+        if (message.getRequest().equals("get user lesson exam")) {
+            getUserLessonExam(message);
+        }
+        if (message.getRequest().equals("get user lesson name")) {
+            getUserLessonName(message);
+        }
+        if (message.getRequest().equals("show minor result")) {
+            showMinorResult(message);
+        }
 
+
+    }
+    private void showMinorResult(Message message){
+        minorDesk.showResult(message.getContent());
+    }
+    private void getUserLessonExam(Message message){
+        examsList.userLessonExam(message.getContent());
+    }
+    private void getUserLessonName(Message message){
+        examsList.userLessonName(message.getContent());
     }
 
     private void showWithdrawalResult(Message message) {

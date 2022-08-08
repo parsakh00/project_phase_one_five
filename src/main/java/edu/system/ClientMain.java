@@ -1,5 +1,6 @@
 package edu.system;
 
+import constants.Constants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 import message.Message;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import passHash.PassHash;
 
 import java.io.*;
 import java.net.Socket;
@@ -39,7 +41,8 @@ public class ClientMain extends Application {
                 stage.close();
             }
         });
-        Socket socket = new Socket("localhost", 8080);
+        int port = Constants.CONFIG.getProperty(Integer.class, "serverPort");
+        Socket socket = new Socket("localhost", port);
         Client client = new Client(socket);
         new Thread(client).start();
         stage.getIcons().add(icon);

@@ -1,5 +1,6 @@
 package edu.system;
 
+import constants.Constants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,7 +40,8 @@ public class ClientMain2 extends Application {
                 stage.close();
             }
         });
-        Socket socket = new Socket("localhost", 8080);
+        int port = Constants.CONFIG.getProperty(Integer.class, "serverPort");
+        Socket socket = new Socket("localhost", port);
         Client client = new Client(socket);
         new Thread(client).start();
         stage.getIcons().add(icon);

@@ -166,7 +166,6 @@ public class StudentUndergraduateDesk {
     }
     @FXML
     protected void examClicked() throws IOException {
-        log.info("List of exams clicked");
         timer.pause();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());

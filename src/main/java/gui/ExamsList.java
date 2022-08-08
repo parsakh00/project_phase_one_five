@@ -1,6 +1,9 @@
 package gui;
 
+import edu.system.Client;
+import edu.system.ClientLogic;
 import edu.system.ClientMain;
+import message.Message;
 import server.Controller;
 import currentUser.CurrentUser;
 import server.MassageInNetwork;
@@ -46,11 +49,11 @@ public class ExamsList {
 
     static Logger log = LogManager.getLogger(ClientMain.class);
 
-    public void initialize() throws IOException, ParseException {
+    public void initialize() throws IOException, ParseException, InterruptedException {
         log.info("Open exams list page");
         timer.playFromStart();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
-        timer.setOnFinished(actionEvent ->{
+        timer.setOnFinished(actionEvent -> {
             actionEvent.consume();
             try {
                 logOut();
@@ -58,9 +61,11 @@ public class ExamsList {
                 log.error("exception happened", e);
                 throw new RuntimeException(e);
             }
-        } );
+        });
         getUserLessonExam();
         getUserLessonName();
+//        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "get user lesson exam"));
+//        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "get user lesson name"));
         turnLessonToArray();
         turnExamDayToArray();
         mapping();
@@ -75,70 +80,98 @@ public class ExamsList {
         stage.setTitle("educational system");
         stage.show();
     }
+
     public void logOut() throws IOException {
         log.info("Logged out out of time");
         stage = ((Stage) (one).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
+        ClientLogic.getInstance().setLogOutDesk(loader, stage);
     }
+
     public void backBtnClicked(ActionEvent actionEvent) throws IOException, ParseException {
         log.info("Back button clicked");
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "back to main page"));
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
         if (Objects.equals(getUserDegree(), "undergraduate")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentUndergraduateDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
             setStageProp(stage, scene);
-        }
-        else if (Objects.equals(getUserDegree(), "master")) {
+            ClientLogic.getInstance().setStudentUndergraduateDesk(loader, stage);
+        } else if (Objects.equals(getUserDegree(), "master")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentMasterDesk.fxml"));
             Scene scene = new Scene(loader.load());
             setStageProp(stage, scene);
-        }
-        else if (Objects.equals(getUserDegree(), "phd")) {
+            ClientLogic.getInstance().setStudentMasterDesk(loader, stage);
+        } else if (Objects.equals(getUserDegree(), "phd")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentPhd.fxml"));
             Scene scene = new Scene(loader.load());
             setStageProp(stage, scene);
+            ClientLogic.getInstance().setStudentPhdDesk(loader, stage);
         }
     }
+
     protected String getUserDegree() throws IOException, ParseException {
         log.info("Get user degree");
         MassageInNetwork massageUserDegree = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().userDegree(massageUserDegree);
     }
+
     protected void getUserLessonExam() throws IOException, ParseException {
         log.info("Get user lesson exam");
-        MassageInNetwork massageGetLessonExam = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
-        examDay =  Controller.getInstance().nameOfLessons(massageGetLessonExam);
+        MassageInNetwork massageGetLessonExam = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
+        examDay = Controller.getInstance().nameOfLessons(massageGetLessonExam);
 
     }
+
     protected void getUserLessonName() throws IOException, ParseException {
         log.info("Get user lesson name");
-        MassageInNetwork massageUserLessonName = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
-        lessonName =  Controller.getInstance().examOfLessons(massageUserLessonName);
+        MassageInNetwork massageUserLessonName = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
+        lessonName = Controller.getInstance().examOfLessons(massageUserLessonName);
 
     }
-    protected void turnLessonToArray(){
-        log.info("Turn lesson to array");
-        for (String element : examDay){
-            if (!Objects.equals((String) element, "null")) lessonsNames.add(element);
-        }
-    }
-    protected void turnExamDayToArray(){
+
+    public void userLessonExam(String content) {
+        examDay = content.split("-");
         log.info("Turn exam day to array");
-        for (String element : lessonName){
+        for (String element : lessonName) {
             if (!Objects.equals((String) element, "null")) examsDays.add(Integer.parseInt(element));
         }
     }
-    protected void mapping(){
-        for (int i = 0; i < examsDays.size() ; i++){
-            map.put(examsDays.get(i), lessonsNames.get(i));
 
+    public void userLessonName(String content) {
+        lesson = content.split("-");
+        log.info("Turn lesson to array");
+        for (String element : examDay) {
+            if (!Objects.equals((String) element, "null")) lessonsNames.add(element);
         }
     }
-    protected void sortMapAndShow(){
+
+    protected void turnLessonToArray() {
+        log.info("Turn lesson to array");
+        for (String element : examDay) {
+            if (!Objects.equals((String) element, "null")) lessonsNames.add(element);
+        }
+    }
+
+    protected void turnExamDayToArray() {
+        log.info("Turn exam day to array");
+        for (String element : lessonName) {
+            if (!Objects.equals((String) element, "null")) examsDays.add(Integer.parseInt(element));
+        }
+    }
+
+    protected void mapping() {
+        for (int i = 0; i < examsDays.size(); i++) {
+            map.put(examsDays.get(i), lessonsNames.get(i));
+        }
+    }
+
+    protected void sortMapAndShow() {
         log.info("Sorting arrays");
         Map<Integer, String> treeMap = new TreeMap<Integer, String>(
                 new Comparator<Integer>() {
@@ -154,9 +187,9 @@ public class ExamsList {
         for (Map.Entry<Integer, String> entry : treeMap.entrySet()) {
             Label label = new Label();
             String lessonName = entry.getValue();
-            int month = entry.getKey()/100;
+            int month = entry.getKey() / 100;
             int day = entry.getKey() % 100;
-            String days = "/"+Integer.toString(month) + "/" + Integer.toString(day) + "   " + lessonName;
+            String days = "/" + Integer.toString(month) + "/" + Integer.toString(day) + "   " + lessonName;
             label.setText(days);
             label.setAlignment(Pos.CENTER);
             exams.add(label, 0, i);
