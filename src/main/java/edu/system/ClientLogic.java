@@ -112,8 +112,14 @@ public class ClientLogic {
         if (message.getRequest().equals("get user lesson exam")) {
             userLessonExam(message);
         }
+        if (message.getRequest().equals("message for admin")) {
+            messageOfAdmin();
+        }
 
 
+    }
+    private void messageOfAdmin(){
+        teacherDesk.showMessageForAdmin();
     }
     private void showMinorResult(Message message){
         minorDesk.showResult(message.getContent());

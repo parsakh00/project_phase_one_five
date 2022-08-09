@@ -83,5 +83,9 @@
             <RowConstraints />
          </rowConstraints>
         </GridPane>
+      <Button layoutX="389.0" layoutY="290.0" mnemonicParsing="false" onAction="#submitForAdmin" text="submit" />
+      <Label layoutX="335.0" layoutY="217.0" text="write your criticism for admin :" />
+      <TextField fx:id="messageForAdmin" layoutX="246.0" layoutY="249.0" prefHeight="26.0" prefWidth="338.0" promptText="write your message for admin" />
+      <Label fx:id="alertMessageForAdmin" alignment="CENTER" contentDisplay="CENTER" layoutX="319.0" layoutY="337.0" prefHeight="18.0" prefWidth="192.0" textAlignment="CENTER" />
     </children>
 </AnchorPane>

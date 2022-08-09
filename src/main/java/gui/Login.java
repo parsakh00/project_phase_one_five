@@ -175,6 +175,7 @@ public class Login {
     @FXML
     protected void LoginClicked(ActionEvent actionEvent) throws IOException {
         try {
+
             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), UserNameTextField.getText() + "-" + PasswordField.getText()
                     + "-" + getCaptchaId() + "-" + CaptchaInput.getText(), "log in"));
 

@@ -1,27 +1,21 @@
-2022-08-09 11:16:19 INFO  ClientMain:699 - Read user type from userdata file
-2022-08-09 11:16:19 INFO  ClientMai2022-08-09 11:16:20 INFO  ClientMain:699 - Read user type from userdata file
-2022-08-09 11:16:20 INFO  ClientMain:707 - Read user type from userdata file
-2022-08-09 11:16:20 INFO  ClientMain:418 - Read user type from userdata file
-2022-08-09 11:16:20 INFO  ClientMain:426 - Read and rewrite phone number from userdata file
-2022-08-09 11:16:20 INFO  ClientMain:378 - Open user data file to read student id of student
-2022-08-09 11:16:20 INFO  ClientMain:691 - Read user supervisor from userdata file
-2022-08-09 11:16:20 INFO  ClientMain:402 - Open user data file to read student id of student
-2022-08-09 11:16:20 INFO  ClientMain:386 - Open user data file to read student id of student
-2022-08-09 11:16:20 INFO  StudentUndergraduateDesk:84 - Undergraduate student main, logged in
-2022-08-09 11:16:20 INFO  StudentUndergraduateDesk:103 - logged in
-2022-08-09 11:16:20 INFO  StudentUndergraduateDesk:245 - Get current student Username
-2022-08-09 11:16:20 INFO  ClientMain:337 - Read name of user from file
-2022-08-09 11:16:20 INFO  StudentUndergraduateDesk:268 - Show default image
-2022-08-09 11:16:20 INFO  StudentUndergraduateDesk:245 - Get current student Username
-2022-08-09 11:16:20 INFO  ClientMain:337 - Read name of user from file
-2022-08-09 11:16:20 INFO  StudentUndergraduateDesk:240 - Get current student Email
-2022-08-09 11:16:20 INFO  StudentUndergraduateDesk:250 - Get current student Educational status
-2022-08-09 11:16:20 INFO  ClientMain:683 - Read user education status from userdata file
-2022-08-09 11:16:20 INFO  StudentUndergraduateDesk:255 - Get current student supervisor
-2022-08-09 11:16:20 INFO  ClientMain:691 - Read user supervisor from userdata file
-2022-08-09 11:16:23 INFO  ClientMain:54 - Open exams list page
-2022-08-09 11:16:23 INFO  ClientMain:119 - Get user lesson name
-2022-08-09 11:16:23 INFO  ClientMain:120 - Get user lesson exam
-2022-08-09 11:16:23 INFO  ClientMain:132 - Turn lesson to array
-2022-08-09 11:16:23 INFO  ClientMain:136 - Turn exam day to array
-2022-08-09 11:16:23 INFO  ClientMain:143 - Sorting arrays
+2022-08-09 12:38:15 INFO  ClientMain:720 - Read user type from userdata file
+2022-08-09 12:38:15 INFO  ClientMai2022-08-09 12:38:15 INFO  ClientMain:720 - Read user type from userdata file
+2022-08-09 12:38:15 INFO  ClientMain:728 - Read user type from userdata file
+2022-08-09 12:38:15 INFO  ClientMain:439 - Read user type from userdata file
+2022-08-09 12:38:15 INFO  ClientMain:447 - Read and rewrite phone number from userdata file
+2022-08-09 12:38:15 INFO  ClientMain:399 - Open user data file to read student id of student
+2022-08-09 12:38:15 INFO  ClientMain:712 - Read user supervisor from userdata file
+2022-08-09 12:38:15 INFO  ClientMain:423 - Open user data file to read student id of student
+2022-08-09 12:38:15 INFO  ClientMain:407 - Open user data file to read student id of student
+2022-08-09 12:38:16 INFO  StudentUndergraduateDesk:83 - Undergraduate student main, logged in
+2022-08-09 12:38:16 INFO  StudentUndergraduateDesk:102 - logged in
+2022-08-09 12:38:16 INFO  StudentUndergraduateDesk:245 - Get current student Username
+2022-08-09 12:38:16 INFO  ClientMain2022-08-09 12:38:21 INFO  ClientMain:168 - write message for admin
+tUndergraduateDesk:268 - Show default image
+2022-08-09 12:38:16 INFO  StudentUndergraduateDesk:245 - Get current student Username
+2022-08-09 12:38:16 INFO  ClientMain:358 - Read name of user from file
+2022-08-09 12:38:16 INFO  StudentUndergraduateDesk:240 - Get current student Email
+2022-08-09 12:38:16 INFO  StudentUndergraduateDesk:250 - Get current student Educational status
+2022-08-09 12:38:16 INFO  ClientMain:704 - Read user education status from userdata file
+2022-08-09 12:38:16 INFO  StudentUndergraduateDesk:255 - Get current student supervisor
+2022-08-09 12:38:16 INFO  ClientMain:712 - Read user supervisor from userdata file

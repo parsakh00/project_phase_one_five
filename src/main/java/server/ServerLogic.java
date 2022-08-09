@@ -166,6 +166,20 @@ public class ServerLogic {
         if (message.getRequest().equals("show minor result")) {
             showMinorRequest(message);
         }
+        if (message.getRequest().equals("message for admin")) {
+            messageForAdmin(message);
+        }
+
+
+    }
+    private void messageForAdmin(Message message){
+        String[] data = message.getContent().split("-");
+        Logic.addMessageForCriticism(data[0], data[1]);
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), "", "message for admin"));
+            }
+        }
 
     }
     private void showMinorRequest(Message message) throws IOException, ParseException {

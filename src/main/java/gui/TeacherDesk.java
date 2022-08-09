@@ -13,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -30,10 +32,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TeacherDesk {
+    public MenuBar barTape;
+    public Label criticism;
+    public ListView listOfCriticism;
     String lastLogIn;
     Stage stage;
     @FXML
@@ -68,11 +74,16 @@ public class TeacherDesk {
         } );
 
         getLoginTime();
-        setUserImage();
+        if (!Objects.equals(CurrentUser.getInstance().getUserName(), "admin")) setUserImage();
         timeDisplay();
         lastTimeLogIn.setText("last log in : " + getLoginTime());
         username.setText("User : " + getUsername());
-        email.setText("Email : " + getEmail());
+        if (!Objects.equals(CurrentUser.getInstance().getUserName(), "admin")) email.setText("Email : " + getEmail());
+        if (Objects.equals(CurrentUser.getInstance().getUserName(), "admin")) {
+            barTape.setVisible(false);
+            criticism.setVisible(true);
+            listOfCriticism.setVisible(true);
+        }
     }
     public void recommendationRequest() throws IOException {
         log.info("open recommendation requests");
@@ -230,4 +241,10 @@ public class TeacherDesk {
 //        Scene scene = new Scene(loader.load());
 //        setStageProp(stage, scene);
     }
+    public void showMessageForAdmin(){
+
+
+
+    }
+
 }

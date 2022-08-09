@@ -11,7 +11,7 @@
                 <Button fx:id="logOut" layoutX="8.0" layoutY="8.0" mnemonicParsing="false" onAction="#logoutClicked" text="log out" />
                 <Label fx:id="timeDate" layoutX="8.0" layoutY="49.0" prefHeight="27.0" prefWidth="133.0" />
                 <Label fx:id="lastTimeLogIn" layoutX="8.0" layoutY="85.0" prefHeight="27.0" prefWidth="146.0" />
-                <MenuBar layoutX="393.0" layoutY="99.0" prefHeight="26.0" prefWidth="407.0">
+                <MenuBar fx:id="barTape" layoutX="393.0" layoutY="99.0" prefHeight="26.0" prefWidth="407.0">
                     <menus>
                         <Menu mnemonicParsing="false" onAction="#profileClicked" text="Profile">
                      <items>
@@ -45,5 +45,7 @@
             </font>
         </Label>
         <Pane fx:id="noidea" layoutX="14.0" layoutY="196.0" prefHeight="160.0" prefWidth="140.0" />
+      <Label fx:id="criticism" layoutX="480.0" layoutY="178.0" prefHeight="27.0" prefWidth="146.0" text="studen's criticism :" visible="false" />
+      <ListView fx:id="listOfCriticism" layoutX="400.0" layoutY="218.0" prefHeight="300.0" prefWidth="254.0" visible="false" />
     </children>
 </AnchorPane>

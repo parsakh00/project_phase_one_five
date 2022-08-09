@@ -3,6 +3,7 @@ package gui;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
+import javafx.scene.control.*;
 import message.Message;
 import server.Controller;
 import currentUser.CurrentUser;
@@ -14,10 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -42,6 +39,8 @@ public class StudentUndergraduateDesk {
     @FXML
     public MenuItem minor;
     public Menu profile;
+    public TextField messageForAdmin;
+    public Label alertMessageForAdmin;
 
     String lastLogIn;
     Stage stage;
@@ -109,6 +108,7 @@ public class StudentUndergraduateDesk {
         email.setText("Email : " + getEmail());
         condition.setText(getEducationalStatus());
         supervisor.setText(getSupervisor());
+        messageForAdmin.setText(null);
     }
     public void minorClicked(ActionEvent actionEvent) throws IOException {
         log.info("Minor request clicked");
@@ -352,5 +352,17 @@ public class StudentUndergraduateDesk {
 //        stage.setScene(scene);
 //        stage.setTitle("educational system");
 //        stage.show();
+    }
+
+    public void submitForAdmin(ActionEvent actionEvent) {
+        if (messageForAdmin.getText()!= null){
+            alertMessageForAdmin.setText(null);
+            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName() +"-"+
+                    messageForAdmin.getText(), "message for admin"));
+            alertMessageForAdmin.setText("Done!");
+        }
+        else{
+            alertMessageForAdmin.setText("First write your message!");
+        }
     }
 }

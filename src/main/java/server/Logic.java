@@ -164,6 +164,27 @@ public class Logic {
             e.printStackTrace();
         }
     }
+    public static void addMessageForCriticism(String username,String message){
+        log.info("write message for admin");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\requests\\messageForAdmin.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            jsonObject.put(username, message);
+            String path = System.getProperty("user.dir") + "\\src\\main\\java\\data\\requests\\messageForAdmin.json";
+            try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
+                Gson gson = new Gson();
+                String json = gson.toJson(jsonObject);
+                out.write(json);
+            } catch (Exception e) {
+                log.error("exception happened", e);
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            log.error("exception happened", e);
+            e.printStackTrace();
+        }
+    }
 
     public void userMinorRequest(String name, String faculty1, String faculty2) throws IOException, ParseException {
         log.info("Open and rewrite minor file acceptation or rejection condition");

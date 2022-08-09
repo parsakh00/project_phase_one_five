@@ -3,6 +3,7 @@ package gui;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
+import javafx.scene.control.TextField;
 import message.Message;
 import server.Controller;
 import currentUser.CurrentUser;
@@ -39,6 +40,8 @@ public class StudentPhdDesk {
     static Logger log = LogManager.getLogger(StudentPhdDesk.class);
     public MenuItem teacherslist;
     public MenuItem lessonLists;
+    public TextField messageForAdmin;
+    public Label alertMessageForAdmin;
     String lastLogIn;
     Stage stage;
     @FXML
@@ -92,6 +95,7 @@ public class StudentPhdDesk {
         email.setText("Email : " + getEmail());
         condition.setText(getEducationalStatus());
         supervisor.setText(getSupervisor());
+        messageForAdmin.setText(null);
     }
 
     public void logOut() throws IOException {
@@ -323,5 +327,17 @@ public class StudentPhdDesk {
 //        stage.setScene(scene);
 //        stage.setTitle("educational system");
 //        stage.show();
+    }
+
+    public void submitForAdmin(ActionEvent actionEvent) {
+        if (messageForAdmin.getText()!= null){
+            alertMessageForAdmin.setText(null);
+            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName() +"-"+
+                    messageForAdmin.getText(), "message for admin"));
+            alertMessageForAdmin.setText("Done!");
+        }
+        else{
+            alertMessageForAdmin.setText("First write your message!");
+        }
     }
 }

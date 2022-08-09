@@ -3,6 +3,7 @@ package gui;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
+import javafx.scene.control.TextField;
 import message.Message;
 import server.Controller;
 import currentUser.CurrentUser;
@@ -36,6 +37,8 @@ import java.util.regex.Pattern;
 
 public class StudentMasterDesk {
     static Logger log = LogManager.getLogger(StudentMasterDesk.class);
+    public TextField messageForAdmin;
+    public Label alertMessageForAdmin;
     @FXML
     protected MenuItem teacherslist;
     @FXML
@@ -97,6 +100,7 @@ public class StudentMasterDesk {
         email.setText("Email : " + getEmail());
         educationalStatus.setText(getEducationalStatus());
         supervisor.setText(getSupervisor());
+        messageForAdmin.setText(null);
     }
     @FXML
     protected void accommodationClicked() throws IOException {
@@ -336,5 +340,17 @@ public class StudentMasterDesk {
 //        stage.setScene(scene);
 //        stage.setTitle("educational system");
 //        stage.show();
+    }
+
+    public void submitForAdmin(ActionEvent actionEvent) {
+        if (messageForAdmin.getText()!= null){
+            alertMessageForAdmin.setText(null);
+            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName() +"-"+
+                    messageForAdmin.getText(), "message for admin"));
+            alertMessageForAdmin.setText("Done!");
+        }
+        else{
+            alertMessageForAdmin.setText("First write your message!");
+        }
     }
 }
