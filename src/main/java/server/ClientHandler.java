@@ -53,7 +53,7 @@ public class ClientHandler implements Runnable{
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (ParseException e) {
+        } catch (ParseException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

@@ -109,6 +109,9 @@ public class ClientLogic {
         if (message.getRequest().equals("show minor result")) {
             showMinorResult(message);
         }
+        if (message.getRequest().equals("get user lesson exam")) {
+            userLessonExam(message);
+        }
 
 
     }
@@ -116,10 +119,13 @@ public class ClientLogic {
         minorDesk.showResult(message.getContent());
     }
     private void getUserLessonExam(Message message){
-        examsList.userLessonExam(message.getContent());
+        //examsList.userLessonExam(message.getContent());
+    }
+    private void userLessonExam(Message message){
+        examsList.getUserLessonExamNew(message.getContent());
     }
     private void getUserLessonName(Message message){
-        examsList.userLessonName(message.getContent());
+        //examsList.userLessonName(message.getContent());
     }
 
     private void showWithdrawalResult(Message message) {
@@ -341,10 +347,10 @@ public class ClientLogic {
     }
 
     public void setExamsList(FXMLLoader fxmlLoader, Stage stage) {
+        if (fxmlLoader.getController() == null) System.out.println("Exams List desk is null");
         System.out.println("Exams List desk");
         this.stage = stage;
         this.examsList = fxmlLoader.getController();
-        if (fxmlLoader.getController() == null) System.out.println("Exams List desk is null");
     }
 
     public void setApplyCertificateEmploymentDesk(FXMLLoader fxmlLoader, Stage stage) {

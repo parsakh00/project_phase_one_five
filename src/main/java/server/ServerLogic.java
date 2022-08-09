@@ -27,7 +27,7 @@ public class ServerLogic {
         return serverLogic;
     }
 
-    public void analyse(Message message) throws IOException, ParseException {
+    public void analyse(Message message) throws IOException, ParseException, InterruptedException {
         if (message.getRequest().equals("log in")) {
             loggedIn(message);
         }
@@ -157,6 +157,9 @@ public class ServerLogic {
         if (message.getRequest().equals("get user lesson name")) {
             getUserLessonName(message);
         }
+        if (message.getRequest().equals("get user lesson name and exam")) {
+            getUserLessonExamName(message);
+        }
         if (message.getRequest().equals("send minor request")) {
             sendMinorRequest(message);
         }
@@ -179,6 +182,34 @@ public class ServerLogic {
         MassageInNetwork sendMinor = new MassageInNetwork(data[0], data[1],data[2]);
         Controller.getInstance().addMinorRequest(sendMinor);
     }
+    private void getUserLessonExamName(Message message) throws IOException, ParseException, InterruptedException {
+        Thread.sleep(100);
+        MassageInNetwork massageGetLessonExam = new MassageInNetwork(message.getContent(), null, null);
+        String[] examDay = Controller.getInstance().nameOfLessons(massageGetLessonExam);
+        MassageInNetwork massageUserLessonName = new MassageInNetwork(message.getContent(), null, null);
+        String[] lessonName = Controller.getInstance().examOfLessons(massageUserLessonName);
+        String str = "";
+        for (String s : examDay) {
+            if (!Objects.equals(s, "null")) {
+                if (!s.equals(examDay[examDay.length - 1])) str += s + "-";
+                else str += s;
+            }
+        }
+        String str2 = "";
+        for (String s : lessonName) {
+            if (!Objects.equals(s, "null")) {
+                if (!s.equals(lessonName[lessonName.length - 1])) str2 += s + "-";
+                else str2 += s;
+            }
+        }
+        String examLesson = str +"-"+str2;
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), examLesson, "get user lesson exam"));
+            }
+        }
+
+    }
     private void getUserLessonExam(Message message) throws IOException, ParseException {
         MassageInNetwork massageGetLessonExam = new MassageInNetwork(message.getContent(), null, null);
         String[] examDay = Controller.getInstance().nameOfLessons(massageGetLessonExam);
@@ -198,16 +229,16 @@ public class ServerLogic {
     private void getUserLessonName(Message message) throws IOException, ParseException {
         MassageInNetwork massageUserLessonName = new MassageInNetwork(message.getContent(), null, null);
         String[] lessonName = Controller.getInstance().examOfLessons(massageUserLessonName);
-        String str = "";
+        String str2 = "";
         for (String s : lessonName) {
             if (!Objects.equals(s, "null")) {
-                if (!s.equals(lessonName[lessonName.length - 1])) str += s + "-";
-                else str += s;
+                if (!s.equals(lessonName[lessonName.length - 1])) str2 += s + "-";
+                else str2 += s;
             }
         }
         for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
             if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
-                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), str, "get user lesson name"));
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), str2, "get user lesson name"));
             }
         }
     }
