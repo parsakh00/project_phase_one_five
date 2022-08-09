@@ -169,18 +169,36 @@ public class ServerLogic {
         if (message.getRequest().equals("message for admin")) {
             messageForAdmin(message);
         }
+        if (message.getRequest().equals("message for admin previous")) {
+            messageOfAdminPr(message);
+        }
+        if (message.getRequest().equals("show message for admin")) {
+            showMessageOfAdmin(message);
+        }
 
 
+
+    }
+    private void showMessageOfAdmin(Message message) throws InterruptedException {
+        System.out.println("show message");
+        Thread.sleep(100);
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), "", "show message for admin"));
+            }
+        }
+    }
+    private void messageOfAdminPr(Message message) throws InterruptedException {
+        Thread.sleep(100);
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), "", "message for admin previous"));
+            }
+        }
     }
     private void messageForAdmin(Message message){
         String[] data = message.getContent().split("-");
         Logic.addMessageForCriticism(data[0], data[1]);
-        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
-            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
-                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), "", "message for admin"));
-            }
-        }
-
     }
     private void showMinorRequest(Message message) throws IOException, ParseException {
         MassageInNetwork howManyFacultyMinor = new MassageInNetwork(message.getContent(),null,null);

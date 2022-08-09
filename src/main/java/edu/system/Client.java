@@ -1,6 +1,7 @@
 package edu.system;
 
 import message.Message;
+import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +23,7 @@ public class Client implements Runnable{
         Client.client = this;
     }
 
-    private void init() throws IOException {
+    private void init() throws IOException, ParseException, InterruptedException {
 //        Message initialMessage = new Message(null,"I am connecting","DD");
 //        printWriter.println(initialMessage.toJson());
 //        printWriter.flush();
@@ -70,7 +71,7 @@ public class Client implements Runnable{
     public void run() {
         try {
             init();
-        } catch (IOException e) {
+        } catch (IOException | ParseException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

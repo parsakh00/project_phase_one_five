@@ -45,7 +45,7 @@
             </font>
         </Label>
         <Pane fx:id="noidea" layoutX="14.0" layoutY="196.0" prefHeight="160.0" prefWidth="140.0" />
-      <Label fx:id="criticism" layoutX="480.0" layoutY="178.0" prefHeight="27.0" prefWidth="146.0" text="studen's criticism :" visible="false" />
-      <ListView fx:id="listOfCriticism" layoutX="400.0" layoutY="218.0" prefHeight="300.0" prefWidth="254.0" visible="false" />
+      <Label fx:id="criticism" alignment="CENTER" layoutX="479.0" layoutY="196.0" prefHeight="27.0" prefWidth="146.0" text="studen's criticism :" visible="false" />
+      <TextArea fx:id="textArea" editable="false" layoutX="424.0" layoutY="241.0" prefHeight="313.0" prefWidth="255.0" visible="false" />
     </children>
 </AnchorPane>

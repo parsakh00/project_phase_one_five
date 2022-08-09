@@ -101,6 +101,21 @@ public class StudentMasterDesk {
         educationalStatus.setText(getEducationalStatus());
         supervisor.setText(getSupervisor());
         messageForAdmin.setText(null);
+        Thread ping = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+
+                    //logic for auto refresh
+                    // delay 5 seconds
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        });
+        ping.start();
     }
     @FXML
     protected void accommodationClicked() throws IOException {
@@ -348,6 +363,7 @@ public class StudentMasterDesk {
             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName() +"-"+
                     messageForAdmin.getText(), "message for admin"));
             alertMessageForAdmin.setText("Done!");
+            messageForAdmin.clear();
         }
         else{
             alertMessageForAdmin.setText("First write your message!");

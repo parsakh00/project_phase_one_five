@@ -11,10 +11,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Logic {
     String courseTeacher;
@@ -163,6 +160,20 @@ public class Logic {
             log.error("exception happened", e);
             e.printStackTrace();
         }
+    }
+    public static String getMessageForAdmin() throws IOException, ParseException {
+        log.info("get messages for admin");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\requests\\messageForAdmin.json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        Set keys = jsonObject.keySet();
+        String data = "";
+        for(Object key:keys){
+            String name = (String) key;
+            String value = (String) jsonObject.get(name);
+            data += name +" : "+ value +"-";
+        }
+        return data;
     }
     public static void addMessageForCriticism(String username,String message){
         log.info("write message for admin");

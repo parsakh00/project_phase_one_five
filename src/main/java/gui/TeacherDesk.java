@@ -11,10 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -39,7 +36,7 @@ import java.util.regex.Pattern;
 public class TeacherDesk {
     public MenuBar barTape;
     public Label criticism;
-    public ListView listOfCriticism;
+    public TextArea textArea;
     String lastLogIn;
     Stage stage;
     @FXML
@@ -82,8 +79,24 @@ public class TeacherDesk {
         if (Objects.equals(CurrentUser.getInstance().getUserName(), "admin")) {
             barTape.setVisible(false);
             criticism.setVisible(true);
-            listOfCriticism.setVisible(true);
+            textArea.setVisible(true);
+            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), "", "message for admin previous"));
         }
+        Thread ping = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), "","show message for admin" ));
+                    // delay 5 seconds
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        });
+        ping.start();
     }
     public void recommendationRequest() throws IOException {
         log.info("open recommendation requests");
@@ -241,10 +254,17 @@ public class TeacherDesk {
 //        Scene scene = new Scene(loader.load());
 //        setStageProp(stage, scene);
     }
-    public void showMessageForAdmin(){
-
-
-
+    public void showMessageForAdmin(String content){
+        String[] data = content.split("-");
+        textArea.clear();
+        for (String str : data) {
+            textArea.setText(textArea.getText() + str + '\n');
+            textArea.setScrollTop(Double.MAX_VALUE);
+        }
+    }
+    public void showMessageAdmin(String str){
+        textArea.setText(textArea.getText() + str + '\n');
+        textArea.setScrollTop(Double.MAX_VALUE);
     }
 
 }

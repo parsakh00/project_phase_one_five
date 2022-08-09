@@ -4,6 +4,8 @@ import gui.*;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import message.Message;
+import org.json.simple.parser.ParseException;
+import server.Logic;
 
 import java.io.IOException;
 
@@ -51,7 +53,7 @@ public class ClientLogic {
         return ClientLogic.clientLogic;
     }
 
-    public void analyse(Message message) {
+    public void analyse(Message message) throws IOException, ParseException, InterruptedException {
         if (message.getRequest().equals("authToken")) {
             authToken(message);
         }
@@ -112,14 +114,24 @@ public class ClientLogic {
         if (message.getRequest().equals("get user lesson exam")) {
             userLessonExam(message);
         }
-        if (message.getRequest().equals("message for admin")) {
-            messageOfAdmin();
+        if (message.getRequest().equals("show message for admin")){
+            showMessageForAdmin(message);
         }
-
-
+        if (message.getRequest().equals("message for admin previous")){
+            showMessageForAdminPr();
+        }
     }
-    private void messageOfAdmin(){
-        teacherDesk.showMessageForAdmin();
+    private void showMessageForAdmin(Message message) throws IOException, ParseException {
+        String data = Logic.getMessageForAdmin();
+        if (this.teacherDesk != null) teacherDesk.showMessageForAdmin(data);
+        else System.out.println("is null");
+        teacherDesk.showMessageAdmin(message.getContent());
+    }
+    private void showMessageForAdminPr() throws IOException, ParseException, InterruptedException {
+        Thread.sleep(100);
+        String data = Logic.getMessageForAdmin();
+        if (this.teacherDesk != null) teacherDesk.showMessageForAdmin(data);
+        else System.out.println("is null");
     }
     private void showMinorResult(Message message){
         minorDesk.showResult(message.getContent());

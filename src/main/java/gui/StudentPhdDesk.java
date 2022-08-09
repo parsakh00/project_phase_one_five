@@ -96,6 +96,22 @@ public class StudentPhdDesk {
         condition.setText(getEducationalStatus());
         supervisor.setText(getSupervisor());
         messageForAdmin.setText(null);
+        Thread ping = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+
+                    //logic for auto refresh
+                    // delay 5 seconds
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        });
+
+        ping.start();
     }
 
     public void logOut() throws IOException {
@@ -335,6 +351,7 @@ public class StudentPhdDesk {
             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName() +"-"+
                     messageForAdmin.getText(), "message for admin"));
             alertMessageForAdmin.setText("Done!");
+            messageForAdmin.clear();
         }
         else{
             alertMessageForAdmin.setText("First write your message!");
