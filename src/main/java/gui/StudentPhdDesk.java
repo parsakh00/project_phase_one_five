@@ -3,7 +3,7 @@ package gui;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import message.Message;
 import server.Controller;
 import currentUser.CurrentUser;
@@ -15,9 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -42,6 +39,7 @@ public class StudentPhdDesk {
     public MenuItem lessonLists;
     public TextField messageForAdmin;
     public Label alertMessageForAdmin;
+    public TextArea messageMohseni;
     String lastLogIn;
     Stage stage;
     @FXML
@@ -99,11 +97,11 @@ public class StudentPhdDesk {
         Thread ping = new Thread(new Runnable() {
             public void run() {
                 while (true) {
-
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show message of mohseni"));
                     //logic for auto refresh
                     // delay 5 seconds
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         break;
                     }
@@ -112,6 +110,10 @@ public class StudentPhdDesk {
         });
 
         ping.start();
+    }
+    public void showMohseniMessageDesk(String content){
+        messageMohseni.setText(messageMohseni.getText() + content + '\n');
+        messageMohseni.setScrollTop(Double.MAX_VALUE);
     }
 
     public void logOut() throws IOException {

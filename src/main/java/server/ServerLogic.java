@@ -175,9 +175,54 @@ public class ServerLogic {
         if (message.getRequest().equals("show message for admin")) {
             showMessageOfAdmin(message);
         }
+        if (message.getRequest().equals("get students base on filter")) {
+            getStudentFilter(message);
+        }
+        if (message.getRequest().equals("message from mohseni write file")){
+            writeMessageOfMohseni(message);
+        }
+        if (message.getRequest().equals("show message of mohseni")){
+            showMessageOfMohseni(message);
+        }
+        if (message.getRequest().equals("show specific user for mohseni")){
+            studentProfileForMohseni(message);
+        }
 
+    }
+    private void studentProfileForMohseni(Message message) throws InterruptedException, IOException, ParseException {
+        Thread.sleep(100);
+        String name = message.getContent();
+        String data = Logic.getUserProfile(name);
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), data, "show specific user for mohseni"));
+            }
+        }
+    }
 
-
+    private void showMessageOfMohseni(Message message) throws InterruptedException, IOException, ParseException {
+        Thread.sleep(100);
+        String name = message.getContent();
+        String data = Logic.getMessageOfMohseni(name);
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), data, "show message of mohseni"));
+            }
+        }
+    }
+    private void writeMessageOfMohseni(Message message) throws IOException, ParseException {
+        String[] data = message.getContent().split("-");
+        String filter = data[0];
+        String messageOfMohseni = data[1];
+        Logic.writeFileMohseni(filter, messageOfMohseni);
+    }
+    private void getStudentFilter(Message message) throws InterruptedException {
+        Thread.sleep(100);
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), message.getContent(), "get students base on filter"));
+            }
+        }
     }
     private void showMessageOfAdmin(Message message) throws InterruptedException {
         System.out.println("show message");

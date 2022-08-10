@@ -161,6 +161,127 @@ public class Logic {
             e.printStackTrace();
         }
     }
+    public static String getStudentFilter(String filter) throws IOException, ParseException {
+        log.info("get messages for mohseni filtering members");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\unidatas\\students.json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        Set keys = jsonObject.keySet();
+        String data = "";
+        Hashtable<Long, String> my_dict = new Hashtable<>();
+        if (filter == null || filter.equals("")) {
+            for (Object key : keys) {
+                String name = (String) key;
+                String value = (String) jsonObject.get(name);
+                my_dict.put(Long.valueOf(name), value);
+            }
+
+            Set<Long> key1 = my_dict.keySet();
+            ArrayList<Long> sorting = new ArrayList<>();
+            sorting.addAll(key1);
+            Collections.sort(sorting);
+            Collections.reverse(sorting);
+            for (Long studentNumbers:sorting){
+                data += studentNumbers + ":" + my_dict.get(studentNumbers)+"-";
+            }
+        }
+        else {
+            for (Object key : keys) {
+                if (((String) key).contains(filter)) {
+                    String name = (String) key;
+                    String value = (String) jsonObject.get(name);
+                    my_dict.put(Long.valueOf(name), value);
+                }
+            }
+
+            Set<Long> key1 = my_dict.keySet();
+            ArrayList<Long> sorting = new ArrayList<>();
+            sorting.addAll(key1);
+            Collections.sort(sorting);
+            Collections.reverse(sorting);
+            for (Long studentNumbers:sorting){
+                data += studentNumbers + ":" + my_dict.get(studentNumbers)+"-";
+            }
+
+        }
+
+        return data;
+    }
+
+    public static boolean isStringInt(String s) {
+        try
+        {
+            Integer.parseInt(s);
+            return true;
+        } catch (NumberFormatException ex)
+        {
+            return false;
+        }
+    }
+    public static void writeFileMohseni(String filter, String message) throws IOException, ParseException {
+        if (!Logic.mohseniMessageForStudentName(filter, message)){
+            if (Logic.isStringInt(filter)){
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\unidatas\\studentsEnteranceYear.json"));
+                JSONObject jsonObject = (JSONObject) obj;
+                Set keys = jsonObject.keySet();
+                for (Object key : keys) {
+                    String name = (String) key;
+                    String value = (String) jsonObject.get(name);
+                    if (Objects.equals(value, filter)){
+                        writeFileMohseni2((String) key,message);
+                    }
+                }
+            }
+            if (Objects.equals(filter, "undergraduate") || Objects.equals(filter, "master") || Objects.equals(filter, "phd")){
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\unidatas\\studentsDegree.json"));
+                JSONObject jsonObject = (JSONObject) obj;
+                Set keys = jsonObject.keySet();
+                for (Object key : keys) {
+                    String name = (String) key;
+                    String value = (String) jsonObject.get(name);
+                    if (Objects.equals(value, filter)){
+                        writeFileMohseni2((String) key,message);
+                    }
+                }
+            }
+        }
+    }
+    public static void writeFileMohseni2(String name2, String message2) throws IOException, ParseException {
+        log.info("Open and write message of mohseni");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\userdata\\" + name2 + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        jsonObject.put("mohseni message", message2);
+        String path = System.getProperty("user.dir") + "\\src\\main\\java\\data\\userdata\\" + name2 + ".json";
+        try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
+            Gson gson = new Gson();
+            String json = gson.toJson(jsonObject);
+            out.write(json);
+        } catch (Exception e) {
+            log.error("exception", e);
+            e.printStackTrace();
+        }
+    }
+    public static boolean mohseniMessageForStudentName(String name, String message) {
+        boolean isSet = false;
+        log.info("Read username message from mohseni");
+        File file = new File(System.getProperty("user.dir"), "/" + "\\src\\main\\java\\data\\userdata\\" + name + ".json");
+        if (file.exists()) {
+            JSONParser parser = new JSONParser();
+            try {
+                Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\userdata\\" + name + ".json"));
+                JSONObject jsonObject = (JSONObject) obj;
+                log.info("set message of mohseni for student");
+                jsonObject.put("mohseni message", message);
+                isSet = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return  isSet;
+    }
     public static String getMessageForAdmin() throws IOException, ParseException {
         log.info("get messages for admin");
         JSONParser parser = new JSONParser();
@@ -337,6 +458,7 @@ public class Logic {
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\userdata\\" + name + ".json"));
         return (JSONObject) obj;
     }
+
 
     public boolean checkUserPass(String pass, String name) {
         log.info("Read username and password of user from userdata file and check them");
@@ -741,6 +863,25 @@ public class Logic {
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\userdata\\" + name + ".json"));
         JSONObject jsonObject = (JSONObject) obj;
         return (String) jsonObject.get("degree");
+    }
+    public static String getUserProfile(String name) throws IOException, ParseException {
+        log.info("specific user data for mohseni");
+        String data = "";
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        data += "username : " + (String) jsonObject.get("username")+ "-"+ "faculty : " + (String) jsonObject.get("faculty")+ "-"+
+                "phone number : " + (String) jsonObject.get("phone number")+ "-"+"condition : " + (String) jsonObject.get("condition")+ "-"+
+                "supervisor : " + (String) jsonObject.get("supervisor")+ "-"+"email : " + (String) jsonObject.get("email")+ "-"+
+                "entering year : " + (String) jsonObject.get("entering year")+ "-"+"student number : " + (String) jsonObject.get("student number");
+        return data;
+    }
+    public static String getMessageOfMohseni(String name) throws IOException, ParseException {
+        log.info("read message of mohseni for student to show");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\userdata\\" + name + ".json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        return (String) jsonObject.get("mohseni message");
     }
 
     public static String getUserDegree(String name) throws IOException, ParseException {

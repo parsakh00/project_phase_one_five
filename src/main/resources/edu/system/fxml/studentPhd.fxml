@@ -83,9 +83,11 @@
             <RowConstraints />
          </rowConstraints>
         </GridPane>
-      <Button layoutX="389.0" layoutY="290.0" mnemonicParsing="false" onAction="#submitForAdmin" text="submit" />
+      <Button layoutX="389.0" layoutY="276.0" mnemonicParsing="false" onAction="#submitForAdmin" text="submit" />
       <Label layoutX="335.0" layoutY="217.0" text="write your criticism for admin :" />
-      <TextField fx:id="messageForAdmin" layoutX="246.0" layoutY="249.0" prefHeight="26.0" prefWidth="338.0" promptText="write your message for admin" />
-      <Label fx:id="alertMessageForAdmin" alignment="CENTER" contentDisplay="CENTER" layoutX="319.0" layoutY="337.0" prefHeight="18.0" prefWidth="192.0" textAlignment="CENTER" />
+      <TextField fx:id="messageForAdmin" layoutX="246.0" layoutY="242.0" prefHeight="26.0" prefWidth="338.0" promptText="write your message for admin" />
+      <Label fx:id="alertMessageForAdmin" alignment="CENTER" contentDisplay="CENTER" layoutX="319.0" layoutY="400.0" prefHeight="18.0" prefWidth="192.0" textAlignment="CENTER" />
+      <Label layoutX="350.0" layoutY="328.0" text="message from mohseni :" />
+      <TextArea fx:id="messageMohseni" editable="false" layoutX="315.0" layoutY="346.0" prefHeight="0.0" prefWidth="200.0" />
     </children>
 </AnchorPane>

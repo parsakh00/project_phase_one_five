@@ -8,6 +8,7 @@ import org.json.simple.parser.ParseException;
 import server.Logic;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ClientLogic {
 
@@ -120,7 +121,33 @@ public class ClientLogic {
         if (message.getRequest().equals("message for admin previous")){
             showMessageForAdminPr();
         }
+        if (message.getRequest().equals("get students base on filter")) {
+            getStudentFilter(message);
+        }
+        if (message.getRequest().equals("show message of mohseni")) {
+            showMohseniMessage(message);
+        }
+        if (message.getRequest().equals("show specific user for mohseni")){
+            studentProfileForMohseni(message);
+        }
     }
+    private void studentProfileForMohseni(Message message){
+        teacherDesk.showStudentProfile(message.getContent());
+    }
+    private void showMohseniMessage(Message message){
+        String data = message.getContent();
+        if (this.studentPhdDesk != null) studentPhdDesk.showMohseniMessageDesk(data);
+        if (this.studentMasterDesk != null) studentMasterDesk.showMohseniMessageDesk(data);
+        if (this.studentUndergraduateDesk != null) studentUndergraduateDesk.showMohseniMessageDesk(data);
+    }
+
+
+    private void getStudentFilter(Message message) throws IOException, ParseException {
+        String data = Logic.getStudentFilter(message.getContent());
+        System.out.println(data);
+        teacherDesk.getStudentFilter(data);
+    }
+
     private void showMessageForAdmin(Message message) throws IOException, ParseException {
         String data = Logic.getMessageForAdmin();
         if (this.teacherDesk != null) teacherDesk.showMessageForAdmin(data);

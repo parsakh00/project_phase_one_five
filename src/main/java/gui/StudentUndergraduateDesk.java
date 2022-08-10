@@ -41,6 +41,7 @@ public class StudentUndergraduateDesk {
     public Menu profile;
     public TextField messageForAdmin;
     public Label alertMessageForAdmin;
+    public TextArea messageMohseni;
 
     String lastLogIn;
     Stage stage;
@@ -112,11 +113,11 @@ public class StudentUndergraduateDesk {
         Thread ping = new Thread(new Runnable() {
             public void run() {
                 while (true) {
-
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show message of mohseni"));
                     //logic for auto refresh
                     // delay 5 seconds
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         break;
                     }
@@ -124,6 +125,10 @@ public class StudentUndergraduateDesk {
             }
         });
         ping.start();
+    }
+    public void showMohseniMessageDesk(String content){
+        messageMohseni.setText(messageMohseni.getText() + content + '\n');
+        messageMohseni.setScrollTop(Double.MAX_VALUE);
     }
     public void minorClicked(ActionEvent actionEvent) throws IOException {
         log.info("Minor request clicked");
