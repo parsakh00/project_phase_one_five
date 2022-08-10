@@ -1,8 +1,10 @@
 package gui;
 
+import ServerRunning.ServerMode;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
+import javafx.application.Platform;
 import message.Message;
 import server.Controller;
 import currentUser.CurrentUser;
@@ -37,6 +39,7 @@ import java.util.regex.Pattern;
 public class EducationalAssistantDesk {
 
     public MenuItem lessonlists;
+    public Label serverCondition;
 
     String lastLogIn;
     Stage stage;
@@ -79,41 +82,96 @@ public class EducationalAssistantDesk {
         lastTimeLogIn.setText("last log in : " + getLoginTime());
         username.setText("User : " + getUsername());
         email.setText("Email : " + getEmail());
+        Thread ping = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    if (ServerMode.getInstance().isOnline()) {
+                        Platform.runLater(() -> {
+                            serverCondition.setText("Server is online");
+                        });
+                        
+                    } else {
+                        Platform.runLater(() -> {
+                            serverCondition.setText("server is offline");
+                        });
+                    }
+
+                    // delay 5 seconds
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        });
+        ping.start();
     }
 
     public void signUpBtnClicked(ActionEvent actionEvent) throws IOException {
-        log.info("sign up new student clicked");
-        timer.pause();
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "go to signup student fxml"));
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-        stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/signupStudent-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        setStageProp(stage, scene);
-        ClientLogic.getInstance().setSignUpStudent(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("sign up new student clicked");
+                timer.pause();
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "go to signup student fxml"));
+                CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+                stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/signupStudent-view.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setStageProp(stage, scene);
+                ClientLogic.getInstance().setSignUpStudent(loader, stage);
+            });
+        }
     }
 
     public void signUpBtnTeacherClicked(ActionEvent actionEvent) throws IOException {
-        log.info("sign up new teacher clicked");
-        timer.pause();
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "go to signup teacher fxml"));
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-        stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/signupTeacher.fxml"));
-        Scene scene = new Scene(loader.load());
-        setStageProp(stage, scene);
-        ClientLogic.getInstance().setSignUpTeacher(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("sign up new teacher clicked");
+                timer.pause();
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "go to signup teacher fxml"));
+                CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+                stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/signupTeacher.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setStageProp(stage, scene);
+                ClientLogic.getInstance().setSignUpTeacher(loader, stage);
+            });
+        }
     }
 
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
-        log.info("Current user Logged out by him self");
-        timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-        stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/login-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        setStageProp(stage, scene);
-        ClientLogic.getInstance().setLogin(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("Current user Logged out by him self");
+                timer.pause();
+                CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+                stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/login-view.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setStageProp(stage, scene);
+                try {
+                    ClientLogic.getInstance().setLogin(loader, stage);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
     }
 
     public void timeDisplay() {
@@ -127,7 +185,6 @@ public class EducationalAssistantDesk {
     }
 
     public String getLoginTime() {
-
         try {
             FileInputStream fstream = new FileInputStream("./src/main/resources/logs/userActivity.log");
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -179,13 +236,22 @@ public class EducationalAssistantDesk {
     }
 
     public void logOut() throws IOException {
-        log.info("Current user logged out ");
-        stage = ((Stage) (email).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
-        Scene scene = new Scene(loader.load());
-        setStageProp(stage, scene);
-        ClientLogic.getInstance().setLogOutDesk(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("Current user logged out ");
+                stage = ((Stage) (email).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setStageProp(stage, scene);
+                ClientLogic.getInstance().setLogOutDesk(loader, stage);
+            });
+        }
     }
 
     private void setStageProp(Stage stage, Scene scene) {
@@ -198,74 +264,119 @@ public class EducationalAssistantDesk {
     }
 
     public void lessonListsClicked() throws IOException {
-        log.info("Current user lessons lists");
-        timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName()
-                , "change fxml to lessonList-view fxml"));
-        stage = ((Stage) (email).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/lessonLists-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
-        ClientLogic.getInstance().setLessonListDesk(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("Current user lessons lists");
+                timer.pause();
+                CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName()
+                        , "change fxml to lessonList-view fxml"));
+                stage = ((Stage) (email).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/lessonLists-view.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage.setHeight(650);
+                stage.setWidth(800);
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.setTitle("educational system");
+                stage.show();
+                ClientLogic.getInstance().setLessonListDesk(loader, stage);
+            });
+        }
     }
 
     public void teachersListsClicked() throws IOException {
-        log.info("Current user teachers lists");
-        timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName()
-                , "change fxml to teacherLists-view fxml"));
-        stage = ((Stage) (email).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/teacherLists-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
-        ClientLogic.getInstance().setTeachersListDesk(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("Current user teachers lists");
+                timer.pause();
+                CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName()
+                        , "change fxml to teacherLists-view fxml"));
+                stage = ((Stage) (email).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/teacherLists-view.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage.setHeight(650);
+                stage.setWidth(800);
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.setTitle("educational system");
+                stage.show();
+                ClientLogic.getInstance().setTeachersListDesk(loader, stage);
+            });
+        }
     }
 
     public void recommendationRequest() throws IOException {
-        log.info("Recommendation request clicked");
-        stage = ((Stage) (email).getScene().getWindow());
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "change fxml to teacherRecommendRequest fxml"));
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/teacherRecommendRequest-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        setStageProp(stage, scene);
-        ClientLogic.getInstance().setTeacherRecommendRequest(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("Recommendation request clicked");
+                stage = ((Stage) (email).getScene().getWindow());
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "change fxml to teacherRecommendRequest fxml"));
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/teacherRecommendRequest-view.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setStageProp(stage, scene);
+                ClientLogic.getInstance().setTeacherRecommendRequest(loader, stage);
+            });
+        }
     }
 
     public void withdrawRequest(ActionEvent actionEvent) throws IOException, ParseException {
-        log.info("Current user withdraw request");
-        timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "change fxml to EduWithdrawRequest-view fxml"));
-        stage = ((Stage) (email).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/EduWithdrawRequest-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        setStageProp(stage, scene);
-        ClientLogic.getInstance().setEduWithdrawRequest(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("Current user withdraw request");
+                timer.pause();
+                CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "change fxml to EduWithdrawRequest-view fxml"));
+                stage = ((Stage) (email).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/EduWithdrawRequest-view.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setStageProp(stage, scene);
+                ClientLogic.getInstance().setEduWithdrawRequest(loader, stage);
+            });
+        }
 
     }
 
     public void minorRequest(ActionEvent actionEvent) throws IOException {
-        log.info("Current user minor request");
-        timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "change fxml to eduMinorRequest-view fxml"));
-        stage = ((Stage) (email).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/eduMinorRequest-view.fxml"));
-        Scene scene = new Scene(loader.load());
-        setStageProp(stage, scene);
-        ClientLogic.getInstance().setEduMinorRequests(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("Current user minor request");
+                timer.pause();
+                CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "change fxml to eduMinorRequest-view fxml"));
+                stage = ((Stage) (email).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/eduMinorRequest-view.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setStageProp(stage, scene);
+                ClientLogic.getInstance().setEduMinorRequests(loader, stage);
+            });
+        }
     }
 
     protected String getUserDegree() throws IOException, ParseException {
@@ -276,8 +387,10 @@ public class EducationalAssistantDesk {
 
     public void profileClicked(ActionEvent actionEvent) throws IOException {
         log.info("Current user profile");
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName()
-                , "change fxml to profile fxml"));
+        if (ServerMode.getInstance().isOnline()) {
+            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName()
+                    , "change fxml to profile fxml"));
+        }
         timer.pause();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());

@@ -52,6 +52,7 @@
                         </Menu>
                     </menus>
                 </MenuBar>
+            <Label fx:id="serverCondition" alignment="CENTER" layoutX="319.0" layoutY="12.0" prefHeight="17.0" prefWidth="161.0" />
             </children>
         </Pane>
         <Label fx:id="username" layoutX="6.0" layoutY="161.0" prefHeight="35.0" prefWidth="240.0" />

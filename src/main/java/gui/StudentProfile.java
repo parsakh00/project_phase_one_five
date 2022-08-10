@@ -1,5 +1,6 @@
 package gui;
 
+import ServerRunning.ServerMode;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
@@ -46,6 +47,7 @@ public class StudentProfile {
     public Label warningNumber;
     public Label warningEmail;
     public ImageView imageUser;
+    public Label serverCondition;
     String username;
     String userDegree;
 
@@ -66,20 +68,78 @@ public class StudentProfile {
                 throw new RuntimeException(e);
             }
         });
-        log.info("Show data");
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show data student"));
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "set name and degree"));
+
+        Thread ping = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    if (ServerMode.getInstance().isOnline()) {
+                        Platform.runLater(() -> {
+                            serverCondition.setText("Server is online");
+                            log.info("Show data");
+                            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show data student"));
+                            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "set name and degree"));
+                            try {
+                                setUserImage();
+                            } catch (IOException | ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+
+                    } else {
+                        Platform.runLater(() -> {
+                            serverCondition.setText("server is offline");
+                            try {
+                                setStudentProfile();
+                            } catch (IOException | ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    // delay 5 seconds
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        });
+        ping.start();
+
+    }
+
+    private void setStudentProfile() throws IOException, ParseException {
+        userName.setText(CurrentUser.getInstance().getUserName());
+        id.setText(CurrentUser.getInstance().getId());
+        studentId.setText(CurrentUser.getInstance().getStudentNumber());
+        phoneNumber.setText(CurrentUser.getInstance().getPhoneNumber());
+        email.setText(CurrentUser.getInstance().getEmail());
+        faculty.setText(CurrentUser.getInstance().getFaculty());
+        score.setText(CurrentUser.getInstance().getTotalScore());
+        supervisor.setText(CurrentUser.getInstance().getSupervisor());
+        enteranceYear.setText(CurrentUser.getInstance().getEnteringYear());
+        userStage.setText(CurrentUser.getInstance().getDegree());
+        condition.setText(CurrentUser.getInstance().getCondition());
         setUserImage();
     }
 
     public void logOut() throws IOException {
-        log.info("Logged out, out of time");
-        stage = ((Stage) (email).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
-        Scene scene = new Scene(loader.load());
-        setStageProp(stage, scene);
-        ClientLogic.getInstance().setLogOutDesk(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("Logged out, out of time");
+                stage = ((Stage) (email).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                setStageProp(stage, scene);
+                ClientLogic.getInstance().setLogOutDesk(loader, stage);
+            });
+        }
     }
 
     public void setUserDegreeAndName(String message) {
@@ -101,7 +161,11 @@ public class StudentProfile {
         log.info("Back button clicked");
         timer.pause();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), "", "back to main page"));
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), "", "back to main page"));
+            });
+        }
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
         if (Objects.equals(userDegree, "master")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentMasterDesk.fxml"));
@@ -151,22 +215,40 @@ public class StudentProfile {
     }
 
     public void changeEmailClicked(ActionEvent actionEvent) throws IOException, ParseException {
-        log.info("Change email clicked");
-        if (!Objects.equals((String) changeEmail.getText(), (String) null)) {
-            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), changeEmail.getText() + "-" + CurrentUser.getInstance().getUserName(), "edit email clicked student"));
-            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show data student"));
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                warningEmail.setText(null);
+                log.info("Change email clicked");
+                if (!Objects.equals((String) changeEmail.getText(), (String) null)) {
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), changeEmail.getText() + "-" + CurrentUser.getInstance().getUserName(), "edit email clicked student"));
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show data student"));
+                } else {
+                    warningEmail.setText("First Fill the field!");
+                }
+            });
         } else {
-            warningEmail.setText("First Fill the field!");
+            Platform.runLater(() -> {
+                warningEmail.setText("server is down!");
+            });
         }
     }
 
     public void changeNumberClicked(ActionEvent actionEvent) throws IOException, ParseException {
-        log.info("Change number clicked");
-        if (!Objects.equals((String) changeNumber.getText(), (String) null)) {
-            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), changeNumber.getText() + "-" + CurrentUser.getInstance().getUserName(), "edit number clicked student"));
-            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show data student"));
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                warningNumber.setText(null);
+                log.info("Change number clicked");
+                if (!Objects.equals((String) changeNumber.getText(), (String) null)) {
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), changeNumber.getText() + "-" + CurrentUser.getInstance().getUserName(), "edit number clicked student"));
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show data student"));
+                } else {
+                    warningNumber.setText("First fill the field!");
+                }
+            });
         } else {
-            warningNumber.setText("First fill the field!");
+            Platform.runLater(() -> {
+                warningNumber.setText("server is down!");
+            });
         }
     }
 }

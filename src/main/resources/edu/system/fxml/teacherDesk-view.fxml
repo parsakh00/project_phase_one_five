@@ -36,6 +36,7 @@
                         </Menu>
                     </menus>
                 </MenuBar>
+            <Label fx:id="serverCondition" alignment="CENTER" layoutX="314.0" layoutY="12.0" prefHeight="17.0" prefWidth="158.0" />
             </children>
         </Pane>
         <Label fx:id="username" layoutX="6.0" layoutY="161.0" prefHeight="35.0" prefWidth="240.0" />
@@ -49,7 +50,7 @@
       <TextArea fx:id="textArea" editable="false" layoutX="424.0" layoutY="241.0" prefHeight="313.0" prefWidth="255.0" visible="false" />
       <Label fx:id="studentFilterLabel" alignment="CENTER" layoutX="562.0" layoutY="134.0" prefHeight="18.0" prefWidth="140.0" text="Students :" visible="false" />
       <TextField fx:id="studentFilterTextField" layoutX="557.0" layoutY="197.0" promptText="filtering" visible="false" />
-      <TextArea fx:id="studentFilterTextArea" editable="false" layoutX="532.0" layoutY="241.0" onKeyPressed="#executeEvent" prefHeight="200.0" prefWidth="200.0" visible="false" />
+      <TextArea fx:id="studentFilterTextArea" editable="false" layoutX="532.0" layoutY="241.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
       <Label fx:id="mohseniAlert" layoutX="24.0" layoutY="511.0" prefHeight="18.0" prefWidth="166.0" visible="false" />
       <Label fx:id="entYearLabel" layoutX="25.0" layoutY="379.0" prefHeight="18.0" prefWidth="86.0" text="entering year :" visible="false" />
       <Label fx:id="nameLabel" layoutX="24.0" layoutY="432.0" text="name :" visible="false" />
@@ -62,6 +63,6 @@
       <Button fx:id="mohseniMessageBtn" layoutX="290.0" layoutY="457.0" mnemonicParsing="false" onAction="#mohseniMessageBtnClicked" text="submit" visible="false" />
       <ComboBox fx:id="studentProfileCombo" layoutX="300.0" layoutY="197.0" onAction="#ComboBoxClicked" prefWidth="150.0" promptText="students" visible="false" />
       <Label fx:id="studentProfile" layoutX="300.0" layoutY="153.0" prefHeight="18.0" prefWidth="150.0" text="Choose student profile :" visible="false" />
-      <TextArea fx:id="studentProfileListView" editable="false" layoutX="300.0" layoutY="241.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextArea fx:id="studentProfileListView" editable="false" layoutX="300.0" layoutY="241.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
     </children>
 </AnchorPane>

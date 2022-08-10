@@ -1,5 +1,6 @@
 package gui;
 
+import ServerRunning.ServerMode;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;

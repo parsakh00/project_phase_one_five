@@ -13,6 +13,7 @@
                   <Font name="System Bold" size="12.0" />
                </font></Label>
             <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#backBtnClicked" text="&lt;-" />
+            <Label fx:id="serverCondition" alignment="CENTER" layoutX="330.0" layoutY="35.0" prefHeight="17.0" prefWidth="141.0" />
          </children></Pane>
       <GridPane layoutX="76.0" layoutY="239.0" prefHeight="312.0" prefWidth="648.0">
         <columnConstraints>

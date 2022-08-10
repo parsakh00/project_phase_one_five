@@ -1,19 +1,22 @@
 package edu.system;
 
+import ServerRunning.ServerMode;
 import message.Message;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.ConnectException;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Client implements Runnable{
     private static Client client;
-    private final Socket socket;
+    private Socket socket;
     private String name;
-    private final PrintWriter printWriter;
-    private final Scanner scanner;
+    private PrintWriter printWriter;
+    private Scanner scanner;
     private String authToken;
 
     public Client(Socket socket) throws IOException {
@@ -27,19 +30,36 @@ public class Client implements Runnable{
 //        Message initialMessage = new Message(null,"I am connecting","DD");
 //        printWriter.println(initialMessage.toJson());
 //        printWriter.flush();
-
+        ServerMode.getInstance().turnServerOn();
         while (true) {
-            String input = scanner.nextLine();
-            while (true) {
-                String nextLine = scanner.nextLine();
-                if (nextLine.equals("over")) break;
-                input += nextLine;
+            try {
+                String input = scanner.nextLine();
+                while (true) {
+                    String nextLine = scanner.nextLine();
+                    if (nextLine.equals("over")) break;
+                    input += nextLine;
+                }
+
+                Message message = Message.jsonTOMessage(input);
+                System.out.println("Message from server : " + input);
+                //use client logic to analyse
+                ClientLogic.getInstance().analyse(message);
+            }catch (NoSuchElementException e){
+
+                try {
+                    Socket newSocket = new Socket("localhost", 8080);
+                    this.socket=newSocket;
+                    this.printWriter = new PrintWriter(socket.getOutputStream());
+                    this.scanner = new Scanner(socket.getInputStream());
+                    ServerMode.getInstance().turnServerOn();
+                    System.out.println("connected");
+                }catch (ConnectException e2){
+                    ServerMode.getInstance().switchServerDown();
+                    //if (!ServerMode.getInstance().isOnline()) System.out.println("server is offline");
+                }
             }
-            Message message = Message.jsonTOMessage(input);
-            System.out.println("Message from server : " + input);
-            //use client logic to analyse
-            ClientLogic.getInstance().analyse(message);
         }
+
     }
 
     public static Client getClient() {

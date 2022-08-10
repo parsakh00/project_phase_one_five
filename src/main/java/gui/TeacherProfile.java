@@ -1,5 +1,6 @@
 package gui;
 
+import ServerRunning.ServerMode;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
@@ -42,6 +43,7 @@ public class TeacherProfile {
     public TextField changeEmail;
     public Label warningNumber;
     public Label warningEmail;
+    public Label serverCondition;
     Stage stage;
     String name;
     ImageView userImage;
@@ -66,31 +68,88 @@ public class TeacherProfile {
         changeNumber.setText(null);
         changeEmail.setText(null);
         log.info("Show teacher data");
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "user data teacher"));
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "set name"));
+        Thread ping = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    if (ServerMode.getInstance().isOnline()) {
+                        Platform.runLater(() -> {
+                            serverCondition.setText("Server is online");
+                        });
+                        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "user data teacher"));
+                        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "set name"));
+                        try {
+                            setUserImage();
+                        } catch (IOException | ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    } else {
+                        Platform.runLater(() -> {
+                            serverCondition.setText("server is offline");
+                            try {
+                                setProfileOffline();
+                            } catch (IOException | ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+
+                    // delay 5 seconds
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        });
+        ping.start();
+    }
+
+    private void setProfileOffline() throws IOException, ParseException {
+        username.setText(CurrentUser.getInstance().getUserName());
+        id.setText(CurrentUser.getInstance().getId());
+        teacherId.setText(CurrentUser.getInstance().getId());
+        phoneNumber.setText(CurrentUser.getInstance().getPhoneNumber());
+        email.setText(CurrentUser.getInstance().getEmail());
+        faculty.setText(CurrentUser.getInstance().getFaculty());
+        roomNo.setText(CurrentUser.getInstance().getRoomNo());
+        degree.setText(CurrentUser.getInstance().getDegree());
         setUserImage();
     }
 
     public void logOut() throws IOException {
-        log.info("Logged out, out of time");
-        stage = ((Stage) (email).getScene().getWindow());
-        FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
-        Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.setTitle("educational system");
-        stage.show();
-        ClientLogic.getInstance().setLogOutDesk(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                log.info("Logged out, out of time");
+                stage = ((Stage) (email).getScene().getWindow());
+                FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "logged out"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(loader.load());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                stage.setHeight(650);
+                stage.setWidth(800);
+                stage.setResizable(false);
+                stage.setScene(scene);
+                stage.setTitle("educational system");
+                stage.show();
+                ClientLogic.getInstance().setLogOutDesk(loader, stage);
+            });
+        }
     }
 
     public void backBtn(ActionEvent actionEvent) throws IOException, ParseException {
         log.info("Back button clicked");
         timer.pause();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), "", "back to main page"));
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), "", "back to main page"));
+            });
+        }
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
         if (Objects.equals(CurrentUser.getInstance().getDegree(), "education assistant")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/educationalAssistantDesk-view.fxml"));
@@ -134,35 +193,55 @@ public class TeacherProfile {
     }
 
     public void setUserImage() throws IOException, ParseException {
-        if (String.valueOf(ClientMain.class.getResource("images/" + name + ".png")) == null) {
-            log.info("Show image of user");
-            userImage = new ImageView(String.valueOf(ClientMain.class.getResource("images/" + name + ".png")));
-        } else {
-            log.info("Show default image");
-            userImage = new ImageView(String.valueOf(ClientMain.class.getResource("images/default.png")));
-        }
-        userImage.setFitHeight(160);
-        userImage.setFitWidth(140);
-        imageOfUser.getChildren().add(userImage);
+        Platform.runLater(() -> {
+            if (String.valueOf(ClientMain.class.getResource("images/" + name + ".png")) == null) {
+                log.info("Show image of user");
+                userImage = new ImageView(String.valueOf(ClientMain.class.getResource("images/" + name + ".png")));
+            } else {
+                log.info("Show default image");
+                userImage = new ImageView(String.valueOf(ClientMain.class.getResource("images/default.png")));
+            }
+            userImage.setFitHeight(160);
+            userImage.setFitWidth(140);
+            imageOfUser.getChildren().add(userImage);
+        });
     }
 
     public void changeEmailClicked(ActionEvent actionEvent) throws IOException, ParseException {
-        log.info("Change email confirmation");
-        if (!Objects.equals((String) changeEmail.getText(), (String) null)) {
-            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), changeEmail.getText() + "-" + CurrentUser.getInstance().getUserName(), "edit email clicked teacher"));
-            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "user data teacher"));
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                warningEmail.setText(null);
+                log.info("Change email confirmation");
+                if (!Objects.equals((String) changeEmail.getText(), (String) null)) {
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), changeEmail.getText() + "-" + CurrentUser.getInstance().getUserName(), "edit email clicked teacher"));
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "user data teacher"));
+                } else {
+                    warningEmail.setText("First Fill the field!");
+                }
+            });
         } else {
-            warningEmail.setText("First Fill the field!");
+            Platform.runLater(() -> {
+                warningEmail.setText("server is down!");
+            });
         }
     }
 
     public void changeNumberClicked(ActionEvent actionEvent) throws IOException, ParseException {
-        log.info("Change number confirmation");
-        if (!Objects.equals((String) changeNumber.getText(), (String) null)) {
-            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), changeNumber.getText() + "-" + CurrentUser.getInstance().getUserName(), "edit number clicked teacher"));
-            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "user data teacher"));
+        if (ServerMode.getInstance().isOnline()) {
+            Platform.runLater(() -> {
+                warningNumber.setText(null);
+                log.info("Change number confirmation");
+                if (!Objects.equals((String) changeNumber.getText(), (String) null)) {
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), changeNumber.getText() + "-" + CurrentUser.getInstance().getUserName(), "edit number clicked teacher"));
+                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "user data teacher"));
+                } else {
+                    warningNumber.setText("First fill the field!");
+                }
+            });
         } else {
-            warningNumber.setText("First fill the field!");
+            Platform.runLater(() -> {
+                warningNumber.setText("server is down!");
+            });
         }
     }
 }

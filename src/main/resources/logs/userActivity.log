@@ -1,48 +1,31 @@
-2022-08-10 15:51:17 INFO  ClientMain:853 - Read user type from userdata file
-2022-08-10 15:51:17 INFO  ClientMai2022-08-10 15:51:17 INFO  ClientMain:853 - Read user type from userdata file
-2022-08-10 15:51:17 INFO  ClientMain:861 - Read user type from userdata file
-2022-08-10 15:51:17 INFO  ClientMain:572 - Read user type from userdata file
-2022-08-10 15:51:17 INFO  ClientMain:580 - Read and rewrite phone number from userdata file
-2022-08-10 15:51:17 INFO  ClientMain:532 - Open user data file to read student id of student
-2022-08-10 15:51:17 INFO  ClientMain:548 - Open user data file to read student id of student
-2022-08-10 15:51:17 INFO  ClientMain:564 - Open user data file to read student id of student
-2022-08-10 15:51:18 INFO  TeacherDesk:83 - Open teacher main, logged in
-2022-08-10 15:51:18 INFO  TeacherDesk:230 - Get current user username
-2022-08-10 15:51:18 INFO  ClientMain:491 - Read name of user from file
-2022-08-10 15:51:18 INFO  ClientMain:165 - get messages for mohseni fi2022-08-10 15:51:40 INFO  ClientMain:868 - specific user data for mohseni
-r mohseni filtering members
-2022-08-10 15:51:23 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:51:28 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:51:33 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:51:38 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:51:43 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:51:48 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:51:53 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:51:58 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:03 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:08 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:13 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:18 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:23 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:28 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:33 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:38 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:43 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:48 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:53 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:52:58 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:03 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:08 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:13 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:18 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:23 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:28 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:33 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:38 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:43 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:48 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:53 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:53:58 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:54:03 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:54:08 INFO  ClientMain:165 - get messages for mohseni filtering members
-2022-08-10 15:54:13 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 00:02:36 INFO  ClientMain:853 - Read user type from userdata file
+2022-08-11 00:02:36 INFO  ClientMai2022-08-11 00:02:37 INFO  ClientMain:853 - Read user type from userdata file
+2022-08-11 00:02:37 INFO  ClientMain:861 - Read user type from userdata file
+2022-08-11 00:02:37 INFO  ClientMain:572 - Read user type from userdata file
+2022-08-11 00:02:37 INFO  ClientMain:580 - Read and rewrite phone number from userdata file
+2022-08-11 00:02:37 INFO  ClientMain:532 - Open user data file to read student id of student
+2022-08-11 00:02:37 INFO  ClientMain:548 - Open user data file to read student id of student
+2022-08-11 00:02:37 INFO  ClientMain:564 - Open user data file to read student id of student
+2022-08-11 00:02:37 INFO  EducationalAssistantDesk:66 - Open educational assistant main page
+2022-08-11 00:02:37 INFO  EducationalAssistantDesk:77 - logged in
+2022-08-11 00:02:37 INFO  EducationalAssistantDesk:192 - Current user name
+2022-08-11 00:02:37 INFO  ClientMain:491 - Read name of user from file
+2022-08-11 00:02:37 INFO  EducationalAssistantDesk:205 - Show default image
+2022-08-11 00:02:37 INFO  EducationalAssistantDesk:192 - Current user name
+2022-08-11 00:02:37 INFO  ClientMain:491 - Read name of user from file
+2022-08-11 00:02:37 INFO  EducationalAssistantDesk:185 - Current user email
+2022-08-11 00:02:59 INFO  EducationalAssistantDesk:364 - Current user profile
+2022-08-11 00:02:59 INFO  ClientMain:56 - Open teacher profile
+2022-08-11 00:02:59 INFO  ClientMain:70 - Show teacher data
+2022-08-11 00:02:59 INFO  ClientMain:201 - Show default image
+2022-08-11 00:03:04 INFO  ClientMain:201 - Show default image
+2022-08-11 00:03:07 INFO  ClientMain:145 - Back button clicked
+2022-08-11 00:03:07 INFO  EducationalAssistantDesk:66 - Open educational assistant main page
+2022-08-11 00:03:07 INFO  EducationalAssistantDesk:77 - logged in
+2022-08-11 00:03:07 INFO  EducationalAssistantDesk:192 - Current user name
+2022-08-11 00:03:07 INFO  ClientMain:491 - Read name of user from file
+2022-08-11 00:03:07 INFO  EducationalAssistantDesk:205 - Show default image
+2022-08-11 00:03:07 INFO  EducationalAssistantDesk:192 - Current user name
+2022-08-11 00:03:07 INFO  ClientMain:491 - Read name of user from file
+2022-08-11 00:03:07 INFO  EducationalAssistantDesk:185 - Current user email
+2022-08-11 00:03:09 INFO  ClientMain:201 - Show default image

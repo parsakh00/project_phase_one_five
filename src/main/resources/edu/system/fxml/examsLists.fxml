@@ -14,6 +14,7 @@
                </font>
             </Label>
             <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#backBtnClicked" text="&lt;-" />
+            <Label fx:id="serverCondition" layoutX="331.0" layoutY="36.0" prefHeight="17.0" prefWidth="139.0" />
          </children></Pane>
       <GridPane fx:id="exams" layoutX="293.0" layoutY="140.0" prefHeight="472.0" prefWidth="214.0">
         <columnConstraints>

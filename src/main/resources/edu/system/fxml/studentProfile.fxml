@@ -8,6 +8,7 @@
         <Pane prefHeight="125.0" prefWidth="800.0" styleClass="loginBox" stylesheets="@../styles.css">
             <children>
                 <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtn" text="&lt;-" />
+            <Label fx:id="serverCondition" alignment="CENTER" layoutX="337.0" layoutY="18.0" prefHeight="17.0" prefWidth="127.0" />
             </children></Pane>
         <GridPane layoutX="246.0" layoutY="137.0" prefHeight="399.0" prefWidth="307.0">
             <columnConstraints>
