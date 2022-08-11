@@ -43,6 +43,12 @@ public class StudentPhdDesk {
     public Label alertMessageForAdmin;
     public TextArea messageMohseni;
     public Label serverCondition;
+    public Label toWhoLabel;
+    public Label chatBoxLabel;
+    public Button sendChatBtn;
+    public TextArea chatBoxTextArea;
+    public TextField messageChatField;
+    public ComboBox toWhoCombo;
     String lastLogIn;
     Stage stage;
     @FXML
@@ -104,11 +110,17 @@ public class StudentPhdDesk {
                     if (ServerMode.getInstance().isOnline()) {
                         Platform.runLater(() -> {
                             serverCondition.setText("Server is online");
+                            sendChatBtn.setVisible(true);
+                            messageChatField.setVisible(true);
+                            toWhoCombo.setVisible(true);
                             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show message of mohseni"));
                         });
 
                     } else {
                         Platform.runLater(() -> {
+                            sendChatBtn.setVisible(false);
+                            messageChatField.setVisible(false);
+                            toWhoCombo.setVisible(false);
                             serverCondition.setText("server is offline");
                         });
                     }
@@ -226,7 +238,9 @@ public class StudentPhdDesk {
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/examsLists.fxml"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
-        ClientLogic.getInstance().setExamsList(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            ClientLogic.getInstance().setExamsList(loader, stage);
+        }
     }
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
         if (ServerMode.getInstance().isOnline()) {
@@ -349,7 +363,9 @@ public class StudentPhdDesk {
                 stage.setScene(scene);
                 stage.setTitle("educational system");
                 stage.show();
-                ClientLogic.getInstance().setTeachersListDesk(loader, stage);
+                if (ServerMode.getInstance().isOnline()) {
+                    ClientLogic.getInstance().setTeachersListDesk(loader, stage);
+                }
             });
         }
     }
@@ -398,7 +414,9 @@ public class StudentPhdDesk {
         stage.setScene(scene);
         stage.setTitle("educational system");
         stage.show();
-        ClientLogic.getInstance().setStudentProfile(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            ClientLogic.getInstance().setStudentProfile(loader, stage);
+        }
     }
     public void temporaryScoreClicked(ActionEvent actionEvent) throws IOException {
         //ToDo incomplete from previous phase
@@ -442,5 +460,11 @@ public class StudentPhdDesk {
         else{
             alertMessageForAdmin.setText("First write your message!");
         }
+    }
+
+    public void sendChatBtnClicked(ActionEvent actionEvent) {
+    }
+
+    public void toWhoComboClicked(ActionEvent actionEvent) {
     }
 }

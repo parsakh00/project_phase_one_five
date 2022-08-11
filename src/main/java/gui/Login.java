@@ -6,6 +6,7 @@ import edu.system.ClientLogic;
 import edu.system.ClientMain;
 import currentUser.CurrentUser;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -257,7 +258,6 @@ public class Login {
                     Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), userName, "set name"));
                     Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), userName, "get type"));
                     Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), userName, "get degree"));
-
                     Thread.sleep(500);
 
                     if (Objects.equals(getUserType(), "student")) {
@@ -314,20 +314,22 @@ public class Login {
     }
 
     public void mainLogIn(String content) {
-        if (!Objects.equals(content, "wrong captcha")) {
-            if (Objects.equals(content, "true")) {
-                isOk = true;
-            }
-            if (Objects.equals(content, "Not allow")) {
-                wrongUserPass.setText("Not allow");
+        Platform.runLater(()->{
+            if (!Objects.equals(content, "wrong captcha")) {
+                if (Objects.equals(content, "true")) {
+                    isOk = true;
+                }
+                if (Objects.equals(content, "Not allow")) {
+                    wrongUserPass.setText("Not allow");
+                    isOk = false;
+                }
+                if (Objects.equals(content, "wrong username or password")) {
+                    wrongUserPass.setText("wrong username or password");
+                    isOk = false;
+                }
+            } else {
                 isOk = false;
             }
-            if (Objects.equals(content, "wrong username or password")) {
-                wrongUserPass.setText("wrong username or password");
-                isOk = false;
-            }
-        } else {
-            isOk = false;
-        }
+        });
     }
 }

@@ -40,6 +40,12 @@ public class StudentMasterDesk {
     public Label alertMessageForAdmin;
     public TextArea messageMohseni;
     public Label serverCondition;
+    public Label toWhoLabel;
+    public Label chatBoxLabel;
+    public Button sendChatBtn;
+    public TextArea chatBoxTextArea;
+    public ComboBox toWhoCombo;
+    public TextField messageChatField;
     @FXML
     protected MenuItem teacherslist;
     @FXML
@@ -109,11 +115,17 @@ public class StudentMasterDesk {
                     if (ServerMode.getInstance().isOnline()) {
                         Platform.runLater(() -> {
                             serverCondition.setText("Server is online");
+                            messageChatField.setVisible(true);
+                            sendChatBtn.setVisible(true);
+                            toWhoCombo.setVisible(true);
                             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show message of mohseni"));
                         });
 
                     } else {
                         Platform.runLater(() -> {
+                            messageChatField.setVisible(false);
+                            sendChatBtn.setVisible(false);
+                            toWhoCombo.setVisible(false);
                             serverCondition.setText("server is offline");
                         });
                     }
@@ -222,7 +234,9 @@ public class StudentMasterDesk {
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/weeklySchedule-view.fxml"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
-        ClientLogic.getInstance().setWeeklySchedule(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            ClientLogic.getInstance().setWeeklySchedule(loader, stage);
+        }
     }
     @FXML
     protected void examClicked() throws IOException {
@@ -233,7 +247,9 @@ public class StudentMasterDesk {
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/examsLists.fxml"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
-        ClientLogic.getInstance().setExamsList(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            ClientLogic.getInstance().setExamsList(loader, stage);
+        }
     }
     public void logOut() throws IOException {
         if (ServerMode.getInstance().isOnline()) {
@@ -418,7 +434,9 @@ public class StudentMasterDesk {
         stage.setScene(scene);
         stage.setTitle("educational system");
         stage.show();
-        ClientLogic.getInstance().setStudentProfile(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            ClientLogic.getInstance().setStudentProfile(loader, stage);
+        }
     }
     public void temporaryScoreClicked(ActionEvent actionEvent) throws IOException {
         //ToDo incomplete from previous phase
@@ -462,5 +480,11 @@ public class StudentMasterDesk {
         else{
             alertMessageForAdmin.setText("First write your message!");
         }
+    }
+
+    public void sendChatBtnClicked(ActionEvent actionEvent) {
+    }
+
+    public void toWhoComboClicked(ActionEvent actionEvent) {
     }
 }

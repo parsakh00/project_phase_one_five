@@ -23,6 +23,7 @@ import server.Controller;
 import server.MassageInNetwork;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class WeeklySchedule {
@@ -171,20 +172,20 @@ public class WeeklySchedule {
                 if (!Objects.equals(eachElement, "null")) {
 
                     if (i % 4 == 1) {
-                        if (Objects.equals(lesson[i + 1], "0"))
-                            Saturday += eachElement + " = " + lesson[i] + " / ";
-                        else if (Objects.equals(lesson[i + 1], "1"))
-                            Sunday += eachElement + " = " + lesson[i] + " / ";
-                        else if (Objects.equals(lesson[i + 1], "2"))
-                            Monday += eachElement + " = " + lesson[i] + " / ";
-                        else if (Objects.equals(lesson[i + 1], "3"))
-                            Tuesday += eachElement + " = " + lesson[i] + " / ";
-                        else if (Objects.equals(lesson[i + 1], "4"))
-                            Wednesday += eachElement + " = " + lesson[i] + " / ";
-                        else if (Objects.equals(lesson[i + 1], "5"))
-                            Thursday += eachElement + " = " + lesson[i] + " / ";
-                        else if (Objects.equals(lesson[i + 1], "6"))
-                            Friday += eachElement + " = " + lesson[i] + " / ";
+                        if (Objects.equals(lesson[i + 2], "0"))
+                            Saturday += eachElement + " = " + lesson[i+1] + " / ";
+                        else if (Objects.equals(lesson[i + 2], "1"))
+                            Sunday += eachElement + " = " + lesson[i+1] + " / ";
+                        else if (Objects.equals(lesson[i + 2], "2"))
+                            Monday += eachElement + " = " + lesson[i+1] + " / ";
+                        else if (Objects.equals(lesson[i + 2], "3"))
+                            Tuesday += eachElement + " = " + lesson[i+1] + " / ";
+                        else if (Objects.equals(lesson[i + 2], "4"))
+                            Wednesday += eachElement + " = " + lesson[i+1] + " / ";
+                        else if (Objects.equals(lesson[i + 2], "5"))
+                            Thursday += eachElement + " = " + lesson[i+1] + " / ";
+                        else if (Objects.equals(lesson[i + 2], "6"))
+                            Friday += eachElement + " = " + lesson[i+1] + " / ";
                     }
                     i += 1;
                 }
@@ -197,9 +198,6 @@ public class WeeklySchedule {
         wednesday.setText(Wednesday);
         thursday.setText(Thursday);
         friday.setText(Friday);
-
-
-
     }
 
     public void showStudentSchedule(String data) {

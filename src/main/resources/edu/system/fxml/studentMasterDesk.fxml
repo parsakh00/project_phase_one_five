@@ -86,11 +86,17 @@
             <RowConstraints />
          </rowConstraints>
       </GridPane>
-      <Button layoutX="416.0" layoutY="325.0" mnemonicParsing="false" onAction="#submitForAdmin" text="submit" />
-      <Label layoutX="362.0" layoutY="258.0" text="write your criticism for admin :" />
-      <TextField fx:id="messageForAdmin" layoutX="267.0" layoutY="285.0" prefHeight="26.0" prefWidth="349.0" promptText="write your message for admin" />
+      <Button layoutX="302.0" layoutY="337.0" mnemonicParsing="false" onAction="#submitForAdmin" text="submit" />
+      <Label layoutX="248.0" layoutY="276.0" text="write your criticism for admin :" />
+      <TextField fx:id="messageForAdmin" layoutX="154.0" layoutY="304.0" prefHeight="26.0" prefWidth="349.0" promptText="write your message for admin" />
       <Label fx:id="alertMessageForAdmin" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="422.0" prefHeight="18.0" prefWidth="174.0" textAlignment="CENTER" />
-      <Label layoutX="377.0" layoutY="356.0" text="message from mohseni :" />
-      <TextArea fx:id="messageMohseni" editable="false" layoutX="342.0" layoutY="382.0" prefHeight="18.0" prefWidth="200.0" />
+      <Label layoutX="264.0" layoutY="373.0" text="message from mohseni :" />
+      <TextArea fx:id="messageMohseni" editable="false" layoutX="228.0" layoutY="403.0" prefHeight="18.0" prefWidth="200.0" />
+        <Label fx:id="toWhoLabel" layoutX="425.0" layoutY="152.0" text="to who :" />
+        <Label fx:id="chatBoxLabel" layoutX="580.0" layoutY="152.0" text="chat box :" />
+        <Button fx:id="sendChatBtn" layoutX="729.0" layoutY="382.0" mnemonicParsing="false" onAction="#sendChatBtnClicked" text="send" />
+        <TextArea fx:id="chatBoxTextArea" layoutX="579.0" layoutY="176.0" prefHeight="200.0" prefWidth="200.0" />
+        <TextField fx:id="messageChatField" layoutX="579.0" layoutY="382.0" prefHeight="26.0" prefWidth="150.0" promptText="message...." />
+        <ComboBox fx:id="toWhoCombo" layoutX="425.0" layoutY="176.0" onAction="#toWhoComboClicked" prefWidth="150.0" />
     </children>
 </AnchorPane>

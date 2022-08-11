@@ -58,6 +58,12 @@ public class TeacherDesk {
     public TextArea studentProfileListView;
     public Label studentProfile;
     public Label serverCondition;
+    public Label chatBoxLabel;
+    public Label toWhoLabel;
+    public ComboBox toWhoCombo;
+    public TextArea chatBoxTextArea;
+    public TextField messageChatField;
+    public Button sendChatBtn;
     String lastLogIn;
     Stage stage;
     @FXML
@@ -96,8 +102,15 @@ public class TeacherDesk {
         });
 
         getLoginTime();
-        if (!Objects.equals(CurrentUser.getInstance().getUserName(), "admin") && !Objects.equals(CurrentUser.getInstance().getUserName(), "mohseni"))
+        if (!Objects.equals(CurrentUser.getInstance().getUserName(), "admin") && !Objects.equals(CurrentUser.getInstance().getUserName(), "mohseni")) {
             setUserImage();
+            toWhoLabel.setVisible(true);
+            chatBoxLabel.setVisible(true);
+            toWhoCombo.setVisible(true);
+            chatBoxTextArea.setVisible(true);
+            messageChatField.setVisible(true);
+            sendChatBtn.setVisible(true);
+        }
         timeDisplay();
         lastTimeLogIn.setText("last log in : " + getLoginTime());
         username.setText("User : " + getUsername());
@@ -142,7 +155,12 @@ public class TeacherDesk {
                         Platform.runLater(()->{
                             serverCondition.setText("Server is online");
                         });
-                        if (Objects.equals(CurrentUser.getInstance().getUserName(), "mohseni")) {
+                        if (!Objects.equals(CurrentUser.getInstance().getUserName(), "admin") && !Objects.equals(CurrentUser.getInstance().getUserName(), "mohseni")) {
+                            messageChatField.setVisible(true);
+                            sendChatBtn.setVisible(true);
+                            toWhoCombo.setVisible(true);
+                        }
+                            if (Objects.equals(CurrentUser.getInstance().getUserName(), "mohseni")) {
                             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), studentFilterTextField.getText(),
                                     "get students base on filter"));
                         }
@@ -152,6 +170,9 @@ public class TeacherDesk {
                     }
                     else{
                         Platform.runLater(()->{
+                            messageChatField.setVisible(false);
+                            sendChatBtn.setVisible(false);
+                            toWhoCombo.setVisible(false);
                             serverCondition.setText("server is offline");
                         });
                     }
@@ -437,6 +458,10 @@ public class TeacherDesk {
                     }
                 }
             });
+        }else{
+            Platform.runLater(()->{
+                mohseniAlert.setText("server is down!");
+            });
         }
     }
 
@@ -458,5 +483,11 @@ public class TeacherDesk {
             studentProfileListView.setText(studentProfileListView.getText() + str + '\n');
             studentProfileListView.setScrollTop(Double.MAX_VALUE);
         }
+    }
+
+    public void chatComboClicked(ActionEvent actionEvent) {
+    }
+
+    public void sendChatClicked(ActionEvent actionEvent) {
     }
 }

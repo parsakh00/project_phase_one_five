@@ -111,7 +111,7 @@ public class StudentProfile {
     private void setStudentProfile() throws IOException, ParseException {
         userName.setText(CurrentUser.getInstance().getUserName());
         id.setText(CurrentUser.getInstance().getId());
-        studentId.setText(CurrentUser.getInstance().getStudentNumber());
+        studentId.setText(CurrentUser.getInstance().getId());
         phoneNumber.setText(CurrentUser.getInstance().getPhoneNumber());
         email.setText(CurrentUser.getInstance().getEmail());
         faculty.setText(CurrentUser.getInstance().getFaculty());
@@ -167,17 +167,17 @@ public class StudentProfile {
             });
         }
         stage = ((Stage) ((Node) (actionEvent.getSource())).getScene().getWindow());
-        if (Objects.equals(userDegree, "master")) {
+        if (Objects.equals(CurrentUser.getInstance().getDegree(), "master")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentMasterDesk.fxml"));
             Scene scene = new Scene(loader.load());
             setStageProp(stage, scene);
             ClientLogic.getInstance().setStudentMasterDesk(loader, stage);
-        } else if (Objects.equals(userDegree, "phd")) {
+        } else if (Objects.equals(CurrentUser.getInstance().getDegree(), "phd")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentPhd.fxml"));
             Scene scene = new Scene(loader.load());
             setStageProp(stage, scene);
             ClientLogic.getInstance().setStudentPhdDesk(loader, stage);
-        } else if (Objects.equals(userDegree, "undergraduate")) {
+        } else if (Objects.equals(CurrentUser.getInstance().getDegree(), "undergraduate")) {
             FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentUndergraduateDesk-view.fxml"));
             Scene scene = new Scene(loader.load());
             setStageProp(stage, scene);

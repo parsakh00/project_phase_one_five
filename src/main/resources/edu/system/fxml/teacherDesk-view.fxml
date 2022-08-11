@@ -39,7 +39,7 @@
             <Label fx:id="serverCondition" alignment="CENTER" layoutX="314.0" layoutY="12.0" prefHeight="17.0" prefWidth="158.0" />
             </children>
         </Pane>
-        <Label fx:id="username" layoutX="6.0" layoutY="161.0" prefHeight="35.0" prefWidth="240.0" />
+        <Label fx:id="username" disable="true" layoutX="6.0" layoutY="161.0" prefHeight="35.0" prefWidth="240.0" />
         <Label fx:id="email" layoutX="6.0" layoutY="126.0" prefHeight="35.0" prefWidth="270.0">
             <font>
                 <Font name="System Bold" size="12.0" />
@@ -64,5 +64,11 @@
       <ComboBox fx:id="studentProfileCombo" layoutX="300.0" layoutY="197.0" onAction="#ComboBoxClicked" prefWidth="150.0" promptText="students" visible="false" />
       <Label fx:id="studentProfile" layoutX="300.0" layoutY="153.0" prefHeight="18.0" prefWidth="150.0" text="Choose student profile :" visible="false" />
       <TextArea fx:id="studentProfileListView" editable="false" layoutX="300.0" layoutY="241.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+      <Label fx:id="chatBoxLabel" layoutX="572.0" layoutY="187.0" text="chat box :" visible="false" />
+      <Label fx:id="toWhoLabel" layoutX="404.0" layoutY="187.0" text="to who :" visible="false" />
+      <ComboBox fx:id="toWhoCombo" layoutX="404.0" layoutY="214.0" onAction="#chatComboClicked" prefWidth="150.0" visible="false" />
+      <TextArea fx:id="chatBoxTextArea" layoutX="572.0" layoutY="214.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+      <TextField fx:id="messageChatField" layoutX="572.0" layoutY="419.0" prefHeight="26.0" prefWidth="158.0" promptText="message...." visible="false" />
+      <Button fx:id="sendChatBtn" layoutX="732.0" layoutY="419.0" mnemonicParsing="false" onAction="#sendChatClicked" text="send" visible="false" />
     </children>
 </AnchorPane>

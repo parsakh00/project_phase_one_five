@@ -45,6 +45,10 @@ public class StudentUndergraduateDesk {
     public Label alertMessageForAdmin;
     public TextArea messageMohseni;
     public Label serverCondition;
+    public TextArea chatBox;
+    public ComboBox chatCombo;
+    public TextField chatField;
+    public Button sendChatBtn;
 
     String lastLogIn;
     Stage stage;
@@ -119,11 +123,17 @@ public class StudentUndergraduateDesk {
                     if (ServerMode.getInstance().isOnline()) {
                         Platform.runLater(() -> {
                             serverCondition.setText("Server is online");
+                            sendChatBtn.setVisible(true);
+                            chatField.setVisible(true);
+                            chatCombo.setVisible(true);
                             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show message of mohseni"));
                         });
 
                     } else {
                         Platform.runLater(() -> {
+                            sendChatBtn.setVisible(false);
+                            chatField.setVisible(false);
+                            chatCombo.setVisible(false);
                             serverCondition.setText("server is offline");
                         });
                     }
@@ -190,12 +200,14 @@ public class StudentUndergraduateDesk {
     protected void scheduleClicked() throws IOException {
         log.info("Weekly schedule clicked");
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/weeklySchedule-view.fxml"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
-        ClientLogic.getInstance().setWeeklySchedule(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            ClientLogic.getInstance().setWeeklySchedule(loader, stage);
+        }
     }
     @FXML
     protected void examClicked() throws IOException {
@@ -205,7 +217,9 @@ public class StudentUndergraduateDesk {
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/examsLists.fxml"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
-        ClientLogic.getInstance().setExamsList(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            ClientLogic.getInstance().setExamsList(loader, stage);
+        }
     }
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
         if (ServerMode.getInstance().isOnline()) {
@@ -398,7 +412,9 @@ public class StudentUndergraduateDesk {
         stage.setScene(scene);
         stage.setTitle("educational system");
         stage.show();
-        ClientLogic.getInstance().setStudentProfile(loader, stage);
+        if (ServerMode.getInstance().isOnline()) {
+            ClientLogic.getInstance().setStudentProfile(loader, stage);
+        }
     }
     public void temporaryScoreClicked(ActionEvent actionEvent) throws IOException {
         //ToDo incomplete from previous phase
@@ -450,5 +466,11 @@ public class StudentUndergraduateDesk {
                 alertMessageForAdmin.setText("server is down!");
             });
         }
+    }
+
+    public void chatComboClicked(ActionEvent actionEvent) {
+    }
+
+    public void sendMessageClicked(ActionEvent actionEvent) {
     }
 }

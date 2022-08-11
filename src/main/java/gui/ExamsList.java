@@ -161,44 +161,58 @@ public class ExamsList {
     }
 
     private void showExamListOffline() throws IOException, ParseException {
-        MassageInNetwork massageGetLessonExam = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
-        String[] examDay = Controller.getInstance().nameOfLessons(massageGetLessonExam);
-        MassageInNetwork massageUserLessonName = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
-        String[] lessonName2 = Controller.getInstance().examOfLessons(massageUserLessonName);
-        log.info("Turn lesson to array");
-        for (String element : examDay) {
-            if (!Objects.equals((String) element, "null")) examsDays.add(Integer.valueOf(element));
-        }
-        log.info("Turn exam day to array");
-        for (String element : lessonName2) {
-            if (!Objects.equals((String) element, "null")) lessonsNames.add(element);
-        }
-        for (int i = 0; i < examsDays.size(); i++) {
-            map.put(examsDays.get(i), lessonsNames.get(i));
-        }
-        log.info("Sorting arrays");
-        Map<Integer, String> treeMap = new TreeMap<Integer, String>(
-                new Comparator<Integer>() {
+        //ToDo
+        Platform.runLater(()->{
+            MassageInNetwork massageGetLessonExam = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
+            String[] examDay = new String[0];
+            try {
+                examDay = Controller.getInstance().nameOfLessons(massageGetLessonExam);
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
+            }
+            MassageInNetwork massageUserLessonName = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
+            String[] lessonName = new String[0];
+            try {
+                lessonName = Controller.getInstance().examOfLessons(massageUserLessonName);
+            } catch (IOException | ParseException e) {
+                throw new RuntimeException(e);
+            }
+            int len = examDay.length + lessonName.length;
+            log.info("Turn lesson to array");
+            for (String element : lessonName) {
+                if (!Objects.equals((String) element, "null")) examsDays.add(Integer.valueOf(element));
+            }
+            log.info("Turn exam day to array");
+            for (String element : examDay) {
+                if (!Objects.equals((String) element, "null")) lessonsNames.add(element);
+            }
+            for (int i = 0; i < examsDays.size(); i++) {
+                map.put(examsDays.get(i), lessonsNames.get(i));
+            }
+            log.info("Sorting arrays");
+            Map<Integer, String> treeMap = new TreeMap<Integer, String>(
+                    new Comparator<Integer>() {
 
-                    @Override
-                    public int compare(Integer o1, Integer o2) {
-                        return o2.compareTo(o1);
-                    }
+                        @Override
+                        public int compare(Integer o1, Integer o2) {
+                            return o2.compareTo(o1);
+                        }
 
-                });
-        treeMap.putAll(map);
-        int i = 0;
-        for (Map.Entry<Integer, String> entry : treeMap.entrySet()) {
-            Label label = new Label();
-            String lessonName = entry.getValue();
-            int month = entry.getKey() / 100;
-            int day = entry.getKey() % 100;
-            String days = "/" + Integer.toString(month) + "/" + Integer.toString(day) + "   " + lessonName;
-            label.setText(days);
-            label.setAlignment(Pos.CENTER);
-            exams.add(label, 0, i);
-            i += 1;
-        }
+                    });
+            treeMap.putAll(map);
+            int i = 0;
+            for (Map.Entry<Integer, String> entry : treeMap.entrySet()) {
+                Label label = new Label();
+                String lessonName22 = entry.getValue();
+                int month = entry.getKey() / 100;
+                int day = entry.getKey() % 100;
+                String days = "/" + Integer.toString(month) + "/" + Integer.toString(day) + "   " + lessonName22;
+                label.setText(days);
+                label.setAlignment(Pos.CENTER);
+                exams.add(label, 0, i);
+                i += 1;
+            }
+        });
     }
 
     public void getUserLessonExamNew(String content) {

@@ -1,31 +1,44 @@
-2022-08-11 00:02:36 INFO  ClientMain:853 - Read user type from userdata file
-2022-08-11 00:02:36 INFO  ClientMai2022-08-11 00:02:37 INFO  ClientMain:853 - Read user type from userdata file
-2022-08-11 00:02:37 INFO  ClientMain:861 - Read user type from userdata file
-2022-08-11 00:02:37 INFO  ClientMain:572 - Read user type from userdata file
-2022-08-11 00:02:37 INFO  ClientMain:580 - Read and rewrite phone number from userdata file
-2022-08-11 00:02:37 INFO  ClientMain:532 - Open user data file to read student id of student
-2022-08-11 00:02:37 INFO  ClientMain:548 - Open user data file to read student id of student
-2022-08-11 00:02:37 INFO  ClientMain:564 - Open user data file to read student id of student
-2022-08-11 00:02:37 INFO  EducationalAssistantDesk:66 - Open educational assistant main page
-2022-08-11 00:02:37 INFO  EducationalAssistantDesk:77 - logged in
-2022-08-11 00:02:37 INFO  EducationalAssistantDesk:192 - Current user name
-2022-08-11 00:02:37 INFO  ClientMain:491 - Read name of user from file
-2022-08-11 00:02:37 INFO  EducationalAssistantDesk:205 - Show default image
-2022-08-11 00:02:37 INFO  EducationalAssistantDesk:192 - Current user name
-2022-08-11 00:02:37 INFO  ClientMain:491 - Read name of user from file
-2022-08-11 00:02:37 INFO  EducationalAssistantDesk:185 - Current user email
-2022-08-11 00:02:59 INFO  EducationalAssistantDesk:364 - Current user profile
-2022-08-11 00:02:59 INFO  ClientMain:56 - Open teacher profile
-2022-08-11 00:02:59 INFO  ClientMain:70 - Show teacher data
-2022-08-11 00:02:59 INFO  ClientMain:201 - Show default image
-2022-08-11 00:03:04 INFO  ClientMain:201 - Show default image
-2022-08-11 00:03:07 INFO  ClientMain:145 - Back button clicked
-2022-08-11 00:03:07 INFO  EducationalAssistantDesk:66 - Open educational assistant main page
-2022-08-11 00:03:07 INFO  EducationalAssistantDesk:77 - logged in
-2022-08-11 00:03:07 INFO  EducationalAssistantDesk:192 - Current user name
-2022-08-11 00:03:07 INFO  ClientMain:491 - Read name of user from file
-2022-08-11 00:03:07 INFO  EducationalAssistantDesk:205 - Show default image
-2022-08-11 00:03:07 INFO  EducationalAssistantDesk:192 - Current user name
-2022-08-11 00:03:07 INFO  ClientMain:491 - Read name of user from file
-2022-08-11 00:03:07 INFO  EducationalAssistantDesk:185 - Current user email
-2022-08-11 00:03:09 INFO  ClientMain:201 - Show default image
+2022-08-11 18:42:35 INFO  ClientMain:58 - launch program
+2022-08-11 18:42:35 INFO  ClientMain:76 - Log in page
+2022-08-11 18:43:05 INFO  ClientMain:853 - Read user type from userdata file
+2022-08-11 18:43:05 INFO  ClientMain:861 - Read user type from userdata file
+2022-08-11 18:43:05 INFO  ClientMain:572 - Read user type from userdata file
+2022-08-11 18:43:05 INFO  ClientMain:580 - Read and rewrite phone number from userdata file
+2022-08-11 18:43:05 INFO  ClientMain:532 - Open user data file to read student id of student
+2022-08-11 18:43:05 INFO  ClientMain:548 - Open user data file to read student id of student
+2022-08-11 18:43:05 INFO  ClientMain:564 - Open user data file to read student id of student
+2022-08-11 18:43:05 INFO  TeacherDesk:91 - Open teacher main, logged in
+2022-08-11 18:43:05 INFO  TeacherDesk:312 - Set current user image
+2022-08-11 18:43:05 INFO  TeacherDesk:297 - Get current user username
+2022-08-11 18:43:05 INFO  ClientMain:491 - Read name of user from file
+2022-08-11 18:43:05 INFO  TeacherDesk:297 - Get current user username
+2022-08-11 18:43:05 INFO  ClientMain:491 - Read name of user from file
+2022-08-11 18:43:05 INFO  TeacherDesk:291 - Get current user email
+6 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:42:41 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:42:46 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:42:51 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:42:56 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:43:01 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:43:06 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:43:11 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:43:16 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:43:21 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:43:26 INFO  ClientMain:165 - get messages for mohseni filtering members
+2022-08-11 18:43:31 INFO  ClientMain:165 - get messages for mohseni filtering members
+a file to read student id of student
+2022-08-11 18:43:04 INFO  ClientMain:548 - Open user data file to read student id of student
+2022-08-11 18:43:04 INFO  ClientMain:564 - Open user data file to read student id of student
+2022-08-11 18:43:04 INFO  ClientMain:464 - Read username and password of user from userdata file and check them
+2022-08-11 18:43:04 INFO  ClientMain:470 - check equality of hash of pass that entered by pass that user field in password field
+2022-08-11 18:43:04 INFO  ClientMain:853 - Read user type from userdata file
+2022-08-11 18:43:04 INFO  ClientMain:861 - Read user type from userdata file
+2022-08-11 18:43:04 INFO  ClientMain:572 - Read user type from userdata file
+2022-08-11 18:43:04 INFO  ClientMain:580 - Read and rewrite phone number from userdata file
+2022-08-11 18:43:04 INFO  ClientMain:532 - Open user data file to read student id of student
+2022-08-11 18:43:04 INFO  ClientMain:548 - Open user data file to read student id of student
+2022-08-11 18:43:04 INFO  ClientMain:564 - Open user data file to read student id of student
+2022-08-11 18:43:04 INFO  ClientMain:464 - Read username and password of user from userdata file and check them
+2022-08-11 18:43:04 INFO  ClientMain:470 - check equality of hash of pass that entered by pass that user field in password field
+2022-08-11 18:43:05 INFO  ClientMain:853 - Read user type from userdata file
+2022-08-11 18:43:05 INFO  ClientMain:861 - Read user type from userdata file
