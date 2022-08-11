@@ -32,6 +32,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -66,6 +67,7 @@ public class TeacherDesk {
     public Button sendChatBtn;
     String lastLogIn;
     Stage stage;
+    String whichMember;
     @FXML
     protected Label email;
     @FXML
@@ -80,7 +82,6 @@ public class TeacherDesk {
     protected ImageView userImage;
     @FXML
     protected Label lastTimeLogIn;
-
 
 
     static Logger log = LogManager.getLogger(TeacherDesk.class);
@@ -110,6 +111,8 @@ public class TeacherDesk {
             chatBoxTextArea.setVisible(true);
             messageChatField.setVisible(true);
             sendChatBtn.setVisible(true);
+            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show chat box auto request"));
+
         }
         timeDisplay();
         lastTimeLogIn.setText("last log in : " + getLoginTime());
@@ -152,24 +155,24 @@ public class TeacherDesk {
             public void run() {
                 while (true) {
                     if (ServerMode.getInstance().isOnline()) {
-                        Platform.runLater(()->{
+                        Platform.runLater(() -> {
                             serverCondition.setText("Server is online");
                         });
                         if (!Objects.equals(CurrentUser.getInstance().getUserName(), "admin") && !Objects.equals(CurrentUser.getInstance().getUserName(), "mohseni")) {
                             messageChatField.setVisible(true);
                             sendChatBtn.setVisible(true);
                             toWhoCombo.setVisible(true);
+                            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "get all members for chat combo"));
                         }
-                            if (Objects.equals(CurrentUser.getInstance().getUserName(), "mohseni")) {
+                        if (Objects.equals(CurrentUser.getInstance().getUserName(), "mohseni")) {
                             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), studentFilterTextField.getText(),
                                     "get students base on filter"));
                         }
                         if (Objects.equals(CurrentUser.getInstance().getUserName(), "admin")) {
                             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), "", "show message for admin"));
                         }
-                    }
-                    else{
-                        Platform.runLater(()->{
+                    } else {
+                        Platform.runLater(() -> {
                             messageChatField.setVisible(false);
                             sendChatBtn.setVisible(false);
                             toWhoCombo.setVisible(false);
@@ -212,7 +215,7 @@ public class TeacherDesk {
 
     public void logOut() throws IOException {
         if (ServerMode.getInstance().isOnline()) {
-            Platform.runLater(()->{
+            Platform.runLater(() -> {
                 log.info("Logged out(out of time)");
                 stage = ((Stage) (email).getScene().getWindow());
                 FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/logOut.fxml"));
@@ -321,16 +324,17 @@ public class TeacherDesk {
             Platform.runLater(() -> {
                 log.info("Current user clicked lesson lists");
                 timer.pause();
-                    CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
-                    Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName()
-                            , "change fxml to lessonList-view fxml"));
+                CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName()
+                        , "change fxml to lessonList-view fxml"));
                 stage = ((Stage) (email).getScene().getWindow());
                 FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/lessonLists-view.fxml"));
                 Scene scene = null;
                 try {
                     scene = new Scene(loader.load());
                 } catch (IOException e) {
-                    System.out.println("lesson list clicked from teacher");;
+                    System.out.println("lesson list clicked from teacher");
+                    ;
                 }
                 stage.setHeight(650);
                 stage.setWidth(800);
@@ -423,10 +427,10 @@ public class TeacherDesk {
     }
 
     public void getStudentFilter(String content) {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             String[] data = content.split("-");
             studentProfileCombo.getItems().clear();
-            for (String str:data){
+            for (String str : data) {
                 studentProfileCombo.getItems().add(str);
             }
             studentFilterTextArea.clear();
@@ -436,6 +440,12 @@ public class TeacherDesk {
             }
         });
     }
+
+    public void showMembersCombo(String member) {
+        String[] data = member.split("-");
+        toWhoCombo.getItems().addAll(data);
+    }
+
 
     public void mohseniMessageBtnClicked(ActionEvent actionEvent) {
         if (ServerMode.getInstance().isOnline()) {
@@ -458,8 +468,8 @@ public class TeacherDesk {
                     }
                 }
             });
-        }else{
-            Platform.runLater(()->{
+        } else {
+            Platform.runLater(() -> {
                 mohseniAlert.setText("server is down!");
             });
         }
@@ -476,7 +486,8 @@ public class TeacherDesk {
             });
         }
     }
-    public void showStudentProfile(String name){
+
+    public void showStudentProfile(String name) {
         String[] data = name.split("-");
         studentProfileListView.clear();
         for (String str : data) {
@@ -486,8 +497,42 @@ public class TeacherDesk {
     }
 
     public void chatComboClicked(ActionEvent actionEvent) {
+        Platform.runLater(() -> {
+            whichMember = (String) toWhoCombo.getValue();
+        });
     }
 
     public void sendChatClicked(ActionEvent actionEvent) {
+        Platform.runLater(()->{
+            LocalTime time = LocalTime.now();
+            String[] time2 = String.valueOf(time).split("\\.");
+            if (messageChatField.getText()!= null || !Objects.equals(messageChatField.getText(), "")){
+                chatBoxTextArea.setText(chatBoxTextArea.getText() + CurrentUser.getInstance().getUserName() +" : "+
+                        messageChatField.getText()+"   " + time2[0] + '\n');
+                chatBoxTextArea.setScrollTop(Double.MAX_VALUE);
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), whichMember +"-"+ CurrentUser.getInstance().getUserName()
+                        +"-"+messageChatField.getText()+"-"+time2[0], "write message of chatBox"));
+            }
+            messageChatField.setText(null);
+        });
+    }
+    public void readChatSend(String content){
+        Platform.runLater(()->{
+            String[] data = content.split("-");
+            String toWho = data[0];
+            String whoSend = data[1];
+            String whatMessage = data[2];
+            String time = data[3];
+            chatBoxTextArea.setText(chatBoxTextArea.getText()+ whoSend +" : "+ whatMessage +"   "+time + '\n');
+            chatBoxTextArea.setScrollTop(Double.MAX_VALUE);
+        });
+    }
+    public void readChatSendInit(String content) {
+        String[] parts = content.split(":");
+        for (String message : parts) {
+            String[] eachMessage = message.split("-");
+            chatBoxTextArea.setText(chatBoxTextArea.getText() + eachMessage[1] + " : " + eachMessage[2] + "   " + eachMessage[3] + '\n');
+            chatBoxTextArea.setScrollTop(Double.MAX_VALUE);
+        }
     }
 }

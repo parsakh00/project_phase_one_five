@@ -130,7 +130,41 @@ public class ClientLogic {
         if (message.getRequest().equals("show specific user for mohseni")){
             studentProfileForMohseni(message);
         }
+        if (message.getRequest().equals("get all members for chat combo")){
+            showMemberCombo(message);
+        }
+        if (message.getRequest().equals("read all members for chat combo")){
+            readChatBoxSend(message);
+        }
+        if (message.getRequest().equals("show chat box auto request")){
+            readChatBoxSendAuto(message);
+        }
+
+
     }
+    private void readChatBoxSendAuto(Message message){
+        String part = message.getContent();
+        if (this.studentPhdDesk != null) studentPhdDesk.readChatSendInit(part);
+        if (this.studentMasterDesk != null) studentMasterDesk.readChatSendInit(part);
+        if (this.studentUndergraduateDesk != null) studentUndergraduateDesk.readChatSendInit(part);
+        if (this.teacherDesk != null) teacherDesk.readChatSendInit(part);
+    }
+    private void readChatBoxSend(Message message) {
+        String members = message.getContent();
+        if (this.studentPhdDesk != null) studentPhdDesk.readChatSend(members);
+        if (this.studentMasterDesk != null) studentMasterDesk.readChatSend(members);
+        if (this.studentUndergraduateDesk != null) studentUndergraduateDesk.readChatSend(members);
+        if (this.teacherDesk != null) teacherDesk.readChatSend(members);
+    }
+    private void showMemberCombo(Message message){
+        String members = message.getContent();
+        if (this.studentPhdDesk != null) studentPhdDesk.showMembersCombo(members);
+        if (this.studentMasterDesk != null) studentMasterDesk.showMembersCombo(members);
+        if (this.studentUndergraduateDesk != null) studentUndergraduateDesk.showMembersCombo(members);
+        if (this.teacherDesk != null) teacherDesk.showMembersCombo(members);
+
+    }
+
     private void studentProfileForMohseni(Message message){
         teacherDesk.showStudentProfile(message.getContent());
     }

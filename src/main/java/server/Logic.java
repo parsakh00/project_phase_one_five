@@ -39,6 +39,8 @@ public class Logic {
     int j = 0;
     static Logger log = LogManager.getLogger(ClientMain.class);
 
+
+
     public void editingPassWord(String username, String password) {
         log.info(" open and rewrite password");
         JSONParser parser = new JSONParser();
@@ -160,6 +162,18 @@ public class Logic {
             log.error("exception happened", e);
             e.printStackTrace();
         }
+    }
+    public static String getMembersForChat() throws IOException, ParseException {
+        log.info("get messages for mohseni filtering members");
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\requests\\members.json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        Set keys = jsonObject.keySet();
+        String members = "";
+        for (Object member : keys){
+            members += (String) member +"-";
+        }
+        return "send to all-" + members;
     }
     public static String getStudentFilter(String filter) throws IOException, ParseException {
         log.info("get messages for mohseni filtering members");
@@ -953,6 +967,48 @@ public class Logic {
                 lessons.put("time", lessonTimeEdit);
             }
         }
+    }
+    public static String chatMessageInit(String toWho) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        String eachMessage = "";
+        String data = "";
+
+        //Read JSON file
+        Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\requests\\chatHistory.json"));
+        JSONArray chat = (JSONArray) obj;
+        return null;
+
+    }
+    public static void writeMessageOfChatBox(String data) {
+        String[] parts = data.split("-");
+        String toWho = parts[0];
+        String fromHow = parts[1];
+        String message = parts[2];
+        String time = parts[3];
+        JSONParser parser = new JSONParser();
+        try {
+            //ToDo chat box write file
+            JSONObject eachChat = new JSONObject();
+            //Read JSON file
+            Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\requests\\chatHistory.json"));
+            JSONArray chats = (JSONArray) obj;
+            eachChat.put("to who", toWho);
+            eachChat.put("from who", fromHow);
+            eachChat.put("message", message);
+            eachChat.put("time", time);
+            chats.add(eachChat);
+            String path = System.getProperty("user.dir") + "\\src\\main\\java\\data\\requests\\chatHistory.json";
+            try (PrintWriter out = new PrintWriter(new FileWriter(path))) {
+                Gson gson = new Gson();
+                String json = gson.toJson(chats);
+                out.write(json);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void add(String lesson, String faculty, String time, String teacher, String unity, String stage, String id, Boolean isPresent) {

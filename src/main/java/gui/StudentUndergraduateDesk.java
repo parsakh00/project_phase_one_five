@@ -30,7 +30,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,9 +51,9 @@ public class StudentUndergraduateDesk {
     public ComboBox chatCombo;
     public TextField chatField;
     public Button sendChatBtn;
-
     String lastLogIn;
     Stage stage;
+    String whichMember;
     @FXML
     protected AnchorPane studentView;
     @FXML
@@ -87,26 +89,27 @@ public class StudentUndergraduateDesk {
 
     static Logger log = LogManager.getLogger(StudentUndergraduateDesk.class);
     PauseTransition timer = new PauseTransition(Duration.seconds(10000));
+
     public void initialize() throws IOException, ParseException {
         log.info("Undergraduate student main, logged in");
         timer.playFromStart();
         CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds());
-        timer.setOnFinished(actionEvent ->{
+        timer.setOnFinished(actionEvent -> {
             actionEvent.consume();
             try {
                 logOut();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } );
-        timer.setOnFinished(actionEvent ->{
+        });
+        timer.setOnFinished(actionEvent -> {
             actionEvent.consume();
             try {
                 logOut();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        } );
+        });
         log.info("logged in");
         getLoginTime();
         setUserImage();
@@ -117,6 +120,7 @@ public class StudentUndergraduateDesk {
         condition.setText(getEducationalStatus());
         supervisor.setText(getSupervisor());
         messageForAdmin.setText(null);
+        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show chat box auto request"));
         Thread ping = new Thread(new Runnable() {
             public void run() {
                 while (true) {
@@ -127,6 +131,7 @@ public class StudentUndergraduateDesk {
                             chatField.setVisible(true);
                             chatCombo.setVisible(true);
                             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show message of mohseni"));
+                            Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "get all members for chat combo"));
                         });
 
                     } else {
@@ -149,53 +154,59 @@ public class StudentUndergraduateDesk {
         });
         ping.start();
     }
-    public void showMohseniMessageDesk(String content){
+
+    public void showMohseniMessageDesk(String content) {
         messageMohseni.setText(content + '\n');
         messageMohseni.setScrollTop(Double.MAX_VALUE);
     }
+
     public void minorClicked(ActionEvent actionEvent) throws IOException {
         log.info("Minor request clicked");
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/Minor-view.fxml"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
         ClientLogic.getInstance().setMinorDesk(loader, stage);
     }
+
     @FXML
     protected void WithdrawalEducation() throws IOException {
         log.info("Withdrawal from education request clicked");
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/withdrawalFromEducation-view.fxml"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
         ClientLogic.getInstance().setWithdrawalFromEducationDesk(loader, stage);
     }
+
     @FXML
     protected void certificateClicked() throws IOException {
         log.info("Apply for certificate employment clicked");
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/ApplyCertificateEmployment-view.fxml"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
         ClientLogic.getInstance().setApplyCertificateEmploymentDesk(loader, stage);
     }
+
     @FXML
     protected void recommendationClicked() throws IOException {
         log.info("Recommendation request clicked");
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/Recommendation-view.fxml"));
         Scene scene = new Scene(loader.load());
         setStageProp(stage, scene);
         ClientLogic.getInstance().setRecommendation(loader, stage);
     }
+
     @FXML
     protected void scheduleClicked() throws IOException {
         log.info("Weekly schedule clicked");
@@ -209,10 +220,11 @@ public class StudentUndergraduateDesk {
             ClientLogic.getInstance().setWeeklySchedule(loader, stage);
         }
     }
+
     @FXML
     protected void examClicked() throws IOException {
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/examsLists.fxml"));
         Scene scene = new Scene(loader.load());
@@ -221,6 +233,12 @@ public class StudentUndergraduateDesk {
             ClientLogic.getInstance().setExamsList(loader, stage);
         }
     }
+
+    public void showMembersCombo(String member) {
+        String[] data = member.split("-");
+        chatCombo.getItems().addAll(data);
+    }
+
     public void logoutClicked(ActionEvent actionEvent) throws IOException {
         if (ServerMode.getInstance().isOnline()) {
             Platform.runLater(() -> {
@@ -244,6 +262,7 @@ public class StudentUndergraduateDesk {
             });
         }
     }
+
     private void setStageProp(Stage stage, Scene scene) {
         stage.setHeight(650);
         stage.setWidth(800);
@@ -252,7 +271,8 @@ public class StudentUndergraduateDesk {
         stage.setTitle("educational system");
         stage.show();
     }
-    public void timeDisplay(){
+
+    public void timeDisplay() {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -261,6 +281,7 @@ public class StudentUndergraduateDesk {
         };
         timer.start();
     }
+
     public void logOut() throws IOException {
         if (ServerMode.getInstance().isOnline()) {
             Platform.runLater(() -> {
@@ -284,16 +305,17 @@ public class StudentUndergraduateDesk {
             });
         }
     }
-    public String getLoginTime(){
-        try{
+
+    public String getLoginTime() {
+        try {
             FileInputStream fstream = new FileInputStream("./src/main/resources/logs/userActivity.log");
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
             String strLine;
-            while ((strLine = br.readLine()) != null){
-                if (strLine.contains("StudentUndergraduateDesk")){
+            while ((strLine = br.readLine()) != null) {
+                if (strLine.contains("StudentUndergraduateDesk")) {
                     Pattern pattern = Pattern.compile("\\d{2}:\\d{2}:\\d{2}");
                     Matcher matcher = pattern.matcher(strLine);
-                    if(matcher.find()){
+                    if (matcher.find()) {
                         lastLogIn = matcher.group();
                     }
                     break;
@@ -305,26 +327,31 @@ public class StudentUndergraduateDesk {
         }
         return lastLogIn;
     }
+
     protected String getEmail() throws IOException, ParseException {
         log.info("Get current student Email");
-        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().userDeskEmail(massageStudentUndergraduateDesk);
     }
+
     protected String getUsername() throws IOException, ParseException {
         log.info("Get current student Username");
-        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork massageStudentUndergraduateDesk = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().userDeskUserName(massageStudentUndergraduateDesk);
     }
+
     protected String getEducationalStatus() throws IOException, ParseException {
         log.info("Get current student Educational status");
-        MassageInNetwork EducationalStatus = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork EducationalStatus = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().educationalStatus(EducationalStatus);
     }
+
     protected String getSupervisor() throws IOException, ParseException {
         log.info("Get current student supervisor");
-        MassageInNetwork supervisor = new MassageInNetwork(CurrentUser.getInstance().getUserName(),null,null);
+        MassageInNetwork supervisor = new MassageInNetwork(CurrentUser.getInstance().getUserName(), null, null);
         return Controller.getInstance().supervisor(supervisor);
     }
+
     public void setUserImage() throws IOException, ParseException {
         if (String.valueOf(ClientMain.class.getResource("images/" + getUsername() + ".png")) == null) {
             log.info("Show image of user");
@@ -332,8 +359,7 @@ public class StudentUndergraduateDesk {
             userImage.setFitHeight(160);
             userImage.setFitWidth(140);
             noidea.getChildren().add(userImage);
-        }
-        else {
+        } else {
             log.info("Show default image");
             ImageView userImage = new ImageView(String.valueOf(ClientMain.class.getResource("images/default.png")));
             userImage.setFitHeight(160);
@@ -341,6 +367,7 @@ public class StudentUndergraduateDesk {
             noidea.getChildren().add(userImage);
         }
     }
+
     public void lessonListsClicked() throws IOException {
         if (ServerMode.getInstance().isOnline()) {
             Platform.runLater(() -> {
@@ -367,6 +394,7 @@ public class StudentUndergraduateDesk {
             });
         }
     }
+
     public void teachersListsClicked() throws IOException {
         if (ServerMode.getInstance().isOnline()) {
             Platform.runLater(() -> {
@@ -393,6 +421,7 @@ public class StudentUndergraduateDesk {
             });
         }
     }
+
     public void profileClicked(ActionEvent actionEvent) throws IOException {
         log.info("Profile clicked");
         if (ServerMode.getInstance().isOnline()) {
@@ -402,7 +431,7 @@ public class StudentUndergraduateDesk {
             });
         }
         timer.pause();
-        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds()-(int) timer.getCurrentTime().toSeconds());
+        CurrentUser.getInstance().setTimer((int) timer.getDuration().toSeconds() - (int) timer.getCurrentTime().toSeconds());
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentProfile.fxml"));
         Scene scene = new Scene(loader.load());
@@ -416,6 +445,7 @@ public class StudentUndergraduateDesk {
             ClientLogic.getInstance().setStudentProfile(loader, stage);
         }
     }
+
     public void temporaryScoreClicked(ActionEvent actionEvent) throws IOException {
         //ToDo incomplete from previous phase
 //        log.info("Temporary score clicked");
@@ -431,6 +461,7 @@ public class StudentUndergraduateDesk {
 //        stage.setTitle("educational system");
 //        stage.show();
     }
+
     public void studentsStatusClicked(ActionEvent actionEvent) throws IOException {
         //ToDo incomplete from previous phase
 //        log.info("Students status clicked");
@@ -460,17 +491,52 @@ public class StudentUndergraduateDesk {
                     alertMessageForAdmin.setText("First write your message!");
                 }
             });
-        }
-        else {
-            Platform.runLater(()->{
+        } else {
+            Platform.runLater(() -> {
                 alertMessageForAdmin.setText("server is down!");
             });
         }
     }
 
     public void chatComboClicked(ActionEvent actionEvent) {
+        Platform.runLater(() -> {
+            whichMember = (String) chatCombo.getValue();
+        });
+    }
+
+    public void readChatSend(String content) {
+        Platform.runLater(() -> {
+            String[] data = content.split("-");
+            String toWho = data[0];
+            String whoSend = data[1];
+            String whatMessage = data[2];
+            String time = data[3];
+            chatBox.setText(chatBox.getText() + whoSend + ":" + whatMessage + "    " + time + '\n');
+            chatBox.setScrollTop(Double.MAX_VALUE);
+        });
     }
 
     public void sendMessageClicked(ActionEvent actionEvent) {
+        Platform.runLater(() -> {
+            LocalTime time = LocalTime.now();
+            String[] time2 = String.valueOf(time).split("\\.");
+            if (chatField.getText() != null || !Objects.equals(chatField.getText(), "")) {
+                chatBox.setText(chatBox.getText() + CurrentUser.getInstance().getUserName() + " : " +
+                        chatField.getText() + "   " + time2[0] + '\n');
+                chatBox.setScrollTop(Double.MAX_VALUE);
+                Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), whichMember + "-" + CurrentUser.getInstance().getUserName()
+                        + "-" + chatField.getText() + "-" + time2[0], "write message of chatBox"));
+            }
+            chatField.setText(null);
+        });
+    }
+
+    public void readChatSendInit(String content) {
+        String[] parts = content.split(":");
+        for (String message : parts) {
+            String[] eachMessage = message.split("-");
+            chatBox.setText(chatBox.getText() + eachMessage[1] + " : " + eachMessage[2] + "   " + eachMessage[3] + '\n');
+            chatBox.setScrollTop(Double.MAX_VALUE);
+        }
     }
 }

@@ -187,7 +187,57 @@ public class ServerLogic {
         if (message.getRequest().equals("show specific user for mohseni")){
             studentProfileForMohseni(message);
         }
+        if (message.getRequest().equals("get all members for chat combo")){
+            showMemberForChat(message);
+        }
+        if (message.getRequest().equals("write message of chatBox")){
+            writeChatMessage(message);
+        }
+        if (message.getRequest().equals("show chat box auto request")){
+            writeChatMessageInit(message);
+        }
 
+    }
+
+    private void writeChatMessageInit(Message message){
+        String toWho = message.getContent();
+        String data = Logic.chatMessageInit(toWho);
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), data, "show chat box auto request"));
+            }
+        }
+    }
+
+    private void writeChatMessage(Message message) throws InterruptedException {
+        Thread.sleep(100);
+        String data = message.getContent();
+        String[] parts = message.getContent().split("-");
+        //for send to all
+        Logic.writeMessageOfChatBox(data);
+        //for send to specific user
+        Thread.sleep(100);
+        if (Objects.equals(parts[0], "send to all")){
+            for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+                if (!clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                    clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), data, "read all members for chat combo"));
+                }
+            }
+        }else{
+            for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+                if (clientHandler.getUsername().equals(parts[0])) {
+                    clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), data, "read all members for chat combo"));
+                }
+            }
+        }
+    }
+    private void showMemberForChat(Message message) throws IOException, ParseException {
+        String allMembers = Logic.getMembersForChat();
+        for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
+            if (clientHandler.getAuthToken().equals(message.getAuthToken())) {
+                clientHandler.sendMessage(new Message(clientHandler.getAuthToken(), allMembers, "get all members for chat combo"));
+            }
+        }
     }
     private void studentProfileForMohseni(Message message) throws InterruptedException, IOException, ParseException {
         Thread.sleep(100);
