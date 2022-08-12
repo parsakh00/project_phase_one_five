@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -67,10 +68,11 @@
       <Label fx:id="chatBoxLabel" layoutX="572.0" layoutY="187.0" text="chat box :" visible="false" />
       <Label fx:id="toWhoLabel" layoutX="404.0" layoutY="187.0" text="to who :" visible="false" />
       <ComboBox fx:id="toWhoCombo" layoutX="404.0" layoutY="214.0" onAction="#chatComboClicked" prefWidth="150.0" visible="false" />
-      <TextArea fx:id="chatBoxTextArea" layoutX="572.0" layoutY="214.0" prefHeight="200.0" prefWidth="200.0" />
-      <TextField fx:id="messageChatField" layoutX="572.0" layoutY="419.0" prefHeight="26.0" prefWidth="158.0" promptText="message...." />
-      <Button fx:id="sendChatBtn" layoutX="732.0" layoutY="419.0" mnemonicParsing="false" onAction="#sendChatClicked" text="send" />
-      <Button fx:id="sendVoiceBtn" layoutX="702.0" layoutY="448.0" mnemonicParsing="false" onAction="#sendVoiceClicked" text="send voice" />
-      <Button fx:id="sendImageBtn" layoutX="624.0" layoutY="448.0" mnemonicParsing="false" onAction="#sendImageClicked" text="send image" />
+      <TextArea fx:id="chatBoxTextArea" layoutX="572.0" layoutY="214.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+      <TextField fx:id="messageChatField" layoutX="572.0" layoutY="419.0" prefHeight="26.0" prefWidth="158.0" promptText="message...." visible="false" />
+      <Button fx:id="sendChatBtn" layoutX="732.0" layoutY="419.0" mnemonicParsing="false" onAction="#sendChatClicked" text="send" visible="false" />
+      <Button fx:id="sendVoiceBtn" layoutX="702.0" layoutY="448.0" mnemonicParsing="false" onAction="#sendVoiceClicked" text="send voice" visible="false" />
+      <Button fx:id="sendImageBtn" layoutX="624.0" layoutY="448.0" mnemonicParsing="false" onAction="#sendImageClicked" text="send image" visible="false" />
+      <ImageView fx:id="userPhoto" fitHeight="66.0" fitWidth="52.0" layoutX="720.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true" visible="false" />
     </children>
 </AnchorPane>

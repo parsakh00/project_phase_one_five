@@ -26,7 +26,9 @@ public class ClientMain extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(ClientMain.class.getResource("fxml/login-view.fxml"));
         Parent root = fxmlLoader.load();
         ClientLogic.getInstance().setLogin(fxmlLoader, stage);
-        Scene scene = new Scene(root, 320, 240);
+        int sceneV = Constants.CONFIG.getProperty(Integer.class, "sceneV");
+        int sceneV1 = Constants.CONFIG.getProperty(Integer.class, "sceneV1");
+        Scene scene = new Scene(root, sceneV, sceneV1);
         Image icon = new Image(String.valueOf(ClientMain.class.getResource("images/university logo.png")));
         stage.setOnCloseRequest(event ->{
             event.consume();
@@ -47,8 +49,10 @@ public class ClientMain extends Application {
         new Thread(client).start();
         stage.getIcons().add(icon);
         stage.setTitle("Education System");
-        stage.setHeight(650);
-        stage.setWidth(800);
+        int height = Constants.CONFIG.getProperty(Integer.class, "stageHeight");
+        int width = Constants.CONFIG.getProperty(Integer.class, "stageWidth");
+        stage.setHeight(height);
+        stage.setWidth(width);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

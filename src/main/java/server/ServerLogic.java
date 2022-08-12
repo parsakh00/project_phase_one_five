@@ -196,6 +196,9 @@ public class ServerLogic {
         if (message.getRequest().equals("show chat box auto request")){
             writeChatMessageInit(message);
         }
+        if (message.getRequest().equals("write message image of chatBox")){
+            writeChatMessage(message);
+        }
 
 
     }

@@ -989,10 +989,22 @@ public class Logic {
     }
     public static void writeMessageOfChatBox(String data) {
         String[] parts = data.split("-");
-        String toWho = parts[0];
-        String fromHow = parts[1];
-        String message = parts[2];
-        String time = parts[3];
+        String toWho = null;
+        String fromHow = null;
+        String message = null;
+        String time = null;
+        if (parts.length == 4) {
+            toWho = parts[0];
+            fromHow = parts[1];
+            message = parts[2];
+            time = parts[3];
+        }
+        else{
+            toWho = parts[0];
+            fromHow = parts[1];
+            message = parts[2] +"-"+parts[3];
+            time = parts[4];
+        }
         JSONParser parser = new JSONParser();
         try {
             //ToDo chat box write file

@@ -1,11 +1,15 @@
 package gui;
 
 import ServerRunning.ServerMode;
+import constants.Constants;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 import message.Message;
 import server.Controller;
 import currentUser.CurrentUser;
@@ -25,10 +29,8 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.json.simple.parser.ParseException;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import javax.imageio.ImageIO;
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -50,6 +52,7 @@ public class StudentMasterDesk {
     public TextField messageChatField;
     public Button sendVoiceBtn;
     public Button sendImageBtn;
+    public ImageView userPhoto;
     @FXML
     protected MenuItem teacherslist;
     @FXML
@@ -321,8 +324,10 @@ public class StudentMasterDesk {
     }
 
     private void setStageProp(Stage stage, Scene scene) {
-        stage.setHeight(650);
-        stage.setWidth(800);
+        int height = Constants.CONFIG.getProperty(Integer.class, "stageHeight");
+        int width = Constants.CONFIG.getProperty(Integer.class, "stageWidth");
+        stage.setHeight(height);
+        stage.setWidth(width);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("educational system");
@@ -388,15 +393,19 @@ public class StudentMasterDesk {
     public void setUserImage() throws IOException, ParseException {
         if (String.valueOf(ClientMain.class.getResource("images/" + getUsername() + ".png")) == null) {
             log.info("Show image of user");
+            int height = Constants.CONFIG.getProperty(Integer.class, "imageHeightUser");
+            int width = Constants.CONFIG.getProperty(Integer.class, "imageWidthUser");
             ImageView userImage = new ImageView(String.valueOf(ClientMain.class.getResource("images/" + getUsername() + ".png")));
-            userImage.setFitHeight(160);
-            userImage.setFitWidth(140);
+            userImage.setFitHeight(height);
+            userImage.setFitWidth(width);
             noidea.getChildren().add(userImage);
         } else {
             log.info("Show default image");
+            int height = Constants.CONFIG.getProperty(Integer.class, "imageHeightUser");
+            int width = Constants.CONFIG.getProperty(Integer.class, "imageWidthUser");
             ImageView userImage = new ImageView(String.valueOf(ClientMain.class.getResource("images/default.png")));
-            userImage.setFitHeight(160);
-            userImage.setFitWidth(140);
+            userImage.setFitHeight(height);
+            userImage.setFitWidth(width);
             noidea.getChildren().add(userImage);
         }
     }
@@ -417,8 +426,10 @@ public class StudentMasterDesk {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                stage.setHeight(650);
-                stage.setWidth(800);
+                int height = Constants.CONFIG.getProperty(Integer.class, "stageHeight");
+                int width = Constants.CONFIG.getProperty(Integer.class, "stageWidth");
+                stage.setHeight(height);
+                stage.setWidth(width);
                 stage.setResizable(false);
                 stage.setScene(scene);
                 stage.setTitle("educational system");
@@ -444,8 +455,10 @@ public class StudentMasterDesk {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                stage.setHeight(650);
-                stage.setWidth(800);
+                int height = Constants.CONFIG.getProperty(Integer.class, "stageHeight");
+                int width = Constants.CONFIG.getProperty(Integer.class, "stageWidth");
+                stage.setHeight(height);
+                stage.setWidth(width);
                 stage.setResizable(false);
                 stage.setScene(scene);
                 stage.setTitle("educational system");
@@ -466,8 +479,10 @@ public class StudentMasterDesk {
         stage = ((Stage) (email).getScene().getWindow());
         FXMLLoader loader = new FXMLLoader(ClientMain.class.getResource("fxml/studentProfile.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setHeight(650);
-        stage.setWidth(800);
+        int height = Constants.CONFIG.getProperty(Integer.class, "stageHeight");
+        int width = Constants.CONFIG.getProperty(Integer.class, "stageWidth");
+        stage.setHeight(height);
+        stage.setWidth(width);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("educational system");
@@ -538,12 +553,27 @@ public class StudentMasterDesk {
     public void readChatSend(String content){
         Platform.runLater(()->{
             String[] data = content.split("-");
-            String toWho = data[0];
-            String whoSend = data[1];
-            String whatMessage = data[2];
-            String time = data[3];
-            chatBoxTextArea.setText(chatBoxTextArea.getText()+ whoSend +":"+ whatMessage +"    "+ time + '\n');
-            chatBoxTextArea.setScrollTop(Double.MAX_VALUE);
+            if (data.length == 4) {
+                String toWho = data[0];
+                String whoSend = data[1];
+                String whatMessage = data[2];
+                String time = data[3];
+                chatBoxTextArea.setText(chatBoxTextArea.getText() + whoSend + ":" + whatMessage + "    " + time + '\n');
+                chatBoxTextArea.setScrollTop(Double.MAX_VALUE);
+            }else{
+                String toWho = data[0];
+                String whoSend = data[1];
+                String kind = data[3];
+                String whatMessage = data[2];
+                String time = data[4];
+                if (Objects.equals(kind, "image")){
+                    Image image = ImageMessage.Image.decode(whatMessage);
+                    userPhoto.setImage(image);
+                }
+                if (Objects.equals(kind, "voice")){
+
+                }
+            }
         });
     }
 
@@ -553,12 +583,26 @@ public class StudentMasterDesk {
         });
     }
     public void readChatSendInit(String content) {
-        String[] parts = content.split("::");
-        for (String message : parts) {
-            String[] eachMessage = message.split("-");
-            chatBoxTextArea.setText(chatBoxTextArea.getText() + eachMessage[1] + " : " + eachMessage[2] + "   " + eachMessage[3] + '\n');
-            chatBoxTextArea.setScrollTop(Double.MAX_VALUE);
-        }
+        Platform.runLater(() -> {
+            String[] parts = content.split("::");
+            for (String message : parts) {
+                String[] eachMessage = message.split("-");
+                System.out.println(eachMessage.length);
+                if (eachMessage.length == 4) {
+                    chatBoxTextArea.setText(chatBoxTextArea.getText() + eachMessage[1] + " : " + eachMessage[2] + "   " + eachMessage[3] + '\n');
+                    chatBoxTextArea.setScrollTop(Double.MAX_VALUE);
+                } else {
+                    if (Objects.equals(eachMessage[3], "image")) {
+                        Image image = ImageMessage.Image.decode(eachMessage[2]);
+                        userPhoto.setImage(image);
+                    }
+                    if (Objects.equals(eachMessage[3], "voice")) {
+
+                    }
+                }
+
+            }
+        });
     }
     public void sendVoiceClicked(ActionEvent actionEvent) {
         Platform.runLater(()->{
@@ -566,6 +610,7 @@ public class StudentMasterDesk {
             String[] time2 = String.valueOf(time).split("\\.");
             if (messageChatField.getText()!= null || !Objects.equals(messageChatField.getText(), "")){
                 //ToDO voice message
+
             }
             messageChatField.setText(null);
         });
@@ -575,10 +620,34 @@ public class StudentMasterDesk {
         Platform.runLater(()->{
             LocalTime time = LocalTime.now();
             String[] time2 = String.valueOf(time).split("\\.");
-            if (messageChatField.getText()!= null || !Objects.equals(messageChatField.getText(), "")){
-                //ToDO image message
+            String random = String.valueOf((int) (Math.random() * 1000));
+            if (chatBoxTextArea.getText() != null || !Objects.equals(chatBoxTextArea.getText(), "")) {
+                //ToDo image message
+                stage = new Stage();
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("choose an image");
+                fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.jpg"));
+                File selectedFile = fileChooser.showOpenDialog(stage);
+                if (chatBoxTextArea.getText() != null || !Objects.equals(chatBoxTextArea.getText(), "")) {
+                    if (selectedFile != null) {
+
+                        String image = ImageMessage.Image.encode(selectedFile.toURI().toString());
+                        javafx.scene.image.Image originalPhoto = new javafx.scene.image.Image(selectedFile.toURI().toString());
+                        Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), whichMember + "-" + CurrentUser.getInstance().getUserName()
+                                + "-" + image + "-image" + "-" + time2[0], "write message image of chatBox"));
+                        userPhoto.setImage(originalPhoto);
+                    }
+                    Image imageToBeSaved = userPhoto.getImage();
+                    File file = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\edu\\system\\images\\" + random + ".jpg");
+                    try {
+                        ImageIO.write(SwingFXUtils.fromFXImage(imageToBeSaved, null), "jpg", file);
+                    } catch (IOException e) {
+                        log.error("exception happened", e);
+                        e.printStackTrace();
+                    }
+                }
             }
-            messageChatField.setText(null);
+            chatBoxTextArea.setText(null);
         });
     }
 }

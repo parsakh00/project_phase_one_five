@@ -1,6 +1,7 @@
 package gui;
 
 import ServerRunning.ServerMode;
+import constants.Constants;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
@@ -135,8 +136,10 @@ public class Login {
     }
 
     private void setCaptchaImage(ImageView imageView, String id) {
-        imageView.setFitWidth(90);
-        imageView.setFitHeight(31);
+        int height = Constants.CONFIG.getProperty(Integer.class, "imageHeightCaptcha");
+        int width = Constants.CONFIG.getProperty(Integer.class, "imageWidthCaptcha");
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
         imageView.setId(id);
         Captcha.getChildren().remove(0, 1);
         Captcha.getChildren().add(imageView);
@@ -150,8 +153,10 @@ public class Login {
     }
 
     private void setStageProp(Stage stage, Scene scene) {
-        stage.setHeight(650);
-        stage.setWidth(800);
+        int height = Constants.CONFIG.getProperty(Integer.class, "stageHeight");
+        int width = Constants.CONFIG.getProperty(Integer.class, "stageWidth");
+        stage.setHeight(height);
+        stage.setWidth(width);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.setTitle("educational system");
@@ -314,7 +319,7 @@ public class Login {
     }
 
     public void mainLogIn(String content) {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             if (!Objects.equals(content, "wrong captcha")) {
                 if (Objects.equals(content, "true")) {
                     isOk = true;

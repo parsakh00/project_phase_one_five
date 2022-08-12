@@ -1,6 +1,7 @@
 package gui;
 
 import ServerRunning.ServerMode;
+import constants.Constants;
 import edu.system.Client;
 import edu.system.ClientLogic;
 import edu.system.ClientMain;
@@ -220,17 +221,19 @@ public class EducationalAssistantDesk {
     }
 
     public void setUserImage() throws IOException, ParseException {
+        int height = Constants.CONFIG.getProperty(Integer.class, "imageHeightUser");
+        int width = Constants.CONFIG.getProperty(Integer.class, "imageWidthUser");
         if (String.valueOf(ClientMain.class.getResource("images/" + getUsername() + ".png")) == null) {
             log.info("Show image of user");
             ImageView userImage = new ImageView(String.valueOf(ClientMain.class.getResource("images/" + getUsername() + ".png")));
-            userImage.setFitHeight(160);
-            userImage.setFitWidth(140);
+            userImage.setFitHeight(height);
+            userImage.setFitWidth(width);
             noidea.getChildren().add(userImage);
         } else {
             log.info("Show default image");
             ImageView userImage = new ImageView(String.valueOf(ClientMain.class.getResource("images/default.png")));
-            userImage.setFitHeight(160);
-            userImage.setFitWidth(140);
+            userImage.setFitHeight(height);
+            userImage.setFitWidth(width);
             noidea.getChildren().add(userImage);
         }
     }

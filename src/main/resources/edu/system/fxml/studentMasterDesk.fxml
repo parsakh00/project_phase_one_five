@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -100,5 +101,7 @@
         <ComboBox fx:id="toWhoCombo" layoutX="425.0" layoutY="176.0" onAction="#toWhoComboClicked" prefWidth="150.0" />
         <Button fx:id="sendVoiceBtn" layoutX="698.0" layoutY="410.0" mnemonicParsing="false" onAction="#sendVoiceClicked" text="send voice" />
         <Button fx:id="sendImageBtn" layoutX="620.0" layoutY="410.0" mnemonicParsing="false" onAction="#sendImageClicked" text="send image" />
+        <ImageView fx:id="userPhoto" fitHeight="66.0" fitWidth="52.0" layoutX="719.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true" />
+
     </children>
 </AnchorPane>
