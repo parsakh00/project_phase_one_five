@@ -1,42 +1,30 @@
-2022-08-12 03:30:06 INFO  ClientMain:867 - Read user type from userdata file
-2022-08-12 03:30:06 INFO  ClientMai2022-08-12 03:30:07 INFO  ClientMain:867 - Read user type from userdata file
-2022-08-12 03:30:07 INFO  ClientMain:875 - Read user type from userdata file
-2022-08-12 03:30:07 INFO  ClientMain:586 - Read user type from userdata file
-2022-08-12 03:30:07 INFO  ClientMain:594 - Read and rewrite phone number from userdata file
-2022-08-12 03:30:07 INFO  ClientMain:546 - Open user data file to read student id of student
-2022-08-12 03:30:07 INFO  ClientMain:859 - Read user supervisor from userdata file
-2022-08-12 03:30:07 INFO  ClientMain:570 - Open user data file to read student id of student
-2022-08-12 03:30:07 INFO  ClientMain:554 - Open user data file to read student id of student
-2022-08-12 03:30:07 INFO  StudentUndergraduateDesk:93 - Undergraduate student main, logged in
-2022-08-12 03:30:07 INFO  StudentUndergraduateDesk:112 - logged in
-2022-08-12 03:30:07 INFO  StudentUndergraduateDesk:321 - Get current student Username
-2022-08-12 03:30:07 INFO  ClientMain:505 - Read name of user from file
-2022-08-12 03:30:07 INFO  StudentUndergraduateDesk:344 - Show default image
-2022-08-12 03:30:07 INFO  StudentUndergraduateDesk:321 - Get current student Username
-2022-08-12 03:30:07 INFO  ClientMain:505 - Read name of user from file
-2022-08-12 03:30:07 INFO  StudentUndergraduateDesk:316 - Get current student Email
-2022-08-12 03:30:07 INFO  StudentUndergraduateDesk:326 - Get current student Educational status
-2022-08-12 03:30:07 INFO  ClientMain:851 - Read user education status from userdata file
-2022-08-12 03:30:07 INFO  StudentUndergraduateDesk:331 - Get current student supervisor
-2022-08-12 03:30:07 INFO  ClientMain:859 - Read user supervisor from userdata file
-of pass that entered by pass that user field in password field
-2022-08-12 03:30:07 INFO  ClientMain:867 - Read user type from userdata file
-2022-08-12 03:30:07 INFO  ClientMain:875 - Read user type from userdata file
-2022-08-12 03:30:08 INFO  ClientMain:894 - read message of mohseni for student to show
-2022-08-12 03:30:08 INFO  ClientMain:167 - get messages for mohseni filtering members
-2022-08-12 03:30:12 INFO  ClientMain:894 - read message of mohseni for student to show
-2022-08-12 03:30:12 INFO  ClientMain:167 - get messages for mohseni filtering members
-2022-08-12 03:30:18 INFO  ClientMain:894 - read message of mohseni for student to show
-2022-08-12 03:30:18 INFO  ClientMain:167 - get messages for mohseni filtering members
-2022-08-12 03:30:22 INFO  ClientMain:894 - read message of mohseni for student to show
-2022-08-12 03:30:22 INFO  ClientMain:167 - get messages for mohseni filtering members
-2022-08-12 03:30:27 INFO  ClientMain:894 - read message of mohseni for student to show
-2022-08-12 03:30:27 INFO  ClientMain:167 - get messages for mohseni filtering members
-2022-08-12 03:30:33 INFO  ClientMain:894 - read message of mohseni for student to show
-2022-08-12 03:30:33 INFO  ClientMain:167 - get messages for mohseni filtering members
-2022-08-12 03:30:38 INFO  ClientMain:894 - read message of mohseni for student to show
-2022-08-12 03:30:38 INFO  ClientMain:167 - get messages for mohseni filtering members
-2022-08-12 03:30:43 INFO  ClientMain:894 - read message of mohseni for student to show
-2022-08-12 03:30:43 INFO  ClientMain:167 - get messages for mohseni filtering members
-2022-08-12 03:30:48 INFO  ClientMain:894 - read message of mohseni for student to show
-2022-08-12 03:30:48 INFO  ClientMain:167 - get messages for mohseni filtering members
+2022-08-12 11:45:00 INFO  ClientMain:867 - Read user type from userdata file
+2022-08-12 11:45:00 INFO  ClientMai2022-08-12 11:45:03 INFO  ClientMain:867 - Read user type from userdata file
+2022-08-12 11:45:03 INFO  ClientMain:875 - Read user type from userdata file
+2022-08-12 11:45:03 INFO  ClientMain:586 - Read user type from userdata file
+2022-08-12 11:45:03 INFO  ClientMain:594 - Read and rewrite phone number from userdata file
+2022-08-12 11:45:03 INFO  ClientMain:546 - Open user data file to read student id of student
+2022-08-12 11:45:03 INFO  ClientMain:859 - Read user supervisor from userdata file
+2022-08-12 11:45:03 INFO  ClientMain:570 - Open user data file to read student id of student
+2022-08-12 11:45:03 INFO  ClientMain:554 - Open user data file to read student id of student
+2022-08-12 11:45:04 INFO  StudentMasterDesk:91 - Open Master student main page
+2022-08-12 11:45:04 INFO  StudentMasterDesk:102 - logged in
+2022-08-12 11:45:04 INFO  StudentMasterDesk:363 - Current user name
+2022-08-12 11:45:04 INFO  ClientMain:505 - Read name of user from file
+2022-08-12 11:45:04 INFO  StudentMasterDesk:388 - Show default image
+2022-08-12 11:45:04 INFO  StudentMasterDesk:369 - Current user education status
+2022-08-12 11:45:04 INFO  ClientMain:851 - Read user education status from userdata file
+2022-08-12 11:45:04 INFO  StudentMasterDesk:375 - Current user supervisor
+2022-08-12 11:45:04 INFO  ClientMain:859 - Read user supervisor from userdata file
+2022-08-12 11:45:04 INFO  StudentMasterDesk:363 - Current user name
+2022-08-12 11:45:04 INFO  ClientMain:505 - Read name of user from file
+2022-08-12 11:45:04 INFO  StudentMasterDesk:357 - Current user email
+2022-08-12 11:45:04 INFO  StudentMasterDesk:369 - Current user education status
+2022-08-12 11:45:04 INFO  ClientMain:851 - Read user education status from userdata file
+2022-08-12 11:45:04 INFO  StudentMasterDesk:375 - Current user supervisor
+2022-08-12 11:45:04 INFO  ClientMain:859 - Read user supervisor from userdata file2022-08-12 11:45:04 INFO  ClientMain:894 - read message of mohseni for student to show
+2022-08-12 11:45:04 INFO  ClientMain:167 - get messages for mohseni filtering members
+2022-08-12 11:45:09 INFO  ClientMain:894 - read message of mohseni for student to show
+2022-08-12 11:45:09 INFO  ClientMain:167 - get messages for mohseni filtering members
+2022-08-12 11:45:14 INFO  ClientMain:894 - read message of mohseni for student to show
+2022-08-12 11:45:14 INFO  ClientMain:167 - get messages for mohseni filtering members

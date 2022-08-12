@@ -1,1 +1,18 @@
-[]
+[
+  {"from who":"student2",
+    "to who":"send to all",
+    "time":"10:56:33",
+    "message":"kir bokhor"
+  },
+  {"from who":"student3",
+    "to who":"student4",
+    "time":"11:24:06",
+    "message":"kir"
+  }
+,
+  {"from who":"student3",
+    "to who":"student2",
+    "time":"11:24:22",
+    "message":"kiram dahanet"
+  }
+]

@@ -65,6 +65,8 @@ public class TeacherDesk {
     public TextArea chatBoxTextArea;
     public TextField messageChatField;
     public Button sendChatBtn;
+    public Button sendImageBtn;
+    public Button sendVoiceBtn;
     String lastLogIn;
     Stage stage;
     String whichMember;
@@ -111,6 +113,8 @@ public class TeacherDesk {
             chatBoxTextArea.setVisible(true);
             messageChatField.setVisible(true);
             sendChatBtn.setVisible(true);
+            sendImageBtn.setVisible(true);
+            sendVoiceBtn.setVisible(true);
             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "show chat box auto request"));
 
         }
@@ -162,6 +166,9 @@ public class TeacherDesk {
                             messageChatField.setVisible(true);
                             sendChatBtn.setVisible(true);
                             toWhoCombo.setVisible(true);
+                            sendChatBtn.setVisible(true);
+                            sendImageBtn.setVisible(true);
+                            sendVoiceBtn.setVisible(true);
                             Client.getClient().sendMessage(new Message(Client.getClient().getAuthToken(), CurrentUser.getInstance().getUserName(), "get all members for chat combo"));
                         }
                         if (Objects.equals(CurrentUser.getInstance().getUserName(), "mohseni")) {
@@ -176,6 +183,9 @@ public class TeacherDesk {
                             messageChatField.setVisible(false);
                             sendChatBtn.setVisible(false);
                             toWhoCombo.setVisible(false);
+                            sendChatBtn.setVisible(false);
+                            sendImageBtn.setVisible(false);
+                            sendVoiceBtn.setVisible(false);
                             serverCondition.setText("server is offline");
                         });
                     }
@@ -528,11 +538,33 @@ public class TeacherDesk {
         });
     }
     public void readChatSendInit(String content) {
-        String[] parts = content.split(":");
+        String[] parts = content.split("::");
         for (String message : parts) {
             String[] eachMessage = message.split("-");
             chatBoxTextArea.setText(chatBoxTextArea.getText() + eachMessage[1] + " : " + eachMessage[2] + "   " + eachMessage[3] + '\n');
             chatBoxTextArea.setScrollTop(Double.MAX_VALUE);
         }
+    }
+
+    public void sendVoiceClicked(ActionEvent actionEvent) {
+        Platform.runLater(()->{
+            LocalTime time = LocalTime.now();
+            String[] time2 = String.valueOf(time).split("\\.");
+            if (messageChatField.getText()!= null || !Objects.equals(messageChatField.getText(), "")){
+            //ToDO voice message
+            }
+            messageChatField.setText(null);
+        });
+    }
+
+    public void sendImageClicked(ActionEvent actionEvent) {
+        Platform.runLater(()->{
+            LocalTime time = LocalTime.now();
+            String[] time2 = String.valueOf(time).split("\\.");
+            if (messageChatField.getText()!= null || !Objects.equals(messageChatField.getText(), "")){
+                //ToDO image message
+            }
+            messageChatField.setText(null);
+        });
     }
 }

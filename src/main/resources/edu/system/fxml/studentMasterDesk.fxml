@@ -98,5 +98,7 @@
         <TextArea fx:id="chatBoxTextArea" layoutX="579.0" layoutY="176.0" prefHeight="200.0" prefWidth="200.0" />
         <TextField fx:id="messageChatField" layoutX="579.0" layoutY="382.0" prefHeight="26.0" prefWidth="150.0" promptText="message...." />
         <ComboBox fx:id="toWhoCombo" layoutX="425.0" layoutY="176.0" onAction="#toWhoComboClicked" prefWidth="150.0" />
+        <Button fx:id="sendVoiceBtn" layoutX="698.0" layoutY="410.0" mnemonicParsing="false" onAction="#sendVoiceClicked" text="send voice" />
+        <Button fx:id="sendImageBtn" layoutX="620.0" layoutY="410.0" mnemonicParsing="false" onAction="#sendImageClicked" text="send image" />
     </children>
 </AnchorPane>

@@ -98,5 +98,7 @@
       <Label layoutX="421.0" layoutY="135.0" prefHeight="18.0" prefWidth="116.0" text="to who :" />
       <TextField fx:id="chatField" layoutX="579.0" layoutY="376.0" promptText="message...." />
       <Button fx:id="sendChatBtn" layoutX="729.0" layoutY="376.0" mnemonicParsing="false" onAction="#sendMessageClicked" text="send" />
+      <Button fx:id="sendVoiceBtn" layoutX="698.0" layoutY="405.0" mnemonicParsing="false" onAction="#sendVoiceClicked" text="send voice" />
+      <Button fx:id="sendImageBtn" layoutX="620.0" layoutY="405.0" mnemonicParsing="false" onAction="#sendImageClicked" text="send image" />
    </children>
 </AnchorPane>

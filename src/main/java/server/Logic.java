@@ -970,13 +970,21 @@ public class Logic {
     }
     public static String chatMessageInit(String toWho) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        String eachMessage = "";
-        String data = "";
-
-        //Read JSON file
         Object obj = parser.parse(new FileReader(System.getProperty("user.dir") + "\\src\\main\\java\\data\\requests\\chatHistory.json"));
         JSONArray chat = (JSONArray) obj;
-        return null;
+        String eachChat = "";
+        String allChats = "";
+        for (int i = 0; i < chat.size(); i++) {
+            JSONObject jsonobject = (JSONObject) chat.get(i);
+            if (Objects.equals((String) jsonobject.get("to who"), toWho) || Objects.equals((String) jsonobject.get("to who"), "send to all") ||
+                    Objects.equals((String) jsonobject.get("from who"), toWho)){
+                eachChat = (String)jsonobject.get("to who") + "-" + (String)jsonobject.get("from who") +"-"
+                        + (String)jsonobject.get("message") +"-"+ (String)jsonobject.get("time");
+                allChats += eachChat +"::";
+            }
+            eachChat = "";
+        }
+        return allChats;
 
     }
     public static void writeMessageOfChatBox(String data) {

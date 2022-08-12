@@ -197,9 +197,10 @@ public class ServerLogic {
             writeChatMessageInit(message);
         }
 
+
     }
 
-    private void writeChatMessageInit(Message message){
+    private void writeChatMessageInit(Message message) throws IOException, ParseException {
         String toWho = message.getContent();
         String data = Logic.chatMessageInit(toWho);
         for (ClientHandler clientHandler : Server.getServer().getClientHandlers()) {
